@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
       <section className="items-center">
         <h1 className="text-2xl font-semibold mb-4 text-center">Welcome</h1>
 
-        <div className="w-full bg-gray-200 rounded-md h-10 flex items-center justify-center ">
+        <div className="w-full bg-gray-200 rounded-md h-10 flex items-center justify-center">
           {/* Search bar placeholder - look into making it span the page */}
           <span className="text-gray-500">
             [ Search Bar Placeholder ]

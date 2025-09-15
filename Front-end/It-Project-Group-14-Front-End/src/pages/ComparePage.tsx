@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ComparePage() {
+const ComparePage = () => {
   return (
     <div>ComparePage</div>
   )

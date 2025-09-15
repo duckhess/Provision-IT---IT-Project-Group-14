@@ -13,7 +13,8 @@ function App() {
       <div className="bg-[#f7f7f7] flex flex-col">
         <NavBar />
 
-        <main className="min-h-screen max-w-6xl mx-auto mt-6 -4">
+        <main className="min-h-screen w-full mx-auto mt-6 px-4">
+
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/search" element={<SearchPage />} />

@@ -3,8 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="w-full bg-[#f7f7f7] py-3 fixed top-0 left-0 z-50">
-      <div className="w-full max-w-7xl mx-auto bg-[#f7f7f7] rounded-md flex items-center justify-between gap-4 px-32 py-2">
+    <nav className="w-full bg-[#f7f7f7] py-3 fixed top-0 left-0 z-50 px-20">
+      <div className="w-full max-w-7xl mx-auto bg-[#f7f7f7] rounded-md flex items-center justify-between gap-4 py-2">
 
         {/* Logo (Link) */}
         <Link to="/" aria-label="Home" className="inline-flex items-center ">
