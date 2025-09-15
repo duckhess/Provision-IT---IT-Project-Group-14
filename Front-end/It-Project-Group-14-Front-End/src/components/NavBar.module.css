@@ -1,0 +1,83 @@
+/* Navbar.module.css */
+.wrapper {
+  width: flex;
+  background: #f7f7f7;          
+  padding: 0.75rem 0rem;
+}
+
+/* the inner white container with blue border (like your screenshot) */
+.inner {
+  width: flex;
+  margin: 0 auto;
+  background: #f7f7f7;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 1.25rem;
+}
+
+/* Left: logo link wrapper (so anchor surrounds non-button element) */
+.logoLink {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* circular logo */
+.logoCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e6e6e6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #263529;
+  cursor: pointer;
+  user-select: none;
+
+}
+
+/* center links area */
+.navLinks {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  flex: 1;              /* ensures it grows to center the links between left & right */
+}
+
+/* each link */
+.link {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: #111827;
+  padding: 0.25rem 0.25rem;
+  transition: opacity .15s ease, color .15s ease;
+}
+
+/* hover */
+.link:hover {
+  opacity: 0.7;
+}
+
+/* active state for NavLink */
+.active {
+  color: #0b5cff;
+  font-weight: 700;
+  border-bottom: 2px solid #0b5cff;
+  padding-bottom: 0.25rem;
+}
+
+/* right-side profile button (styled link) */
+.profile {
+  background: #e6e7e8;
+  border-radius: 6px;
+  padding: 0.45rem 0.7rem;
+  text-decoration: none;
+  color: #111827;
+  font-weight: 600;
+}
