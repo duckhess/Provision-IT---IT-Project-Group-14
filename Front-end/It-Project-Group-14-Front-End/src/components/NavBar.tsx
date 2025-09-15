@@ -1,26 +1,29 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import styles from "./Navbar.module.css";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className={styles.wrapper}>
-      <div className={styles.inner}>
+    <nav className="w-full bg-[#f7f7f7] py-3 fixed top-0 left-0 z-50">
+      <div className="w-full max-w-7xl mx-auto bg-[#f7f7f7] rounded-md flex items-center justify-between gap-4 px-32 py-2">
+
         {/* Logo (Link) */}
-        <Link to="/" aria-label="Home" className={styles.logoLink}>
-          <div className={styles.logoCircle}>
-            {/* could be an <img> or svg; using initial here */}
+        <Link to="/" aria-label="Home" className="inline-flex items-center ">
+          <div className=" w-10 h-10 rounded-full bg-[#e6e6e6] flex items-center justify-center font-bold text-[#263529] cursor-pointer select-none">
             L
           </div>
         </Link>
 
-        {/* Center links (NavLink gives us active state) */}
-        <div className={styles.navLinks}>
+        {/* Center links */}
+        <div className="flex gap-12 justify-center items-center flex-1">
           <NavLink
             to="/"
             end
             className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.active}` : styles.link
+              `no-underline text-[0.95rem] text-[#111827] px-1 transition-colors duration-150 ${
+                isActive
+                  ? "text-[#0b5cff] font-bold border-b-2 border-[#0b5cff] pb-1"
+                  : "hover:opacity-70"
+              }`
             }
           >
             Home
@@ -29,7 +32,11 @@ const Navbar: React.FC = () => {
           <NavLink
             to="/search"
             className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.active}` : styles.link
+              `no-underline text-[0.95rem] text-[#111827] px-1 transition-colors duration-150 ${
+                isActive
+                  ? "text-[#0b5cff] font-bold border-b-2 border-[#0b5cff] pb-1"
+                  : "hover:opacity-70"
+              }`
             }
           >
             Search
@@ -38,7 +45,11 @@ const Navbar: React.FC = () => {
           <NavLink
             to="/compare"
             className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.active}` : styles.link
+              `no-underline text-[0.95rem] text-[#111827] px-1 transition-colors duration-150 ${
+                isActive
+                  ? "text-[#0b5cff] font-bold border-b-2 border-[#0b5cff] pb-1"
+                  : "hover:opacity-70"
+              }`
             }
           >
             Compare
@@ -46,9 +57,19 @@ const Navbar: React.FC = () => {
         </div>
 
         {/* Profile on the right */}
-        <Link to="/profile" className={styles.profile} aria-label="Profile">
+        <NavLink
+          to="/profile"
+          aria-label="Profile"
+          className={({ isActive }) =>
+            `rounded-md px-3 py-2 no-underline font-semibold ${
+              isActive
+                ? "bg-[#e6e7e8] text-[#0b5cff] font-bold border-b-2 border-[#0b5cff] pb-1"
+                : "bg-[#e6e7e8] text-[#111827] hover:opacity-70"
+            }`
+          }
+        >
           Profile
-        </Link>
+        </NavLink>
       </div>
     </nav>
   );
