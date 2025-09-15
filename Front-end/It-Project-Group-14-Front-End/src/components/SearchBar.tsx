@@ -52,7 +52,9 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
             onChange={(e =>handleChange(e.target.value))}
             className="w-full h-full ml-1 bg-transparent border-0 text-xl focus:outline-none">
             </input>
-            <FaSearch id = "search-icon"></FaSearch>
+            <FaSearch id = "search-icon"
+            className="cursor-pointer text-gray-500"
+            onClick = {()=>alert(`You have clicked search icon`)}></FaSearch>
         </div>
     </div>
     );
