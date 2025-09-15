@@ -7,6 +7,5 @@
   
 */
 
-@tailwind base;
-@tailwind components;
+@import "tailwindcss";
 @tailwind utilities;

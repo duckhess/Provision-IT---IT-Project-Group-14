@@ -1,4 +1,4 @@
-.App{
+App{
   background-color: #eee;
   height: 100vh;
   width:100vw;
@@ -12,5 +12,5 @@
   flex-direction: column;
   align-items: center;
   min-width: 200px;
-}  
+} 
 
