@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import { FaSearch } from "react-icons/fa";
-import "./SearchBar.css";
+//import "./SearchBar.css";
 
 export type Company = {
     id: number;
@@ -44,13 +44,16 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
 
     // input is handled when there is a new character typed
     return(
-    <div className="input-wrapper">
-        <input 
-        placeholder="Type to search..." 
-        value = {input} 
-        onChange={(e =>handleChange(e.target.value))}>
-        </input>
-        <FaSearch id = "search-icon"></FaSearch>
+    <div className="w-full flex just mt-10">
+        <div className="flex items-center w-full max-w-[1180px] min-w-[300px] h-10 px-4 bg-white rounded-lg shadow gap-1">
+            <input 
+            placeholder="Type to search..." 
+            value = {input} 
+            onChange={(e =>handleChange(e.target.value))}
+            className="w-full h-full ml-1 bg-transparent border-0 text-xl focus:outline-none">
+            </input>
+            <FaSearch id = "search-icon"></FaSearch>
+        </div>
     </div>
     );
 };
