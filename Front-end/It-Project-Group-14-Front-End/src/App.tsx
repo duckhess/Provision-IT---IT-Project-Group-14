@@ -6,6 +6,7 @@ import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import ComparePage from "./pages/ComparePage";
 import LoginPage from "./pages/LoginPage";
+import BusinessPage from "./pages/BusinessPage";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/compare" element={<ComparePage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/business/:companyId" element={<BusinessPage />} /> {/*for dynamic routing*/}
+
+
           </Routes>
         </main>
 
