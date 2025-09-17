@@ -9,7 +9,7 @@ interface CompanyData {
   industry: string;
 }
 
-// ✅ Move dummy data OUTSIDE component
+// Move dummy data OUTSIDE component
 const dummyCompanies: CompanyData[] = [
   {
     id: "1",
@@ -50,7 +50,7 @@ const BusinessPage: React.FC = () => {
     };
 
     fetchCompany();
-  }, [companyId]); // ✅ only depend on companyId
+  }, [companyId]); // only depend on companyId
 
   if (!company) return <p className="text-center py-12">Loading...</p>;
 
