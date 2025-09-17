@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "Home of Organic (Est. 2020, 5 Years)",
+    "category": "Agriculture / Food",
+    "description": "Fresh, chemical-free produce from farm to table.",
+    "funding": "$750k",
+    "useOfFunds": "Expand greenhouse tech.",
+    "imageUrl": "../Test_Image/Organic.jpg"
+  }
+]
