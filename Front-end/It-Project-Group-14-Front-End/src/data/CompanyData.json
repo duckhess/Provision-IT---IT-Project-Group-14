@@ -6,6 +6,15 @@
     "description": "Fresh, chemical-free produce from farm to table.",
     "funding": "$750k",
     "useOfFunds": "Expand greenhouse tech.",
-    "imageUrl": "../Test_Image/Organic.jpg"
+    "imageUrl": "Test_Image/Organic.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Random Company (Est. 2024, 1 Year)",
+    "category": "Technology",
+    "description": "Science in finding true randomness",
+    "funding": "$350k",
+    "useOfFunds": "Hiring Researchers",
+    "imageUrl": "Test_Image/RandomLogo.png"
   }
 ]
