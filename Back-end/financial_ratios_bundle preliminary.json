@@ -1,0 +1,3727 @@
+{
+  "industries": [
+    {
+      "industry_id": 1,
+      "name": "Household"
+    },
+    {
+      "industry_id": 2,
+      "name": "Real Estate"
+    },
+    {
+      "industry_id": 3,
+      "name": "Food Processing"
+    },
+    {
+      "industry_id": 4,
+      "name": "Advertising"
+    }
+  ],
+
+  "companies": [
+    {
+      "company_id": 1,
+      "name": "Household Business",
+      "industry_id": 1
+    },
+    {
+      "company_id": 2,
+      "name": "Real Estate",
+      "industry_id": 2
+    },
+    {
+      "company_id": 3,
+      "name": "Food Processing Business",
+      "industry_id": 3
+    },
+    {
+      "company_id": 4,
+      "name": "Adertising Business",
+      "industry_id": 4
+    }
+  ],
+
+  "file_timeline": [
+    {
+      "file_id": 1,
+      "label": "2023-06-30",
+      "year": 2023
+    },
+    {
+      "file_id": 2,
+      "label": "2024-06-30",
+      "year": 2024
+    },
+    {
+      "file_id": 3,
+      "label": "2025-06-30",
+      "year": 2025
+    }
+  ],
+
+  "ratios": [
+    {
+      "ratio_id": 1,
+      "code": "CURRENT_RATIO",
+      "ratio_name": "Current Ratio",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 2,
+      "code": "QUICK_RATIO_ACID_TEST",
+      "ratio_name": "Quick Ratio (Acid Test)",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 3,
+      "code": "DEBT_RATIO",
+      "ratio_name": "Debt Ratio",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 4,
+      "code": "EQUITY_RATIO",
+      "ratio_name": "Equity Ratio",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 5,
+      "code": "QUASI_EQUITY_RATIO",
+      "ratio_name": "Quasi Equity Ratio",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 6,
+      "code": "CAPITALISATION_RATIO",
+      "ratio_name": "Capitalisation Ratio",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 7,
+      "code": "GROSS_PROFIT_MARGIN",
+      "ratio_name": "Gross Profit Margin",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 8,
+      "code": "NET_PROFIT_LOSS_MARGIN",
+      "ratio_name": "Net Profit/Loss (-) Margin",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 9,
+      "code": "RETURN_ON_TOTAL_ASSETS",
+      "ratio_name": "Return on Total Assets",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 10,
+      "code": "INTEREST_COVER",
+      "ratio_name": "Interest Cover",
+      "unit": "times"
+    },
+    {
+      "ratio_id": 11,
+      "code": "RECEIVABLES_TURNOVER",
+      "ratio_name": "Receivables Turnover",
+      "unit": "times"
+    },
+    {
+      "ratio_id": 12,
+      "code": "INVENTORY_TURNOVER",
+      "ratio_name": "Inventory Turnover",
+      "unit": "times"
+    },
+    {
+      "ratio_id": 13,
+      "code": "CREDITORS_TURNOVER",
+      "ratio_name": "Creditors Turnover",
+      "unit": "times"
+    },
+    {
+      "ratio_id": 14,
+      "code": "AVERAGE_RECEIVABLES_PERIOD_DAYS",
+      "ratio_name": "Average Receivables Period (days)",
+      "unit": "days"
+    },
+    {
+      "ratio_id": 15,
+      "code": "AVERAGE_CREDITORS_PERIOD_DAYS",
+      "ratio_name": "Average Creditors Period (days)",
+      "unit": "days"
+    },
+    {
+      "ratio_id": 16,
+      "code": "INVENTORY_TURNOVER_DAYS",
+      "ratio_name": "Inventory Turnover (days)",
+      "unit": "days"
+    },
+    {
+      "ratio_id": 17,
+      "code": "OPERATING_CYCLE_DAYS",
+      "ratio_name": "Operating Cycle (days)",
+      "unit": "days"
+    },
+    {
+      "ratio_id": 18,
+      "code": "DIVIDEND_RATIO",
+      "ratio_name": "Dividend Ratio",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 19,
+      "code": "OTHER_OPERATING_EXPENSES_REVENUE",
+      "ratio_name": "Other Operating Expenses/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 20,
+      "code": "WAGES_AND_SALARIES_REVENUE",
+      "ratio_name": "Wages and Salaries/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 21,
+      "code": "OTHER_INCOME_TOTAL_INCOME",
+      "ratio_name": "Other Income/Total Income",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 22,
+      "code": "TOTAL_INCOME_TOTAL_EXPENSES",
+      "ratio_name": "Total Income/Total Expenses",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 23,
+      "code": "TOTAL_EXPENSES_TOTAL_INCOME",
+      "ratio_name": "Total Expenses/Total Income",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 24,
+      "code": "BERRY_RATIO_AUSTRALIAN_TAXATION_OFFICE",
+      "ratio_name": "Berry Ratio (Australian Taxation Office)",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 25,
+      "code": "EBITDA_MARGIN",
+      "ratio_name": "EBITDA Margin",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 26,
+      "code": "RETURN_ON_EQUITY",
+      "ratio_name": "Return on Equity",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 27,
+      "code": "ASSET_TURNOVER_RATIO",
+      "ratio_name": "Asset Turnover Ratio",
+      "unit": "times"
+    },
+    {
+      "ratio_id": 28,
+      "code": "IMPLIED_INTEREST_RATE",
+      "ratio_name": "Implied Interest Rate",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 29,
+      "code": "ADMINISTRATIVE_EXPENSE_REVENUE",
+      "ratio_name": "Administrative Expense/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 30,
+      "code": "AMORTISATION_REVENUE",
+      "ratio_name": "Amortisation/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 31,
+      "code": "BAD_AND_DOUBTFUL_DEBT_REVENUE",
+      "ratio_name": "Bad and Doubtful Debt/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 32,
+      "code": "DEPRECIATION_AND_AMORTISATION_NET_REVENUE",
+      "ratio_name": "Depreciation and Amortisation/Net Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 33,
+      "code": "DISTRIBUTION_REVENUE",
+      "ratio_name": "Distribution/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 34,
+      "code": "FINANCE_REVENUE",
+      "ratio_name": "Finance/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 35,
+      "code": "INTEREST_REVENUE",
+      "ratio_name": "Interest/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 36,
+      "code": "MARKETING_REVENUE",
+      "ratio_name": "Marketing/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 37,
+      "code": "OCCUPANCY_REVENUE",
+      "ratio_name": "Occupancy/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 38,
+      "code": "DEBT_SERVICE_COVER",
+      "ratio_name": "Debt Service Cover",
+      "unit": "times"
+    },
+    {
+      "ratio_id": 39,
+      "code": "TOTAL_EXPENSES_REVENUE",
+      "ratio_name": "Total Expenses/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 40,
+      "code": "TOTAL_OTHER_INCOME_REVENUE",
+      "ratio_name": "Total Other Income/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 41,
+      "code": "TOTAL_OTHER_INCOME_NET_PROFIT_LOSS_BEFORE_TAX",
+      "ratio_name": "Total Other Income/Net Profit/Loss Before Tax",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 42,
+      "code": "TOTAL_OTHER_NON_OPERATING_EXPENSES_REVENUE",
+      "ratio_name": "Total Other Non Operating Expenses/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 43,
+      "code": "COST_OF_SALES_REVENUE",
+      "ratio_name": "Cost of Sales/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 44,
+      "code": "LABOUR_REVENUE",
+      "ratio_name": "Labour/Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 45,
+      "code": "EBITDA_NET_REVENUE",
+      "ratio_name": "EBITDA/Net Revenue",
+      "unit": "ratio"
+    },
+    {
+      "ratio_id": 46,
+      "code": "OPERATING_PROFIT_BEFORE_TAX_TOTAL_INCOME",
+      "ratio_name": "Operating Profit Before Tax/Total Income",
+      "unit": "ratio"
+    }
+  ],
+  
+  "ratio_values": [
+    {
+      "ratio_id": 1,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 3.28
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 3.12
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 1.93
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 1.87
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 1.39
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.96
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.39
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.5
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.48
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.61
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.5
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.52
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.61
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.61
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.64
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 1.65
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 1.99
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 1.91
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.22
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.19
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.22
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.05
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.16
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.08
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 47.02
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 4192.66
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 17.2
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 7.57
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 11.59
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 8.79
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 36.7
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 22.19
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 12.77
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 48.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 32.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 42.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 10.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 16.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 29.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 37.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 45.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 41.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 75.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 60.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 54.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": -0.12
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.08
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.05
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 1.28
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 1.13
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 1.2
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.78
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.89
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.84
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 1.2
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 1.0
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 1.08
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.26
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.17
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.25
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 43.32
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.62
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.67
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 3.0
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 2.74
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 1.92
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.05
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 54.59
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 6404.07
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 24.49
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.18
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.19
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.2
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.29
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.98
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.59
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.78
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.81
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.78
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 1,
+      "file_id": 1,
+      "ratio_value": 0.22
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 1,
+      "file_id": 2,
+      "ratio_value": 0.11
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 1,
+      "file_id": 3,
+      "ratio_value": 0.16
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 2.38
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 4.81
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 4.03
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 2.33
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 4.78
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 3.98
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 1.17
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 1.06
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.36
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": -0.17
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": -0.06
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.64
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.59
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.7
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.64
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": -5.9
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": -16.04
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 1.57
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.92
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.95
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.92
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.3
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.49
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.37
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 1.21
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 1.14
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.72
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 20.41
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 58.15
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 147.67
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 21.81
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 227.8
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 22.69
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 40.19
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 60.68
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 31.8
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 17.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 2.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 16.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 9.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 6.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 11.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 8.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": -4.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 5.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": -1.41
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": -1.76
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": -1.0
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.15
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.12
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.15
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.31
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.19
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.27
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 1.44
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 2.04
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 1.61
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.69
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.49
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.62
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 1.37
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 2.01
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 1.54
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.32
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.52
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.38
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 1.52
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 1.47
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 3.88
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 2.3
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 1.95
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.05
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.28
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.48
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.35
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.05
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.03
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.03
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.08
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.09
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 20.58
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 58.38
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 149.03
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.67
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.47
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.6
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.15
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.03
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.12
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.08
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.05
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.08
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.31
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.19
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.27
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.31
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.5
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.37
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 2,
+      "file_id": 1,
+      "ratio_value": 0.31
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 2,
+      "file_id": 2,
+      "ratio_value": 0.51
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 2,
+      "file_id": 3,
+      "ratio_value": 0.38
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.66
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 1.03
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.28
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.64
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.12
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.74
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.85
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.72
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.26
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.15
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.28
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.57
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.49
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.62
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 3.91
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 6.5
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 3.56
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 1.0
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.38
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 59.75
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.09
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.3
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.04
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.49
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 296.03
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -3.7
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 29.51
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.32
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 10.39
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 1.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 35.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 33.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": -1.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -2.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 4.85
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.18
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 1.13
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.15
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.99
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.03
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 1.0
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 8.21
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.83
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 2.24
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.12
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 1.21
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.45
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.12
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.77
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.88
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.06
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.57
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.96
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.16
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 1.39
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.62
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.88
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.08
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.55
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.71
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.2
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 1.33
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.09
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 296.03
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -1.27
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 29.51
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 8.29
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.5
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 67.04
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.03
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 1.12
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.37
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 1.81
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.62
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 1.13
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": 0.15
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 59.95
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.02
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 3,
+      "file_id": 1,
+      "ratio_value": 0.88
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 3,
+      "file_id": 2,
+      "ratio_value": -0.21
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 3,
+      "file_id": 3,
+      "ratio_value": 0.55
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 1.06
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 1.37
+    },
+    {
+      "ratio_id": 1,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 6.84
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.9
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 1.04
+    },
+    {
+      "ratio_id": 2,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 6.76
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.5
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.42
+    },
+    {
+      "ratio_id": 3,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.38
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.5
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.58
+    },
+    {
+      "ratio_id": 4,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.62
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.65
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.71
+    },
+    {
+      "ratio_id": 5,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.94
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 1.99
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 1.73
+    },
+    {
+      "ratio_id": 6,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 1.6
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.78
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.79
+    },
+    {
+      "ratio_id": 7,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.8
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.39
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.36
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.23
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.26
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.19
+    },
+    {
+      "ratio_id": 9,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.18
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 10,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 6.43
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 6.75
+    },
+    {
+      "ratio_id": 11,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 7.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 12,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 30.0
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 19.69
+    },
+    {
+      "ratio_id": 13,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 41.48
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 57.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 54.0
+    },
+    {
+      "ratio_id": 14,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 52.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 12.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 18.0
+    },
+    {
+      "ratio_id": 15,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 9.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 3.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 3.0
+    },
+    {
+      "ratio_id": 16,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 2.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 47.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 38.0
+    },
+    {
+      "ratio_id": 17,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 45.0
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": -0.23
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": -0.18
+    },
+    {
+      "ratio_id": 18,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.1
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.09
+    },
+    {
+      "ratio_id": 19,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.74
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.3
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.35
+    },
+    {
+      "ratio_id": 20,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.32
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.06
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 21,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.11
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 1.87
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 1.71
+    },
+    {
+      "ratio_id": 22,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.8
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.53
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.59
+    },
+    {
+      "ratio_id": 23,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 1.24
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 1.73
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 1.57
+    },
+    {
+      "ratio_id": 24,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.69
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.48
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.44
+    },
+    {
+      "ratio_id": 25,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.17
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 1.72
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 1.45
+    },
+    {
+      "ratio_id": 26,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.58
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.67
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.54
+    },
+    {
+      "ratio_id": 27,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.8
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 28,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.37
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.33
+    },
+    {
+      "ratio_id": 8,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.2
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.04
+    },
+    {
+      "ratio_id": 29,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 30,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 31,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.02
+    },
+    {
+      "ratio_id": 32,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 33,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 34,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 35,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 36,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 37,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.01
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 38,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.45
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.51
+    },
+    {
+      "ratio_id": 39,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 1.16
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.07
+    },
+    {
+      "ratio_id": 40,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.13
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.17
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.2
+    },
+    {
+      "ratio_id": 41,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.57
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 42,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.0
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.22
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.21
+    },
+    {
+      "ratio_id": 43,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.2
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.3
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.35
+    },
+    {
+      "ratio_id": 44,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": 0.32
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.4
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.38
+    },
+    {
+      "ratio_id": 45,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.16
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 4,
+      "file_id": 1,
+      "ratio_value": 0.47
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 4,
+      "file_id": 2,
+      "ratio_value": 0.41
+    },
+    {
+      "ratio_id": 46,
+      "company_id": 4,
+      "file_id": 3,
+      "ratio_value": -0.24
+    }
+  ]
+}
