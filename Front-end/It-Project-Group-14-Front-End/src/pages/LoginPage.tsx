@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <main className="flex flex-col items-center justify-center h-screen px-4 space-y-6">
+    <main className="flex w-screen flex-col items-center justify-center h-screen px-4 space-y-6">
       {/* Title */}
       <h1 className="text-4xl font-semibold mb-4 text-center">Login</h1>
 

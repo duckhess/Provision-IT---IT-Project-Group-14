@@ -14,7 +14,7 @@ function App() {
       <div className="bg-[#f7f7f7] flex flex-col">
         <NavBar />
 
-        <main className="min-h-screen w-full mx-auto mt-6 px-4">
+        <main className="w-screen min-h-screen mx-auto mt-6 px-4 text-gray-900 ">
 
           <Routes>
             <Route path="/" element={<HomePage />} />

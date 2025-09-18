@@ -53,7 +53,7 @@ const ComparePage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-20">
         {/* Page title */}
         <header className="text-center mb-8">
-          <h1 className="text-2xl font-semibold">Let’s Compare…</h1>
+          <h1 className="text-2xl font-semibold ">Let’s Compare…</h1>
         </header>
 
         {/* Grid: two equal columns on md+ screens; single column on small screens */}

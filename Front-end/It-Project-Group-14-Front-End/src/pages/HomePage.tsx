@@ -16,7 +16,7 @@ const CompanyCard: React.FC<{ company: Company }> = ({ company }) => {
       </div>
       <Link
         to={`/business/${company.id}`}
-        className="mt-4 px-3 py-1 bg-gray-800 text-white rounded-md text-sm hover:bg-gray-700 text-center"
+        className="mt-4 px-3 py-1 bg-gray-800 !text-white rounded-md text-sm hover:bg-gray-700 text-center"
       >
         View More
       </Link>

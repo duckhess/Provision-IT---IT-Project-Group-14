@@ -2,9 +2,9 @@ import React from "react";
 
 const ProfilePage: React.FC = () => {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-12 space-y-8">
+    <main className="max-w-7xl mx-auto px-6 py-20 space-y-8">
       {/* Header */}
-      <h1 className="text-3xl font-semibold text-center">Your Profile</h1>
+      <h1 className="text-2xl font-semibold text-center text-black">Your Profile</h1>
 
       {/* Profile card */}
       <section className="bg-white shadow-md rounded-lg p-6 space-y-4">
@@ -16,7 +16,7 @@ const ProfilePage: React.FC = () => {
 
           {/* Basic info */}
           <div>
-            <h2 className="text-2xl font-semibold">Shawn Perera</h2>
+            <h2 className="text-2xl font-semibold text-black">Shawn Perera</h2>
             <p className="text-gray-600">shawn@example.com</p>
             <p className="text-gray-500 text-sm">Joined: January 2024</p>
           </div>
