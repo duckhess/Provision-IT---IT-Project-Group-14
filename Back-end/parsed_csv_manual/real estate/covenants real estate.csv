@@ -1,0 +1,19 @@
+Covenants,Unit,Benchmark,Result,Category
+Current Ratio,Ratio,88,4.03,Liquidity
+Quick Ratio (Acid Test),Ratio,1,3.98,Liquidity
+Debt Ratio,Ratio,40,36.20,Solvency (Leverage)
+Equity Ratio,Ratio,60,63.80,Solvency (Leverage)
+Quasi Equity Ratio,Ratio,15,63.80,Solvency (Leverage)
+Capitalisation Ratio,Ratio,123,156.73,Solvency (Leverage)
+Gross Profit Margin,Ratio,40,92.28,Profitability
+Net Profit Margin,Ratio,15,36.53,Profitability
+Return on Total Assets,Ratio,8,71.65,Profitability
+Interest Cover,times,3,147.67,Solvency (Leverage)
+Receivables Turnover,times,2,22.69,Efficiency & Working-Capital
+Inventory Turnover,times,2,0.00,Efficiency & Working-Capital
+Creditors Turnover,times,2,31.80,Efficiency & Working-Capital
+Average Collection Period,days,30,16.09,Efficiency & Working-Capital
+Average Payment Period,days,45,11.48,Efficiency & Working-Capital
+Inventory Turnover,days,50,0.00,Efficiency & Working-Capital
+Operating Cycle,days,30,4.61,Efficiency & Working-Capital
+Dividend Ratio,bool,TRUE,Dividend Payout
