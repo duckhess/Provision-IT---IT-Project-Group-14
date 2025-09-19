@@ -1,62 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import companyData from "../data/CompanyData.json"
+import Summary from "../components/BasicSummary"
 
-type Company = {
-  id: number;
-  name: string;
-  description: string;
-};
 
-const CompanyCard: React.FC<{ company: Company }> = ({ company }) => {
-  return (
-    <div className="bg-white shadow-md rounded-lg p-6 border border-gray-200 w-full h-full flex flex-col justify-between">
-      <div>
-        <h4 className="text-lg font-semibold mb-2">{company.name}</h4>
-        <p className="text-gray-600 text-sm">{company.description}</p>
+  type Company = {
+      id: number,
+      title: string,
+      category: string,
+      description: string,
+      funding: string,
+      useOfFunds: string,
+      imageUrl: string
+  }
+
+  const CompanyCard: React.FC<{ company: Company }> = ({ company }) => {
+    return (
+      <div className="h-full w-full  rounded-md flex items-center justify-center">
+        <Summary company = {company}/>
       </div>
-      <Link
-        to={`/business/${company.id}`}
-        className="mt-4 px-3 py-1 bg-gray-800 text-white rounded-md text-sm hover:bg-gray-700 text-center"
-      >
-        View More
-      </Link>
-    </div>
-  );
-};
+    );
+  };
 
 const HomePage: React.FC = () => {
   const [companies, setCompanies] = useState<Company[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Dummy data until backend is ready
+// Dummy data until backend is ready
   useEffect(() => {
     const dummyData: Company[] = [
       {
-        id: 1,
-        name: "GreenTech Energy",
-        description: "Pioneering renewable energy solutions for urban areas.",
+        id: companyData[0].id,
+        title: companyData[0].title,
+        category: companyData[0].category,
+        description: companyData[0].description,
+        funding: companyData[0].funding,
+        useOfFunds: companyData[0].useOfFunds,
+        imageUrl: companyData[0].imageUrl
       },
+
       {
-        id: 2,
-        name: "AgroFuture",
-        description: "Revolutionizing sustainable agriculture with AI-powered tools.",
-      },
-      {
-        id: 3,
-        name: "HealthBridge",
-        description: "Connecting communities with affordable healthcare services.",
+        id: companyData[1].id,
+        title: companyData[1].title,
+        category: companyData[1].category,
+        description: companyData[1].description,
+        funding: companyData[1].funding,
+        useOfFunds: companyData[1].useOfFunds,
+        imageUrl: companyData[1].imageUrl
       },
     ];
     setCompanies(dummyData);
   }, []);
 
-  // Rotate cards every minute
+  // Rotate cards every 10 seconds
   useEffect(() => {
     if (companies.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % companies.length);
-    }, 60000); // 60,000 ms = 1 minute
+    }, 10000); // 10,000 ms = 10 seconds
 
     return () => clearInterval(interval);
   }, [companies]);
@@ -87,18 +89,17 @@ const HomePage: React.FC = () => {
             toward succesful direct transparent investing.
           </p>
         </div>
-        <div className="w-full bg-gray-300 h-60 rounded-md flex items-center justify-center">
+        <div className="h-full min-h-[328px] max-h-[329px] w-full bg-gray-300 rounded-md flex items-center 
+          justify-center">
           [ Static Image Placeholder ]
         </div>
       </section>
 
       {/* Investment highlight section with rotating cards */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div className="w-full h-48 rounded-md flex items-center justify-center">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-2">
           {companies.length > 0 && (
             <CompanyCard company={companies[currentIndex]} />
           )}
-        </div>
         <div className="space-y-3">
           <h3 className="text-2xl font-semibold">
             See where people are investing today
