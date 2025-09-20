@@ -10,7 +10,7 @@ type OverlayProps = {
         location: string
     }
     setFilters : React.Dispatch<React.SetStateAction<{
-        businessSize: String
+        businessSize: string
         industry: string
         location: string
     }>>
