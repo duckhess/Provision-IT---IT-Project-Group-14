@@ -8,9 +8,9 @@ const FilterSearchPage = () => {
 
     const [filters, setFilters] = useState({
         businessSize : "",
-        revenue : "",
-        employees: "",
-    })
+        industry : "",
+        location: "",
+    });
 
     return (
         <div>

@@ -1,22 +1,21 @@
 import React from "react";
+import SearchBarComponent from "../components/searchBar/SearchBarComponent";
+import FilterSearchPage from "../components/filterSearchPage/FilterSearchPage";
 
 const SearchPage: React.FC = () => {
   return (
     <main className="w-full max-w-7xl mx-auto py-20 space-y-12 px-20">
 
       {/* Search Bar Section */}
-      <section>
-        <hr className="my-6 border-t border-gray-600" />
+      <section className = "align-middle">
+        <hr className="my-4 border-t border-gray-600" />
 
         <div className="flex gap-4 items-center">
           {/* Search Bar */}
-          <div className="flex-grow bg-gray-200 rounded-md h-10 flex items-center px-4">
-            <span className="text-gray-500">[ Search Bar Placeholder ]</span>
-          </div>
+            <SearchBarComponent></SearchBarComponent>
+          
           {/* Filter Button */}
-          <button className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">
-            + Add Filter
-          </button>
+          <FilterSearchPage></FilterSearchPage>
         </div>
 
         <hr className="my-6 border-t border-gray-600" />

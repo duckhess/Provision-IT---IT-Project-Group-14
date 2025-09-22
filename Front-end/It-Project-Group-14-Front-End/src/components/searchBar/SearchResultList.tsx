@@ -14,7 +14,7 @@ type SearchResultListProps = {
 
 export const SearchResultList : React.FC<SearchResultListProps> = ({ results }) => {
     return (
-        <div className= "w-full bg-white flex flex-col shadow rounded-lg mt-4 max-h-[300px] overflow-y-scroll scrollbar-hide">
+        <div className= "absolute left-0 right-0 bg-white flex flex-col shadow rounded-lg mt-2 max-h-[300px] overflow-y-scroll scrollbar-hide z-50">
             {results.map((company)=>(
                 <SearchResult result = {company} key={company.id}></SearchResult>
             ))}

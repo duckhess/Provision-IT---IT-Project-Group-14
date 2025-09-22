@@ -50,14 +50,15 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
 
     // input is handled when there is a new character typed
     return(
-    <div className="w-full flex just mt-10">
-        <div className="flex items-center w-full max-w-[1180px] min-w-[300px] h-10 px-4 bg-white rounded-lg shadow gap-1">
+    <div className="w-full flex justify-center mt-10">
+        <div className="flex items-center w-full max-w-[1180px] min-w-[300px] h-12 px-4 bg-white rounded-lg shadow gap-2">
             <input 
             placeholder="Type to search..." 
             value = {input} 
             onChange={(e =>handleChange(e.target.value))}
             className="w-full h-full ml-1 bg-transparent border-0 text-xl focus:outline-none">
             </input>
+
             <FaSearch id = "search-icon"
             className="cursor-pointer text-gray-500"
             onClick = {()=>alert(`You have clicked search icon`)}></FaSearch>
