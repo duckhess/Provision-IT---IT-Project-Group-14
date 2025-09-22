@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 
 import { FaSearch } from "react-icons/fa";
-//import "./SearchBar.css";
 
 export type Company = {
     id: number;
@@ -16,7 +15,7 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
     const [input, setInput] = useState("");
 
     // fetch data from API (need to be changed)
-    // fetch(API)
+    // use this when the back-end query isnt set up yet
     const fetchData = (value : string) => {
         fetch("https://jsonplaceholder.typicode.com/users")
         .then((response) => response.json())
@@ -35,6 +34,13 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
             setResults(result);
         });
     };
+
+    // use this when the backend is ready with query
+    // const fetchData = (value:string) => {
+    //     fetch(`http://local_host:3000/company?search=${encodeURIComponent(value)}`)
+    //     .then ((response)=>response.json())
+    //     .then((json: Company[])=> setResults(json));
+    // }
 
     // handling input changed by setting the input then fetch data
     const handleChange = (value : string) => {
