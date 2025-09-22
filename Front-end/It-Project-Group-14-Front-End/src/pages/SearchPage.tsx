@@ -12,10 +12,10 @@ const SearchPage: React.FC = () => {
 
         <div className="flex gap-4 items-center">
           {/* Search Bar */}
-            <SearchBarComponent></SearchBarComponent>
+            <SearchBarComponent/>
           
           {/* Filter Button */}
-          <FilterSearchPage></FilterSearchPage>
+          <FilterSearchPage/>
         </div>
 
         <hr className="my-6 border-t border-gray-600" />
