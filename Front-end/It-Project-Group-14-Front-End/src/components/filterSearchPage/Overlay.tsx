@@ -28,7 +28,7 @@ const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters}) => {
             </button>
             
             <h2 className='text-xl font-bold mb-4'>Please apply the filters below </h2>
-            
+
             <DropdownFilter 
                 title = "Business Size" 
                 options = {['Small', 'Medium', 'Large']}
