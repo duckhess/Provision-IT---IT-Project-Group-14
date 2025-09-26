@@ -1,9 +1,0 @@
-GET http://localhost:3000/abs_benchmarkings/fetch_all_abs
-
-###
-
-GET http://localhost:3000/abs_benchmarkings/fetch_abs?absid=1
-
-###
-
-GET http://localhost:3000/abs_benchmarkings/fetch_benchmark?Benchmark="total"
