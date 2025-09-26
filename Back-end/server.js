@@ -1,18 +1,26 @@
-import dotenv from 'dotenv'
 import express from 'express'
 import mongoose from 'mongoose'
-import abs_router from './routes/abs_benchmarkings.js'
+import dotenv from 'dotenv'
+import industry_router from './routes/industry.routes.js'
+import company_routes from './routes/company.routes.js'
+import key_ratio_routes from './routes/key_ratio.routes.js'
+import abs_router from './routes/abs_benchmarkings.routes.js'
 
 const app = express()
 dotenv.config()
 
-app.use(express.json())
-app.use('/abs_benchmarkings', abs_router)
+const PORT = process.env.PORT || 7000
+const MONGOURL = process.env.DB_URL
 
-mongoose.connect(process.env.DB_URL)
-const db = mongoose.connection
-db.on('error', (error) => console.error(error))
-db.once('open', () => console.log('Connected to Database'))
+mongoose.connect(MONGOURL).then(() => {
+    console.log("Database is connected successfully")
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`)
+    })
+})
+.catch((error) => console.log(error))
 
-// localhost:3000/abs_benchmarkings
-app.listen(3000, () => console.log('Server Started'))
+app.use("/industries", industry_router)
+app.use("/companies", company_routes)
+app.use("/key_ratios", key_ratio_routes)
+app.use("/abs_benchmarkings", abs_router)

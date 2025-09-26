@@ -1,12 +1,13 @@
 import abs_schema from '../models/abs_benchmarkings.js'
 import abs_values_schema from '../models/abs_values.js'
 
-const filter_abs_id = async (filters = {}) => {
+const filter_abs = async (filters = {}) => {
     const matching_params = {}
 
-    if (filters.ABSID) matching_params.ABSID = Number(filters.ABSID)
-    if (filters.ApplicationID) matching_params.ApplicationID = Number(filters.ApplicationID)
-    if (filters.Analysis !== undefined) matching_params.Analysis = filters.Analysis === 'true'
+    if (filters.absid) matching_params.ABSID = Number(filters.absid)
+    if (filters.applicationid) matching_params.ApplicationID = Number(filters.applicationid)
+    if (filters.anziccode) matching_params.ANZICCode = Number(filters.anziccode)
+    if (filters.analysis !== undefined) matching_params.Analysis = filters.analysis === 'true'
 
     const value = await abs_values_schema.find(matching_params).lean()
 
@@ -33,5 +34,5 @@ const filter_abs_id = async (filters = {}) => {
 }
 
 export default {
-    filter_abs_id,
+    filter_abs,
 }

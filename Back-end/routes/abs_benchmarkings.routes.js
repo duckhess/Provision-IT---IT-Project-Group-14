@@ -3,6 +3,6 @@ import abs_controller from '../controllers/abs_controller.js'
 
 const router = express.Router()
 
-router.get('/fetch_abs', abs_controller.fetch_abs)
+router.get('/', abs_controller.fetch_abs)
 
 export default router
