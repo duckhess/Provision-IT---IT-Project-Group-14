@@ -1,0 +1,21 @@
+@startuml Login
+title Login Flow
+
+actor Investor
+participant "Web App" as Web
+participant "Auth Service" as Auth
+
+Investor -> Web: Access website
+activate Web
+Web -> Investor: Show login page
+
+
+Investor -> Web: Enter credentials
+Web -> Auth: Validate credentials
+activate Auth
+Auth --> Web: Confirm authentication
+deactivate Auth
+Web -> Investor: Redirect to main page
+deactivate Web
+
+@enduml

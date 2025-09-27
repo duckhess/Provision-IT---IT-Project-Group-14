@@ -1,0 +1,46 @@
+@startuml compare_companies_highlevel
+title Compare Companies Flow 
+
+autonumber
+actor Investor
+participant "Web App" as Web
+participant "Auth Service" as Auth
+participant "Application Backend" as Backend
+database "Data Store" as Store
+
+ref over Investor, Web, Auth
+  Login Flow (see: login_flow.puml)
+end ref
+
+ref over Investor, Web, Backend, Store
+  Load Main Page (see: main_page.puml)
+end ref
+
+
+Investor -> Web: Navigate to comparison page
+activate Web
+Web -> Backend: Search companies
+activate Backend
+Backend -> Store: Query companies
+activate Store
+Store --> Backend: Companies list
+deactivate Store
+Backend --> Web: Companies list
+deactivate Backend
+Web -> Investor: Show search results
+deactivate Web
+
+Investor -> Web: Select company
+activate Web
+Web -> Backend: Request comparison data
+activate Backend
+Backend -> Store: Query ratio values
+activate Store
+Store --> Backend: Comparison dataset
+deactivate Store
+Backend --> Web: Comparison dataset
+deactivate Backend
+Web -> Investor: Display side-by-side comparison
+deactivate Web
+
+@enduml
