@@ -1,29 +1,34 @@
 import {
-  listIndustriesService,
-  getIndustryByIdService
-} from "../services/industry.service.js";
+  list_industries_service,
+  get_industry_by_id_service
+} from '../services/industry.service.js'
 
-export const listIndustriesController = async (req,res) => {
+export const list_industries_controller = async (req,res) => {
   try {
-    const data = await listIndustriesService();
-    return res.json(data);
-  } catch (e) {
-    return res.status(500).json({ error: e.message });
-  }
-}
-
-export const getIndustryByIdController = async(req, res) => {
-  try {
-    const idNum = Number(req.params.id);
-    if (Number.isNaN(idNum)) {
-      return res.status(400).json({ error: "id must be a number" });
+    const parameters = {}
+    for (const key in req.query){
+      parameters[key.toLowerCase()] = req.query[key]
     }
 
-    const item = await getIndustryByIdService(idNum);
+    const element = parameters["industryid"]
+
+    if(element){
+      const industry_id = Number(element)
+      if (Number.isNaN(industry_id)) {
+      return res.status(400).json({ error: "Industry ID must be a number" })
+    
+    }
+    
+    const item = await get_industry_by_id_service(industry_id);
     if (!item) return res.status(404).json({ error: "Not found" });
 
     return res.json(item);
-  } catch (e) {
-    return res.status(500).json({ error: e.message });
+
+    }
+
+    const industries = await list_industries_service()
+    return res.json(industries)
+  } catch (err) {
+    return res.status(500).json({ error: e.message })
   }
 }

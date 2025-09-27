@@ -1,13 +1,13 @@
-import { listCompaniesService } from "../services/company.service.js";
+import { list_companies_service } from '../services/company.service.js'
 
-export const listCompaniesController = async (req,res) => {
+export const list_companies_controller = async (req,res) => {
   try {
-    const data = await listCompaniesService();
-    return res.json(data);
+    const data = await list_companies_service()
+    return res.json(data)
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message })
   }
-};
+}
 
 /**export async function listCompaniesController(req, res) {
   try {
