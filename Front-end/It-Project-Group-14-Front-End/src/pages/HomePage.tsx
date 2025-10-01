@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import companyData from "../data/CompanyData.json"
 import Summary from "../components/BasicSummary"
 
