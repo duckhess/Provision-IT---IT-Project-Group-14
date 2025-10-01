@@ -1,12 +1,9 @@
-
-const { plugin } = require("postcss");
-
-module.exports = {
-  content: {
-    "./src/**/*.{js, jsx, ts, tsx}"
-    "./node_modules/flowbite/**/*.js"
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [],
+  theme: {
+    extend: {},
   },
-  plugins: [
-    require('flowbite/plugin')
-  ]
+  plugins: [],
 }
+
