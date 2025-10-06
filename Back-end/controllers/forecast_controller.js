@@ -1,18 +1,18 @@
-import service from '../services/wcm_service.js'
+import service from '../services/forecast_service.js'
 
-const fetch_wcm = async (req, res) => {
+const fetch_forecasts = async (req, res) => {
     try {
         const filter_querries = {}
         for (const key in req.query) {
             filter_querries[key.toLowerCase()] = req.query[key]
         }
-        const wcm_document = await service.filter_wcm(filter_querries)
-        res.json(wcm_document)
+        const forecast_document = await service.filter_forecasts(filter_querries)
+        res.json(forecast_document)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
 }
 
 export default {
-    fetch_wcm
+    fetch_forecasts,
 }

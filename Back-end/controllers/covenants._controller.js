@@ -1,18 +1,18 @@
-import service from '../services/wcm_service.js'
+import service from '../services/covenants_service.js'
 
-const fetch_wcm = async (req, res) => {
+const fetch_covenants = async (req, res) => {
     try {
         const filter_querries = {}
         for (const key in req.query) {
             filter_querries[key.toLowerCase()] = req.query[key]
         }
-        const wcm_document = await service.filter_wcm(filter_querries)
-        res.json(wcm_document)
+        const covenants_document = await service.filter_covenants(filter_querries)
+        res.json(covenants_document)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
 }
 
 export default {
-    fetch_wcm
+    fetch_covenants
 }
