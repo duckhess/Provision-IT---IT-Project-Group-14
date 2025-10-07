@@ -1,0 +1,32 @@
+import cash_schema from '../models/cash_equivalences.js'
+import cash_values_schema from '../models/cash_values.js'
+
+const filter_cash_equivalences = async (filters = {}) => {
+    const matching_params = {}
+
+    if (filters.cashid) matching_params.CashID = Number(filters.cashid)
+    if (filters.applicationid) matching_params.ApplicationID = Number(filters.applicationid)
+    if (filters.fileid) matching_params.FileID = Number(filters.fileid)
+
+    const value = await cash_values_schema.find(matching_params).lean()
+
+    const document = await cash_schema.find().lean()
+    const mapped_document = new Map()
+    document.forEach(c => mapped_document.set(c.CashID, c))
+
+    return value.map(v => {
+        const cash = mapped_document.get(v.CashID)
+        return {
+            CashID: cash.CashID,
+            Metric: cash.Metric,
+            Unit: cash.Unit,
+            ApplicationID: v.ApplicationID,
+            // Period: 
+            Value: parseFloat(v.Value)
+        }
+    })
+}
+
+export default {
+    filter_cash_equivalences
+}
