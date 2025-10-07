@@ -13,20 +13,20 @@ const filter_abs = async (filters = {}) => {
 
     const document = await abs_schema.find().lean()
     const mapped_document = new Map()
-    document.forEach(b => mapped_document.set(b.ABSID, b))
+    document.forEach(a => mapped_document.set(a.ABSID, a))
 
-    const response = value.map(value => {
-        const benchmark = mapped_document.get(value.ABSID)
+    const response = value.map(v => {
+        const benchmark = mapped_document.get(v.ABSID)
         return {    
-            ABSID: value.ABSID,
+            ABSID: v.ABSID,
             Benchmark: benchmark.Benchmark,
             Unit: benchmark.Unit,
-            ApplicationID: value.ApplicationID,
-            ANZICCode: value.ANZICCode,
-            Field: value.Field,
-            ABSValue: value.ABSValue,
-            CalcValue: value.CalcValue,
-            Analysis: value.Analysis
+            ApplicationID: v.ApplicationID,
+            ANZICCode: v.ANZICCode,
+            Field: v.Field,
+            ABSValue: v.ABSValue,
+            CalcValue: v.CalcValue,
+            Analysis: v.Analysis
         }
     })
 
