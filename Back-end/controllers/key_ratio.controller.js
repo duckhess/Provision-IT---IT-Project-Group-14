@@ -1,20 +1,27 @@
-import { getRatioByMetricNameService } from "../services/key_ratio.service.js";
+import { ratioService } from "../services/key_ratio.service.js";
 
-export const getRatiosByMetricNameController = async (req,res) => {
+export const keyRatioController = async (req,res) => {
+  
   try {
-    const metric = req.query.metric ?? req.query.metricName;
-    const applicationId = Number(req.query.applicationId);
-    const fileId = req.query.fileId != null ? Number(req.query.fileId) : undefined;
+    const parameters = {}
+    for (const key in req.query){
+      parameters[key.toLowerCase()] = req.query[key]
+    }
 
-    const result = await getRatioByMetricNameService({
-      metricName,
-      applicationId: Number(applicationId),
-      fileId: fileId != null ? Number(fileId) : undefined,
-    });
-
-    return res.json(result);
-  } catch (err) {
-    const status = err.status || 500;
-    return res.status(status).json({ error: err.message || 'Internal Server Error' });
+    const filters = {
+      metric : parameters.metric,
+      unit : parameters.unit,
+      keyratioid: parameters.keyratioid,           
+      applicationid: parameters.applicationid,      
+      fileid: parameters.fileid
+    }
+  
+    const ratios = await ratioService(filters)
+    return res.json(ratios)  
+  } 
+  catch (err) {
+    return res.status(500).json({ error: e.message })
   }
 }
+
+

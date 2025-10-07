@@ -24,9 +24,10 @@ mongoose.connect(MONGOURL).then(()=>{
 
 app.use("/industries", industry_routes)
 app.use("/companies", company_routes)
-//app.use("/keyRatios", key_ratio_routes)
-//app.use('/abs_benchmarkings', abs_router)
+app.use("/keyRatios", key_ratio_routes)
+
 
 //http://localhost:3000/companies
 //http://localhost:3000/industries
-//http://localhost:3000/industries/1
+//http://localhost:3000/industries?industryID=5
+//http://localhost:3000/keyRatios?unit=%&fileid=2

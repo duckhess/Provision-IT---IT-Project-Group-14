@@ -1,4 +1,5 @@
 import keyRatioModel from "../models/key_ratio.model.js";
+import keyRatioValueModel from "../models/key_ratios_values.model.js";
 
 const FILE_TIMELINE = {
     1: '2023',
@@ -10,76 +11,61 @@ function toTimeline(fileId) {
   return FILE_TIMELINE[fileId] || `File ${fileId}`;
 }
 
-// get values by metric name, app.ID and optional file id 
-// return only ONE row if file id provided
-export async function getRatioByMetricNameService({ metricName, applicationId, fileId }) {
-  validateInputs(metricName, applicationId);
+const results = (r) => ({
+  KeyRatioID: r.KeyRatioID,  
+  MetricName: r.Metric,
+  Unit: r.Unit,
+  ApplicationID : r.ApplicationID,
+  FileID : r.FileID,
+  Timeline: toTimeline(r.FileID),   
+  Value : r.Value
+})
 
-  const pipeline = buildPipeline(metricName, applicationId, fileId);
-  const docs = await keyRatioModel.aggregate(pipeline).allowDiskUse(true);
+export async function ratioService(filters = {}) {
 
-  return formatResult(docs, metricName);
-}
+  const matching_params = {}
+  if (filters.keyratioid != null) matching_params.KeyRatioID = Number(filters.keyratioid)
+  if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid)
+  if (filters.fileid != null) matching_params.FileID = Number(filters.fileid)
+  
+  const values = await keyRatioValueModel.find(matching_params).select("-__v -_id").lean()
+  if (values.length === 0) return []
 
-function validateInputs(metricName, applicationId) {
-  if (!metricName || applicationId == null) {
-    const err = new Error('metricName and applicationId are required');
-    err.status = 400;
-    throw err;
+  // find keyratioid in keyratio table
+  const fetchedIDs = [...new Set(values.map(v => v.KeyRatioID))]
+  const keyQuery = { KeyRatioID: { $in: fetchedIDs } };
+
+  // filter metric name 
+  if (filters.metric && String(filters.metric).trim() !== "") {
+  const metricRegex = String(filters.metric).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+  keyQuery.Metric = { $regex: metricRegex, $options: "i" };
   }
-}
 
-function formatResult(docs, metricName) {
-  if (!docs.length || !docs[0].data.length) {
-    return {
-      metricName,
-      unit: docs[0]?.unit ?? null,
-      data: [],
-    };
+  //filter unit
+  if (filters.unit && String(filters.unit).trim() !== "") {
+    const unitRegex = String(filters.unit).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    keyQuery.Unit = { $regex: unitRegex, $options: "i" }
   }
-  return docs[0];
+
+  // find metric name and unit in key ratio table 
+  const keyDocs = await keyRatioModel.find(keyQuery).select("-_id KeyRatioID Metric Unit ").lean();
+  if (keyDocs.length === 0) return []
+
+  const byId = new Map(keyDocs.map(d => [d.KeyRatioID, d]))
+
+  const filteredValues = values.filter(v => byId.has(v.KeyRatioID))
+
+  return filteredValues.map(v => {
+    const meta = byId.get(v.KeyRatioID);
+    return results({
+      ...v,                 
+      Metric: meta.Metric,  
+      Unit: meta.Unit, 
+    });
+  });
 }
 
-function buildPipeline(metric, applicationId, fileId) {
-  const baseMatch = {
-    Metric: { $regex: `^${escapeRegex(metric)}$`, $options: 'i' },
-  };
 
-  return [
-    { $match: baseMatch },
-    {
-      $lookup: {
-        from: 'key_ratios_values',
-        localField: 'KeyRatioID',
-        foreignField: 'KeyRatioID',
-        as: 'rows',
-        pipeline: [
-          { $match: { ApplicationID: Number(applicationId) } },
-          ( fileId != null ? [{ $match: { FileID: Number(fileId) } }] : []),
-          { $project: { _id: 0, KeyRatioID: 1, ApplicationID: 1, FileID: 1, Value: 1 } },
-          { $sort: { FileID: 1 } },
-        ],
-      },
-    },
-    {
-      $project: {
-        _id: 0,
-        metric: '$Metric',
-        unit: '$Unit',
-        data: {
-          $map: {
-            input: '$rows',
-            as: 'r',
-            in: {
-              timeline: fileIdToTimeline('$$r.FileID'),
-              value: '$$r.Value',
-            },
-          },
-        },
-      },
-    },
-  ];
-}
 
 
 

@@ -28,6 +28,7 @@ export const list_industries_controller = async (req,res) => {
 
     const industries = await list_industries_service()
     return res.json(industries)
+    
   } catch (err) {
     return res.status(500).json({ error: e.message })
   }

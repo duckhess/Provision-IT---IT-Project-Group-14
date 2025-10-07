@@ -1,11 +1,8 @@
 import { Router } from "express";
-import { getRatiosByMetricNameController } from "../controllers/key_ratio.controller.js";
-
+import { keyRatioController } from "../controllers/key_ratio.controller.js";
 
 const router = Router();
 
-// Params:metric name, app.ID, fileID(optional)
-// return values for that metric
-router.get('/', getRatiosByMetricNameController);
+router.get('/', keyRatioController);
 
 export default router;
