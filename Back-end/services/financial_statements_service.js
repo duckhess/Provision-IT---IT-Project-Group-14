@@ -22,7 +22,7 @@ const filter_statements = async (filters = {}) => {
             Unit: financials.Unit,
             ApplicationID: v.ApplicationID,
             // Period: 
-            Value: parseFloat(v.Value.toString())
+            Value: parseFloat(v.Value)
         }
     })
 }

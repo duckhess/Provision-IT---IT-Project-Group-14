@@ -49,7 +49,7 @@ const filter_wcm = async (filters = {}) => {
             Unit: movements.Unit,
             ApplicationID: v.ApplicationID,
             // Period: parseInt((timeline.get(`${v.FileID}`))?.period.toString()),
-            Value: parseFloat(v.Value.toString()),
+            Value: parseFloat(v.Value),
             "Avg Historical Forecast": parseFloat(forecast?.["Avg Historical Forecast"].toString()),
             "User Forecast": parseFloat(forecast?.["User Forecast"].toString())
         }

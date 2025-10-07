@@ -38,7 +38,7 @@ const filter_forecasts = async (filters = {}) => {
             Unit: forecasting.Unit,
             ApplicationID: f.ApplicationID,
             // Period: 
-            ...(v && {Value: parseFloat(v?.Value.toString())}),
+            ...(v && {Value: parseFloat(v?.Value)}),
             "Avg Hist Forecast": parseFloat(f["Avg Hist Forecast"]),
             "Avg Hist % Change": parseFloat(f["Avg Hist % Change"]),
             "Avg Hist % to Revenue": parseFloat(f["Avg Hist % to Revenue"]),

@@ -9,6 +9,7 @@ import wcm_router from './routes/working_capital_movements.routes.js'
 import covenants_router from './routes/covenants.routes.js'
 import financial_router from './routes/financial_statements.routes.js'
 import forecast_router from './routes/forecasts.routes.js'
+import cash_router from './routes/cash_equivalences.routes.js'
 
 const app = express()
 dotenv.config()
@@ -32,3 +33,4 @@ app.use("/working_capital_movements", wcm_router)
 app.use("/covenants", covenants_router)
 app.use("/financial_statements", financial_router)
 app.use("/forecasts", forecast_router)
+app.use("/cash_equivalences", cash_router)
