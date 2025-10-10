@@ -2,8 +2,8 @@ import LineGraph from "./GraphComponents/LineGraph";
 import BarGraph from "./GraphComponents/BarGraph";
 import WaterfallGraph from "./GraphComponents/WaterfallGraph";
 
-type Unit = "%" | "$" | "days" | "Ratio" | "Times";
-type Metric = "Ratio" | "Revenue" | "Duration";
+type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
+type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
 
 interface Dataset {
   name: string; // label
@@ -15,6 +15,7 @@ interface Dataset {
 interface GraphProps {
   datasets: Dataset[]; // up to 4 datasets
   unit: Unit;
+  title: String;
 }
 
 // Combine charts (An x-value maps to each dataset's y-value)
@@ -43,33 +44,33 @@ function mergeDatasets(datasets: Dataset[]) {
   });
 }
 
-function Graph({ datasets, unit }: GraphProps) {
+function Graph({ datasets, unit, title }: GraphProps) {
   const mergedData = mergeDatasets(datasets);
 
   switch (unit) {
     case "%":
       return (
-        <LineGraph datasets={datasets} mergedSets={mergedData}></LineGraph>
+        <LineGraph datasets={datasets} mergedSets={mergedData} yLabel="%" title={title}></LineGraph>
       );
 
     case "$":
       return (
-        <WaterfallGraph datasets={datasets} mergedSets={mergedData}></WaterfallGraph>
+        <WaterfallGraph datasets={datasets} mergedSets={mergedData} title={title}></WaterfallGraph>
       );
 
     case "days":
       return (
-        <LineGraph datasets={datasets} mergedSets={mergedData}></LineGraph>
+        <LineGraph datasets={datasets} mergedSets={mergedData} yLabel="days" title={title}></LineGraph>
       );
 
     case "Ratio":
       return (
-        <BarGraph datasets={datasets} mergedSets={mergedData}></BarGraph>
+        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="" title={title}></BarGraph>
       );
     
     case "Times":
       return (
-        <BarGraph datasets={datasets} mergedSets={mergedData}></BarGraph>
+        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="×" title={title}></BarGraph>
       );
 
     default:

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import ABSBenchmarkingLarge from './ABSBenchmarkingLarge.tsx';
-import ABSBenchmarkingSmall from './ABSBenchmarkingSmall.tsx';
+import ABSBenchmarkingLarge from './ABSBenchmarkingLarge';
+import ABSBenchmarkingSmall from './ABSBenchmarkingSmall';
 
 type MetricItem = {
     name : string;

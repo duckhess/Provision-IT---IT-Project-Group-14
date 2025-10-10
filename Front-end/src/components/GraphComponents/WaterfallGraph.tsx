@@ -2,8 +2,8 @@ import { useState } from "react";
 import WaterfallGraphSmall from "./WaterfallGraphSmall.tsx";
 import WaterfallGraphLarge from "./WaterfallGraphLarge.tsx";
 
-type Unit = "%" | "$" | "days";
-type Metric = "Ratio" | "Revenue" | "Duration";
+type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
+type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
 
 interface Dataset {
   name: string; // label
@@ -15,9 +15,10 @@ interface Dataset {
 interface GraphProps {
   datasets: Dataset[]; // up to 4 datasets
   mergedSets: Dataset[];
+  title: String;
 }
 
-const WaterfallGraph = ({ datasets, mergedSets }: GraphProps) => {
+const WaterfallGraph = ({ datasets, mergedSets, title }: GraphProps) => {
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => setExpanded((prev) => !prev);
 
@@ -25,11 +26,11 @@ const WaterfallGraph = ({ datasets, mergedSets }: GraphProps) => {
     <div className="flex flex-col gap-2 w-full h-full">
       {expanded ? (
         <div onClick={toggleExpand} className="cursor-pointer">
-          <WaterfallGraphLarge datasets={datasets} mergedSets={mergedSets} />
+          <WaterfallGraphLarge datasets={datasets} mergedSets={mergedSets} title={title} />
         </div>
       ) : (
         <div onClick={toggleExpand} className="cursor-pointer">
-          <WaterfallGraphSmall datasets={datasets} mergedSets={mergedSets} />
+          <WaterfallGraphSmall datasets={datasets} mergedSets={mergedSets} title={title}/>
         </div>
       )}
     </div>

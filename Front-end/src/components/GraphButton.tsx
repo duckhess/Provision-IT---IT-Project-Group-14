@@ -1,12 +1,12 @@
 import DataBox from "./DataBox.tsx";
 
-type Unit = "%" | "$" | "days";
-type Metric = "Ratio" | "Revenue" | "Duration";
-type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow";
+type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
+type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
+type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
   name: string; // label
-  data: { x: number; y: number }[];
+  data: any[];
   metric: Metric;
   unit: Unit;
   section: Section;
@@ -45,7 +45,7 @@ export function GraphButton({ selectedDatasets }: GraphContainerProps) {
 
         // Create a graph of maximum four dataset in each graph for each key-value pair
         return chunks.map((chunk, i) => (
-          <DataBox key={`${key}_${i}`} datasets={chunk} unit={unit} section={section} />
+          <DataBox key={`${key}_${i}`} datasets={chunk} unit={unit} section={section}/>
         ));
       })}
     </div>

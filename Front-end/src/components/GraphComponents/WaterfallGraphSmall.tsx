@@ -1,7 +1,7 @@
 import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Legend, Cell } from "recharts";
 
-type Unit = "%" | "$" | "days";
-type Metric = "Ratio" | "Revenue" | "Duration";
+type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
+type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
 
 interface Dataset {
   name: string;
@@ -12,15 +12,16 @@ interface Dataset {
 
 interface GraphProps {
   datasets: Dataset[];
-  mergedSets: any[]; // flattened merged data
+  mergedSets: any[]; 
+  title: String;
 }
 
 const greenShades = ["#22c55e", "#166534", "#22c55e", "#166534"]; 
 const redShades   = ["#ef4444", "#ef4444", "#ef4444", "#ef4444"];
 
-function buildWaterfallData(mergedSets) {
+function buildWaterfallData(mergedSets: any[]) {
   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
-  const result = [];
+  const result: any[] = [];
 
   keys.forEach((key) => {
     let cumulative = 0;
@@ -30,9 +31,9 @@ function buildWaterfallData(mergedSets) {
 
       if (i === 0) {
         result.push({
-          name: String(row.x), // x axis value (e.g., 1, 2, 3)
-          key,                 // dataset name (e.g., "A")
-          uv: value,
+          name: String(row.x), 
+          key,                 
+          change: value,
           pv: 0,
         });
         cumulative = value;
@@ -43,7 +44,7 @@ function buildWaterfallData(mergedSets) {
         result.push({
           name: String(row.x),
           key,
-          uv: diff,
+          change: diff,
           pv: cumulative,
         });
 
@@ -55,8 +56,8 @@ function buildWaterfallData(mergedSets) {
   return result;
 }
 
-const WaterfallGraphSmall = ({ mergedSets, datasets }: GraphProps) => {
-  const data = buildWaterfallData(mergedSets, datasets);
+const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
+  const data = buildWaterfallData(mergedSets);
 
   // Compute unique metrics in order of appearance
   const metricOrder = Array.from(
@@ -66,6 +67,11 @@ const WaterfallGraphSmall = ({ mergedSets, datasets }: GraphProps) => {
 
   return (
     <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
+      <div className ="px-4 w-full">
+        <h2 className='text-black text-xl font-bold border-b mb-4 inline-block'>
+          {title}
+        </h2>
+      </div>
       <div className="w-full h-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
@@ -74,9 +80,9 @@ const WaterfallGraphSmall = ({ mergedSets, datasets }: GraphProps) => {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
-              dataKey="uv"
+              dataKey="change"
               interval={0}
-              tickFormatter={(value, index) => {
+              tickFormatter={(index) => {
                 const current = data[index];
                 const prev = data[index - 1];
                 const next = data[index + 1];
@@ -97,7 +103,7 @@ const WaterfallGraphSmall = ({ mergedSets, datasets }: GraphProps) => {
 
             <Bar dataKey="pv" stackId="a" fill="transparent" />
             
-            <Bar dataKey="uv" stackId="a">
+            <Bar dataKey="change" stackId="a">
               {data.map((entry, index) => {
                 const metricIndex = metricOrder.indexOf(entry.key);
                 {console.log(metricIndex)};
@@ -107,7 +113,7 @@ const WaterfallGraphSmall = ({ mergedSets, datasets }: GraphProps) => {
                 return (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.uv >= 0 ? green : red}
+                    fill={entry.change >= 0 ? green : red}
                   />
                 );
               })}

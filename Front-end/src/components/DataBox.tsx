@@ -1,8 +1,8 @@
 import Graph from "./Graph";
-import ABSBenchmarking from "./ABSBenchmarking";
+import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
 
-type Unit = "%" | "$" | "days";
-type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast";
+type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
+type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
 type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
@@ -25,8 +25,7 @@ function DataBox({ datasets, unit, section}: GraphProps) {
     case "Ratio":
       return (
         <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} />
-            <p>Section: Ratio</p>
+            <Graph datasets={datasets} unit={unit} title={section}/>
         </div>
       );
 
@@ -34,25 +33,22 @@ function DataBox({ datasets, unit, section}: GraphProps) {
       return (
         <div className="flex flex-col">
             <ABSBenchmarking code = {"ABC123"} metric_list = {datasets[0].data}></ABSBenchmarking>
-            <p>ABS</p>
         </div>
       );
 
     case "Statement of Cashflow":
       return (
         <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} />
+            <Graph datasets={datasets} unit={unit} title={section}/>
             <br/>
-            <p>Section: Statement of Cashflow</p>
         </div>
       );
     
     case "Forecast":
       return (
         <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} />
+            <Graph datasets={datasets} unit={unit} title={section}/>
             <br/>
-            <p>Section: Forecast</p>
         </div>
       );
 
