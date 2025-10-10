@@ -1,0 +1,53 @@
+@startuml Profile_page
+title Profile Page Flow 
+
+autonumber
+actor Investor
+participant "Web App" as Web
+participant "Auth Service" as Auth
+participant "Application Backend" as Backend
+database "Data Store" as Store
+
+
+ref over Investor, Web, Auth
+  Login Flow (see: login_flow.puml)
+end ref
+
+
+ref over Investor, Web, Backend, Store
+  Main Page Load (see: main_page.puml)
+end ref
+
+== Navigate to Profile ==
+Investor -> Web:Access profile tab
+activate Web
+Web -> Backend: Request profile data 
+activate Backend
+
+== Fetch Profile Data ==
+Backend -> Store: Get user profile 
+activate Store
+Store --> Backend: Profile data
+deactivate Store
+
+Backend -> Store: Get transaction history 
+activate Store
+Store --> Backend: Transactions list
+deactivate Store
+
+Backend -> Store: Get payment methods 
+activate Store
+Store --> Backend: Masked payment methods
+deactivate Store
+
+Backend --> Web: Aggregated profile payload
+deactivate Backend
+
+== Render Profile ==
+Web -> Investor: Show header (avatar, username)
+Web -> Investor: Show profile details (email, preferences)
+Web -> Investor: Show transaction history 
+Web -> Investor: Show payment methods (masked ••••1234)
+deactivate Web
+
+@enduml

@@ -1,0 +1,73 @@
+@startuml filter_feature
+title Filter Feature
+
+autonumber
+actor Investor
+participant "Web App" as Web
+participant "Application Backend" as Backend
+database "Data Store" as Store
+participant "Auth Service" as Auth
+
+ref over Investor, Web, Auth
+  Login Flow (see: login_flow.puml)
+end ref
+
+ref over Investor, Web, Backend, Store
+  Main Page Load (see: main_page.puml)
+end ref
+
+== Case 1: Apply Company Filters ==
+Investor -> Web: Open Companies tab
+activate Web
+Web -> Backend: Request filter metadata (locations, years, industries)
+activate Backend
+Backend -> Store: Fetch filter sets
+activate Store
+Store --> Backend: Filter sets
+deactivate Store
+Backend --> Web: Filter sets
+deactivate Backend
+Web -> Investor: Return filter sets
+deactivate Web
+
+loop Refine Company Filters
+  Investor -> Web: Select filters (Location=VIC, Year=2024, Industry=Real Estate)
+  activate Web
+  Web -> Backend: Submit filter state
+  activate Backend
+  Backend -> Store: Query matching companies
+  activate Store
+  Store --> Backend: Filtered companies
+  deactivate Store
+  Backend --> Web: Filtered companies
+  deactivate Backend
+  Web -> Investor: Update results grid
+  deactivate Web
+end
+
+Investor -> Web: Click on a company to research
+Web -> Investor: Navigate to Company tab (profile view)
+
+
+== Case 2: Filter Metrics ==
+Investor -> Web: Open metric filter (dropdown)
+activate Web
+Web -> Investor: Show metric categories + search + checkboxes
+deactivate Web
+
+loop Refine Metric Filters
+  Investor -> Web: Select "Revenue" via checkboxes
+  activate Web
+  Web -> Backend: Request filtered metric subset 
+  activate Backend
+  Backend -> Store: Fetch metric definitions + 3-year data
+  activate Store
+  Store --> Backend: Filtered metrics
+  deactivate Store
+  Backend --> Web: Filtered metrics
+  deactivate Backend
+  Web -> Investor: Update metric list (show Revenue, hide others)
+  deactivate Web
+end
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml Main Page
+title Main Page Load (Post-Login)
+
+actor Investor
+participant "Web App" as Web
+participant "Application Backend" as Backend
+database "Data Store" as Store
+
+Investor -> Web: Explore main page
+activate Web
+Web -> Backend: Request company metadata
+activate Backend
+
+Backend -> Store: Fetch metadata
+activate Store
+Store --> Backend: Metadata
+deactivate Store
+
+Backend --> Web: Aggregated data
+deactivate Backend
+
+Web -> Investor: Display main page data
+Web -> Investor: Show search bar + dynamic company list 
+deactivate Web
+
+@enduml
