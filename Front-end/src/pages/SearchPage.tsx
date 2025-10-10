@@ -13,7 +13,7 @@ const SearchPage: React.FC = () => {
 
         <div className="flex gap-4 items-center">
           {/* Search Bar */}
-            <SearchBarComponent/>
+          <SearchBarComponent/>
           
           {/* Filter Button */}
           <FilterSearchPage/>

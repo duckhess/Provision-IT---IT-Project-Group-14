@@ -10,7 +10,7 @@ const FilterButton:React.FC<FilterButtonProps> = ({onClick}) => {
     <div>
         <button 
         onClick={onClick}
-        className='flex items-center gap-2 px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-200'>
+        className='h-12 flex items-center gap-2 px-4 py-2 bg-white text-gray-700 font-semibold rounded-lg shadow-md hover:bg-gray-200'>
             <HiPlus className='text-xl'>
             </HiPlus>
             Filters
