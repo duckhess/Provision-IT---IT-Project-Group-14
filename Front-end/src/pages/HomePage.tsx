@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import companyData from "../data/CompanyData.json"
 import Summary from "../components/BasicSummary"
+import CompanyList from "../components/CompanyList";
 
 
   type Company = {
@@ -109,6 +110,8 @@ const HomePage: React.FC = () => {
           </p>
         </div>
       </section>
+
+      <CompanyList></CompanyList>
     </main>
   );
 };
