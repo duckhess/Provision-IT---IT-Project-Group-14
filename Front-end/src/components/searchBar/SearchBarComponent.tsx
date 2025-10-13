@@ -2,9 +2,9 @@ import {useState} from 'react'
 import { SearchBar } from './SearchBar';
 import { SearchResultList } from './SearchResultList';
 
-type Company = {
-  id : number;
-  name : string;
+interface Company {
+  companyId: number;
+  companyName: string;
 }
 
 const SearchBarComponent = () => {
@@ -15,7 +15,7 @@ const SearchBarComponent = () => {
           <div className='w-full max-w-[1180px] min-w-[300px] px-4'>
             <div className='relative w-full'>
               <SearchBar setResults = {setResults}></SearchBar>
-              <SearchResultList results = {results}></SearchResultList>
+              {results.length > 0 && <SearchResultList results = {results}/>}
             </div>
           </div>
     </div>

@@ -18,15 +18,6 @@ dotenv.config();
 const PORT = process.env.PORT || 7000;
 const MONGOURL = process.env.MONGO_URL;
 
-mongoose
-  .connect(MONGOURL)
-  .then(() => {
-    console.log("Database is connected successfully");
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
-    });
-  })
-  .catch((error) => console.log(error));
 
 app.use(cors());
 
@@ -40,7 +31,18 @@ app.use("/financial_statements", financial_router);
 app.use("/forecasts", forecast_router);
 app.use("/cash_equivalences", cash_router);
 
+
+mongoose
+  .connect(MONGOURL)
+  .then(() => {
+    console.log("Database is connected successfully");
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  })
+  .catch((error) => console.log(error));
+
 //http://localhost:3000/companies
 //http://localhost:3000/industries
 //http://localhost:3000/industries?industryID=5
-//http://localhost:3000/keyRatios?unit=%&fileid=2
+//http://localhost:3000/key_ratios?unit=%&fileid=2

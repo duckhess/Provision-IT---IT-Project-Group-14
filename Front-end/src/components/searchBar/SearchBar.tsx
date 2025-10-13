@@ -1,39 +1,73 @@
-import React, {useState} from "react";
-
+import React, {useState, useEffect} from "react";
 import { FaSearch } from "react-icons/fa";
+import axios from "axios";
 
-export type Company = {
-    id: number;
-    name: string;
+interface Company {
+  companyId: number;
+  companyName: string;
 }
 
-type SearchBarProps = {
+interface SearchBarProps {
     setResults : React.Dispatch<React.SetStateAction<Company[]>>;
 }
 
 export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
     const [input, setInput] = useState("");
+    const [allCompanies, setAllCompanies] = useState<Company[]>([]);
+    const [loading, setLoading] = useState(false);
 
-    // fetch data from API (need to be changed)
-    // use this when the back-end query isnt set up yet
-    const fetchData = (value : string) => {
-        fetch("https://jsonplaceholder.typicode.com/users")
-        .then((response) => response.json())
-        .then((json : Company[])=> {
-            /* check is the user exist, then check is there a name then compare */
-            /* can be simplified but however data isnt ready yet */
-            /* filtering is usually done at backend side */
-            const result = json.filter ((user) => {
-                return (
-                    value && 
-                    user && 
-                    user.name && 
-                    user.name.toLowerCase().includes(value.toLocaleLowerCase())
-                );
-            });
-            setResults(result);
-        });
+    useEffect(() => {
+        const fetchCompanies = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get<Company[]>("http://localhost:5000/companies");
+            setAllCompanies(response.data);
+        } catch (err) {
+            console.error("Error fetching companies:", err);
+        } finally {
+            setLoading(false);
+        }
+        };
+        fetchCompanies();
+    }, []);
+
+    const handleChange = (value: string) => {
+        setInput(value);
+        if (value.trim() === "") {
+        setResults([]);
+        return;
+        }
+
+        const filtered = allCompanies.filter((company) =>
+        company.companyName.toLowerCase().includes(value.toLowerCase())
+        );
+        setResults(filtered);
     };
+
+
+    // // fetch data from API (need to be changed)
+    // // use this when the back-end query isnt set up yet
+    // const fetchData = (value : string) => {
+    //     fetch("/companies/companyName")
+    //     .then((response) => response.json())
+    //     .then((json : Company[])=> {
+    //         console.log("Fetched data : ", json);
+    //         /* check is the user exist, then check is there a name then compare */
+    //         /* can be simplified but however data isnt ready yet */
+    //         /* filtering is usually done at backend side */
+    //         const result = value 
+    //              ? json.filter((company) => 
+    //                 company.name
+    //                 .toLowerCase()
+    //                 .includes(value.toLowerCase())
+    //             ) : [];
+            
+    //         setResults(result);
+    //         console.log("Filter results", result);
+    //     })
+    //     .catch((err)=>console.error(err));
+    // };
+
 
     // use this when the backend is ready with query
     // const fetchData = (value:string) => {
@@ -43,10 +77,10 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
     // }
 
     // handling input changed by setting the input then fetch data
-    const handleChange = (value : string) => {
-        setInput(value);
-        fetchData(value);
-    };
+    // const handleChange = (value : string) => {
+    //     setInput(value);
+    //     fetchData(value);
+    // };
 
     // input is handled when there is a new character typed
     return(

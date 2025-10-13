@@ -2,9 +2,9 @@ import React from 'react'
 
 //import "./SearchResult.css"
 
-type Company = {
-    id : number;
-    name : string;
+interface Company {
+  companyId: number;
+  companyName: string;
 }
 
 type SearchResultProps = {
@@ -14,9 +14,9 @@ type SearchResultProps = {
 export const SearchResult: React.FC<SearchResultProps> = ({result}) => {
     return (
         <div className= "px-5 py-2.5 hover:bg-gray-100 cursor-pointer w-full"
-        onClick={() => alert(`You click on ${result.name}`)}
+        onClick={() => alert(`You click on ${result.companyName}`)}
         >
-        {result.name}
+        {result.companyName}
         </div>
     );
 };
