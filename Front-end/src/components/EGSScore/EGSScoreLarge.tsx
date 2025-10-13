@@ -36,6 +36,7 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
                         startAngle={90}
                         endAngle={-270}>
                         <PolarRadiusAxis domain = {[0, 100]} tick = {false}/>
+                        {/* need to be fix : using latest version of tailwind- minAngle = {5} */}
                         <RadialBar {...({ minAngle: 5 } as any)} background clockWise dataKey="value" label={{ position: "insideStart", fill: "#fff", fontSize: 12 }}/>
                         <Legend iconSize={10} layout="vertical" verticalAlign="middle" align="right" />
                     </RadialBarChart>
