@@ -10,11 +10,16 @@ import covenants_router from './routes/covenants.routes.js'
 import financial_router from './routes/financial_statements.routes.js'
 import forecast_router from './routes/forecasts.routes.js'
 import cash_router from './routes/cash_equivalences.routes.js'
+import liability_router from './routes/liability.routes.js'
+import asset_router from './routes/asset.routes.js'
+import equity_router from './routes/equity.routes.js'
+import income_router from './routes/income_statement.routes.js'
+import soc_router from './routes/statement_of_cashflows.routes.js'
 
 const app = express()
 dotenv.config()
 
-const PORT = process.env.PORT || 7000
+const PORT = process.env.PORT || 3000
 const MONGOURL = process.env.MONGO_URL
 
 mongoose.connect(MONGOURL).then(() => {
@@ -34,7 +39,11 @@ app.use("/covenants", covenants_router)
 app.use("/financial_statements", financial_router)
 app.use("/forecasts", forecast_router)
 app.use("/cash_equivalences", cash_router)
-
+app.use("/liabilities", liability_router)
+app.use("/assets", asset_router)
+app.use("/equities", equity_router)
+app.use("/income_statements", income_router)
+app.use("/statement_of_cashflows", soc_router)
 
 //http://localhost:3000/companies
 //http://localhost:3000/industries
