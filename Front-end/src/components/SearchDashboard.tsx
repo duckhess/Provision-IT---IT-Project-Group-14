@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CompanyCard from '../components/CompanyCard';
 import Summary from '../components/BasicSummary';
-import SearchDashboardGraph from './SearchGraph.tsx';
+import SearchPageGrid from './SearchPageGrid.tsx';
 
 type Company = {
     id: number,
@@ -145,15 +145,19 @@ const SearchDashboard: React.FC = () => {
       </div>
 
       {/* Right panel */}
-      <div className="w-3/4 pl-6 grid grid-rows-[30%_70%]">
-        {selectedItem ? (
-          <>
-            <Summary company={selectedItem.summary} />
-            <SearchDashboardGraph datasets={selectedItem.datasets} />
-          </>
-        ) : (
-          <p className="text-gray-500 text-center mt-20">Select a startup to see summary and metrics.</p>
-        )}
+      <div className = "h-[1250px] w-3/4 pl-6 border-r pr-4">
+        <div className="grid grid-rows-[330px_920px]">
+          {selectedItem ? (
+            <>
+              <Summary company={selectedItem.summary} />
+              <div className="overflow-y-auto">
+                <SearchPageGrid selectedDatasets={selectedItem.datasets} />
+              </div>
+            </>
+          ) : (
+            <p className="text-gray-500 text-center mt-20">Select a startup to see summary and metrics.</p>
+          )}
+        </div>
       </div>
     </div>
   );
