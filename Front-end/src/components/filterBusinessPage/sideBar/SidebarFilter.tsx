@@ -19,7 +19,7 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
   toggleSelection,
 }) => {
   return (
-    <div className="fixed top-0 left-0 h-full w-80 shadow-lg p-4 bg-white border-gray-300 z-50 overflow-y-scroll">
+    <div className="fixed top-0 left-0 h-full w-80 shadow-lg p-4 bg-white border-gray-300 z-50 text-start overflow-y-scroll">
       <h3 className="font-black mb-2">Filter by:</h3>
 
       {sections.map((section) => (
