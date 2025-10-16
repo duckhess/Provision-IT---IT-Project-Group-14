@@ -11,9 +11,10 @@ type SearchBarProps = {
   allCompanies: Company[];
   setSuggested: (companies: Company[]) => void;
   setSearchResults: (companies: Company[]) => void;
+  handleSearchClick? : (input : string) => void;
 }
 
-export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested, setSearchResults}) =>{
+export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested, setSearchResults, handleSearchClick}) =>{
     const [input, setInput] = useState("");
 
     const handleChange = (value: string) => {
@@ -33,7 +34,15 @@ export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested
         setSuggested(filtered);
     };
 
-    const handleSearchClick = () => {
+    const handleClick = () => {
+        const trimmedInput = input.trim();
+
+        if(handleSearchClick){
+            handleSearchClick(trimmedInput);
+            setSuggested([]);
+            return;
+        }
+
         const filtered = input.trim() === ""
             ? allCompanies
             : allCompanies.filter((c) =>
@@ -42,7 +51,42 @@ export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested
 
         setSearchResults(filtered); 
         setSuggested([]);// only update dashboard
-    };
+
+    }
+
+    // const handleSearchClick = () => {
+
+
+    //     const filtered = input.trim() === ""
+    //         ? allCompanies
+    //         : allCompanies.filter((c) =>
+    //             c.companyName.toLowerCase().includes(input.toLowerCase())
+    //             );
+
+    //     setSearchResults(filtered); 
+    //     setSuggested([]);// only update dashboard
+    // };
+
+    // const handleClick = () => {
+    //     const trimmedInput = input.trim();
+
+    //     // If a custom search handler is provided (like homepage navigation)
+    //     if (handleSearchClick) {
+    //         handleSearchClick(trimmedInput); // e.g., navigate to search page
+    //         setSuggested([]);               // hide dropdown after search
+    //         return;
+    //     }
+
+    //     // Default behavior: filter companies for the dashboard (search page)
+    //     const filtered = trimmedInput === ""
+    //         ? allCompanies              // show all companies if input is blank
+    //         : allCompanies.filter(c =>
+    //             c.companyName.toLowerCase().includes(trimmedInput.toLowerCase())
+    //         );
+
+    //     setSearchResults(filtered);  // update SearchDashboard
+    //     setSuggested([]);            // hide dropdown
+    // };
 
     // const performSearch = (value: string) => {
     //     setInput(value);
@@ -90,7 +134,7 @@ export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested
 
             <FaSearch id = "search-icon"
             className="cursor-pointer text-gray-500"
-            onClick = {handleSearchClick}></FaSearch>
+            onClick = {handleClick}></FaSearch>
         </div>
     );
 };

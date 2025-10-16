@@ -4,6 +4,7 @@ import SearchBarComponent from "../components/searchBar/SearchBarComponent";
 import FilterSearchPage from "../components/filterSearchPage/FilterSearchPage";
 import SearchDashboard from "../components/SearchDashboard";
 import axios from "axios";
+import {useLocation} from "react-router-dom";
 
 interface Company {
   companyId: number;
@@ -17,6 +18,8 @@ const SearchPage: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Company[]>([]);
   // const [results, setResults] = useState <Company[]> ([]);
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const query = new URLSearchParams(location.search).get("query") || "";
 
   useEffect (() => {
     const fetchCompanies = async () => {

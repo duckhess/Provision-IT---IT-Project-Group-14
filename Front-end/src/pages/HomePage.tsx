@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
 import companyData from "../data/CompanyData.json"
 import Summary from "../components/BasicSummary"
+import SearchBarComponent from "../components/searchBar/SearchBarComponent";
+import axios from "axios";
 
-
-  type Company = {
+  type CompanyInfo = {
       id: number,
       title: string,
       category: string,
@@ -13,7 +15,12 @@ import Summary from "../components/BasicSummary"
       imageUrl: string
   }
 
-  const CompanyCard: React.FC<{ company: Company }> = ({ company }) => {
+  interface Company {
+    companyId: number;
+    companyName: string;
+  }
+
+  const CompanyCard: React.FC<{ company: CompanyInfo }> = ({ company }) => {
     return (
       <div className="h-full w-full  rounded-md flex items-center justify-center">
         <Summary company = {company}/>
@@ -21,13 +28,21 @@ import Summary from "../components/BasicSummary"
     );
   };
 
+
 const HomePage: React.FC = () => {
-  const [companies, setCompanies] = useState<Company[]>([]);
+  const [companies, setCompanies] = useState<CompanyInfo[]>([]);
+  const [allCompanies, setAllCompanies] = useState<Company []>([]);
+  const [suggestedCompanies, setSuggestedCompanies] = useState <Company[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  const handleSearchClick = (input : string) => {
+    navigate(`/search?query=${encodeURIComponent(input)}`);
+  };
 
 // Dummy data until backend is ready
   useEffect(() => {
-    const dummyData: Company[] = [
+    const dummyData: CompanyInfo[] = [
       {
         id: companyData[0].id,
         title: companyData[0].title,
@@ -51,6 +66,21 @@ const HomePage: React.FC = () => {
     setCompanies(dummyData);
   }, []);
 
+  // fetch all possible companies
+  useEffect (() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get<Company[]> (
+          "http://localhost:7000/companies"
+        );
+        setAllCompanies(response.data);
+      } catch (err){
+        console.error("error fetching companies data",err);
+      } 
+    };
+    fetchCompanies();
+  }, []);
+
   // Rotate cards every 10 seconds
   useEffect(() => {
     if (companies.length === 0) return;
@@ -68,8 +98,12 @@ const HomePage: React.FC = () => {
       <section className="items-center">
         <h1 className="text-2xl font-semibold mb-4 text-center">Welcome</h1>
 
-        <div className="w-full bg-gray-200 rounded-md h-10 flex items-center justify-center">
-          <span className="text-gray-500">[ Search Bar Placeholder ]</span>
+        <div className="w-full flex items-center justify-center">
+            <SearchBarComponent 
+              allCompanies={allCompanies} 
+              setSearchResults={() => {}}
+              handleSearchClick = {handleSearchClick}></SearchBarComponent>
+          {/* <span className="text-gray-500">[ Search Bar Placeholder ]</span> */}
         </div>
       </section>
 

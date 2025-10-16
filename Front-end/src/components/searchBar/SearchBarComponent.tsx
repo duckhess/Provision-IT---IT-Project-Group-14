@@ -10,9 +10,10 @@ interface Company {
 type SearchBarComponentProps = {
   allCompanies: Company[];
   setSearchResults: (companies: Company[]) => void;
+  handleSearchClick? : (input : string) => void;
 };
 
-const SearchBarComponent : React.FC <SearchBarComponentProps> = ({allCompanies, setSearchResults }) => {
+const SearchBarComponent : React.FC <SearchBarComponentProps> = ({allCompanies, setSearchResults, handleSearchClick }) => {
   const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
 
   return (
@@ -23,6 +24,7 @@ const SearchBarComponent : React.FC <SearchBarComponentProps> = ({allCompanies, 
                 allCompanies={allCompanies}
                 setSuggested={setSuggestedCompanies}
                 setSearchResults={setSearchResults}
+                handleSearchClick = {handleSearchClick}
               />
               <SearchResultList
                 results={suggestedCompanies}
