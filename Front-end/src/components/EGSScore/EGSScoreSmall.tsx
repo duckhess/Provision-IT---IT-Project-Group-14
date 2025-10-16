@@ -41,6 +41,7 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment}) => {
                 </div>
             </div>
 
+            {/* Social */}
             <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                     <FaUsers className='text-blue-500 text-3xl' />
@@ -53,7 +54,6 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment}) => {
                 </div>
             </div>
         </div>
-           
     </div>
   )
 }

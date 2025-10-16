@@ -1,24 +1,27 @@
 import React from 'react';
 
 interface CompanyCardProps {
-  id: string;
-  text: string;
-  companyDetails: string;
-  onClick: (id: string) => void;
+  id: number;
+  companyName: string;
+  // projectShortDescription : string;
+  // estDate : string;
+  onClick: (id: number) => void;
   isActive: boolean;
+
+  //projectShortDescription, estDate
 }
 
-const CompanyCard: React.FC<CompanyCardProps> = ({ id, text, companyDetails, onClick, isActive }) => {
+const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, isActive }) => {
   return (
     <div
-      className={`p-4 border rounded cursor-pointer mb-2 ${
+      className={`p-4 rounded cursor-pointer mb-2 ${
         isActive ? 'bg-blue-100 border-blue-400' : 'bg-white'
       }`}
       onClick={() => onClick(id)}
     >
-      {text}
-      <br/>
-      {companyDetails} 
+      <h3 className='font-bold'>{companyName}</h3>
+      {/* <p className='text-gray-600 text-sm'>{projectShortDescription}</p>
+      <p className='text-gray-400 text-xs'> Est. {estDate}</p> */}
     </div>
   );
 };

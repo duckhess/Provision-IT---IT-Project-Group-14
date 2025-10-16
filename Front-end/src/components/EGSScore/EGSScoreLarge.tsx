@@ -21,13 +21,16 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
             return <FaThumbsDown className='text-red-500 text-xl'/>;
         }
   return (
-    <div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">
+    <div className="flex flex-col items-start w-full h-[800px] bg-gray-100 rounded-lg shadow p-4">
         <h2 className='text-xl font-bold mb-4'> Environment and Social Score </h2>
-        
+
         <div className='grid grid-rows-3 gap-4 w-full h-full'>
-            <div className="w-full h-full min-w-[600px]">
-                <ResponsiveContainer width="100%" height="100%">
+
+            {/*Radial Graph */}
+            <div className="flex justify-enter items-center w-full h-full">
+                <ResponsiveContainer width="95%" height="100%">
                     <RadialBarChart 
+                        cx = "25%"
                         innerRadius="40%" 
                         outerRadius="80%"
                         data={[
@@ -43,8 +46,9 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
                 </ResponsiveContainer>
 
             </div>
+   
             {/*Environment */}
-            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between w-full'>
+            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                     <FaLeaf className='text-green-500 text-3xl' />
                     <span className = "font-semibold text-gray-700 ml-3">Environemnt </span>

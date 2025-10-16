@@ -1,9 +1,42 @@
 import React from "react";
+import {useState, useEffect} from "react";
 import SearchBarComponent from "../components/searchBar/SearchBarComponent";
 import FilterSearchPage from "../components/filterSearchPage/FilterSearchPage";
 import SearchDashboard from "../components/SearchDashboard";
+import axios from "axios";
+
+interface Company {
+  companyId: number;
+  companyName: string;
+}
+
 
 const SearchPage: React.FC = () => {
+  const [allCompanies, setAllCompanies] = useState<Company[]>([]);
+  // const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
+  const [searchResults, setSearchResults] = useState<Company[]>([]);
+  // const [results, setResults] = useState <Company[]> ([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect (() => {
+    const fetchCompanies = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get<Company[]> (
+          "http://localhost:7000/companies"
+        );
+        setAllCompanies(response.data);
+        setSearchResults(response.data)
+      } catch (err){
+        console.error("error fetching companies data",err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCompanies();
+  }, []);
+
+
   return (
     <main className="w-full max-w-7xl mx-auto py-20 space-y-12 px-20">
 
@@ -13,7 +46,7 @@ const SearchPage: React.FC = () => {
 
         <div className="flex gap-4 items-center">
           {/* Search Bar */}
-          <SearchBarComponent/>
+          <SearchBarComponent allCompanies={allCompanies} setSearchResults = {setSearchResults}/>
           
           {/* Filter Button */}
           <FilterSearchPage/>
@@ -22,7 +55,10 @@ const SearchPage: React.FC = () => {
         <hr className="my-6 border-t border-gray-600" />
       </section>
       <section className="align-middle h-[65%]">
-        <SearchDashboard/>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (<SearchDashboard companies = {searchResults} />)}
+        {/* <SearchDashboard companies = {results}/> */}
       </section>
 
       {/* Pagination */}

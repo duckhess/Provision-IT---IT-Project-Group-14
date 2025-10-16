@@ -1,4 +1,6 @@
+import CovenanatsSummary from "./CovenantsSummary/CovenantsSummary";
 import DataBox from "./DataBox";
+import EGSScore from "./EGSScore/EGSScore";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
@@ -17,8 +19,36 @@ interface GraphContainerProps {
 }
 
 function SearchPageGrid({ selectedDatasets }: GraphContainerProps) {
+
+  const mockCategoryData =  [
+        {
+            name: "Technology",
+            averageSuccess: 75,
+            spotPercentageSuccess: 80
+        },
+        {
+            name: "Health",
+            averageSuccess: 65,
+            spotPercentageSuccess: 70
+        },
+        {
+            name: "Finance",
+            averageSuccess: 85,
+            spotPercentageSuccess: 90
+        },
+        {
+            name: "Education",
+            averageSuccess: 70,
+            spotPercentageSuccess: 68
+        },
+        {
+            name: "Entertainment",
+            averageSuccess: 60,
+            spotPercentageSuccess: 55
+        }
+      ]
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
+    <div className="grid grid-cols-2 grid-rows-3 gap-4 items-stretch h-full">
       {selectedDatasets.map((dataset, i) => (
         <div className="overflow-y-auto">
         <DataBox
@@ -27,8 +57,15 @@ function SearchPageGrid({ selectedDatasets }: GraphContainerProps) {
           unit={dataset.unit}
           section={dataset.section}
         />
+        
         </div>
+        
       ))}
+      <div className="overflow-y-auto">
+        <EGSScore social =  {70} environment={80}></EGSScore>
+      </div>
+      <CovenanatsSummary datasets={mockCategoryData}></CovenanatsSummary>
+      
     </div>
   );
 }

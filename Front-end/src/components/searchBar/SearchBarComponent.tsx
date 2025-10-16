@@ -1,21 +1,36 @@
-import {useState} from 'react'
 import { SearchBar } from './SearchBar';
 import { SearchResultList } from './SearchResultList';
+import { useState } from 'react';
 
-type Company = {
-  id : number;
-  name : string;
+interface Company {
+  companyId: number;
+  companyName: string;
 }
 
-const SearchBarComponent = () => {
-  const [results, setResults] = useState<Company[]>([]);
+type SearchBarComponentProps = {
+  allCompanies: Company[];
+  setSearchResults: (companies: Company[]) => void;
+};
+
+const SearchBarComponent : React.FC <SearchBarComponentProps> = ({allCompanies, setSearchResults }) => {
+  const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
 
   return (
     <div className="flex items-center w-full ">
           <div className='w-full max-w-[1180px] min-w-[300px] px-4'>
             <div className='relative w-full'>
-              <SearchBar setResults = {setResults}></SearchBar>
-              <SearchResultList results = {results}></SearchResultList>
+              <SearchBar
+                allCompanies={allCompanies}
+                setSuggested={setSuggestedCompanies}
+                setSearchResults={setSearchResults}
+              />
+              <SearchResultList
+                results={suggestedCompanies}
+                onSelect={(company) => {
+                  setSearchResults([company]); 
+                  setSuggestedCompanies([]); 
+                }}
+              />
             </div>
           </div>
     </div>
