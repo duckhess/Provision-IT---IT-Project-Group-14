@@ -158,9 +158,9 @@ const mockSections: MetricSection[] = Object.entries(
 }));
 
 const FilterComparisonPage = () => {
-    const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-    const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleToggleSelection = (key: string) => {
     setSelectedKeys((prev) =>
@@ -168,34 +168,37 @@ const FilterComparisonPage = () => {
     );
   };
 
-    const handleGenerate = () => {
-    setFinalSelectedKeys(selectedKeys); // Lock in the current selection
+  const handleGenerate = () => {
+    setFinalSelectedKeys(selectedKeys);
     setSidebarOpen(false);
-    };
+  };
 
   return (
-    <div className="flex">
+    <div className="flex h-screen overflow-hidden">
+      {/* Sidebar toggle button */}
       <SideBarFilterButton onClick={() => setSidebarOpen(!sidebarOpen)} />
 
+      {/* Sidebar */}
       {sidebarOpen && (
         <SidebarFilter
-          onClose={handleGenerate}         // Trigger graph generation
+          onClose={handleGenerate}
           sections={mockSections}
           selectedKeys={selectedKeys}
           toggleSelection={handleToggleSelection}
+
         />
       )}
 
-      <div className="flex-1 p-4">
+      {/* Main content area */}
+      <div className="flex-1 p-4 overflow-y-auto min-h-0">
         {finalSelectedKeys.length > 0 && (
-            <CompareGraphButton
+          <CompareGraphButton
             selectedKeys={finalSelectedKeys}
             companyDatasets={companyData}
-            />
+          />
         )}
-        </div>
-
-    </div>
+      </div>
+      </div>
   );
 };
 

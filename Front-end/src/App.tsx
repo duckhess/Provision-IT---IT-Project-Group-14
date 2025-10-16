@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import ComparePage from "./pages/ComparePage";
 import LoginPage from "./pages/LoginPage";
 import BusinessPage from "./pages/BusinessPage";
+import FilterComparisonPage from "./components/ComparisonPageComponents/FilterComparisonPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    // <FilterComparisonPage/>
   );
 }
 
