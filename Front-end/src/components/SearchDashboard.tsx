@@ -27,6 +27,7 @@ interface Dataset {
 interface DataItem {
   id: number;
   text: string;
+  companyDetails: string;
   summary: Company;
   datasets: Dataset[];
 }
@@ -36,6 +37,7 @@ const mockData: DataItem[] = [
   {
     id: 1,
     text: 'Startup A',
+    companyDetails: 'StartupA seeks $15,200 to purchase new banks. Your support keeps our banks thriving and ensures we keep growing financially.',
     summary: {
       id: 1,
       title: 'Startup A',
@@ -67,6 +69,7 @@ const mockData: DataItem[] = [
     {
     id: 2,
     text: 'Startup B',
+    companyDetails: 'Tegridy Farms seeks $25,000 to purchase new tractors. Your support keeps our South Park fields thriving and ensures we keep growing with tegridy. ',
     summary: {
       id: 2,
       title: 'Startup B',
@@ -138,6 +141,7 @@ const SearchDashboard: React.FC = () => {
             key={item.id}
             id={item.id.toString()}
             text={item.text}
+            companyDetails={item.companyDetails}
             onClick={() => setSelectedId(item.id)}
             isActive={item.id === selectedId}
           />
