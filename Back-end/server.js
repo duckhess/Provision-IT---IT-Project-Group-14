@@ -15,6 +15,7 @@ import asset_router from './routes/asset.routes.js'
 import equity_router from './routes/equity.routes.js'
 import income_router from './routes/income_statement.routes.js'
 import soc_router from './routes/statement_of_cashflows.routes.js'
+import company_data_router from './routes/company_data.routes.js'
 
 const app = express()
 dotenv.config()
@@ -44,6 +45,7 @@ app.use("/assets", asset_router)
 app.use("/equities", equity_router)
 app.use("/income_statements", income_router)
 app.use("/statement_of_cashflows", soc_router)
+app.use("/company_data", company_data_router)
 
 //http://localhost:3000/companies
 //http://localhost:3000/industries
