@@ -10,7 +10,7 @@ export const dataController = async (req,res) => {
 
     const filters = {
       companyid : parameters.companyid,       
-      applicationid: parameters.applicationid,      
+      applicationid: parameters.applicationid  
     }
   
     const datas = await companyDataService(filters)
