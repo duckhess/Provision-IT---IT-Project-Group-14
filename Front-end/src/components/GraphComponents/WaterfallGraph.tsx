@@ -1,9 +1,10 @@
 import { useState } from "react";
 import WaterfallGraphSmall from "./WaterfallGraphSmall.tsx";
 import WaterfallGraphLarge from "./WaterfallGraphLarge.tsx";
+import type { Metric } from "../Types/Types.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
+
 
 interface Dataset {
   name: string; // label

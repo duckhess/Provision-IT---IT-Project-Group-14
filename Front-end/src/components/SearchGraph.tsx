@@ -1,8 +1,8 @@
 import React from 'react';
 import DataBox from '../components/DataBox';
+import type { Metric } from "./Types/Types.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark";
-type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast" | "ABS Benchmark";
 type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
@@ -33,14 +33,14 @@ const SearchDashboardGraph: React.FC<SearchGraphProps> = ({ datasets }) => {
     <div className="grid grid-cols-2 gap-4">
       {groups.map(([key, group], index) => {
         const unit = group[0].unit;
-        const section = group[0].section;
+        const metric = group[0].metric;
 
         return (
           <DataBox
             key={`${key}_${index}`}
             datasets={group}
             unit={unit}
-            section={section}
+            metric={metric}
           />
         );
       })}

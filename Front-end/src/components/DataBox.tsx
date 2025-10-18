@@ -1,31 +1,71 @@
 import Graph from "./Graph";
 import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
+import type { Metric } from "./Types/Types.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
-type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
+
+// type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
   name: string; // label
   data: any[];
   metric: Metric;
   unit: Unit;
-  section: Section;
+  // section: Section;
 }
 
 interface GraphProps {
   datasets: Dataset[]; // up to 4 datasets
   unit: Unit;
-  section: Section;
+  // section: Section;
+  metric: Metric;
 }
 
-function DataBox({ datasets, unit, section}: GraphProps) {
+// function DataBox({ datasets, unit, section}: GraphProps) {
 
-  switch (section) {
+//   switch (section) {
+//     case "Ratio":
+//       return (
+//         <div className="flex flex-col">
+//             <Graph datasets={datasets} unit={unit} title={section}/>
+//         </div>
+//       );
+
+//     case "ABS Benchmarking":
+//       return (
+//         <div className="flex flex-col">
+//             <ABSBenchmarking code = {"ABC123"} metric_list = {datasets[0].data}></ABSBenchmarking>
+//         </div>
+//       );
+
+//     case "Statement of Cashflow":
+//       return (
+//         <div className="flex flex-col">
+//             <Graph datasets={datasets} unit={unit} title={section}/>
+//             <br/>
+//         </div>
+//       );
+    
+//     case "Forecast":
+//       return (
+//         <div className="flex flex-col">
+//             <Graph datasets={datasets} unit={unit} title={section}/>
+//             <br/>
+//         </div>
+//       );
+
+//     default:
+//       return null;
+//   }
+// }
+
+function DataBox({ datasets, unit, metric}: GraphProps) {
+
+  switch (metric) {
     case "Ratio":
       return (
         <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} title={section}/>
+            <Graph datasets={datasets} unit={unit} title={metric}/>
         </div>
       );
 
@@ -39,7 +79,7 @@ function DataBox({ datasets, unit, section}: GraphProps) {
     case "Statement of Cashflow":
       return (
         <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} title={section}/>
+            <Graph datasets={datasets} unit={unit} title={metric}/>
             <br/>
         </div>
       );
@@ -47,7 +87,7 @@ function DataBox({ datasets, unit, section}: GraphProps) {
     case "Forecast":
       return (
         <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} title={section}/>
+            <Graph datasets={datasets} unit={unit} title={metric}/>
             <br/>
         </div>
       );

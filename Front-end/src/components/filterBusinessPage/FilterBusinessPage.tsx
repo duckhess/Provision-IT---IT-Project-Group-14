@@ -2,59 +2,159 @@ import { useState } from 'react';
 import SideBarFilterButton from './sideBar/SideBarFilterButton';
 import SidebarFilter from './sideBar/SidebarFilter';
 import { GraphButton } from '../GraphButton';
+import type { Metric } from '../Types/Types';
 
 // ------------------------------
 // Types
 // ------------------------------
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
-type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 export interface Dataset {
   name: string;
   data: any[]; // timeseries or benchmark entries
   metric: Metric;
   unit: Unit;
-  section: Section;
 }
 
-type MetricSection = {
-  sectionName: string;
-  metrics: string[];
-};
+// type MetricSection = {
+//   sectionName: string;
+//   metrics: string[];
+// };
 
 // ------------------------------
 // Dummy Data
 // ------------------------------
+
 const dummyData: Dataset[] = [
+  // --- Liquidity Ratios ---
   {
-    name: "Dividend Ratio",
-    data: [{ x: 1, y: 20 }, { x: 2, y: 40 }, { x: 3, y: 60 }],
+    name: "Current Ratio",
+    data: [
+      { x: 2023, y: 3.28 },
+      { x: 2024, y: 3.12 },
+      { x: 2025, y: 1.93 },
+    ],
+    metric: "Ratio",
+    unit: "Times",
+  },
+  {
+    name: "Quick Ratio (Acid Test)",
+    data: [
+      { x: 2023, y: 1.87 },
+      { x: 2024, y: 1.39 },
+      { x: 2025, y: 0.96 },
+    ],
+    metric: "Ratio",
+    unit: "Times",
+  },
+
+  // --- Solvency Ratios ---
+  {
+    name: "Debt Ratio",
+    data: [
+      { x: 2023, y: 39 },
+      { x: 2024, y: 50 },
+      { x: 2025, y: 48 },
+    ],
     metric: "Ratio",
     unit: "%",
-    section: "Ratio"
   },
   {
-    name: "Other Operating Expenses/Revenue",
-    data: [{ x: 1, y: 30 }, { x: 2, y: 50 }, { x: 3, y: 80 }],
+    name: "Equity Ratio",
+    data: [
+      { x: 2023, y: 61 },
+      { x: 2024, y: 50 },
+      { x: 2025, y: 52 },
+    ],
     metric: "Ratio",
     unit: "%",
-    section: "Ratio"
   },
   {
-    name: "Depreciation",
-    data: [{ x: 1, y: 200 }, { x: 2, y: 300 }, { x: 3, y: 400 }],
-    metric: "Forecast",
+    name: "Capitalisation Ratio",
+    data: [
+      { x: 2023, y: 165 },
+      { x: 2024, y: 199 },
+      { x: 2025, y: 191 },
+    ],
+    metric: "Ratio",
     unit: "%",
-    section: "Forecast"
   },
-    {
-    name: "Operation Cycle",
-    data: [{ x: 1, y: 300 }, { x: 2, y: 100 }, { x: 3, y: 250 }],
+
+  // --- Profitability Ratios ---
+  {
+    name: "Gross Profit Margin",
+    data: [
+      { x: 2023, y: 22 },
+      { x: 2024, y: 19 },
+      { x: 2025, y: 22 },
+    ],
+    metric: "Ratio",
+    unit: "%",
+  },
+  {
+    name: "Net Profit/Loss (-) Margin",
+    data: [
+      { x: 2023, y: 5 },
+      { x: 2024, y: 2 },
+      { x: 2025, y: 4 },
+    ],
+    metric: "Ratio",
+    unit: "%",
+  },
+  {
+    name: "Return on Total Assets",
+    data: [
+      { x: 2023, y: 16 },
+      { x: 2024, y: 7 },
+      { x: 2025, y: 8 },
+    ],
+    metric: "Ratio",
+    unit: "%",
+  },
+  {
+    name: "Interest Cover",
+    data: [
+      { x: 2023, y: 47.02 },
+      { x: 2024, y: 4192.66 },
+      { x: 2025, y: 17.2 },
+    ],
+    metric: "Ratio",
+    unit: "Times",
+  },
+
+  // --- Efficiency Ratios ---
+  {
+    name: "Receivables Turnover",
+    data: [
+      { x: 2023, y: 7.57 },
+      { x: 2024, y: 11.59 },
+      { x: 2025, y: 8.79 },
+    ],
+    metric: "Ratio",
+    unit: "Times",
+  },
+  {
+    name: "Inventory Turnover (days)",
+    data: [
+      { x: 2023, y: 37 },
+      { x: 2024, y: 45 },
+      { x: 2025, y: 41 },
+    ],
     metric: "Ratio",
     unit: "days",
-    section: "Ratio"
   },
+  {
+    name: "Operating Cycle (days)",
+    data: [
+      { x: 2023, y: 75 },
+      { x: 2024, y: 60 },
+      { x: 2025, y: 54 },
+    ],
+    metric: "Ratio",
+    unit: "days",
+  },
+
+  // --- ABS Benchmarking ---
   {
     name: "Benchmark A",
     data: [
@@ -71,77 +171,88 @@ const dummyData: Dataset[] = [
     { name: "Depreciation and Amortisation/Net Revenue", pass: true, calc_value: 1.81, abs_value: 1, greater: true},
     { name: "Interest/Revenue", pass: false, calc_value: 0.25, abs_value: 1, greater: false}
   ],
-    metric: "ABS Benchmark",
+    metric: "ABS Benchmarking",
     unit: "Benchmark",
-    section: "ABS Benchmarking"
   },
-    {
-    name: "Wages and Salaries/Revenue",
-    data: [{ x: 1, y: 20 }, { x: 2, y: 50 }, { x: 3, y: 80 }],
-    metric: "Ratio",
-    unit: "%",
-    section: "Ratio"
-  }, 
-    {
-    name: "Other Income/Total Income",
-    data: [{ x: 1, y: 30 }, { x: 2, y: 12 }, { x: 3, y: 16 }],
-    metric: "Ratio",
-    unit: "%",
-    section: "Ratio"
-  },
-    {
-    name: "Total Income/Total Expenses",
-    data: [{ x: 1, y: 11 }, { x: 2, y: 12 }, { x: 3, y: 8 }],
-    metric: "Ratio",
-    unit: "%",
-    section: "Ratio"
-  }, 
+
+  // --- Statement of Cashflows ---
   {
-    name: "Benchmark B",
-    data: [    { name: "Wages and Salaries/Revenue", pass: false, calc_value: 812, abs_value: 12, greater: true},
-    { name: "Total Expenses/Total Income", pass: false, calc_value: 102, abs_value: 81, greater: true },
-    { name: "Total Expenses/Revenue", pass: true, calc_value: 21.50, abs_value: 986, greater: false}],
-    metric: "ABS Benchmark",
+    name: "Revenue",
+    data: [
+      { x: 2024, y: 13736093 },
+      { x: 2025, y: 15699648 },
+    ],
+    metric: "Statement of Cashflow",
     unit: "$",
-    section: "ABS Benchmarking"
   },
-    {
-    name: "Ratio With Dollars",
-    data: [{ x: 1, y: 212 }, { x: 2, y: 419 }, { x: 3, y: 387 }],
-    metric: "Ratio",
+  {
+    name: "Cost of Sales",
+    data: [
+      { x: 2024, y: 11123405 },
+      { x: 2025, y: 12222437 },
+    ],
+    metric: "Statement of Cashflow",
     unit: "$",
-    section: "Ratio"
   },
-    {
-    name: "Descending Dark",
-    data: [{ x: 1, y: 220 }, { x: 2, y: 200 }, { x: 3, y: 450 }],
-    metric: "Ratio",
-    unit: "days",
-    section: "Ratio"
+  {
+    name: "Profit/Loss for Period",
+    data: [
+      { x: 2024, y: 326782 },
+      { x: 2025, y: 630973 },
+    ],
+    metric: "Statement of Cashflow",
+    unit: "$",
   },
-      {
-    name: "Art Dark",
-    data: [{ x: 1, y: 420 }, { x: 2, y: 10 }, { x: 3, y: 312 }],
-    metric: "Ratio",
-    unit: "days",
-    section: "Ratio"
+  {
+    name: "Depreciation",
+    data: [
+      { x: 2024, y: 172402 },
+      { x: 2025, y: 283548 },
+    ],
+    metric: "Statement of Cashflow",
+    unit: "$",
+  },
+
+  // --- Forecast ---
+  {
+    name: "Forecast Revenue",
+    data: [
+      { x: 2023, y: 15766553 },
+      { x: 2024, y: 13736093 },
+      { x: 2025, y: 15699605 },
+    ],
+    metric: "Forecast",
+    unit: "$",
+  },
+  {
+    name: "% Total Other Income / Revenue",
+    data: [
+      { x: 2023, y: 1.48 },
+      { x: 2024, y: 2.33 },
+      { x: 2025, y: 2.37 },
+    ],
+    metric: "Forecast",
+    unit: "%",
   },
 ];
 
 // ------------------------------
 // Section Generator
 // ------------------------------
-const mockSections: MetricSection[] = Object.entries(
-  dummyData.reduce((acc, curr) => {
-    if (!acc[curr.section]) acc[curr.section] = [];
-    acc[curr.section].push(curr.name);
-    return acc;
-  }, {} as Record<string, string[]>)
-).map(([sectionName, metrics]) => ({
-  sectionName,
-  metrics
-}));
+// const mockSections: MetricSection[] = Object.entries(
+//   dummyData.reduce((acc, curr) => {
+//     if (!acc[curr.section]) acc[curr.section] = [];
+//     acc[curr.section].push(curr.name);
+//     return acc;
+//   }, {} as Record<string, string[]>)
+// ).map(([sectionName, metrics]) => ({
+//   sectionName,
+//   metrics
+// }));
 
+// ------------------------------
+// Component
+// ------------------------------
 // ------------------------------
 // Component
 // ------------------------------
@@ -152,14 +263,14 @@ const FilterBusinessPage = () => {
 
   const handleToggleSelection = (key: string) => {
     setSelectedKeys((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+      prev.includes(key)
+        ? prev.filter((k) => k !== key)
+        : [...prev, key]
     );
   };
 
   const handleGenerate = () => {
-    const selected = dummyData.filter((d) =>
-      selectedKeys.includes(d.name)
-    );
+    const selected = dummyData.filter((d) => selectedKeys.includes(d.name));
     setSelectedDataSets(selected);
     setSidebarOpen(false);
   };
@@ -171,7 +282,7 @@ const FilterBusinessPage = () => {
       {sidebarOpen && (
         <SidebarFilter
           onClose={handleGenerate}
-          sections={mockSections}
+          datasets={dummyData} // simplified: just pass all dataset names
           selectedKeys={selectedKeys}
           toggleSelection={handleToggleSelection}
         />

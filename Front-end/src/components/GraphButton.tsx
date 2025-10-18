@@ -1,15 +1,15 @@
 import DataBox from "./DataBox.tsx";
+import type { Metric } from "./Types/Types.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
-type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
+
 
 interface Dataset {
   name: string; // label
   data: any[];
   metric: Metric;
   unit: Unit;
-  section: Section;
+  // section: Section;
 }
 
 interface GraphContainerProps {
@@ -20,7 +20,8 @@ export function GraphButton({ selectedDatasets }: GraphContainerProps) {
   // Group by metric+unit
   // Record as a (Metric_Unit): Dataset[]
   const groupedData = selectedDatasets.reduce<Record<string, Dataset[]>>((acc, ds) => {
-    const key = `${ds.metric}_${ds.unit}_${ds.section}`;
+    // const key = `${ds.metric}_${ds.unit}_${ds.section}`;
+    const key = `${ds.metric}_${ds.unit}`;
 
     // Puts the dataset into the appropriate group with a (Metric_Unit) key.
     if (!acc[key]) acc[key] = [];
@@ -41,11 +42,11 @@ export function GraphButton({ selectedDatasets }: GraphContainerProps) {
         }
 
         const unit = datasets[0].unit;
-        const section = datasets[0].section;
+        const metric = datasets[0].metric;
 
         // Create a graph of maximum four dataset in each graph for each key-value pair
         return chunks.map((chunk, i) => (
-          <DataBox key={`${key}_${i}`} datasets={chunk} unit={unit} section={section}/>
+          <DataBox key={`${key}_${i}`} datasets={chunk} unit={unit} metric={metric}/>
         ));
       })}
     </div>

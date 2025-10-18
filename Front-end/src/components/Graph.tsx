@@ -1,9 +1,10 @@
 import LineGraph from "./GraphComponents/LineGraph";
 import BarGraph from "./GraphComponents/BarGraph";
 import WaterfallGraph from "./GraphComponents/WaterfallGraph";
+import type { Metric } from "./Types/Types.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
+
 
 interface Dataset {
   name: string; // label

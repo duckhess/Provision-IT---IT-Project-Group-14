@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CompanyCard from '../components/CompanyCard';
 import Summary from '../components/BasicSummary';
 import SearchDashboardGraph from './SearchGraph.tsx';
+import type { Metric } from "./Types/Types.tsx";
 
 type Company = {
     id: number,
@@ -13,7 +14,6 @@ type Company = {
     imageUrl: string
 }
 type Unit = "%" | "$" | "days" | "Benchmark";
-type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast" | "ABS Benchmark";
 type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
@@ -107,7 +107,7 @@ const mockData: DataItem[] = [
     { name: "Depreciation and Amortisation/Net Revenue", pass: true, calc_value: 1.81, abs_value: 1, greater: true},
     { name: "Interest/Revenue", pass: false, calc_value: 0.25, abs_value: 1, greater: false}
   ],
-    metric: "ABS Benchmark",
+    metric: "ABS Benchmarking",
     unit: "Benchmark",
     section: "ABS Benchmarking"
   },

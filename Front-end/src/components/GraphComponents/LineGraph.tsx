@@ -1,9 +1,10 @@
 import { useState } from "react";
 import LineGraphSmall from "./LineGraphSmall";
 import LineGraphLarge from "./LineGraphLarge";
+import type { Metric } from "../Types/Types.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
+
 
 interface Dataset {
   name: string; // label
