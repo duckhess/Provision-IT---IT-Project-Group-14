@@ -1,14 +1,5 @@
 import timeline_schema from '../models/timelines.js'
 
-// const get_period = async (id) => {
-//     const result = await timeline_schema.find({FileID: id}).lean()
-//     return result.map(t => t.period)
-// }
-
-// export default {
-//     get_period,
-// }
-
 export async function get_period(fileIDs = []) {
     // fileIDs expected to be an array of numbers
 

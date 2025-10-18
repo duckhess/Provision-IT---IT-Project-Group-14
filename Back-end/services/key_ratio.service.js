@@ -1,23 +1,13 @@
 import keyRatioModel from "../models/key_ratio.model.js";
 import keyRatioValueModel from "../models/key_ratios_values.model.js";
-
-const FILE_TIMELINE = {
-    1: '2023',
-    2: '2024',
-    3: '2025',
-};
-
-function toTimeline(fileId) {
-  return FILE_TIMELINE[fileId] || `File ${fileId}`;
-}
+import { get_period } from './timeline_service.js'
 
 const results = (r) => ({
   KeyRatioID: r.KeyRatioID,  
   MetricName: r.Metric,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  FileID : r.FileID,
-  Timeline: toTimeline(r.FileID),   
+  Period: r.Period,   
   Value : r.Value
 })
 
@@ -55,18 +45,17 @@ export async function ratioService(filters = {}) {
 
   const filteredValues = values.filter(v => byId.has(v.KeyRatioID))
 
+  const fileIDs = [...new Set(filteredValues.map(v => v.FileID))]
+  const timelineMap = await get_period(fileIDs)
+
   return filteredValues.map(v => {
     const meta = byId.get(v.KeyRatioID);
+    console.log(timelineMap.get(v?.FileID))
     return results({
       ...v,                 
       Metric: meta.Metric,  
-      Unit: meta.Unit, 
+      Unit: meta.Unit,
+      Period: timelineMap.get(v?.FileID),
     });
   });
 }
-
-
-
-
-
-

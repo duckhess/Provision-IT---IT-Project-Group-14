@@ -1,15 +1,6 @@
 import incomeModel from "../models/income_statement.model.js";
 import incomeValueModel from "../models/income_statement_values.model.js";
-
-const FILE_TIMELINE = {
-    1: '2023',
-    2: '2024',
-    3: '2025',
-};
-
-function toTimeline(fileId) {
-  return FILE_TIMELINE[fileId] || `File ${fileId}`;
-}
+import { get_period } from './timeline_service.js'
 
 const toJsNumber = (v) => {
   if (v == null) return v;
@@ -19,14 +10,12 @@ const toJsNumber = (v) => {
   return v;
 };
 
-
 const results = (r) => ({
   IncomeID: r.IncomeID,  
   Metric: r.Metric,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  FileID : r.FileID,
-  Timeline: toTimeline(r.FileID),   
+  Period: r.Period, 
   Value : toJsNumber(r.Value)
 })
 
@@ -65,12 +54,16 @@ export async function incomeService(filters = {}) {
 
   const filteredValues = values.filter(v => byId.has(v.IncomeID))
 
+  const fileIDs = [...new Set(filteredValues.map(v => v.FileID))]
+  const timelineMap = await get_period(fileIDs)
+
   return filteredValues.map(v => {
     const meta = byId.get(v.IncomeID);
     return results({
       ...v,                 
       Metric: meta.Metric,  
-      Unit: meta.Unit, 
+      Unit: meta.Unit,
+      Period: timelineMap.get(v?.FileID),
     });
   });
 }

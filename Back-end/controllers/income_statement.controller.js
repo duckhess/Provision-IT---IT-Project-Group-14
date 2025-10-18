@@ -1,4 +1,4 @@
-import { incomeService } from "../services/income_statement.service.js";
+import { incomeService } from "../services/income_statement.service.js"
 
 export const incomeController = async (req,res) => {
   

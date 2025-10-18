@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const KeyRatioSchema = new mongoose.Schema(
   {
@@ -7,6 +7,6 @@ const KeyRatioSchema = new mongoose.Schema(
   Unit: { type: String, required: true }              
   },
   { collection: 'key_ratios', timestamps: false }
-);
+)
 
-export default mongoose.model('key_ratios', KeyRatioSchema);
+export default mongoose.model('key_ratios', KeyRatioSchema)

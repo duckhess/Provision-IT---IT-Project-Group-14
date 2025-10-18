@@ -28,7 +28,6 @@ const TABLE_HANDLERS = {
       MetricName,
       Unit,
       Data: rows.map(r => ({
-        FileID: r.FileID,
         Timeline: toTimeline(r.FileID),
         Value: r.Value,
       })),

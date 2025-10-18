@@ -1,8 +1,8 @@
-import express from 'express'
-import financial_controller from '../controllers/financial_controller.js'
+import { Router } from "express"
+import { fetch_statements } from '../controllers/financial_controller.js'
 
-const router = express.Router()
+const router = Router()
 
-router.get('/', financial_controller.fetch_statements)
+router.get('/', fetch_statements)
 
 export default router
