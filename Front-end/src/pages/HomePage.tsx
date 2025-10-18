@@ -5,15 +5,15 @@ import Summary from "../components/BasicSummary"
 import SearchBarComponent from "../components/searchBar/SearchBarComponent";
 import axios from "axios";
 
-  type CompanyInfo = {
-      id: number,
-      title: string,
-      category: string,
-      description: string,
-      funding: string,
-      useOfFunds: string,
-      imageUrl: string
-  }
+  // type CompanyInfo = {
+  //     id: number,
+  //     title: string,
+  //     category: string,
+  //     description: string,
+  //     funding: string,
+  //     useOfFunds: string,
+  //     imageUrl: string
+  // }
 
   interface Company {
     companyId: number;
@@ -30,7 +30,7 @@ import axios from "axios";
 
 
 const HomePage: React.FC = () => {
-  const [companies, setCompanies] = useState<CompanyInfo[]>([]);
+  // const [companies, setCompanies] = useState<CompanyInfo[]>([]);
   const [allCompanies, setAllCompanies] = useState<Company []>([]);
   const [suggestedCompanies, setSuggestedCompanies] = useState <Company[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -41,30 +41,30 @@ const HomePage: React.FC = () => {
   };
 
 // Dummy data until backend is ready
-  useEffect(() => {
-    const dummyData: CompanyInfo[] = [
-      {
-        id: companyData[0].id,
-        title: companyData[0].title,
-        category: companyData[0].category,
-        description: companyData[0].description,
-        funding: companyData[0].funding,
-        useOfFunds: companyData[0].useOfFunds,
-        imageUrl: companyData[0].imageUrl
-      },
+  // useEffect(() => {
+  //   const dummyData: CompanyInfo[] = [
+  //     {
+  //       id: companyData[0].id,
+  //       title: companyData[0].title,
+  //       category: companyData[0].category,
+  //       description: companyData[0].description,
+  //       funding: companyData[0].funding,
+  //       useOfFunds: companyData[0].useOfFunds,
+  //       imageUrl: companyData[0].imageUrl
+  //     },
 
-      {
-        id: companyData[1].id,
-        title: companyData[1].title,
-        category: companyData[1].category,
-        description: companyData[1].description,
-        funding: companyData[1].funding,
-        useOfFunds: companyData[1].useOfFunds,
-        imageUrl: companyData[1].imageUrl
-      },
-    ];
-    setCompanies(dummyData);
-  }, []);
+  //     {
+  //       id: companyData[1].id,
+  //       title: companyData[1].title,
+  //       category: companyData[1].category,
+  //       description: companyData[1].description,
+  //       funding: companyData[1].funding,
+  //       useOfFunds: companyData[1].useOfFunds,
+  //       imageUrl: companyData[1].imageUrl
+  //     },
+  //   ];
+  //   setCompanies(dummyData);
+  // }, []);
 
   // fetch all possible companies : search bar
   useEffect (() => {
@@ -83,14 +83,14 @@ const HomePage: React.FC = () => {
 
   // Rotate cards every 10 seconds : carousel
   useEffect(() => {
-    if (companies.length === 0) return;
+    if (allCompanies.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % companies.length);
-    }, 60000); // 10,000 ms = 10 seconds
+      setCurrentIndex((prev) => (prev + 1) % allCompanies.length);
+    }, 10000); // 10,000 ms = 10 seconds
 
     return () => clearInterval(interval);
-  }, [companies]);
+  }, [allCompanies]);
 
   return (
     <main className="max-w-7xl mx-auto px-20 py-20 space-y-16">
@@ -122,7 +122,7 @@ const HomePage: React.FC = () => {
             toward succesful direct transparent investing.
           </p>
         </div>
-        <div className="h-full min-h-[328px] max-h-[329px] w-full bg-gray-300 rounded-md flex items-center 
+        <div className="h-[500px] w-full bg-gray-300 rounded-md flex items-center 
           justify-center">
           [ Static Image Placeholder ]
         </div>
@@ -130,8 +130,8 @@ const HomePage: React.FC = () => {
 
       {/* Investment highlight section with rotating cards */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-2">
-          {companies.length > 0 && (
-            <CompanyCard company={companies[currentIndex]} />
+          {allCompanies.length > 0 && (
+            <CompanyCard company={allCompanies[currentIndex]} />
           )}
         <div className="space-y-3">
           <h3 className="text-2xl font-semibold">

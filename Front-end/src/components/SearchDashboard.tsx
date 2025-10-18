@@ -188,6 +188,7 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
   return (
     <div className="flex h-full p-6">
 
+      {/* Left panel */}
         <div className="w-1/4 pr-4 border-r overflow-y-auto">
         
         {companies && companies.length > 0 ? (
@@ -205,23 +206,7 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
           <p className="p-4 text-gray-500">No companies to display</p>
         )}
       </div>
-    
-    
-
-      {/* Left panel */}
-      {/* <div className="w-1/4 pr-4 border-r">
-        {mockData.map(item => (
-        <CompanyCard
-          key={item.id}
-          id={item.id} 
-          companyName={item.text}
-          projectShortDescription={item.projectShortDescription}
-          estDate={item.estDate} 
-          onClick={() => setSelectedId(item.id)}
-          isActive={item.id === selectedId}
-        />
-        ))}
-      </div> */}
+      
 
       {/* Right panel */}
       <div className = "h-[1500px] w-3/4 pl-6 border-r pr-4">
@@ -229,9 +214,6 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
           {selectedItem ? (
             <>
               <Summary company={selectedItem} />
-              {/* { <div className="overflow-y-auto">
-                <SearchPageGrid selectedDatasets={selectedItem} />
-              </div>} */}
               <div className='overflow-y-auto'>
                 <SearchPageGrid company={selectedItem} />
               </div>

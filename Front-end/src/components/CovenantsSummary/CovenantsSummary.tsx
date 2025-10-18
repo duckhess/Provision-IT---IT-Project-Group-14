@@ -85,7 +85,9 @@ const processData = (keyRatios : KeyRatio[], covenants : Covenant[]) : CategoryI
       const metricData = groupedRatios.get(cov.Metric);
       if(!metricData || metricData.length === 0) return;
 
-      totalMetrics += metricData.length;
+      //console.log(`Metric ${cov.Metric} has ${metricData.length} key ratio entries`);
+
+      totalMetrics ++;
 
       const values = metricData.map(r=>r.Value);
       let sum = 0;
@@ -94,11 +96,15 @@ const processData = (keyRatios : KeyRatio[], covenants : Covenant[]) : CategoryI
       }
 
       const avg = sum / values.length;
+      // avg is correct
+      console.log(`Metric ${cov.Metric} has ${avg} average and has ${cov.Value} and ${avg > cov.Value}`);
 
       if(avg > cov.Value) {
-        passMetrics += metricData.length;
+        passMetrics ++;
       }
     });
+
+    console.log(`total Metrics in ${catName} = ${totalMetrics} and success = ${passMetrics}`);
 
     const spotSuccess = 
       totalMetrics > 0 ? (passMetrics/totalMetrics) * 100 : 0;

@@ -67,7 +67,6 @@ const SearchPage: React.FC = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (<SearchDashboard companies = {searchResults} />)}
-        {/* <SearchDashboard companies = {results}/>*/}
       </section>
 
       {/* Pagination */}
