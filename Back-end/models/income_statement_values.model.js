@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const IncomeValueSchema = new mongoose.Schema(
  {
@@ -8,6 +8,6 @@ const IncomeValueSchema = new mongoose.Schema(
   Value: { type: mongoose.Types.Decimal128, required: true}            
  },
  { collection: 'income_statement_values', timestamps: false }
-);
+)
 
-export default mongoose.model('income_statement_values', IncomeValueSchema);
+export default mongoose.model('income_statement_values', IncomeValueSchema)

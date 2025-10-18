@@ -2,7 +2,7 @@ import cash_schema from '../models/cash_equivalences.js'
 import cash_values_schema from '../models/cash_values.js'
 import { get_period } from './timeline_service.js'
 
-const filter_cash_equivalences = async (filters = {}) => {
+export async function filter_cash_equivalences(filters = {}) {
     const matching_params = {}
 
     if (filters.cashid) matching_params.CashID = Number(filters.cashid)
@@ -29,8 +29,4 @@ const filter_cash_equivalences = async (filters = {}) => {
             Value: parseFloat(v.Value)
         }
     })
-}
-
-export default {
-    filter_cash_equivalences
 }

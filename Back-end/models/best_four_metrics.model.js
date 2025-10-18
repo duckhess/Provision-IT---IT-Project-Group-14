@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const CompanyBestMetricSchema = new mongoose.Schema(
   {
@@ -17,6 +17,6 @@ const CompanyBestMetricSchema = new mongoose.Schema(
 
   },
   {collection: "best_four_metrics", timestamps: false}
-);
+)
 
-export default mongoose.model("best_four_metrics", CompanyBestMetricSchema);
+export default mongoose.model("best_four_metrics", CompanyBestMetricSchema)

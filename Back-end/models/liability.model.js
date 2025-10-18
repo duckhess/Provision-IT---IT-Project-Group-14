@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const LiabilitySchema = new mongoose.Schema(
   {
@@ -7,6 +7,6 @@ const LiabilitySchema = new mongoose.Schema(
   Unit: { type: String, required: true }              
   },
   { collection: 'liabilities', timestamps: false }
-);
+)
 
-export default mongoose.model('liabilities', LiabilitySchema);
+export default mongoose.model('liabilities', LiabilitySchema)

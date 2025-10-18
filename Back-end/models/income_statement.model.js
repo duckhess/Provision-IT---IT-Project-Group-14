@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const IncomeSchema = new mongoose.Schema(
   {
@@ -7,6 +7,6 @@ const IncomeSchema = new mongoose.Schema(
   Unit: { type: String, required: true }              
   },
   { collection: 'income_statement', timestamps: false }
-);
+)
 
-export default mongoose.model('income_statement', IncomeSchema);
+export default mongoose.model('income_statement', IncomeSchema)

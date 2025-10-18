@@ -1,6 +1,6 @@
 import { filter_forecasts } from '../services/forecast_service.js'
 
-const fetch_forecasts = async (req, res) => {
+export const fetch_forecasts = async (req, res) => {
     try {
         const filter_querries = {}
         for (const key in req.query) {
@@ -11,8 +11,4 @@ const fetch_forecasts = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
-}
-
-export default {
-    fetch_forecasts,
 }

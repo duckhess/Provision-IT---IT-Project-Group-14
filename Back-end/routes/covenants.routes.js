@@ -1,8 +1,8 @@
-import express from 'express'
-import covenants_controller from '../controllers/covenants._controller.js'
+import { Router } from "express"
+import { fetch_covenants } from '../controllers/covenants._controller.js'
 
-const router = express.Router()
+const router = Router()
 
-router.get('/', covenants_controller.fetch_covenants)
+router.get('/', fetch_covenants)
 
 export default router

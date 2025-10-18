@@ -1,4 +1,4 @@
-import { companyDataService } from "../services/company_data.service.js";
+import { companyDataService } from "../services/company_data.service.js"
 
 export const dataController = async (req,res) => {
   

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const AssetSchema = new mongoose.Schema(
   {
@@ -7,6 +7,6 @@ const AssetSchema = new mongoose.Schema(
   Unit: { type: String, required: true }              
   },
   { collection: 'assets', timestamps: false }
-);
+)
 
-export default mongoose.model('assets', AssetSchema);
+export default mongoose.model('assets', AssetSchema)
