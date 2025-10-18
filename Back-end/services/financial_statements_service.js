@@ -22,10 +22,10 @@ export async function filter_statements(filters = {}) {
         const financials = mapped_document.get(v.FinancialID)
         return  {
             FinancialID: v.FinancialID,
-            Metric: financials.Metric,
+            MetricName: financials.Metric,
             Unit: financials.Unit,
             ApplicationID: v.ApplicationID,
-            Period: timelineMap.get(v?.FileID),
+            Timeline: timelineMap.get(v?.FileID),
             Value: parseFloat(v.Value)
         }
     })

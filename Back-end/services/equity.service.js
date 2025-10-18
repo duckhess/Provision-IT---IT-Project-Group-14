@@ -1,21 +1,21 @@
-import equityModel from "../models/equity.model.js";
-import equityValueModel from "../models/equity_values.model.js";
+import equityModel from "../models/equity.model.js"
+import equityValueModel from "../models/equity_values.model.js"
 import { get_period } from './timeline_service.js'
 
 const toJsNumber = (v) => {
-  if (v == null) return v;
+  if (v == null) return v
   if (typeof v === "object" && (v._bsontype === "Decimal128" || v instanceof mongoose.Types.Decimal128)) {
-    return parseFloat(v.toString()); 
+    return parseFloat(v.toString()) 
   }
-  return v;
-};
+  return v
+}
 
 const results = (r) => ({
   EquityID: r.EquityID,  
-  Metric: r.Metric,
+  MetricName: r.Metric,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  Period: r.Period,   
+  Timeline: r.Period,   
   Value : toJsNumber(r.Value)
 })
 
@@ -31,12 +31,12 @@ export async function equityService(filters = {}) {
 
   // find equityid in equity table
   const fetchedIDs = [...new Set(values.map(v =>v.EquityID))]
-  const keyQuery = {EquityID: { $in: fetchedIDs } };
+  const keyQuery = {EquityID: { $in: fetchedIDs } }
 
   // filter metric
   if (filters.metric && String(filters.metric).trim() !== "") {
   const metricRegex = String(filters.metric).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  keyQuery.Metric = { $regex: metricRegex, $options: "i" };
+  keyQuery.Metric = { $regex: metricRegex, $options: "i" }
   }
 
   //filter unit
@@ -46,7 +46,7 @@ export async function equityService(filters = {}) {
   }
 
   
-  const keyDocs = await equityModel.find(keyQuery).select("-_id EquityID Metric Unit ").lean();
+  const keyDocs = await equityModel.find(keyQuery).select("-_id EquityID Metric Unit ").lean()
   if (keyDocs.length === 0) return []
 
   //join by id
@@ -58,14 +58,14 @@ export async function equityService(filters = {}) {
   const timelineMap = await get_period(fileIDs)
 
   return filteredValues.map(v => {
-    const meta = byId.get(v.EquityID);
+    const meta = byId.get(v.EquityID)
     return results({
       ...v,                 
       Metric: meta.Metric,  
       Unit: meta.Unit, 
       Period: timelineMap.get(v?.FileID),
-    });
-  });
+    })
+  })
 }
 
 
