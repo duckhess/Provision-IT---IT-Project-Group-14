@@ -6,6 +6,7 @@ const results = (r) => ({
   KeyRatioID: r.KeyRatioID,  
   MetricName: r.Metric,
   Unit: r.Unit,
+  Category: r.Category,
   ApplicationID : r.ApplicationID,
   Period: r.Period,   
   Value : r.Value
@@ -38,7 +39,7 @@ export async function ratioService(filters = {}) {
   }
 
   // find metric name and unit in key ratio table 
-  const keyDocs = await keyRatioModel.find(keyQuery).select("-_id KeyRatioID Metric Unit ").lean();
+  const keyDocs = await keyRatioModel.find(keyQuery).select("-_id KeyRatioID Metric Unit Category ").lean();
   if (keyDocs.length === 0) return []
 
   const byId = new Map(keyDocs.map(d => [d.KeyRatioID, d]))
@@ -50,11 +51,11 @@ export async function ratioService(filters = {}) {
 
   return filteredValues.map(v => {
     const meta = byId.get(v.KeyRatioID);
-    console.log(timelineMap.get(v?.FileID))
     return results({
       ...v,                 
       Metric: meta.Metric,  
       Unit: meta.Unit,
+      Category: meta.Category,
       Period: timelineMap.get(v?.FileID),
     });
   });
