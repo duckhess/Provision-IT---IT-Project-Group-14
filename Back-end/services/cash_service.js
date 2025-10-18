@@ -1,5 +1,6 @@
 import cash_schema from '../models/cash_equivalences.js'
 import cash_values_schema from '../models/cash_values.js'
+import { get_period } from './timeline_service.js'
 
 const filter_cash_equivalences = async (filters = {}) => {
     const matching_params = {}
@@ -14,6 +15,9 @@ const filter_cash_equivalences = async (filters = {}) => {
     const mapped_document = new Map()
     document.forEach(c => mapped_document.set(c.CashID, c))
 
+    const fileIDs = [...new Set(value.map(v => v.FileID))]
+    const timelineMap = await get_period(fileIDs)
+
     return value.map(v => {
         const cash = mapped_document.get(v.CashID)
         return {
@@ -21,7 +25,7 @@ const filter_cash_equivalences = async (filters = {}) => {
             Metric: cash.Metric,
             Unit: cash.Unit,
             ApplicationID: v.ApplicationID,
-            // Period: 
+            Period: timelineMap.get(v?.FileID),
             Value: parseFloat(v.Value)
         }
     })

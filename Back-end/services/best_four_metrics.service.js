@@ -1,7 +1,8 @@
 // services/best_four_metrics.service.js
 import best4Model from "../models/best_four_metrics.model.js";
-//import { workingCapitalService } from "./wcm_service.js"; 
+import { filter_wcm } from "./wcm_service.js"; 
 import { ratioService } from "./key_ratio.service.js"; 
+import { filter_statements } from "./financial_statements_service.js";
 
 // timeline map
 const FILE_TIMELINE = { 1: "2023", 2: "2024", 3: "2025" };
@@ -34,27 +35,48 @@ const TABLE_HANDLERS = {
     };
   },
 
-  /**async working_capital_movements({ metricId, applicationId }) {
+  async working_capital_movements({ metricId, applicationId }) {
 
-    const rows = await workingCapitalService({
-      movementid: metricId,
+    const rows = await filter_wcm({
+      capitalid: metricId,
       applicationid: applicationId,
     });
     if (!rows || rows.length === 0) return null;
 
-    const { MetricName, Unit } = rows[0];
+    const { Metric, Unit } = rows[0];
     return {
       Table: "working_capital_movements",
       MetricID: metricId,
-      MetricName,
+      Metric,
       Unit,
       Data: rows.map(r => ({
-        FileID: r.FileID,
-        Timeline: toTimeline(r.FileID),
+        Timeline: r.Period,
         Value: r.Value,
       })),
     };
-  },*/
+  },
+
+
+  async financial_statements({ metricId, applicationId }) {
+    const rows = await filter_statements({
+      financialid: metricId,
+      applicationid: applicationId,
+    })
+
+    if (!rows || rows.length === 0) return null;
+
+    const { Metric, Unit } = rows[0];
+    return {
+      Table: "financial_statements",
+      MetricID: metricId,
+      Metric,
+      Unit,
+      Data: rows.map(r => ({
+        Timeline: r.Period,
+        Value: r.Value,
+      })),
+    };
+  }
 };
 
 /**

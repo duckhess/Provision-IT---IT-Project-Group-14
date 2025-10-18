@@ -1,4 +1,4 @@
-import service from '../services/financial_statements_service.js'
+import {filter_statements} from '../services/financial_statements_service.js'
 
 const fetch_statements = async (req, res) => {
     try {
