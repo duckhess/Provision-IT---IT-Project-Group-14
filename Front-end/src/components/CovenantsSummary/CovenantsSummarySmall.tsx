@@ -26,7 +26,7 @@ const CustomTick = ({ payload, x, y, textAnchor, ...rest }: any) => {
         <tspan
           key={index}
           x={x}
-          dy={index === 0 ? 0 : 15} // 12px vertical spacing between lines
+          dy={index === 0 ? 0 : 15} 
         >
           {word}
         </tspan>
@@ -37,11 +37,11 @@ const CustomTick = ({ payload, x, y, textAnchor, ...rest }: any) => {
 
 const CovenantsSummarySmall : React.FC<CategoryProps> = ({datasets}) => {
   return (
-    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4 overflow-x-scroll scrollbar-hide">
+    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
         <h2 className='text-xl font-bold mb-4'> Covenants Summary</h2>
-        <div className="w-full h-full min-w-[500px]">
+        <div className="w-full h-full">
             <ResponsiveContainer width = "100%" height = "100%">
-                <RadarChart outerRadius = "80%" data = {datasets} margin={{ top: 30, right: 50, bottom: 30, left: 70 }}>
+                <RadarChart outerRadius = "65%" data = {datasets} margin={{ top: 30, right: 30, bottom: 30, left: 30 }}>
                     <PolarGrid/>
                     <PolarAngleAxis
                         dataKey="name" tick = {<CustomTick />}/>

@@ -24,15 +24,15 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment}) => {
 
 
   return (
-    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
+    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4 overflow-x-hidden">
         <h2 className='text-xl font-bold mb-4'> Environment and Social Score </h2>
 
-        <div className='grid grid-rows-2 gap-4 w-full h-full'>
+        <div className='grid grid-rows-2 gap-4 w-full max-w-full h-full'>
             {/*Environment */}
             <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                     <FaLeaf className='text-green-500 text-3xl' />
-                    <span className = "font-semibold text-gray-700 ml-3">Environemnt </span>
+                    <span className = "font-semibold text-gray-700 ml-3">Environment </span>
                 </div>
 
                 <div className='flex items-center gap-2'>
@@ -41,6 +41,7 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment}) => {
                 </div>
             </div>
 
+            {/* Social */}
             <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                     <FaUsers className='text-blue-500 text-3xl' />
@@ -53,7 +54,6 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment}) => {
                 </div>
             </div>
         </div>
-           
     </div>
   )
 }

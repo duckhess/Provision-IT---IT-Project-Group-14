@@ -1,73 +1,115 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
+
 import { FaSearch } from "react-icons/fa";
-import axios from "axios";
 
 interface Company {
   companyId: number;
   companyName: string;
 }
 
-interface SearchBarProps {
-    setResults : React.Dispatch<React.SetStateAction<Company[]>>;
+type SearchBarProps = {
+  allCompanies: Company[];
+  setSuggested: (companies: Company[]) => void;
+  setSearchResults: (companies: Company[]) => void;
+  handleSearchClick? : (input : string) => void;
 }
 
-export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
+export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested, setSearchResults, handleSearchClick}) =>{
     const [input, setInput] = useState("");
-    const [allCompanies, setAllCompanies] = useState<Company[]>([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const fetchCompanies = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get<Company[]>("http://localhost:5000/companies");
-            setAllCompanies(response.data);
-        } catch (err) {
-            console.error("Error fetching companies:", err);
-        } finally {
-            setLoading(false);
-        }
-        };
-        fetchCompanies();
-    }, []);
 
     const handleChange = (value: string) => {
         setInput(value);
-        if (value.trim() === "") {
-        setResults([]);
-        return;
-        }
 
-        const filtered = allCompanies.filter((company) =>
-        company.companyName.toLowerCase().includes(value.toLowerCase())
-        );
-        setResults(filtered);
+        // update suggested list as user types
+        const filtered = value.trim() === ""
+            ? []
+            : allCompanies.filter((c) =>
+                c.companyName.toLowerCase().includes(value.toLowerCase())
+                );
+        
+
+        // debug tools
+          console.log("input:", value);           // what the user typed
+            console.log("allCompanies:", allCompanies); // full list fetched from backend
+            console.log("filtered:", filtered);     // the suggestions based on input
+
+        setSuggested(filtered);
     };
 
+    const handleClick = () => {
+        const trimmedInput = input.trim();
 
-    // // fetch data from API (need to be changed)
-    // // use this when the back-end query isnt set up yet
-    // const fetchData = (value : string) => {
-    //     fetch("/companies/companyName")
-    //     .then((response) => response.json())
-    //     .then((json : Company[])=> {
-    //         console.log("Fetched data : ", json);
-    //         /* check is the user exist, then check is there a name then compare */
-    //         /* can be simplified but however data isnt ready yet */
-    //         /* filtering is usually done at backend side */
-    //         const result = value 
-    //              ? json.filter((company) => 
-    //                 company.name
-    //                 .toLowerCase()
-    //                 .includes(value.toLowerCase())
-    //             ) : [];
-            
-    //         setResults(result);
-    //         console.log("Filter results", result);
-    //     })
-    //     .catch((err)=>console.error(err));
+        if(handleSearchClick){
+            handleSearchClick(trimmedInput);
+            setSuggested([]);
+            return;
+        }
+
+        const filtered = input.trim() === ""
+            ? allCompanies
+            : allCompanies.filter((c) =>
+                c.companyName.toLowerCase().includes(input.toLowerCase())
+                );
+
+        setSearchResults(filtered); 
+        setSuggested([]);// only update dashboard
+
+    }
+
+    // const handleSearchClick = () => {
+
+
+    //     const filtered = input.trim() === ""
+    //         ? allCompanies
+    //         : allCompanies.filter((c) =>
+    //             c.companyName.toLowerCase().includes(input.toLowerCase())
+    //             );
+
+    //     setSearchResults(filtered); 
+    //     setSuggested([]);// only update dashboard
     // };
 
+    // const handleClick = () => {
+    //     const trimmedInput = input.trim();
+
+    //     // If a custom search handler is provided (like homepage navigation)
+    //     if (handleSearchClick) {
+    //         handleSearchClick(trimmedInput); // e.g., navigate to search page
+    //         setSuggested([]);               // hide dropdown after search
+    //         return;
+    //     }
+
+    //     // Default behavior: filter companies for the dashboard (search page)
+    //     const filtered = trimmedInput === ""
+    //         ? allCompanies              // show all companies if input is blank
+    //         : allCompanies.filter(c =>
+    //             c.companyName.toLowerCase().includes(trimmedInput.toLowerCase())
+    //         );
+
+    //     setSearchResults(filtered);  // update SearchDashboard
+    //     setSuggested([]);            // hide dropdown
+    // };
+
+    // const performSearch = (value: string) => {
+    //     setInput(value);
+
+    //     let filtered: Company[];
+
+    //     if (value.trim() === "") {
+    //         // Show all companies when input is empty
+    //         filtered = allCompanies;
+    //     } else {
+    //         filtered = allCompanies.filter((company) =>
+    //         company.companyName.toLowerCase().includes(value.toLowerCase())
+    //         );
+    //     }
+
+    //     setResults(filtered);
+    // };
+
+    // const handleSearchClick = () => {
+    //     performSearch(input);
+    // }
 
     // use this when the backend is ready with query
     // const fetchData = (value:string) => {
@@ -88,13 +130,13 @@ export const SearchBar: React.FC<SearchBarProps> =  ({setResults}) =>{
             <input 
             placeholder="Type to search..." 
             value = {input} 
-            onChange={(e =>handleChange(e.target.value))}
+            onChange={(e) =>handleChange(e.target.value)}
             className="w-full h-full ml-1 bg-transparent border-0 text-xl focus:outline-none">
             </input>
 
             <FaSearch id = "search-icon"
             className="cursor-pointer text-gray-500"
-            onClick = {()=>alert(`You have clicked search icon`)}></FaSearch>
+            onClick = {handleClick}></FaSearch>
         </div>
     );
 };

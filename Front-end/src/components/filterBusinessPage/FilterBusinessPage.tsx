@@ -276,8 +276,9 @@ const FilterBusinessPage = () => {
   };
 
   return (
-    <div className="flex">
-      <SideBarFilterButton onClick={() => setSidebarOpen(!sidebarOpen)} />
+    <div className="grid grid-rows-[35px]">
+      <div>
+        <SideBarFilterButton onClick={() => setSidebarOpen(!sidebarOpen)} />
 
       {sidebarOpen && (
         <SidebarFilter
@@ -287,7 +288,7 @@ const FilterBusinessPage = () => {
           toggleSelection={handleToggleSelection}
         />
       )}
-
+      </div>
       <div className="flex-1 p-4">
         <GraphButton selectedDatasets={selectedDataSets} />
       </div>
