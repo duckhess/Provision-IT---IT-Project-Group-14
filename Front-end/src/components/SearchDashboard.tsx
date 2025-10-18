@@ -139,6 +139,7 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
   const [companyDetails, setCompanyDetails] = useState<Company | null>(null);
   const [loading, setLoading] = useState(false);
 
+
   if (!companies || companies.length === 0) {
     return (
       <div className="p-6 text-gray-500">
@@ -147,7 +148,7 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
     );
   }
 
-   const selectedItem = companies.find((c) => c.companyId === selectedId) || null;
+  const selectedItem = companies.find((c) => c.companyId === selectedId) || null;
 
   useEffect (() => {
     if(!selectedId) {
@@ -169,14 +170,19 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
 
     fetchCompanyDetails();
   }, [selectedId]);
-  // const [selectedId, setSelectedId] = useState<number | null>(null);
+
 
   // const selectedItem = mockData.find(item => item.id === selectedId) || null;
 
+  
+
   return (
     <div className="flex h-full p-6">
-      <div className="w-1/4 pr-4 border-r overflow-y-auto">
+
+        <div className="w-1/4 pr-4 border-r overflow-y-auto">
+        
         {companies && companies.length > 0 ? (
+          
           companies.map((company) => (
             <CompanyCard
               key={company.companyId}
@@ -190,6 +196,8 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
           <p className="p-4 text-gray-500">No companies to display</p>
         )}
       </div>
+    
+    
 
       {/* Left panel */}
       {/* <div className="w-1/4 pr-4 border-r">

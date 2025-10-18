@@ -48,9 +48,9 @@ function SearchPageGrid({ selectedDatasets }: GraphContainerProps) {
         }
       ]
   return (
-    <div className="grid grid-cols-2 grid-rows-3 gap-4 items-stretch h-full">
+    <div className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
       {selectedDatasets.map((dataset, i) => (
-        <div className="overflow-y-auto">
+        <div className="overflow-y-auto h-full">
         <DataBox
           key={i}
           datasets={[dataset]} // array of 1 element
@@ -61,10 +61,13 @@ function SearchPageGrid({ selectedDatasets }: GraphContainerProps) {
         </div>
         
       ))}
-      <div className="overflow-y-auto">
+      {/* <div className="overflow-y-auto h-full">
         <EGSScore social =  {70} environment={80}></EGSScore>
       </div>
-      <CovenanatsSummary datasets={mockCategoryData}></CovenanatsSummary>
+      <div className="overflow-y-auto h-full">
+        <CovenanatsSummary datasets={mockCategoryData}></CovenanatsSummary>
+      </div> */}
+    
       
     </div>
   );

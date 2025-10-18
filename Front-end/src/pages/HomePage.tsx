@@ -66,7 +66,7 @@ const HomePage: React.FC = () => {
     setCompanies(dummyData);
   }, []);
 
-  // fetch all possible companies
+  // fetch all possible companies : search bar
   useEffect (() => {
     const fetchCompanies = async () => {
       try {
@@ -81,7 +81,7 @@ const HomePage: React.FC = () => {
     fetchCompanies();
   }, []);
 
-  // Rotate cards every 10 seconds
+  // Rotate cards every 10 seconds : carousel
   useEffect(() => {
     if (companies.length === 0) return;
 

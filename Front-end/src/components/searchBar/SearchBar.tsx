@@ -26,7 +26,9 @@ export const SearchBar: React.FC<SearchBarProps> =  ({allCompanies, setSuggested
             : allCompanies.filter((c) =>
                 c.companyName.toLowerCase().includes(value.toLowerCase())
                 );
+        
 
+        // debug tools
           console.log("input:", value);           // what the user typed
             console.log("allCompanies:", allCompanies); // full list fetched from backend
             console.log("filtered:", filtered);     // the suggestions based on input

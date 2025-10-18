@@ -16,10 +16,11 @@ const SearchPage: React.FC = () => {
   const [allCompanies, setAllCompanies] = useState<Company[]>([]);
   // const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
   const [searchResults, setSearchResults] = useState<Company[]>([]);
-  // const [results, setResults] = useState <Company[]> ([]);
   const [loading, setLoading] = useState(false);
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("query") || "";
+
+  console.log("search result length = " + searchResults.length);
 
   useEffect (() => {
     const fetchCompanies = async () => {
@@ -29,6 +30,8 @@ const SearchPage: React.FC = () => {
           "http://localhost:7000/companies"
         );
         setAllCompanies(response.data);
+
+        // show all comapnies when there is no input in search bar 
         setSearchResults(response.data)
       } catch (err){
         console.error("error fetching companies data",err);

@@ -51,7 +51,7 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
             <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
                 <div className='flex items-center gap-1'>
                     <FaLeaf className='text-green-500 text-3xl' />
-                    <span className = "font-semibold text-gray-700 ml-3">Environemnt </span>
+                    <span className = "font-semibold text-gray-700 ml-3">Environment </span>
                 </div>
 
                 <div className='flex items-center gap-2'>
