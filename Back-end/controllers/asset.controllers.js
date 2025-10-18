@@ -20,6 +20,7 @@ export const assetController = async (req,res) => {
     return res.json(assets)  
   } 
   catch (err) {
-    return res.status(500).json({ error: e.message })
+    console.error("AssetController error:", err);
+    return res.status(500).json({ error: err.message })
   }
 }

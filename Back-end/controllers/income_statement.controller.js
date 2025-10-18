@@ -1,6 +1,6 @@
-import { liabilityService } from "../services/liability.service.js";
+import { incomeService } from "../services/income_statement.service.js";
 
-export const liabilityController = async (req,res) => {
+export const incomeController = async (req,res) => {
   
   try {
     const parameters = {}
@@ -11,13 +11,13 @@ export const liabilityController = async (req,res) => {
     const filters = {
       metric : parameters.metric,
       unit : parameters.unit,
-      liabilityid: parameters.liabilityid,           
+      incomeid: parameters.incomeid,           
       applicationid: parameters.applicationid,      
       fileid: parameters.fileid
     }
   
-    const liabilities = await liabilityService(filters)
-    return res.json(liabilities)  
+    const incomes = await incomeService(filters)
+    return res.json(incomes)  
   } 
   catch (err) {
     return res.status(500).json({ error: e.message })

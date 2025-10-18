@@ -1,0 +1,34 @@
+@startuml display_graph_summary
+title Display Graph Flow 
+
+autonumber
+actor Investor
+participant "Web App" as Web
+participant "Auth Service" as Auth
+participant "Application Backend" as Backend
+database "Data Store" as Store
+
+ref over Investor, Web, Auth
+  Login Flow (see: login_flow.puml)
+end ref
+
+ref over Investor, Web, Backend, Store
+  Main Page Load (see: main_page.puml)
+end ref
+
+== Company Profile ==
+Investor -> Web: Select a company (from search or dynamic list)
+activate Web
+Web -> Backend: Request company profile + 3-year financial metrics
+activate Backend
+Backend -> Store: Fetch profile + metrics
+activate Store
+Store --> Backend: Profile + metrics
+deactivate Store
+Backend --> Web: Profile + metrics
+deactivate Backend
+Web -> Investor: Render profile (summary info, image, bio)
+Web -> Investor: Display financial graph (x-axis: years, y-axis: ratio values)
+deactivate Web
+
+@enduml
