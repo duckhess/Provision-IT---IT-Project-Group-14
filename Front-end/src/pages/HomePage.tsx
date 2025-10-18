@@ -20,7 +20,7 @@ import axios from "axios";
     companyName: string;
   }
 
-  const CompanyCard: React.FC<{ company: CompanyInfo }> = ({ company }) => {
+  const CompanyCard: React.FC<{ company: Company }> = ({ company }) => {
     return (
       <div className="h-full w-full  rounded-md flex items-center justify-center">
         <Summary company = {company}/>
@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
     const fetchCompanies = async () => {
       try {
         const response = await axios.get<Company[]> (
-          "http://localhost:7000/companies"
+          "/api/companies"
         );
         setAllCompanies(response.data);
       } catch (err){

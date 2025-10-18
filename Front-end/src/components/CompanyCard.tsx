@@ -10,32 +10,69 @@ interface CompanyCardProps {
 }
 
 interface CompanyCardInfo {
-  projectShortDescription : string;
-  estDate : string;
+  projectShortDescription: string;
+  estDate: string;
+}
+
+interface BackendCompanyData {
+  CompanyID: number;
+  CompanyName: string;
+  Industry: string;
+  IndustryID: number;
+  ApplicationID: number;
+  YearEstablished: string;
+  Location: string;
+  UsageOfFunds: string;
+  Amount: string;
+  EnvironmentalScore: number;
+  SocialScore: number;
+  ShortGeneralDescription: string;
+  LongGeneralDescription: string;
+  ShortApplicationDescription: string;
+  LongApplicationDescription: string;
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, isActive }) => {
-  const [companyCardDetail, setCompanyCardDetails] = useState <CompanyCardInfo | null> (null);
+  const [companyCardDetails, setCompanyCardDetails] = useState<CompanyCardInfo | null>(null);
   const [loading, setLoading] = useState<boolean> (false);
 
-  // useEffect (() => {
-  //     const fetchCompanies = async () => {
-  //       try {
-  //         setLoading(true);
-  //         const response = await axios.get<CompanyCardInfo> (
-  //           `http://localhost:7000/companies/${id}`
-  //         );
-  //         setCompanyCardDetails(response.data);
+  useEffect (() => {
+      const fetchCompanies = async (id : number) => {
+        try {
+          setLoading(true);
+          const response = await axios.get<BackendCompanyData[]> (
+            `/api/company_data?CompanyID=${id}`
+          );
 
-  //       } catch (err){
-  //         console.error("error fetching companies data",err);
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-  //     fetchCompanies();
-  //   }, [id]);
-  // }
+        // console.log("Backend reponse", response.data);
+        
+        // response is parsed as an array
+        if (response.data.length > 0) {
+          const firstCompany = response.data[0];
+          setCompanyCardDetails({
+            projectShortDescription : firstCompany.ShortApplicationDescription,
+            estDate : firstCompany.YearEstablished,
+          });
+        } else {
+          setCompanyCardDetails({
+            projectShortDescription: "No description available",
+            estDate : 'N/A',
+          });
+        }
+
+        } catch (err){
+          console.error("error fetching companies data",err);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchCompanies(id);
+    }, [id]);
+
+//     useEffect(() => {
+//   console.log("CompanyCardDetails updated:", companyCardDetails);
+// }, [companyCardDetails]);
+
 
 
   return (
@@ -46,8 +83,8 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
       onClick={() => onClick(id)}
     >
       <h3 className='font-bold'>{companyName}</h3>
-      {/* <p className='text-gray-600 text-sm'>{projectShortDescription}</p>
-      <p className='text-gray-400 text-xs'> Est. {estDate}</p> */}
+      <p className='text-gray-600 text-sm'>{companyCardDetails?.projectShortDescription}</p>
+      <p className='text-gray-400 text-xs'> Est. {companyCardDetails?.estDate}</p>
     </div>
   );
 };

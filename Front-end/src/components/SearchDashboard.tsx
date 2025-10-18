@@ -8,36 +8,41 @@ interface receivedCompaniesProps {
   companies: { companyId: number; companyName: string }[];
 }
 
-type Company = {
-    id: number,
-    title: string,
-    category: string,
-    description: string,
-    funding: string,
-    useOfFunds: string,
-    imageUrl: string,
-    projectShortDescription : string,
-    estDate : string;
-};
+// type Company = {
+//     id: number,
+//     title: string,
+//     category: string,
+//     description: string,
+//     funding: string,
+//     useOfFunds: string,
+//     imageUrl: string,
+//     projectShortDescription : string,
+//     estDate : string;
+// };
 
-type Unit = "%" | "$" | "days" | "Benchmark";
-type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast" | "ABS Benchmark";
-type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
+// type Company = {
+//   companyID : number;
+//   companyName : string;
+// }
 
-interface Dataset {
-  name: string; // label
-  data: any[];
-  metric: Metric;
-  unit: Unit;
-  section: Section;
-}
+// type Unit = "%" | "$" | "days" | "Benchmark";
+// type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast" | "ABS Benchmark";
+// type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
-interface DataItem {
-  id: number;
-  text: string;
-  summary: Company;
-  datasets: Dataset[];
-}
+// interface Dataset {
+//   name: string; // label
+//   data: any[];
+//   metric: Metric;
+//   unit: Unit;
+//   section: Section;
+// }
+
+// interface DataItem {
+//   id: number;
+//   text: string;
+//   summary: Company;
+//   datasets: Dataset[];
+// }
 
 // Fake mock data
 // const mockData: DataItem[] = [
@@ -136,8 +141,8 @@ interface DataItem {
 
 const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [companyDetails, setCompanyDetails] = useState<Company | null>(null);
-  const [loading, setLoading] = useState(false);
+  // const [companyDetails, setCompanyDetails] = useState<Company | null>(null);
+  // const [loading, setLoading] = useState(false);
 
 
   if (!companies || companies.length === 0) {
@@ -150,26 +155,30 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
 
   const selectedItem = companies.find((c) => c.companyId === selectedId) || null;
 
-  useEffect (() => {
-    if(!selectedId) {
-      setCompanyDetails(null);
-      return;
-    }
+  // useEffect (() => {
+  //   if(!selectedId) {
+  //     setCompanyDetails(null);
+  //     return;
+  //   }
 
-   const fetchCompanyDetails = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get<Company>(`http://localhost:7000/companies/${selectedId}`);
-        setCompanyDetails(response.data);
-      } catch (err) {
-        console.error("Error fetching company details:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  //  const fetchCompanyDetails = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await axios.get<Company>(`http://localhost:3000/companies/${selectedId}`);
+        
+  //       // console.log("Axios reponse", response);
+  //       // console.log("reponse data:", response.data);
+        
+  //       setCompanyDetails(response.data);
+  //     } catch (err) {
+  //       console.error("Error fetching company details:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchCompanyDetails();
-  }, [selectedId]);
+  //   fetchCompanyDetails();
+  // }, [selectedId]);
 
 
   // const selectedItem = mockData.find(item => item.id === selectedId) || null;
@@ -215,20 +224,23 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
       </div> */}
 
       {/* Right panel */}
-      {/* <div className = "h-[1250px] w-3/4 pl-6 border-r pr-4">
-        <div className="grid grid-rows-[330px_920px]">
+      <div className = "h-[1500px] w-3/4 pl-6 border-r pr-4">
+        <div className="grid grid-rows-[500px_1000px]">
           {selectedItem ? (
             <>
-              <Summary company={selectedItem.summary} />
-              <div className="overflow-y-auto">
-                <SearchPageGrid selectedDatasets={selectedItem.datasets} />
+              <Summary company={selectedItem} />
+              {/* { <div className="overflow-y-auto">
+                <SearchPageGrid selectedDatasets={selectedItem} />
+              </div>} */}
+              <div className='overflow-y-auto'>
+                <SearchPageGrid company={selectedItem} />
               </div>
             </>
           ) : (
             <p className="text-gray-500 text-center mt-20">Select a startup to see summary and metrics.</p>
           )}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

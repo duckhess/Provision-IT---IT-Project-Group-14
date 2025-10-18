@@ -20,19 +20,19 @@ const SearchPage: React.FC = () => {
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("query") || "";
 
-  console.log("search result length = " + searchResults.length);
-
   useEffect (() => {
     const fetchCompanies = async () => {
       try {
         setLoading(true);
         const response = await axios.get<Company[]> (
-          "http://localhost:7000/companies"
+          "/api/companies"
         );
         setAllCompanies(response.data);
 
         // show all comapnies when there is no input in search bar 
-        setSearchResults(response.data)
+        setSearchResults(response.data);
+
+        console.log("all companies", response.data);
       } catch (err){
         console.error("error fetching companies data",err);
       } finally {
@@ -41,6 +41,9 @@ const SearchPage: React.FC = () => {
     };
     fetchCompanies();
   }, []);
+
+  // console.log("all companies", allCompanies);
+  // console.log("search result", searchResults);
 
 
   return (
@@ -64,7 +67,7 @@ const SearchPage: React.FC = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (<SearchDashboard companies = {searchResults} />)}
-        {/* <SearchDashboard companies = {results}/> */}
+        {/* <SearchDashboard companies = {results}/>*/}
       </section>
 
       {/* Pagination */}

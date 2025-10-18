@@ -2,13 +2,12 @@ import React, {useState} from 'react'
 import EGSScoreSmall from './EGSScoreSmall';
 import EGSScoreLarge from './EGSScoreLarge';
 
-
-interface EGSScoreProps {
-    social : number;
-    environment : number;
+interface EGSScore {
+  social : number;
+  environment : number;
 }
 
-const EGSScore: React.FC<EGSScoreProps> = ({social, environment}) => {
+const EGSScore: React.FC<EGSScore> = ({social, environment}) => {
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => setExpanded((prev) => !prev);
 
