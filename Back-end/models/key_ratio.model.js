@@ -4,7 +4,8 @@ const KeyRatioSchema = new mongoose.Schema(
   {
   KeyRatioID: { type: Number, required: true, unique: true, index: true },
   Metric: { type: String, required: true, index: true }, 
-  Unit: { type: String, required: true }              
+  Unit: { type: String, required: true },
+  Category: { type: String, required: true}
   },
   { collection: 'key_ratios', timestamps: false }
 )
