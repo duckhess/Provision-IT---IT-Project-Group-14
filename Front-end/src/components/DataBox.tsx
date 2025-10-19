@@ -1,10 +1,9 @@
 import Graph from "./Graph";
 import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
 import type { Metric } from "./Types/Types.tsx";
+import Covenants from "./filterBusinessPage/Covenants/Covenants.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-// type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
   // label
@@ -22,44 +21,6 @@ interface GraphProps {
   // section: Section;
   metric: Metric;
 }
-
-// function DataBox({ datasets, unit, section}: GraphProps) {
-
-//   switch (section) {
-//     case "Ratio":
-//       return (
-//         <div className="flex flex-col">
-//             <Graph datasets={datasets} unit={unit} title={section}/>
-//         </div>
-//       );
-
-//     case "ABS Benchmarking":
-//       return (
-//         <div className="flex flex-col">
-//             <ABSBenchmarking code = {"ABC123"} metric_list = {datasets[0].data}></ABSBenchmarking>
-//         </div>
-//       );
-
-//     case "Statement of Cashflow":
-//       return (
-//         <div className="flex flex-col">
-//             <Graph datasets={datasets} unit={unit} title={section}/>
-//             <br/>
-//         </div>
-//       );
-    
-//     case "Forecast":
-//       return (
-//         <div className="flex flex-col">
-//             <Graph datasets={datasets} unit={unit} title={section}/>
-//             <br/>
-//         </div>
-//       );
-
-//     default:
-//       return null;
-//   }
-// }
 
 function DataBox({ datasets, unit, metric}: GraphProps) {
   // console.log(metric);
@@ -141,6 +102,25 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
       return (
         <div className="flex flex-col">
             <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
+    case "cash_equivalences":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
+    case "covenants":
+      console.log("Name: " + datasets[0].name);
+      console.log("Metrics: " + JSON.stringify(datasets[0].data, null, 2));
+      console.log("3 Yr: " + datasets[0].metadata?.threeYearAvgSuccess);
+      return (
+        <div className="flex flex-col">
+            <Covenants category={datasets[0].name} metric_list={datasets[0].data[0]} threeYearAverageSuccess={datasets[0].metadata?.threeYearAvgSuccess} />
             <br/>
         </div>
       );

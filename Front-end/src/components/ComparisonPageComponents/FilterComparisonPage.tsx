@@ -15,9 +15,11 @@ const endpoints = [
   "financial_statements",
   "key_ratios",
   "working_capital_movements",
+  "forecasts",
+  "cash_equivalences",
+  "covenants",
 ];
 
-// Optional: human-readable metric names for sidebar/graph
 const humanReadableMetric: Record<string, string> = {
   abs_benchmarkings: "ABS Benchmarking",
   liabilities: "Liabilities",
@@ -26,6 +28,7 @@ const humanReadableMetric: Record<string, string> = {
   financial_statements: "Financial Statements",
   key_ratios: "Key Ratios",
   working_capital_movements: "Working Capital Movements",
+  covenants: "Covenants",
 };
 
 interface Dataset {
@@ -52,103 +55,199 @@ interface FilterComparisonPageProps {
   companyB: Company | null;
 }
 
-// --- Transform Functions ---
+interface CovenantMetricItem {
+  name: string;
+  pass: boolean;
+  calc_value: number;
+  abs_value: number;
+}
 
-const transformABSBenchmarking = (data: any[], companyId: number): Dataset[] => {
-  const applicationId =
-    companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
-  const filtered = data.filter((item) => item.ApplicationID === applicationId);
+interface CovenantDataset extends Dataset {
+  data: CovenantMetricItem[][];
+  metadata?: {
+    threeYearAvgSuccess: number;
+  };
+}
 
-  return [
-    {
-      name: "ABS Benchmarking",
-      metric: "ABS Benchmarking",
-      unit: filtered[0]?.Unit ?? "Benchmark",
-      data: filtered.map((item) => ({
-        name: item.Benchmark,
-        pass: item.Analysis,
-        calc_value: item.CalcValue,
-        abs_value: item.ABSValue,
-        greater: item.Analysis
-          ? item.CalcValue > item.ABSValue
-          : item.CalcValue < item.ABSValue,
-      })),
-      metadata: {
-        ANZICCode: filtered[0]?.ANZICCode ?? null,
-        field: filtered[0]?.Field ?? null,
-      },
+/* -------------------- TRANSFORMS -------------------- */
+
+const transformABSBenchmarking = (data: any[]): Dataset[] => [
+  {
+    name: "ABS Benchmarking",
+    metric: "ABS Benchmarking",
+    unit: data[0]?.Unit ?? "Benchmark",
+    data: data.map((item) => ({
+      name: item.Benchmark,
+      pass: item.Analysis,
+      calc_value: item.CalcValue,
+      abs_value: item.ABSValue,
+      greater: item.Analysis
+        ? item.CalcValue > item.ABSValue
+        : item.CalcValue < item.ABSValue,
+    })),
+    metadata: {
+      ANZICCode: data[0]?.ANZICCode ?? null,
+      field: data[0]?.Field ?? null,
     },
-  ];
-};
+  },
+];
 
-const transformTimelineMetricsPerCompany = (endpoint: string, rawData: any[], companyId: number): Dataset[] => {
-  // Map frontend companyId (1001–1004) → backend ApplicationID (1–4)
-  const applicationId =
-    companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
+const transformTimelineMetricsPerCompany = (
+  endpoint: string,
+  rawData: any[]
+): Dataset[] => {
+  if (!rawData || rawData.length === 0) return [];
 
-  // Filter rawData to only include this company
-  const filtered = rawData.filter((item) => item.ApplicationID === applicationId);
-
-  if (filtered.length === 0) return [];
-
-  // Determine ID field (KeyRatioID, LiabilityID, etc.)
   const idKey =
-    "KeyRatioID" in filtered[0]
-      ? "KeyRatioID"
-      : "LiabilityID" in filtered[0]
-      ? "LiabilityID"
-      : "FinancialID" in filtered[0]
-      ? "FinancialID"
-      : "EquityID" in filtered[0]
-      ? "EquityID"
-      : "IncomeID" in filtered[0]
-      ? "IncomeID"
-      : "ID";
+    Object.keys(rawData[0]).find((k) => k.endsWith("ID")) ?? "ID";
 
-  // Group by metric ID
   const grouped: Record<string | number, any[]> = {};
-  filtered.forEach((item) => {
+  rawData.forEach((item) => {
     const id = item[idKey];
     if (!grouped[id]) grouped[id] = [];
     grouped[id].push(item);
   });
 
-  // Map to frontend Dataset format
   return Object.values(grouped).map((items) => ({
     name: items[0].MetricName ?? items[0].name ?? endpoint,
     metric: endpoint as Metric,
     unit: items[0].Unit as Unit,
-    data: items.map(d => ({
-      x: Number(d.Timeline), // or parseInt/Date if Timeline is a string
+    data: items.map((d) => ({
+      x: Number(d.Timeline),
       y: Number(d.Value),
     })),
   }));
 };
 
-// --- Fetch Company Datasets ---
+const transformTimelineForecastMetrics = (
+  rawData: any[],
+  companyId: number,
+  metricCategory: Metric,
+  idField: string
+): Dataset[] => {
+  const applicationId =
+    companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
+
+  const filtered = rawData.filter(
+    (item) => item.ApplicationID === applicationId
+  );
+  if (filtered.length === 0) return [];
+
+  const grouped: Record<number, any[]> = {};
+  filtered.forEach((item) => {
+    if (!grouped[item[idField]]) grouped[item[idField]] = [];
+    grouped[item[idField]].push(item);
+  });
+
+  return Object.values(grouped).map((items) => {
+    const first = items[0];
+    return {
+      name: first.AccountDescription ?? first.Metric ?? "Unknown",
+      metric: metricCategory,
+      unit: first.Unit as Unit,
+      data: [
+        { x: "Avg Historical Forecast", y: first["Avg Historical Forecast"] },
+        { x: "User Forecast", y: first["User Forecast"] },
+      ],
+    };
+  });
+};
+
+/* -------------------- COVENANTS -------------------- */
+
+const transformCovenants = (
+  covenantsRaw: any[],
+  keyRatios: Dataset[]
+): CovenantDataset[] => {
+  const groupedByCategory: Record<string, any[]> = {};
+  covenantsRaw.forEach(item => {
+    const category = item.Category ?? "Uncategorized";
+    if (!groupedByCategory[category]) groupedByCategory[category] = [];
+    groupedByCategory[category].push(item);
+  });
+
+  return Object.entries(groupedByCategory).map(([category, items]) => {
+    const metricList = items.map(item => ({
+      name: item.Metric,
+      pass: item.Analysis,
+      calc_value: Number(item.Value),
+      abs_value: item.Benchmark,
+    }));
+
+    // Calculate threeYearAvgSuccess
+    let passCount = 0;
+    metricList.forEach(metric => {
+      if (!metric.name) return; // skip if metric name is undefined/null
+      const kr = keyRatios.find(k => {
+        if (!k.name) return false; // skip if key ratio name is undefined
+        return k.name.trim().toLowerCase() === metric.name.trim().toLowerCase();
+      });
+      if (kr && kr.data.length > 0) {
+        const avg =
+          kr.data.reduce((sum, d) => sum + d.y, 0) / kr.data.length;
+        const latest = kr.data[kr.data.length - 1].y;
+        if (avg > latest) passCount += 1;
+      }
+    });
+
+    const threeYearAvgSuccess =
+      metricList.length > 0 ? (passCount / metricList.length) * 100 : 0;
+
+    return {
+      name: category,
+      metric: "covenants",
+      unit: category as Unit,
+      data: [metricList],
+      metadata: { threeYearAvgSuccess },
+    };
+  });
+};
+
+/* -------------------- FETCH -------------------- */
 
 const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
   try {
-
     const applicationId =
-    companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
-  
+      companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
+
     const requests = endpoints.map((endpoint) =>
       axios.get(`/api/${endpoint}?applicationID=${applicationId}`)
     );
-
     const responses = await Promise.all(requests);
 
-    const datasets: Dataset[] = responses.flatMap((res, i) => {
-      const endpoint = endpoints[i];
-      if (!res.data || res.data.length === 0) return [];
+    // Extract key_ratios for use in covenants
+    const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
+    const keyRatios = keyRatiosRes?.data ?? [];
 
-      if (endpoint === "abs_benchmarkings") {
-        return transformABSBenchmarking(res.data, companyId);
-      } else {
-        return transformTimelineMetricsPerCompany(endpoint, res.data, companyId);
+    const datasets: Dataset[] = [];
+
+    for (let i = 0; i < responses.length; i++) {
+      const endpoint = endpoints[i];
+      const data = responses[i].data;
+      if (!data || data.length === 0) continue;
+
+      switch (endpoint) {
+        case "abs_benchmarkings":
+          datasets.push(...transformABSBenchmarking(data));
+          break;
+        case "forecasts":
+          datasets.push(
+            ...transformTimelineForecastMetrics(data, companyId, "Forecast", "ForecastID")
+          );
+          break;
+        case "working_capital_movements":
+          datasets.push(
+            ...transformTimelineForecastMetrics(data, companyId, "working_capital_movements", "CapitalID")
+          );
+          break;
+        case "covenants":
+          datasets.push(...transformCovenants(data, keyRatios));
+          break;
+        default:
+          datasets.push(...transformTimelineMetricsPerCompany(endpoint, data));
+          break;
       }
-    });
+    }
 
     return datasets;
   } catch (err) {
@@ -157,7 +256,7 @@ const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
   }
 };
 
-// --- Component ---
+/* -------------------- COMPONENT -------------------- */
 
 const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
   companyA,
@@ -189,7 +288,6 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
     fetchData();
   }, [companyA, companyB]);
 
-  // Keep per-company datasets separate
   const companyDatasets: CompanyDataset[] = [
     {
       company: companyA?.companyName ?? "Company A",
@@ -201,7 +299,6 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
     },
   ];
 
-  // --- Build sidebar metrics (deduplicated by name) ---
   const allDatasets: Dataset[] = [];
   const seen = new Set<string>();
   companyDatasets.forEach(({ datasets }) => {
@@ -211,14 +308,13 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
           name: ds.name,
           metric: ds.metric,
           unit: ds.unit,
-          data: [], // sidebar only needs metric name
+          data: [],
         });
         seen.add(ds.name);
       }
     });
   });
 
-  // --- Handlers ---
   const handleToggleSelection = (key: string) => {
     setSelectedKeys((prev) =>
       prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
@@ -255,4 +351,3 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
 };
 
 export default FilterComparisonPage;
-
