@@ -99,7 +99,7 @@ const transformTimelineMetricsPerCompany = (
   });
 
   return Object.values(grouped).map((items) => ({
-    name: items[0].MetricName ?? items[0].name ?? endpoint,
+    name: items[0].MetricName ?? items[0].AccountDescription ?? items[0].name ?? endpoint,
     metric: endpoint as Metric,
     unit: items[0].Unit as Unit,
     data: items.map((d) => ({

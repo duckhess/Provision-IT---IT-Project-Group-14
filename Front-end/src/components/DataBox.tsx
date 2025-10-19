@@ -125,6 +125,14 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
         </div>
       );
 
+    case "assets":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
     default:
       return null;
   }
