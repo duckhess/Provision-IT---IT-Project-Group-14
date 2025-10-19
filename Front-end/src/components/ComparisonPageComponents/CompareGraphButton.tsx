@@ -103,76 +103,75 @@ export const CompareGraphButton: React.FC<CompareGraphButtonProps> = ({
     const selected = datasets.filter(
       (ds) =>
         selectedKeys.includes(ds.name) ||
-        selectedKeys.includes(ds.metric) // allow matching by metric name too
+        selectedKeys.includes(ds.metric)
     );
     return { company, datasets: selected };
   });
 
-  // For each company, group datasets by metric+unit combo
-  const groupedByCompany = filteredCompanyDatasets.map(({ company, datasets }) => {
-    const grouped: Record<string, Dataset[]> = {};
+  // For each company, group datasets by metric+unit combo and split into chunks of 4
+  const groupedByCompany: Record<
+    string, // company
+    Record<string, Dataset[][]> // metricKey -> chunks
+  > = {};
 
-    datasets.forEach((ds) => {
+  filteredCompanyDatasets.forEach(({ company, datasets }) => {
+    const grouped: Record<string, Dataset[]> = {};
+    datasets.forEach(ds => {
       const key = `${ds.metric}_${ds.unit}`;
       if (!grouped[key]) grouped[key] = [];
       grouped[key].push(ds);
     });
 
-    // Split large groups into chunks of up to 4 datasets
-    const groupedChunks = Object.entries(grouped).flatMap(([key, group]) => {
+    const chunked: Record<string, Dataset[][]> = {};
+    Object.entries(grouped).forEach(([key, group]) => {
       const chunks: Dataset[][] = [];
       for (let i = 0; i < group.length; i += 4) {
         chunks.push(group.slice(i, i + 4));
       }
-      return chunks.map((chunk) => ({ key, datasets: chunk }));
+      chunked[key] = chunks;
     });
 
-    return { company, groupedChunks };
+    groupedByCompany[company] = chunked;
   });
 
-  // Determine all metric+unit keys (so we render A and B side by side)
+  // Get all metricKeys across companies
   const allMetricKeys = Array.from(
     new Set(
-      groupedByCompany.flatMap((c) =>
-        c.groupedChunks.map((g) => g.key)
-      )
+      Object.values(groupedByCompany)
+        .flatMap(g => Object.keys(g))
     )
   );
 
-  // Render two graphs per metric key (one per company)
   return (
     <div className="space-y-8">
-      {allMetricKeys.map((metricKey) => (
-        <div
-          key={metricKey}
-          className="grid grid-cols-2 gap-6 items-stretch"
-        >
-          {groupedByCompany.map(({ company, groupedChunks }) => {
-            const match = groupedChunks.find((g) => g.key === metricKey);
+      {allMetricKeys.map(metricKey => {
+        // Determine how many graphs we need for this metricKey (max chunks across companies)
+        const numGraphs = Math.max(
+          ...Object.values(groupedByCompany).map(g => g[metricKey]?.length || 0)
+        );
 
-            // if no dataset group exists, create an empty placeholder dataset
-            const placeholderDataset = {
-              name: metricKey.split("_")[0],
-              metric: metricKey.split("_")[0] as Metric,
-              unit: metricKey.split("_")[1] as Unit,
-              data: [],
-            };
-
-            const datasets = match?.datasets?.length
-              ? match.datasets
-              : [placeholderDataset];
-
-            return (
-              <DataBox
-                key={`${company}_${metricKey}`}
-                datasets={datasets}
-                metric={datasets[0].metric}
-                unit={datasets[0].unit}
-              />
-            );
-          })}
-        </div>
-      ))}
+        return Array.from({ length: numGraphs }).map((_, idx) => (
+          <div key={`${metricKey}_${idx}`} className="grid grid-cols-2 gap-6 items-stretch">
+            {filteredCompanyDatasets.map(({ company }) => {
+              const chunks = groupedByCompany[company][metricKey] || [];
+              const datasets = chunks[idx] || [{
+                name: metricKey.split("_")[0],
+                metric: metricKey.split("_")[0] as Metric,
+                unit: metricKey.split("_")[1] as Unit,
+                data: [],
+              }];
+              return (
+                <DataBox
+                  key={`${company}_${metricKey}_${idx}`}
+                  datasets={datasets}
+                  metric={datasets[0].metric}
+                  unit={datasets[0].unit}
+                />
+              );
+            })}
+          </div>
+        ));
+      })}
     </div>
   );
 };

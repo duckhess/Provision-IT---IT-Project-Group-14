@@ -9,6 +9,7 @@ type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
 const endpoints = [
   "abs_benchmarkings",
+  "assets",
   "liabilities",
   "income_statements",
   "equities",
@@ -19,17 +20,6 @@ const endpoints = [
   "cash_equivalences",
   "covenants",
 ];
-
-const humanReadableMetric: Record<string, string> = {
-  abs_benchmarkings: "ABS Benchmarking",
-  liabilities: "Liabilities",
-  income_statements: "Income Statements",
-  equities: "Equities",
-  financial_statements: "Financial Statements",
-  key_ratios: "Key Ratios",
-  working_capital_movements: "Working Capital Movements",
-  covenants: "Covenants",
-};
 
 interface Dataset {
   name: string;
