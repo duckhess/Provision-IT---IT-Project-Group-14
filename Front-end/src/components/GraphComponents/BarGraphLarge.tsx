@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import type { Metric } from "../Types/Types.tsx";
+import type { Metric } from '../../Types/Types';
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 

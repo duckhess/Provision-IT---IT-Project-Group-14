@@ -4,9 +4,12 @@ import { useParams } from "react-router-dom";
 import FilterBusinessPage from "../components/filterBusinessPage/FilterBusinessPage";
 import axios from "axios";
 
-interface CompanyData {
-  id: number;
+interface Company {
+  id : number;
   name: string;
+}
+
+interface CompanyData extends Company{
   companyLongDescription: string;
   projectLongDescription : string;
   companyImageUrl : string;
@@ -167,8 +170,7 @@ const BusinessPage: React.FC = () => {
       <section className="py-8 px-4">
         <h2 className="text-3xl text-gray-600 font-bold mb-4 text-left"> Quick Look at Our Statistics</h2>
         <div>
-          <FilterBusinessPage></FilterBusinessPage>
-          "data Summary"
+          <FilterBusinessPage companyA={{ companyId: company.id, companyName: company.name }}></FilterBusinessPage>
         </div>
       </section>
       

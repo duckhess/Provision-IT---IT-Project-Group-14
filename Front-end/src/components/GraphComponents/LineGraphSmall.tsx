@@ -1,7 +1,7 @@
 import { ResponsiveContainer, LineChart, CartesianGrid, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-import type { Metric } from "../Types/Types.tsx";
+import type { Metric } from "../../Types/Types";
 
 interface Dataset {
   name: string; // label

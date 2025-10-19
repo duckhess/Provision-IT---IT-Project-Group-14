@@ -1,25 +1,13 @@
 import CovenanatsSummary from "./CovenantsSummary/CovenantsSummary";
-import DataBox from "./DataBox";
 import EGSScore from "./EGSScore/EGSScore";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { data } from "react-router-dom";
+import Graph from "./Graph"
 
-// type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-// type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmark" | "Forecast";
-// type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
+type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
+type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmarking" | "Forecast";
+type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
-// interface Dataset {
-//   name: string; // label
-//   data: any[];
-//   metric: Metric;
-//   unit: Unit;
-//   section: Section;
-// }
-
-// interface GraphContainerProps {
-//   selectedDatasets: Dataset[];
-// }
 
 interface BackendCompanyData {
   CompanyID: number;
@@ -39,7 +27,7 @@ interface BackendCompanyData {
   LongApplicationDescription: string;
 }
 
-interface DataNeeded {
+interface CompanyDataNeeded {
   ApplicationID : number,
   SocialScore : number,
   EnvironmentalScore : number,
@@ -54,10 +42,52 @@ interface SearchPageGridProps {
   company : Company | null;
 }
 
+interface BackendBestMetrics {
+  CompanyID : number;
+  ApplicationID : number;
+  Table : string;
+  MetricID : number;
+  Metric : string,
+  Unit : string,
+  Data : {Timeline : number; Value : number}[];
+}
+
+interface BackendWCM {
+  CapitalID : number;
+  Metric : string;
+  Unit : Unit;
+  ApplicationID : number;
+  Period : number;
+  Value : number;
+  "Avg Historical Forecast" : number;
+  "User Forecast" : number;
+}
+
+interface Dataset{
+  name : string;
+  data : {x:any; y:any}[];
+  metric : Metric;
+  unit : Unit;
+}
+
+// interface Data{
+//   datasets : Dataset[];
+//   unit : string;
+//   title : string;
+// }
+
 const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
-  const [dataNeeded,setDataNeeded] = useState<DataNeeded>();
+  //for companyData
+  const [dataNeeded,setDataNeeded] = useState<CompanyDataNeeded>();
   const [loading, setLoading] = useState(false);
+
+  // for bestMetrics
+  const [bestMetrics, setBestMetrics] = useState<Dataset[]>([]);
+  const [titleBestMetrics, setTitleBestMetrics] = useState<string>("");
+
+  // for working capital movement 
+  const [workingCapitalMovement, setWorkingCapitalMovement] = useState<Dataset[]>([]);
 
   useEffect(() => {
     if(!company) return;
@@ -92,24 +122,103 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
     fetchScore();
   }, [company]);
 
+  // for fetching best 4 metrics defined for each company
   useEffect(() => {
-    console.log("data updated:" , dataNeeded);
-  }, [dataNeeded]);
+    const fetchBestMetrics = async() => {
+      try {
+        const response = await axios.get<BackendBestMetrics[]>(
+          `/api/best_data?CompanyID=${company?.companyId}`);
+        const backendData = response.data;
+
+        if(!Array.isArray(backendData) || backendData.length === 0){
+          setBestMetrics([]);
+          setTitleBestMetrics("");
+          return;
+        }
+
+        const chartTitle = backendData[0].Table || "";
+
+        const dataNeeded : Dataset[] = backendData.map(metric => ({
+          name : metric.Metric,
+          data : metric.Data
+          .filter(d=>typeof d.Timeline==="number" && typeof d.Value==="number")
+          .map(d=>({x:d.Timeline, y:d.Value})),
+          metric : metric.Metric as Metric,
+          unit : metric.Unit as Unit,
+        }));
+
+        setTitleBestMetrics(chartTitle);
+        setBestMetrics(dataNeeded);
+      } catch(err) {
+      console.error("Failed to fecth best 4 metrics", err);
+      setBestMetrics([]);
+      setTitleBestMetrics("");
+      }
+    } ;
+    fetchBestMetrics();
+  }, [company?.companyId]);
+
+
   
+  useEffect(()=>{
+    // we only interested in the one that is $ for this search grid 
+    const fetchWorkingCapital = async() =>{
+      try{
+        const response = await axios.get<BackendWCM[]>(
+          `/api/working_capital_movements?ApplicationID=${dataNeeded?.ApplicationID}`
+        );
+        const backendData = response.data;
+
+         if(!Array.isArray(backendData) || backendData.length === 0){
+          setWorkingCapitalMovement([]);
+          return;
+        }
+
+        const metricMap = new Map<string, BackendWCM[]>();
+        backendData.forEach(item => {
+          if(item.Unit !== "$"){
+            console.warn(`Skipping row for metric ${item.Metric} with unit ${item.Unit}`);
+            return;
+          }
+
+          if(!metricMap.has(item.Metric)) metricMap.set(item.Metric, []);
+          metricMap.get(item.Metric)!.push(item);
+        });
+
+        console.log("metric map,", metricMap);
+
+        const data : Dataset[] = Array.from(metricMap.entries()).map(
+          ([metricName, items]) => ({
+            name: metricName,
+            data: items.map(item => ({
+                  x: "Avg Historical Forecast",
+                  y: item["Avg Historical Forecast"]
+                })).concat(items.map(item => ({
+                  x: "User Forecast",
+                  y: item["User Forecast"]
+                }))),
+              metric: items[0].Metric as Metric,
+              unit: '$' as Unit,
+          }));
+        console.log("final datasets: ", data);
+        setWorkingCapitalMovement(data);
+      } catch (err) {
+        console.error("failed to fetch working capital movement", err);
+        setWorkingCapitalMovement([]);
+      }
+    };
+
+    if(dataNeeded?.ApplicationID){
+      fetchWorkingCapital();
+    }
+  }, [dataNeeded?.ApplicationID]);
+
+  useEffect(()=>{
+    console.log("working capital : ", workingCapitalMovement);
+  }, [workingCapitalMovement])
+
   return (
     <div className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
-      {/* {selectedDatasets.map((dataset, i) => (
-        <div className="overflow-y-auto h-full">
-        <DataBox
-          key={i}
-          datasets={[dataset]} // array of 1 element
-          unit={dataset.unit}
-          section={dataset.section}
-        />
-        
-        </div>
-        
-      ))} */}
 
     {dataNeeded ? (<>
         <div className="overflow-y-auto h-full">
@@ -118,6 +227,13 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
         <div className="overflow-y-auto h-full">
           <CovenanatsSummary applicationId = {dataNeeded.ApplicationID}></CovenanatsSummary>
         </div>
+        <div className="overflow-y-auto h-full">
+          <Graph datasets={bestMetrics} unit={bestMetrics[0]?.unit as Unit} title={titleBestMetrics}></Graph>
+        </div>
+        <div className="overflow-y-auto h-full">
+          <Graph datasets={workingCapitalMovement} unit={workingCapitalMovement[0]?.unit as Unit} title={"Working Capital Movement"}></Graph>
+        </div>
+
     </>) : (
       <p>No data available</p>
     )}

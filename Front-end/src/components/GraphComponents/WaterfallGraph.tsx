@@ -1,7 +1,7 @@
 import { useState } from "react";
 import WaterfallGraphSmall from "./WaterfallGraphSmall.tsx";
 import WaterfallGraphLarge from "./WaterfallGraphLarge.tsx";
-import type { Metric } from "../Types/Types.tsx";
+import type { Metric } from "../../Types/Types";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 

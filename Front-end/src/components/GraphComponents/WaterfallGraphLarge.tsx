@@ -1,5 +1,5 @@
-import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Legend, Cell } from "recharts";
-import type { Metric } from "../Types/Types.tsx";
+import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
+import type { Metric } from "../../Types/Types";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
@@ -66,10 +66,12 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
   );
   console.log(metricOrder);
 
+  console.log("merged datasets", mergedSets);
+
   return (
     <div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">
      <div className ="px-4 w-full">
-        <h2 className='text-black text-xl font-bold border-b mb-4 inline-block'>
+        <h2 className='text-black text-xl font-bold border-b mb-4 inline-block break-words w-full'>
           {title}
         </h2>
       </div>

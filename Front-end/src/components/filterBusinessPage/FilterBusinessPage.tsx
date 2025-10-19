@@ -1,279 +1,337 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SideBarFilterButton from './sideBar/SideBarFilterButton';
 import SidebarFilter from './sideBar/SidebarFilter';
 import { GraphButton } from '../GraphButton';
-import type { Metric } from '../Types/Types';
+import type { Metric } from '../../Types/Types';
+import axios from "axios";
 
 // ------------------------------
 // Types
 // ------------------------------
+
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
-export interface Dataset {
+const endpoints = [
+  "abs_benchmarkings",
+  "assets",
+  "liabilities",
+  "income_statements",
+  "equities",
+  "financial_statements",
+  "key_ratios",
+  "working_capital_movements",
+  "forecasts",
+  "cash_equivalences",
+  "covenants",
+];
+
+interface Dataset {
   name: string;
-  data: any[]; // timeseries or benchmark entries
+  data: any[];
   metric: Metric;
   unit: Unit;
+  metadata?: Record<string, any>;
 }
 
-// type MetricSection = {
-//   sectionName: string;
-//   metrics: string[];
-// };
+interface Company {
+  companyId: number;
+  companyName: string;
+  datasets?: Dataset[];
+}
 
-// ------------------------------
-// Dummy Data
-// ------------------------------
+interface CompanyDataset {
+  company: string;
+  datasets: Dataset[];
+}
 
-const dummyData: Dataset[] = [
-  // --- Liquidity Ratios ---
-  {
-    name: "Current Ratio",
-    data: [
-      { x: 2023, y: 3.28 },
-      { x: 2024, y: 3.12 },
-      { x: 2025, y: 1.93 },
-    ],
-    metric: "Ratio",
-    unit: "Times",
-  },
-  {
-    name: "Quick Ratio (Acid Test)",
-    data: [
-      { x: 2023, y: 1.87 },
-      { x: 2024, y: 1.39 },
-      { x: 2025, y: 0.96 },
-    ],
-    metric: "Ratio",
-    unit: "Times",
-  },
+interface FilterBusinessPageProps {
+  companyA: Company | null;
+}
 
-  // --- Solvency Ratios ---
-  {
-    name: "Debt Ratio",
-    data: [
-      { x: 2023, y: 39 },
-      { x: 2024, y: 50 },
-      { x: 2025, y: 48 },
-    ],
-    metric: "Ratio",
-    unit: "%",
-  },
-  {
-    name: "Equity Ratio",
-    data: [
-      { x: 2023, y: 61 },
-      { x: 2024, y: 50 },
-      { x: 2025, y: 52 },
-    ],
-    metric: "Ratio",
-    unit: "%",
-  },
-  {
-    name: "Capitalisation Ratio",
-    data: [
-      { x: 2023, y: 165 },
-      { x: 2024, y: 199 },
-      { x: 2025, y: 191 },
-    ],
-    metric: "Ratio",
-    unit: "%",
-  },
+interface CovenantMetricItem {
+  name: string;
+  pass: boolean;
+  calc_value: number;
+  abs_value: number;
+}
 
-  // --- Profitability Ratios ---
-  {
-    name: "Gross Profit Margin",
-    data: [
-      { x: 2023, y: 22 },
-      { x: 2024, y: 19 },
-      { x: 2025, y: 22 },
-    ],
-    metric: "Ratio",
-    unit: "%",
-  },
-  {
-    name: "Net Profit/Loss (-) Margin",
-    data: [
-      { x: 2023, y: 5 },
-      { x: 2024, y: 2 },
-      { x: 2025, y: 4 },
-    ],
-    metric: "Ratio",
-    unit: "%",
-  },
-  {
-    name: "Return on Total Assets",
-    data: [
-      { x: 2023, y: 16 },
-      { x: 2024, y: 7 },
-      { x: 2025, y: 8 },
-    ],
-    metric: "Ratio",
-    unit: "%",
-  },
-  {
-    name: "Interest Cover",
-    data: [
-      { x: 2023, y: 47.02 },
-      { x: 2024, y: 4192.66 },
-      { x: 2025, y: 17.2 },
-    ],
-    metric: "Ratio",
-    unit: "Times",
-  },
+interface CovenantDataset extends Dataset {
+  data: CovenantMetricItem[][];
+  metadata?: {
+    threeYearAvgSuccess: number;
+  };
+}
 
-  // --- Efficiency Ratios ---
-  {
-    name: "Receivables Turnover",
-    data: [
-      { x: 2023, y: 7.57 },
-      { x: 2024, y: 11.59 },
-      { x: 2025, y: 8.79 },
-    ],
-    metric: "Ratio",
-    unit: "Times",
-  },
-  {
-    name: "Inventory Turnover (days)",
-    data: [
-      { x: 2023, y: 37 },
-      { x: 2024, y: 45 },
-      { x: 2025, y: 41 },
-    ],
-    metric: "Ratio",
-    unit: "days",
-  },
-  {
-    name: "Operating Cycle (days)",
-    data: [
-      { x: 2023, y: 75 },
-      { x: 2024, y: 60 },
-      { x: 2025, y: 54 },
-    ],
-    metric: "Ratio",
-    unit: "days",
-  },
+/* -------------------- TRANSFORMS -------------------- */
 
-  // --- ABS Benchmarking ---
+const transformABSBenchmarking = (data: any[]): Dataset[] => [
   {
-    name: "Benchmark A",
-    data: [
-    { name: "Wages and Salaries/Revenue", pass: true, calc_value: 7.44, abs_value: 14, greater: false},
-    { name: "Total Expenses/Total Income", pass: true, calc_value: 83.61, abs_value: 94, greater: false },
-    { name: "Total Expenses/Revenue", pass: true, calc_value: 20.50, abs_value: 96, greater: false},
-    { name: "Operating Profit Before Tax/Total Income", pass: true, calc_value: 4.02, abs_value: 6, greater: true},
-    { name: "Net Profit/Loss (-) Margin", pass: false, calc_value: 4.02, abs_value: 6, greater: false},
-    { name: "EBITDA/Net Revenue", pass: false, calc_value: 6.07, abs_value : 7, greater: false},
-    { name: "Interest Cover", pass: true, calc_value: 17.20, abs_value: 7.5, greater: false},
-    { name: "EBITDA Margin", pass: true, calc_value: 24.77, abs_value: 7, greater: true},
-    { name: "Total Other Income/Revenue", pass: true, calc_value: 2.37, abs_value:1, greater: true},
-    { name: "Total Other Income/Net Profit/Loss Before Tax", pass: true, calc_value: 58.88, abs_value: 20, greater: true},
-    { name: "Depreciation and Amortisation/Net Revenue", pass: true, calc_value: 1.81, abs_value: 1, greater: true},
-    { name: "Interest/Revenue", pass: false, calc_value: 0.25, abs_value: 1, greater: false}
-  ],
+    name: "ABS Benchmarking",
     metric: "ABS Benchmarking",
-    unit: "Benchmark",
-  },
-
-  // --- Statement of Cashflows ---
-  {
-    name: "Revenue",
-    data: [
-      { x: 2024, y: 13736093 },
-      { x: 2025, y: 15699648 },
-    ],
-    metric: "Statement of Cashflow",
-    unit: "$",
-  },
-  {
-    name: "Cost of Sales",
-    data: [
-      { x: 2024, y: 11123405 },
-      { x: 2025, y: 12222437 },
-    ],
-    metric: "Statement of Cashflow",
-    unit: "$",
-  },
-  {
-    name: "Profit/Loss for Period",
-    data: [
-      { x: 2024, y: 326782 },
-      { x: 2025, y: 630973 },
-    ],
-    metric: "Statement of Cashflow",
-    unit: "$",
-  },
-  {
-    name: "Depreciation",
-    data: [
-      { x: 2024, y: 172402 },
-      { x: 2025, y: 283548 },
-    ],
-    metric: "Statement of Cashflow",
-    unit: "$",
-  },
-
-  // --- Forecast ---
-  {
-    name: "Forecast Revenue",
-    data: [
-      { x: 2023, y: 15766553 },
-      { x: 2024, y: 13736093 },
-      { x: 2025, y: 15699605 },
-    ],
-    metric: "Forecast",
-    unit: "$",
-  },
-  {
-    name: "% Total Other Income / Revenue",
-    data: [
-      { x: 2023, y: 1.48 },
-      { x: 2024, y: 2.33 },
-      { x: 2025, y: 2.37 },
-    ],
-    metric: "Forecast",
-    unit: "%",
+    unit: data[0]?.Unit ?? "Benchmark",
+    data: data.map((item) => ({
+      name: item.Benchmark,
+      pass: item.Analysis,
+      calc_value: item.CalcValue,
+      abs_value: item.ABSValue,
+      greater: item.Analysis
+        ? item.CalcValue > item.ABSValue
+        : item.CalcValue < item.ABSValue,
+    })),
+    metadata: {
+      ANZICCode: data[0]?.ANZICCode ?? null,
+      field: data[0]?.Field ?? null,
+    },
   },
 ];
 
-// ------------------------------
-// Section Generator
-// ------------------------------
-// const mockSections: MetricSection[] = Object.entries(
-//   dummyData.reduce((acc, curr) => {
-//     if (!acc[curr.section]) acc[curr.section] = [];
-//     acc[curr.section].push(curr.name);
-//     return acc;
-//   }, {} as Record<string, string[]>)
-// ).map(([sectionName, metrics]) => ({
-//   sectionName,
-//   metrics
-// }));
+const transformTimelineMetricsPerCompany = (
+  endpoint: string,
+  rawData: any[]
+): Dataset[] => {
+  if (!rawData || rawData.length === 0) return [];
 
-// ------------------------------
-// Component
-// ------------------------------
-// ------------------------------
-// Component
-// ------------------------------
-const FilterBusinessPage = () => {
+  const idKey =
+    Object.keys(rawData[0]).find((k) => k.endsWith("ID")) ?? "ID";
+
+  const grouped: Record<string | number, any[]> = {};
+  rawData.forEach((item) => {
+    const id = item[idKey];
+    if (!grouped[id]) grouped[id] = [];
+    grouped[id].push(item);
+  });
+
+return Object.values(grouped).map((items) => {
+    const first = items[0];
+
+    // Try to detect possible x/y field names automatically
+    const xKey = ["Timeline", "Period", "Year", "Date"].find((k) => k in first) ?? "Period";
+    const yKey = ["Value", "Amount", "Balance", "Val"].find((k) => k in first) ?? "Value";
+
+    const data = items.map((d) => ({
+      x: Number(d[xKey]),
+      y: Number(d[yKey]),
+    }));
+
+    return {
+      name: first.MetricName ?? first.name ?? endpoint,
+      metric: endpoint as Metric,
+      unit: first.Unit as Unit,
+      data,
+    };
+  });
+};
+
+const transformTimelineForecastMetrics = (
+  rawData: any[],
+  companyId: number,
+  metricCategory: Metric,
+  idField: string
+): Dataset[] => {
+  const applicationId =
+    companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
+
+  const filtered = rawData.filter(
+    (item) => item.ApplicationID === applicationId
+  );
+  if (filtered.length === 0) return [];
+
+  const grouped: Record<number, any[]> = {};
+  filtered.forEach((item) => {
+    if (!grouped[item[idField]]) grouped[item[idField]] = [];
+    grouped[item[idField]].push(item);
+  });
+
+  return Object.values(grouped).map((items) => {
+    const first = items[0];
+    return {
+      name: first.AccountDescription ?? first.Metric ?? "Unknown",
+      metric: metricCategory,
+      unit: first.Unit as Unit,
+      data: [
+        { x: "Avg Historical Forecast", y: first["Avg Historical Forecast"] },
+        { x: "User Forecast", y: first["User Forecast"] },
+      ],
+    };
+  });
+};
+
+/* -------------------- COVENANTS -------------------- */
+
+const transformCovenants = (
+  covenantsRaw: any[],
+  keyRatios: Dataset[]
+): CovenantDataset[] => {
+  const groupedByCategory: Record<string, any[]> = {};
+  covenantsRaw.forEach(item => {
+    const category = item.Category ?? "Uncategorized";
+    if (!groupedByCategory[category]) groupedByCategory[category] = [];
+    groupedByCategory[category].push(item);
+  });
+
+  return Object.entries(groupedByCategory).map(([category, items]) => {
+    const metricList = items.map(item => ({
+      name: item.Metric,
+      pass: item.Analysis,
+      calc_value: Number(item.Value),
+      abs_value: item.Benchmark,
+    }));
+
+    // Calculate threeYearAvgSuccess
+    let passCount = 0;
+    metricList.forEach(metric => {
+      if (!metric.name) return; // skip if metric name is undefined/null
+      const kr = keyRatios.find(k => {
+        if (!k.name) return false; // skip if key ratio name is undefined
+        return k.name.trim().toLowerCase() === metric.name.trim().toLowerCase();
+      });
+      if (kr && kr.data.length > 0) {
+        const avg =
+          kr.data.reduce((sum, d) => sum + d.y, 0) / kr.data.length;
+        const latest = kr.data[kr.data.length - 1].y;
+        if (avg > latest) passCount += 1;
+      }
+    });
+
+    const threeYearAvgSuccess =
+      metricList.length > 0 ? (passCount / metricList.length) * 100 : 0;
+
+    return {
+      name: category,
+      metric: "covenants" as Metric,
+      unit: category as Unit,
+      data: [metricList],
+      metadata: { threeYearAvgSuccess },
+    };
+  });
+};
+
+/* -------------------- FETCH -------------------- */
+
+const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
+  try {
+    const applicationId =
+      companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
+
+    const requests = endpoints.map((endpoint) =>
+      axios.get(`/api/${endpoint}?applicationID=${applicationId}`)
+    );
+    const responses = await Promise.all(requests);
+
+    // Extract key_ratios for use in covenants
+    const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
+    const keyRatios = keyRatiosRes?.data ?? [];
+
+    const datasets: Dataset[] = [];
+
+    for (let i = 0; i < responses.length; i++) {
+      const endpoint = endpoints[i];
+      const data = responses[i].data;
+      if (!data || data.length === 0) continue;
+
+      switch (endpoint) {
+        case "abs_benchmarkings":
+          datasets.push(...transformABSBenchmarking(data));
+          break;
+        case "forecasts":
+          datasets.push(
+            ...transformTimelineForecastMetrics(data, companyId, "Forecast", "ForecastID")
+          );
+          break;
+        case "working_capital_movements":
+          datasets.push(
+            ...transformTimelineForecastMetrics(data, companyId, "working_capital_movements", "CapitalID")
+          );
+          break;
+        case "covenants":
+          datasets.push(...transformCovenants(data, keyRatios));
+          break;
+        default:
+          datasets.push(...transformTimelineMetricsPerCompany(endpoint, data));
+          break;
+      }
+    }
+
+    return datasets;
+  } catch (err) {
+    console.error(`Error fetching datasets for company ${companyId}:`, err);
+    return [];
+  }
+};
+
+
+const FilterBusinessPage : React.FC<FilterBusinessPageProps> = ({companyA}) => {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [selectedDataSets, setSelectedDataSets] = useState<Dataset[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [companyMetric, setCompanyMetric] = useState<Company | null>(null);
+  const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async() => {
+      setLoading(true);
+      try {
+        if(companyA?.companyId){
+          const dataSetsA = await fetchCompanyDatasets(companyA.companyId);
+          setCompanyMetric({...companyA, datasets: dataSetsA});
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [companyA]);
+
+  useEffect(() => {
+    console.log("selected data sets: ", companyMetric);
+  })
+
+  const companyDatasets : CompanyDataset[] = [{
+    company : companyMetric?.companyName ?? "Company A",
+    datasets : companyMetric?.datasets ?? [],
+  }]
+
+  // useEffect(() => {
+  //   console.log("selected data sets: ", companyDatasets);
+  // })
+
+  const allDatasets: Dataset[] = [];
+  const seen = new Set<string>();
+  companyDatasets.forEach(({ datasets }) => {
+    datasets.forEach((ds) => {
+      if (!seen.has(ds.name)) {
+        allDatasets.push({
+          name: ds.name,
+          metric: ds.metric,
+          unit: ds.unit,
+          data: [],
+        });
+        seen.add(ds.name);
+      }
+    });
+  });
+
 
   const handleToggleSelection = (key: string) => {
     setSelectedKeys((prev) =>
-      prev.includes(key)
-        ? prev.filter((k) => k !== key)
-        : [...prev, key]
+      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
     );
   };
 
   const handleGenerate = () => {
-    const selected = dummyData.filter((d) => selectedKeys.includes(d.name));
-    setSelectedDataSets(selected);
+    setFinalSelectedKeys(selectedKeys);
     setSidebarOpen(false);
   };
+
+  // const handleGenerate = () => {
+  //   const selected = dummyData.filter((d) => selectedKeys.includes(d.name));
+  //   setSelectedDataSets(selected);
+  //   setSidebarOpen(false);
+  // };
+
+  console.log("company datasets ", companyDatasets);
+  console.log("")
 
   return (
     <div className="grid grid-rows-[35px]">
@@ -283,14 +341,21 @@ const FilterBusinessPage = () => {
       {sidebarOpen && (
         <SidebarFilter
           onClose={handleGenerate}
-          datasets={dummyData} // simplified: just pass all dataset names
+          datasets={allDatasets} // simplified: just pass all dataset names
           selectedKeys={selectedKeys}
           toggleSelection={handleToggleSelection}
         />
       )}
       </div>
+      
       <div className="flex-1 p-4">
-        <GraphButton selectedDatasets={selectedDataSets} />
+        {finalSelectedKeys.length > 0 && companyA  && (
+
+          <GraphButton
+            selectedKeys={finalSelectedKeys}
+            companyDatasets={companyDatasets}
+          />
+        )}
       </div>
     </div>
   );

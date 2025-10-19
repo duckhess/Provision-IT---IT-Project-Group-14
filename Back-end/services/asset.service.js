@@ -48,8 +48,6 @@ export async function assetService(filters = {}) {
   const keyDocs = await assetModel.find(keyQuery).select("-_id AssetsID AccountDescription Unit ").lean()
   if (keyDocs.length === 0) return []
 
-  const byId = new Map(keyDocs.map(d => [d.AssetsID, d]))
-
   const byId = new Map(keyDocs.map((d) => [d.AssetsID, d]));
   const filteredValues = values.filter((v) => byId.has(v.AssetsID));
 
