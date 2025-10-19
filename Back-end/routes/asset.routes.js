@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { assetController } from "../controllers/asset.controllers.js";
+import { Router } from "express"
+import { assetController } from "../controllers/asset.controllers.js"
 
-const router = Router();
+const router = Router()
 
-router.get('/', assetController);
+router.get('/', assetController)
 
-export default router;
+export default router

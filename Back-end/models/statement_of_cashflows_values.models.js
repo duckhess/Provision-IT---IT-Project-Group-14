@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const SocValueSchema = new mongoose.Schema(
  {
@@ -8,6 +8,6 @@ const SocValueSchema = new mongoose.Schema(
   Value: { type: mongoose.Types.Decimal128, required: true}            
  },
  { collection: 'statement_of_cashflows_values', timestamps: false }
-);
+)
 
-export default mongoose.model('statement_of_cashflows_values', SocValueSchema);
+export default mongoose.model('statement_of_cashflows_values', SocValueSchema)

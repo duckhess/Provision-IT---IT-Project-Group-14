@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const SocSchema = new mongoose.Schema(
   {
@@ -7,6 +7,6 @@ const SocSchema = new mongoose.Schema(
   Unit: { type: String, required: true }              
   },
   { collection: 'statement_of_cashflows', timestamps: false }
-);
+)
 
-export default mongoose.model('statement_of_cashflows', SocSchema);
+export default mongoose.model('statement_of_cashflows', SocSchema)

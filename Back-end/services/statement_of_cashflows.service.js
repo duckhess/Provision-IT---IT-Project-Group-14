@@ -1,32 +1,21 @@
-import socModel from "../models/statement_of_cashflows.model.js";
-import socValueModel from "../models/statement_of_cashflows_values.models.js";
-
-const FILE_TIMELINE = {
-    1: '2023',
-    2: '2024',
-    3: '2025',
-};
-
-function toTimeline(fileId) {
-  return FILE_TIMELINE[fileId] || `File ${fileId}`;
-}
+import socModel from "../models/statement_of_cashflows.model.js"
+import socValueModel from "../models/statement_of_cashflows_values.models.js"
+import { get_period } from './timeline_service.js'
 
 const toJsNumber = (v) => {
-  if (v == null) return v;
+  if (v == null) return v
   if (typeof v === "object" && (v._bsontype === "Decimal128" || v instanceof mongoose.Types.Decimal128)) {
-    return parseFloat(v.toString()); 
+    return parseFloat(v.toString()) 
   }
-  return v;
-};
-
+  return v
+}
 
 const results = (r) => ({
   CashflowID: r.CashflowID,  
   Metric: r.Metric,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  FileID : r.FileID,
-  Timeline: toTimeline(r.FileID),   
+  Timeline: r.Period,   
   Value : toJsNumber(r.Value)
 })
 
@@ -42,12 +31,12 @@ export async function socService(filters = {}) {
 
   // find cashflowid in soc table
   const fetchedIDs = [...new Set(values.map(v =>v.CashflowID))]
-  const keyQuery = {CashflowID: { $in: fetchedIDs } };
+  const keyQuery = {CashflowID: { $in: fetchedIDs } }
 
   // filter metric
   if (filters.metric && String(filters.metric).trim() !== "") {
   const metricRegex = String(filters.metric).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  keyQuery.Metric = { $regex: metricRegex, $options: "i" };
+  keyQuery.Metric = { $regex: metricRegex, $options: "i" }
   }
 
   //filter unit
@@ -57,7 +46,7 @@ export async function socService(filters = {}) {
   }
 
   
-  const keyDocs = await socModel.find(keyQuery).select("-_id CashflowID Metric Unit ").lean();
+  const keyDocs = await socModel.find(keyQuery).select("-_id CashflowID Metric Unit ").lean()
   if (keyDocs.length === 0) return []
 
   //join by id
@@ -65,12 +54,16 @@ export async function socService(filters = {}) {
 
   const filteredValues = values.filter(v => byId.has(v.CashflowID))
 
+  const fileIDs = [...new Set(filteredValues.map(v => v.FileID))]
+  const timelineMap = await get_period(fileIDs)
+
   return filteredValues.map(v => {
-    const meta = byId.get(v.CashflowID);
+    const meta = byId.get(v.CashflowID)
     return results({
       ...v,                 
       Metric: meta.Metric,  
       Unit: meta.Unit, 
-    });
-  });
+      Period: timelineMap.get(v?.FileID),
+    })
+  })
 }

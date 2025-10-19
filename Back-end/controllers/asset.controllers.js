@@ -1,4 +1,4 @@
-import { assetService } from "../services/asset.service.js";
+import { assetService } from "../services/asset.service.js"
 
 export const assetController = async (req,res) => {
   
@@ -20,7 +20,7 @@ export const assetController = async (req,res) => {
     return res.json(assets)  
   } 
   catch (err) {
-    console.error("AssetController error:", err);
+    console.error("AssetController error:", err)
     return res.status(500).json({ error: err.message })
   }
 }

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const EquityValueSchema = new mongoose.Schema(
  {
@@ -8,6 +8,6 @@ const EquityValueSchema = new mongoose.Schema(
   Value: { type: mongoose.Types.Decimal128, required: true}            
  },
  { collection: 'equity_values', timestamps: false }
-);
+)
 
-export default mongoose.model('equity_values', EquityValueSchema);
+export default mongoose.model('equity_values', EquityValueSchema)

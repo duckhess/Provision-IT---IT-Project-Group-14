@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const CompanyDataSchema = new mongoose.Schema(
  {
@@ -19,6 +19,6 @@ const CompanyDataSchema = new mongoose.Schema(
     LongApplicationDescription: { type: String },
   },
  { collection: 'company_datas', timestamps: false }
-);
+)
 
-export default mongoose.model('company_datas', CompanyDataSchema);
+export default mongoose.model('company_datas', CompanyDataSchema)
