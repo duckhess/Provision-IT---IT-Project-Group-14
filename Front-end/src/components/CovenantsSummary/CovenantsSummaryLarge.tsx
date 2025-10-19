@@ -46,8 +46,8 @@ const CovenantsSummaryLarge : React.FC<CategoryProps> = ({datasets}) => {
                     <PolarGrid/>
                     <PolarAngleAxis dataKey="name" tick = {<CustomTick/>}/>
                     <PolarRadiusAxis />
-                    <Radar name = "3 Year Average % Success" dataKey = "averageSuccess" stroke = "green" fill = "green" fillOpacity={0.5}/>
-                    <Radar name = "Spot % Sucess" dataKey = "spotPercentageSuccess" stroke = "blue" fill = "blue" fillOpacity={0.2}/>
+                    <Radar name = "3 Year Average % Success" dataKey = "spotPercentageSuccess" stroke = "green" fill = "green" fillOpacity={0.5}/>
+                    <Radar name = "Spot % Sucess" dataKey = "averageSuccess" stroke = "blue" fill = "blue" fillOpacity={0.2}/>
                     <Legend verticalAlign = "bottom" height = {36}></Legend> 
                     <Tooltip formatter = {(value : number) => `${value}%`}/>
                 </RadarChart>
