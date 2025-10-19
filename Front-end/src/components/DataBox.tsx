@@ -121,7 +121,6 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
         </div>
       );
     case "key_ratios":
-      console.log(datasets);
       return (
         <div className="flex flex-col">
             <Graph datasets={datasets} unit={unit} title={metric}/>

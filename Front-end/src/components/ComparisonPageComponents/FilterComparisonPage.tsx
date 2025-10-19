@@ -92,8 +92,12 @@ const transformTimelineMetricsPerCompany = (endpoint: string, rawData: any[], co
       ? "KeyRatioID"
       : "LiabilityID" in filtered[0]
       ? "LiabilityID"
-      : "FinancialStatementID" in filtered[0]
-      ? "FinancialStatementID"
+      : "FinancialID" in filtered[0]
+      ? "FinancialID"
+      : "EquityID" in filtered[0]
+      ? "EquityID"
+      : "IncomeID" in filtered[0]
+      ? "IncomeID"
       : "ID";
 
   // Group by metric ID
@@ -120,8 +124,12 @@ const transformTimelineMetricsPerCompany = (endpoint: string, rawData: any[], co
 
 const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
   try {
+
+    const applicationId =
+    companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
+  
     const requests = endpoints.map((endpoint) =>
-      axios.get(`/api/${endpoint}?companyId=${companyId}`)
+      axios.get(`/api/${endpoint}?applicationID=${applicationId}`)
     );
 
     const responses = await Promise.all(requests);
