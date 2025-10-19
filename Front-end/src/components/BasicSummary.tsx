@@ -49,7 +49,7 @@ const Summary: React.FC<{company: Company}> = ({company}) => {
           console.log("Backend reponse", response.data);
           
           // response is parsed as an array
-          if (response.data.length == 1) {
+          if (response.data.length >= 1) {
             const firstCompany = response.data[0];
             setCompanyInfo({
               title : firstCompany.CompanyName,

@@ -77,7 +77,7 @@ const processData = (keyRatios : KeyRatio[], covenants : Covenant[]) : CategoryI
       ? (covList.filter(c=>c.Analysis).length/covList.length) * 100
       : 0;
 
-    console.log(`avgSuccess for ${catName} = ${avgSuccess}`);
+    //console.log(`avgSuccess for ${catName} = ${avgSuccess}`);
 
     const keyRatiosInCategory = groupRatio.get(catName) || [];
 
@@ -128,7 +128,7 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => setExpanded((prev) => !prev);
   const [datasets, setDatasets] = useState<CategoryItem[] | null>(null);
-  
+
   useEffect(() => {
     const loadData = async () => {
       const[keyResponse, covResponse] = await Promise.all([
@@ -138,6 +138,9 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
 
       const keyRatiosRes = await keyResponse.json();
       const covenantsRes = await covResponse.json();
+      
+      console.log("key ratio raw reposnse", keyRatiosRes);
+      console.log("covenants raw resposne ", covenantsRes);
 
       const keyRatios : KeyRatio[] = Array.isArray(keyRatiosRes) ? keyRatiosRes : [];
       const covenants = Array.isArray(covenantsRes) ? (covenantsRes as Covenant[]) : [];

@@ -5,7 +5,8 @@ import axios from "axios";
 import Graph from "./Graph"
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmarking" | "Forecast";
+// type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmarking" | "Forecast";
+type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast" | "Statement of Cashflow" | "ABS Benchmarking" | "Liabilities" | "Income Statements" | "Equities" | "Financial Statements" | "Key Ratios" | "Working Capital Movements" | "equities" | "liabilities" | "income_statements" |"financial_statements" | "key_ratios" | "working_capital_movements" | "cash_equivalences" | "covenants" | "assets";
 type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 
@@ -47,7 +48,7 @@ interface BackendBestMetrics {
   ApplicationID : number;
   Table : string;
   MetricID : number;
-  Metric : string,
+  MetricName : string,
   Unit : string,
   Data : {Timeline : number; Value : number}[];
 }
@@ -124,11 +125,15 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
   // for fetching best 4 metrics defined for each company
   useEffect(() => {
+    if(!company?.companyId)return;
+
     const fetchBestMetrics = async() => {
       try {
         const response = await axios.get<BackendBestMetrics[]>(
-          `/api/best_data?CompanyID=${company?.companyId}`);
+          `/api/best_data?CompanyID=${company.companyId}`);
         const backendData = response.data;
+
+        console.log("best 4 metrics raw response", backendData);
 
         if(!Array.isArray(backendData) || backendData.length === 0){
           setBestMetrics([]);
@@ -139,13 +144,20 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
         const chartTitle = backendData[0].Table || "";
 
         const dataNeeded : Dataset[] = backendData.map(metric => ({
-          name : metric.Metric,
+          name : metric.MetricName,
           data : metric.Data
+          // .map(d=>({
+          //   x:Number(d.Timeline),
+          //   y:Number(d.Value),
+          // })).filter(
+          //   d=>!isNaN(d.x) && !isNaN(d.y)),
           .filter(d=>typeof d.Timeline==="number" && typeof d.Value==="number")
           .map(d=>({x:d.Timeline, y:d.Value})),
-          metric : metric.Metric as Metric,
+          metric : metric.Table as Metric,
           unit : metric.Unit as Unit,
         }));
+
+        console.log("data needed : ", dataNeeded);
 
         setTitleBestMetrics(chartTitle);
         setBestMetrics(dataNeeded);
@@ -157,6 +169,9 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
     } ;
     fetchBestMetrics();
   }, [company?.companyId]);
+
+  useEffect(()=>
+  console.log("best metrics", bestMetrics), [bestMetrics])
 
 
   
