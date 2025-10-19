@@ -60,7 +60,7 @@ interface GraphProps {
 // }
 
 function DataBox({ datasets, unit, metric}: GraphProps) {
-
+  // console.log(metric);
   switch (metric) {
     case "Ratio":
       return (
@@ -85,6 +85,58 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
       );
     
     case "Forecast":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
+    case "Duration":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+    case "equities":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+    case "financial_statements":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+    case "income_statements":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+    case "key_ratios":
+      console.log(datasets);
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+    case "liabilities":
+      return (
+        <div className="flex flex-col">
+            <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
+    case "working_capital_movements":
       return (
         <div className="flex flex-col">
             <Graph datasets={datasets} unit={unit} title={metric}/>

@@ -71,7 +71,7 @@ const HomePage: React.FC = () => {
     const fetchCompanies = async () => {
       try {
         const response = await axios.get<Company[]> (
-          "http://localhost:7000/companies"
+          "/api/companies"
         );
         setAllCompanies(response.data);
       } catch (err){

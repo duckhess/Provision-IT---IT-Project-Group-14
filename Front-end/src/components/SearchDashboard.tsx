@@ -159,7 +159,7 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
    const fetchCompanyDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<Company>(`http://localhost:7000/companies/${selectedId}`);
+        const response = await axios.get<Company>(`/api/companies/${selectedId}`);
         setCompanyDetails(response.data);
       } catch (err) {
         console.error("Error fetching company details:", err);

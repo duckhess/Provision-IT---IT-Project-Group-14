@@ -27,8 +27,9 @@ const SearchPage: React.FC = () => {
       try {
         setLoading(true);
         const response = await axios.get<Company[]> (
-          "http://localhost:7000/companies"
+          "/api/companies"
         );
+        console.log("Data: " + response.data);
         setAllCompanies(response.data);
 
         // show all comapnies when there is no input in search bar 

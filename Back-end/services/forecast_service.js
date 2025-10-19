@@ -29,7 +29,7 @@ const filter_forecasts = async (filters = {}) => {
     })
 
     return forecast.map(f => {
-        const forecasting = mapped_document.values(f.ForecastID)
+        const forecasting = mapped_document.get(f.ForecastID)
         const key = `${f.ForecastID}`
         const v = mapped_value.get(key)
         return {

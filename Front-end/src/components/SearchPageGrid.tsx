@@ -51,12 +51,12 @@ function SearchPageGrid({ selectedDatasets }: GraphContainerProps) {
     <div className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
       {selectedDatasets.map((dataset, i) => (
         <div className="overflow-y-auto h-full">
-        <DataBox
+        {/* <DataBox
           key={i}
           datasets={[dataset]} // array of 1 element
           unit={dataset.unit}
           section={dataset.section}
-        />
+        /> */}
         
         </div>
         
