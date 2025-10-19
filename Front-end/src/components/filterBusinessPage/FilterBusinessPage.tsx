@@ -114,7 +114,11 @@ return Object.values(grouped).map((items) => {
     }));
 
     return {
-      name: first.MetricName ?? first.name ?? endpoint,
+      name: first.MetricName ??
+    first.Metric ??
+    first.AccountDescription ?? // ✅ correct key
+    first.accountDescription ?? // ✅ lowercase variant, just in case
+    endpoint,
       metric: endpoint as Metric,
       unit: first.Unit as Unit,
       data,
@@ -294,15 +298,20 @@ const FilterBusinessPage : React.FC<FilterBusinessPageProps> = ({companyA}) => {
     datasets : companyMetric?.datasets ?? [],
   }]
 
-  // useEffect(() => {
-  //   console.log("selected data sets: ", companyDatasets);
-  // })
+  useEffect(() => {
+    console.log("selected data sets: ", companyDatasets);
+  })
 
   const allDatasets: Dataset[] = [];
   const seen = new Set<string>();
+
+  console.log("CompanyDatasets Raw:", companyDatasets);
   companyDatasets.forEach(({ datasets }) => {
     datasets.forEach((ds) => {
-      if (!seen.has(ds.name)) {
+    const cleanName = ds.name?.trim().toLowerCase(); // normalize
+    if (!cleanName) return; // skip undefined or empty names
+
+      if (!seen.has(cleanName)) {
         allDatasets.push({
           name: ds.name,
           metric: ds.metric,
