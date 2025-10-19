@@ -19,7 +19,7 @@ interface KeyRatio {
   MetricName : string;
   Unit : string;
   ApplicationID : number;
-  Period : number;
+  Timeline : number;
   Value : number;
   Category : string;
 }
@@ -77,7 +77,6 @@ const processData = (keyRatios : KeyRatio[], covenants : Covenant[]) : CategoryI
       ? (covList.filter(c=>c.Analysis).length/covList.length) * 100
       : 0;
 
-    //console.log(`avgSuccess for ${catName} = ${avgSuccess}`);
 
     const keyRatiosInCategory = groupRatio.get(catName) || [];
 
@@ -101,18 +100,24 @@ const processData = (keyRatios : KeyRatio[], covenants : Covenant[]) : CategoryI
       }
 
       const avg = sum/values.length;
+      console.log(`avg of the metric is ${avg}`)
 
-      const latestRatio = metricList.find(r => r.Period === 2025);
+      // time line or period?? remember to check
+      const latestRatio = metricList.find(r => r.Timeline === 2025);
+
+      console.log(`avg of the metric is ${avg} and latest is $`)
       if(!latestRatio) return;
       // console.log(`avg = ${avg} in ${metricList[0].MetricName} and  latestRatio = ${latestRatio.Value}`)
       if(avg >= latestRatio.Value) passMetrics++;
       
     });
 
-      //console.log(`total Metrics in ${catName} = ${totalMetrics} and success = ${passMetrics}`);
+    //console.log(`total Metrics in ${catName} = ${totalMetrics} and success = ${passMetrics}`);
 
     const spotSuccess = 
       totalMetrics > 0 ? (passMetrics/totalMetrics) * 100 : 0;
+
+    console.log(`${catName} has avg : ${avgSuccess} and spot 3 year : ${spotSuccess} `)
 
     results.push({
       name : catName,
@@ -142,6 +147,7 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
       console.log("key ratio raw reposnse", keyRatiosRes);
       console.log("covenants raw resposne ", covenantsRes);
 
+      // this is working 
       const keyRatios : KeyRatio[] = Array.isArray(keyRatiosRes) ? keyRatiosRes : [];
       const covenants = Array.isArray(covenantsRes) ? (covenantsRes as Covenant[]) : [];
 
