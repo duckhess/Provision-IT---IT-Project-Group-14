@@ -25,7 +25,7 @@ export async function filter_cash_equivalences(filters = {}) {
             Metric: cash.Metric,
             Unit: cash.Unit,
             ApplicationID: v.ApplicationID,
-            Period: timelineMap.get(v?.FileID),
+            Timeline: timelineMap.get(v?.FileID),
             Value: parseFloat(v.Value)
         }
     })

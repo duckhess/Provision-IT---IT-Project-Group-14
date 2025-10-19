@@ -1,5 +1,5 @@
-import keyRatioModel from "../models/key_ratio.model.js";
-import keyRatioValueModel from "../models/key_ratios_values.model.js";
+import keyRatioModel from "../models/key_ratio.model.js"
+import keyRatioValueModel from "../models/key_ratios_values.model.js"
 import { get_period } from './timeline_service.js'
 
 const results = (r) => ({
@@ -8,7 +8,7 @@ const results = (r) => ({
   Unit: r.Unit,
   Category: r.Category,
   ApplicationID : r.ApplicationID,
-  Period: r.Period,   
+  Timeline: r.Period,   
   Value : r.Value
 })
 
@@ -24,12 +24,12 @@ export async function ratioService(filters = {}) {
 
   // find keyratioid in keyratio table
   const fetchedIDs = [...new Set(values.map(v => v.KeyRatioID))]
-  const keyQuery = { KeyRatioID: { $in: fetchedIDs } };
+  const keyQuery = { KeyRatioID: { $in: fetchedIDs } }
 
   // filter metric name 
   if (filters.metric && String(filters.metric).trim() !== "") {
   const metricRegex = String(filters.metric).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  keyQuery.Metric = { $regex: metricRegex, $options: "i" };
+  keyQuery.Metric = { $regex: metricRegex, $options: "i" }
   }
 
   //filter unit
@@ -39,7 +39,7 @@ export async function ratioService(filters = {}) {
   }
 
   // find metric name and unit in key ratio table 
-  const keyDocs = await keyRatioModel.find(keyQuery).select("-_id KeyRatioID Metric Unit Category ").lean();
+  const keyDocs = await keyRatioModel.find(keyQuery).select("-_id KeyRatioID Metric Unit Category ").lean()
   if (keyDocs.length === 0) return []
 
   const byId = new Map(keyDocs.map(d => [d.KeyRatioID, d]))
@@ -50,13 +50,13 @@ export async function ratioService(filters = {}) {
   const timelineMap = await get_period(fileIDs)
 
   return filteredValues.map(v => {
-    const meta = byId.get(v.KeyRatioID);
+    const meta = byId.get(v.KeyRatioID)
     return results({
       ...v,                 
       Metric: meta.Metric,  
       Unit: meta.Unit,
       Category: meta.Category,
       Period: timelineMap.get(v?.FileID),
-    });
-  });
+    })
+  })
 }
