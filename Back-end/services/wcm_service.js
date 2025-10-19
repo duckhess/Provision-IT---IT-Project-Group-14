@@ -13,20 +13,6 @@ export async function filter_wcm(filters = {}) {
     const document = await wcm_schema.find().lean()
     const mapped_document = new Map()
     document.forEach(w => mapped_document.set(w.CapitalID, w))
-    
-    // const value = await wcm_values_schema.find(matching_params).lean()
-
-    // const forecast_filters = value.map(v => ({
-    //     CapitalID: v.CapitalID,
-    //     ApplicationID: v.ApplicationID
-    // }))
-
-    // const all_forecast = await wcm_forecasts_schema.find({$or: forecast_filters}).lean()
-    // const mapped_forecast = new Map()
-    // all_forecast.forEach(f => {
-    //     const key = `${f.CapitalID}_${f.ApplicationID}`
-    //     mapped_forecast.set(key, f)
-    // })
 
     const forecast = await wcm_forecasts_schema.find(matching_params).lean()
     const forecast_filters = forecast.map(d => ({
