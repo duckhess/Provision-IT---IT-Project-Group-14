@@ -39,7 +39,7 @@ export async function best4MetricsService(filters = {}) {
         ApplicationID: d.ApplicationID,
         Table: "financial_statements",
         MetricID: d.MetricID,
-        Metric,
+        MetricName: d.Metric,
         Unit,
         Data: rows.map(r => ({
           Timeline: r.Timeline,
