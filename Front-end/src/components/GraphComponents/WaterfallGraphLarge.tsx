@@ -68,7 +68,7 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
 
   return (
     <div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">
-      <div className ="px-4 w-full">
+     <div className ="px-4 w-full">
         <h2 className='text-black text-xl font-bold border-b mb-4 inline-block'>
           {title}
         </h2>
@@ -83,31 +83,59 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
             <XAxis
               dataKey="change"
               interval={0}
-              tickFormatter={(index) => {
-                const current = data[index];
-                const prev = data[index - 1];
-                const next = data[index + 1];
-
-                const isStart = !prev || current.key !== prev.key;
-                const isEnd = !next || current.key !== next.key;
-
-                if (!isStart && !isEnd) {
-                  return current.key;
-                }
-
-                return "";
+              tick={({x,y, index}) => {
+                const item = data[index];
+                if(!item) return <g/>;
+                
+                // show the metric name only for the first value
+                const firstIndex = data.findIndex(d=>d.key === item.key);
+                if(index !== firstIndex) return <g/>;
+                return (
+                  <g transform={`translate(${x}, ${y+10}) rotate(-45)`}>
+                    <text 
+                    textAnchor="end"
+                    fontSize={12}
+                    fill="#333">
+                      {item.key}
+                    </text>
+                  </g>
+                )
               }}
+              angle={-45}
+              textAnchor="end"
+              height={100}
+
             />
             <YAxis />
-            <Tooltip />
-            <Legend />
+
+            
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload || !payload.length) return null;
+
+                const { name: year, key: metricName, change } = payload[0].payload;
+
+                return (
+                  <div className="bg-white p-2 rounded shadow text-sm min-w-[160px]">
+
+                    <div className="font-bold mb-2">{metricName}</div>
+
+                    {/* year and value (needs to be "change", dont change to pv)*/}
+                    <div className="flex justify-between">
+                      <span>{year}</span>
+                      <span>{change.toLocaleString()}</span>
+                    </div>
+                  </div>
+                );
+              }}
+            />
 
             <Bar dataKey="pv" stackId="a" fill="transparent" />
             
             <Bar dataKey="change" stackId="a">
               {data.map((entry, index) => {
                 const metricIndex = metricOrder.indexOf(entry.key);
-                {console.log(metricIndex)};
+                // {console.log(metricIndex)};
                 const green = greenShades[metricIndex % greenShades.length];
                 const red = redShades[metricIndex % redShades.length];
 

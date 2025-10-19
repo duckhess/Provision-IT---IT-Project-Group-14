@@ -58,13 +58,16 @@ function buildWaterfallData(mergedSets: any[]) {
 }
 
 const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
+  
   const data = buildWaterfallData(mergedSets);
+
+  // console.log("data = ",data);
 
   // Compute unique metrics in order of appearance
   const metricOrder = Array.from(
     new Set(data.map(entry => entry.key))
   );
-  console.log(metricOrder);
+  //console.log(metricOrder);
 
   return (
     <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
@@ -83,31 +86,59 @@ const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
             <XAxis
               dataKey="change"
               interval={0}
-              tickFormatter={(index) => {
-                const current = data[index];
-                const prev = data[index - 1];
-                const next = data[index + 1];
-
-                const isStart = !prev || current.key !== prev.key;
-                const isEnd = !next || current.key !== next.key;
-
-                if (!isStart && !isEnd) {
-                  return current.key;
-                }
-
-                return "";
+              tick={({x,y, index}) => {
+                const item = data[index];
+                if(!item) return <g/>;
+                
+                // show the metric name only for the first value
+                const firstIndex = data.findIndex(d=>d.key === item.key);
+                if(index !== firstIndex) return <g/>;
+                return (
+                  <g transform={`translate(${x}, ${y+10}) rotate(-45)`}>
+                    <text 
+                    textAnchor="end"
+                    fontSize={12}
+                    fill="#333">
+                      {item.key}
+                    </text>
+                  </g>
+                )
               }}
+              angle={-45}
+              textAnchor="end"
+              height={100}
+
             />
             <YAxis />
-            <Tooltip />
-            <Legend />
+
+            
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload || !payload.length) return null;
+
+                const { name: year, key: metricName, change } = payload[0].payload;
+
+                return (
+                  <div className="bg-white p-2 rounded shadow text-sm min-w-[160px]">
+
+                    <div className="font-bold mb-2">{metricName}</div>
+
+                    {/* year and value (needs to be "change", dont change to pv)*/}
+                    <div className="flex justify-between">
+                      <span>{year}</span>
+                      <span>{change.toLocaleString()}</span>
+                    </div>
+                  </div>
+                );
+              }}
+            />
 
             <Bar dataKey="pv" stackId="a" fill="transparent" />
             
             <Bar dataKey="change" stackId="a">
               {data.map((entry, index) => {
                 const metricIndex = metricOrder.indexOf(entry.key);
-                {console.log(metricIndex)};
+                // {console.log(metricIndex)};
                 const green = greenShades[metricIndex % greenShades.length];
                 const red = redShades[metricIndex % redShades.length];
 
@@ -122,6 +153,8 @@ const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
+
+
     </div>
   );
 };
