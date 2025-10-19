@@ -19,9 +19,9 @@ interface KeyRatio {
   MetricName : string;
   Unit : string;
   ApplicationID : number;
-  FileID : number;
-  Timeline : string;
+  Period : number;
   Value : number;
+  Category : string;
 }
 
 interface Covenant {
@@ -52,56 +52,71 @@ const groupKeyRatios = (keyRatios : KeyRatio[]) => {
 
 //it would be better if backend has an endpoint derive the high level investor view
 const processData = (keyRatios : KeyRatio[], covenants : Covenant[]) : CategoryItem[] => {
-  // group the metric values based on the metric name from key ratios 
-  const groupedRatios = groupKeyRatios(keyRatios);
 
   // group the covenants based on category in "covenants"
-  const groupCategory = new Map<string, Covenant[]>();
+  const groupCovenants = new Map<string, Covenant[]>();
   covenants.forEach(c=> {
-    if(!groupCategory.has(c.Category)){
-      groupCategory.set(c.Category, []);
+     //console.log("[DEBUG] Covenant Category:", c.Category);
+    const catName = c.Category.trim();
+    if(!groupCovenants.has(catName)){
+      groupCovenants.set(catName, []);
     }
-    groupCategory.get(c.Category)!.push(c);
+    groupCovenants.get(catName)!.push(c);
   });
 
-  // console.log("=== CATEGORY GROUPING CHECK ===");
-  // groupCategory.forEach((covList, categoryName) => {
-  //   console.log(`Category: ${categoryName}`);
-  //   console.log("Metrics in this category:", covList.map(c => c.Metric));
-  // });
+  // group the key ratios by metric name 
+  //const groupKeyRatiosByName = groupKeyRatios(keyRatios)
+
+  // group key ratios based on category
+  const groupRatio = new Map<string, KeyRatio[]>();
+  keyRatios.forEach(k => {
+    if(!k.Category || !k.MetricName || k.Value === undefined){
+      console.warn("[Debug] skipping invalid key ratio", k);
+      return;
+    }
+    console.log(`[DEBUG] KeyRatio Category:${k.Category} under ${k.MetricName}` );
+    const catName = k.Category.trim();
+    if(!groupRatio.has(catName)) groupRatio.set(catName,[]);
+    groupRatio.get(catName)!.push(k);
+  })
 
   const results : CategoryItem[] = [];
 
-  groupCategory.forEach((covList, catName) => {
+  groupCovenants.forEach((covList, catName) => {
 
     // find the average success of each category
-    const avgSuccess = (covList.filter(c=>c.Analysis).length/covList.length) * 100;
+    const avgSuccess = covList.length > 0 
+      ? (covList.filter(c=>c.Analysis).length/covList.length) * 100
+      : 0;
+
+    const keyRatiosInCategory = groupRatio.get(catName) || [];
+
+    const metricsMap = new Map<string, KeyRatio[]>();
+    keyRatiosInCategory.forEach(ratio => {
+      if(!metricsMap.has(ratio.MetricName)) metricsMap.set(ratio.MetricName,[]);
+      metricsMap.get(ratio.MetricName)!.push(ratio);
+    })
 
     // find the spot % three years
     let totalMetrics = 0;
     let passMetrics = 0;
 
-    covList.forEach(cov => {
-      const metricData = groupedRatios.get(cov.Metric);
-      if(!metricData || metricData.length === 0) return;
-
-      //console.log(`Metric ${cov.Metric} has ${metricData.length} key ratio entries`);
-
+    metricsMap.forEach((metricList) => {
       totalMetrics ++;
 
-      const values = metricData.map(r=>r.Value);
+      const values = metricList.map(r=>r.Value);
       let sum = 0;
       for (let i = 0; i<values.length; i++){
         sum += values[i];
       }
 
-      const avg = sum / values.length;
-      // avg is correct
-      console.log(`Metric ${cov.Metric} has ${avg} average and has ${cov.Value} and ${avg > cov.Value}`);
+      const avg = sum/values.length;
 
-      if(avg > cov.Value) {
-        passMetrics ++;
-      }
+      const latestRatio = metricList.find(r => r.Period === 2025);
+      if(!latestRatio) return;
+      
+      if(avg > latestRatio.Value) passMetrics++;
+      
     });
 
     console.log(`total Metrics in ${catName} = ${totalMetrics} and success = ${passMetrics}`);
@@ -138,10 +153,14 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
       const keyRatiosRes = await keyResponse.json();
       const covenantsRes = await covResponse.json();
 
+      // console.log("key ratio : ", keyRatiosRes);
+      // console.log("covenants fixed", covenantsRes);
+
       const keyRatios : KeyRatio[] = Array.isArray(keyRatiosRes) ? keyRatiosRes : [];
       const covenants = Array.isArray(covenantsRes) ? (covenantsRes as Covenant[]) : [];
 
-      // console.log("key ratio fixed : ", keyRatios);
+      console.log("key ratio fixed : ", keyRatios);
+      console.log("KeyRatios missing category:", keyRatios.filter(k => !k.Category));
       // console.log("covenants fixed", covenants);
 
       const category = processData(keyRatios, covenants);

@@ -95,36 +95,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
   useEffect(() => {
     console.log("data updated:" , dataNeeded);
   }, [dataNeeded]);
-
-
-
-  // const mockCategoryData =  [
-  //       {
-  //           name: "Technology",
-  //           averageSuccess: 75,
-  //           spotPercentageSuccess: 80
-  //       },
-  //       {
-  //           name: "Health",
-  //           averageSuccess: 65,
-  //           spotPercentageSuccess: 70
-  //       },
-  //       {
-  //           name: "Finance",
-  //           averageSuccess: 85,
-  //           spotPercentageSuccess: 90
-  //       },
-  //       {
-  //           name: "Education",
-  //           averageSuccess: 70,
-  //           spotPercentageSuccess: 68
-  //       },
-  //       {
-  //           name: "Entertainment",
-  //           averageSuccess: 60,
-  //           spotPercentageSuccess: 55
-  //       }
-  //     ]
+  
   return (
     <div className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
       {/* {selectedDatasets.map((dataset, i) => (
