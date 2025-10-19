@@ -1,4 +1,4 @@
-import dataModel from "../models/company_data.model.js";
+import dataModel from "../models/company_data.model.js"
 
 
 const results = (r) => ({
@@ -17,7 +17,7 @@ const results = (r) => ({
   LongGeneralDescription: r.LongGeneralDescription,
   ShortApplicationDescription: r.ShortApplicationDescription,
   LongApplicationDescription: r.LongApplicationDescription
-});
+})
 
 export async function companyDataService(filters = {}) {
 
@@ -29,9 +29,9 @@ export async function companyDataService(filters = {}) {
   if (values.length === 0) return []
   
 
-return values.map(results);
+return values.map(results)
 
-};
+}
 
 
 

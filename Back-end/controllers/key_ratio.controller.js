@@ -1,4 +1,4 @@
-import { ratioService } from "../services/key_ratio.service.js";
+import { ratioService } from "../services/key_ratio.service.js"
 
 export const keyRatioController = async (req,res) => {
   

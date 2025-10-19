@@ -1,9 +1,9 @@
 import forecast_schema from '../models/forecast.js'
 import forecast_values_schema from '../models/forecast_values.js'
 import forecast_forecasts_schema from '../models/forecast_forecasts.js'
-// import timeline_schema from '../models/timelines.js'
+import { get_period } from './timeline_service.js'
 
-const filter_forecasts = async (filters = {}) => {
+export async function filter_forecasts(filters = {}) {
     const matching_params = {}
 
     if (filters.forecastid) matching_params.ForecastID = Number(filters.forecastid)
@@ -28,8 +28,11 @@ const filter_forecasts = async (filters = {}) => {
         mapped_value.set(key, f)
     })
 
+    const fileIDs = [...new Set(value.map(v => v.FileID))]
+    const timelineMap = await get_period(fileIDs)
+
     return forecast.map(f => {
-        const forecasting = mapped_document.values(f.ForecastID)
+        const forecasting = mapped_document.get(f.ForecastID)
         const key = `${f.ForecastID}`
         const v = mapped_value.get(key)
         return {
@@ -37,7 +40,7 @@ const filter_forecasts = async (filters = {}) => {
             AccountDescription: forecasting.AccountDescription,
             Unit: forecasting.Unit,
             ApplicationID: f.ApplicationID,
-            // Period: 
+            Timeline: timelineMap.get(v?.FileID),
             ...(v && {Value: parseFloat(v?.Value)}),
             "Avg Hist Forecast": parseFloat(f["Avg Hist Forecast"]),
             "Avg Hist % Change": parseFloat(f["Avg Hist % Change"]),
@@ -50,8 +53,4 @@ const filter_forecasts = async (filters = {}) => {
             "Cashflow Movement User Forecast": parseFloat(f["Cashflow Movement User Forecast"])
         }
     })
-}
-
-export default {
-    filter_forecasts
 }

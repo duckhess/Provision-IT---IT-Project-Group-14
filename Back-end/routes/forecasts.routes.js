@@ -1,8 +1,8 @@
-import express from 'express'
-import forecast_controller from '../controllers/forecast_controller.js'
+import { Router } from "express"
+import { fetch_forecasts } from '../controllers/forecast_controller.js'
 
-const router = express.Router()
+const router = Router()
 
-router.get('/', forecast_controller.fetch_forecasts)
+router.get('/', fetch_forecasts)
 
 export default router
