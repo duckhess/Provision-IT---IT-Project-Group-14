@@ -25,7 +25,7 @@ export async function filter_statements(filters = {}) {
             MetricName: financials.Metric,
             Unit: financials.Unit,
             ApplicationID: v.ApplicationID,
-            Timeline: timelineMap.get(v?.FileID),
+            Timeline: timelineMap.get(v.FileID),
             Value: parseFloat(v.Value)
         }
     })
