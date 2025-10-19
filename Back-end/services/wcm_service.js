@@ -40,7 +40,7 @@ export async function filter_wcm(filters = {}) {
             Metric: movements.Metric,
             Unit: movements.Unit,
             ApplicationID: v.ApplicationID,
-            Period: timelineMap.get(v.FileID),
+            Timeline: timelineMap.get(v.FileID),
             Value: parseFloat(v.Value),
             "Avg Historical Forecast": parseFloat(forecast?.["Avg Historical Forecast"].toString()),
             "User Forecast": parseFloat(forecast?.["User Forecast"].toString())

@@ -1,14 +1,14 @@
-import assetModel from "../models/asset.model.js";
-import assetValueModel from "../models/asset_value.model.js";
+import assetModel from "../models/asset.model.js"
+import assetValueModel from "../models/asset_value.model.js"
 import { get_period } from './timeline_service.js'
 
 const toJsNumber = (v) => {
-  if (v == null) return v;
+  if (v == null) return v
   if (typeof v === "object" && (v._bsontype === "Decimal128" || v instanceof mongoose.Types.Decimal128)) {
-    return parseFloat(v.toString()); 
+    return parseFloat(v.toString()) 
   }
-  return v;
-};
+  return v
+}
 
 
 const results = (r) => ({
@@ -16,7 +16,7 @@ const results = (r) => ({
   AccountDesciption : r.AccountDesciption,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  Period: r.Period, 
+  Timeline: r.Period, 
   Value : toJsNumber(r.Value)
 })
 
@@ -32,12 +32,12 @@ export async function assetService(filters = {}) {
 
   // find assetsid in asset table
   const fetchedIDs = [...new Set(values.map(v =>v.AssetsID))]
-  const keyQuery = {AssetsID: { $in: fetchedIDs } };
+  const keyQuery = {AssetsID: { $in: fetchedIDs } }
 
   // filter account description 
   if (filters.accountdescription && String(filters.accountdescription).trim() !== "") {
   const descriptionRegex = String(filters.accountdescription).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  keyQuery.AccountDesciption = { $regex: descriptionRegex, $options: "i" };
+  keyQuery.AccountDesciption = { $regex: descriptionRegex, $options: "i" }
   }
 
   //filter unit
@@ -47,7 +47,7 @@ export async function assetService(filters = {}) {
   }
 
   
-  const keyDocs = await assetModel.find(keyQuery).select("-_id AssetsID AccountDescription Unit ").lean();
+  const keyDocs = await assetModel.find(keyQuery).select("-_id AssetsID AccountDescription Unit ").lean()
   if (keyDocs.length === 0) return []
 
   const byId = new Map(keyDocs.map(d => [d.AssetsID, d]))
@@ -58,14 +58,14 @@ export async function assetService(filters = {}) {
   const timelineMap = await get_period(fileIDs)
 
   return filteredValues.map(v => {
-    const meta = byId.get(v.AssetsID);
+    const meta = byId.get(v.AssetsID)
     return results({
       ...v,                 
       AccountDesciption: meta.AccountDesciption,  
       Unit: meta.Unit,
       Period: timelineMap.get(v?.FileID),
-    });
-  });
+    })
+  })
 }
 
 

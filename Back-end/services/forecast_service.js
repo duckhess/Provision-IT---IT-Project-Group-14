@@ -40,7 +40,7 @@ export async function filter_forecasts(filters = {}) {
             AccountDescription: forecasting.AccountDescription,
             Unit: forecasting.Unit,
             ApplicationID: f.ApplicationID,
-            Period: timelineMap.get(v?.FileID),
+            Timeline: timelineMap.get(v?.FileID),
             ...(v && {Value: parseFloat(v?.Value)}),
             "Avg Hist Forecast": parseFloat(f["Avg Hist Forecast"]),
             "Avg Hist % Change": parseFloat(f["Avg Hist % Change"]),
