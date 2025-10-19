@@ -90,7 +90,7 @@ const BusinessPage: React.FC = () => {
           name : companyNeeded.CompanyName,
           companyLongDescription : companyNeeded.LongGeneralDescription,
           projectLongDescription : companyNeeded.LongApplicationDescription,
-          companyImageUrl:""
+          companyImageUrl:`/Pic/${companyNeeded.CompanyID}_image.jpg`
         };
 
         setCompany(mapped);

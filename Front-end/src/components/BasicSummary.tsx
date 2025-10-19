@@ -57,7 +57,7 @@ const Summary: React.FC<{company: Company}> = ({company}) => {
               description : firstCompany.ShortGeneralDescription,
               funding : firstCompany.Amount,
               useOfFunds : firstCompany.UsageOfFunds,
-              imageUrl : "random"
+              imageUrl : `/Pic/${firstCompany.CompanyID}_image.jpg`,
             });
            
           } else {
