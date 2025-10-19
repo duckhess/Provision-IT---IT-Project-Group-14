@@ -33,6 +33,7 @@ interface Dataset {
   data: any[];
   metric: Metric;
   unit: Unit;
+  metadata?: Record<string, any>;
 }
 
 interface Company {
@@ -72,6 +73,10 @@ const transformABSBenchmarking = (data: any[], companyId: number): Dataset[] => 
           ? item.CalcValue > item.ABSValue
           : item.CalcValue < item.ABSValue,
       })),
+      metadata: {
+        ANZICCode: filtered[0]?.ANZICCode ?? null,
+        field: filtered[0]?.Field ?? null,
+      },
     },
   ];
 };

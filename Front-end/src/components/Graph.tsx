@@ -8,7 +8,7 @@ type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
 interface Dataset {
   name: string; // label
-  data: { x: number; y: number }[];
+  data: { x: number; y: number, extra?:any }[];
   metric: Metric;
   unit: Unit;
 }

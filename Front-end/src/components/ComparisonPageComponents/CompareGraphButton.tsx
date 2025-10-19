@@ -149,19 +149,18 @@ export const CompareGraphButton: React.FC<CompareGraphButtonProps> = ({
         >
           {groupedByCompany.map(({ company, groupedChunks }) => {
             const match = groupedChunks.find((g) => g.key === metricKey);
-            if (!match) {
-              // still render empty placeholder DataBox so layout stays aligned
-              return (
-                <DataBox
-                  key={`${company}_${metricKey}_empty`}
-                  datasets={[]}
-                  metric={metricKey.split("_")[0] as Metric}
-                  unit={metricKey.split("_")[1] as Unit}
-                />
-              );
-            }
 
-            const datasets = match.datasets;
+            // if no dataset group exists, create an empty placeholder dataset
+            const placeholderDataset = {
+              name: metricKey.split("_")[0],
+              metric: metricKey.split("_")[0] as Metric,
+              unit: metricKey.split("_")[1] as Unit,
+              data: [],
+            };
+
+            const datasets = match?.datasets?.length
+              ? match.datasets
+              : [placeholderDataset];
 
             return (
               <DataBox

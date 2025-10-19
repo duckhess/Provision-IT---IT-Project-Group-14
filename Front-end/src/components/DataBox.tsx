@@ -7,11 +7,13 @@ type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 // type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 interface Dataset {
-  name: string; // label
+  // label
+  name: string;
+   
   data: any[];
   metric: Metric;
   unit: Unit;
-  // section: Section;
+  metadata?: Record<string, any>;
 }
 
 interface GraphProps {
@@ -72,7 +74,7 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
     case "ABS Benchmarking":
       return (
         <div className="flex flex-col">
-            <ABSBenchmarking code = {"ABC123"} metric_list = {datasets[0].data}></ABSBenchmarking>
+            <ABSBenchmarking code = {datasets[0].metadata?.ANZICCode} metric_list = {datasets[0].data}></ABSBenchmarking>
         </div>
       );
 
