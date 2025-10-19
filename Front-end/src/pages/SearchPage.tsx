@@ -17,8 +17,10 @@ const SearchPage: React.FC = () => {
   // const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
   const [searchResults, setSearchResults] = useState<Company[]>([]);
   const [loading, setLoading] = useState(false);
+
   const location = useLocation();
-  const query = new URLSearchParams(location.search).get("query") || "";
+  const query = new URLSearchParams(location.search).get("query")?.toLowerCase() || "";
+  //console.log("query : ", query);
 
   useEffect (() => {
     const fetchCompanies = async () => {
@@ -28,6 +30,18 @@ const SearchPage: React.FC = () => {
           "/api/companies"
         );
         setAllCompanies(response.data);
+
+        if(query) {
+          const queryTrimmed = query.trim().toLowerCase();
+          const filtered = allCompanies.filter(
+            (company) => 
+              company.companyName.toLowerCase().includes(queryTrimmed)
+          ); 
+          console.log("filter query", filtered);
+          setSearchResults(filtered);
+        } else {
+          setSearchResults(allCompanies);
+        }
 
         // show all comapnies when there is no input in search bar 
         setSearchResults(response.data);
@@ -58,7 +72,7 @@ const SearchPage: React.FC = () => {
           <SearchBarComponent allCompanies={allCompanies} setSearchResults = {setSearchResults}/>
           
           {/* Filter Button */}
-          <FilterSearchPage/>
+          <FilterSearchPage allCompanies={allCompanies} setSearchResults={setSearchResults}/>
         </div>
 
         <hr className="my-6 border-t border-gray-600" />

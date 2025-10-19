@@ -40,33 +40,7 @@ const HomePage: React.FC = () => {
     navigate(`/search?query=${encodeURIComponent(input)}`);
   };
 
-// Dummy data until backend is ready
-  // useEffect(() => {
-  //   const dummyData: CompanyInfo[] = [
-  //     {
-  //       id: companyData[0].id,
-  //       title: companyData[0].title,
-  //       category: companyData[0].category,
-  //       description: companyData[0].description,
-  //       funding: companyData[0].funding,
-  //       useOfFunds: companyData[0].useOfFunds,
-  //       imageUrl: companyData[0].imageUrl
-  //     },
 
-  //     {
-  //       id: companyData[1].id,
-  //       title: companyData[1].title,
-  //       category: companyData[1].category,
-  //       description: companyData[1].description,
-  //       funding: companyData[1].funding,
-  //       useOfFunds: companyData[1].useOfFunds,
-  //       imageUrl: companyData[1].imageUrl
-  //     },
-  //   ];
-  //   setCompanies(dummyData);
-  // }, []);
-
-  // fetch all possible companies : search bar
   useEffect (() => {
     const fetchCompanies = async () => {
       try {
@@ -87,7 +61,7 @@ const HomePage: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % allCompanies.length);
-    }, 10000); // 10,000 ms = 10 seconds
+    }, 60000); // 10,000 ms = 10 seconds
 
     return () => clearInterval(interval);
   }, [allCompanies]);
@@ -128,7 +102,7 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Investment highlight section with rotating cards */}
+      {/* Investment highlight section with rotating cards (showing all available companies for now)*/}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-2">
           {allCompanies.length > 0 && (
             <CompanyCard company={allCompanies[currentIndex]} />
