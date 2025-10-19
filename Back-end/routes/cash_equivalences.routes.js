@@ -1,8 +1,8 @@
-import express from 'express'
-import cash_controller from '../controllers/cash_controller.js'
+import { Router } from "express"
+import { fetch_cash_equivalences } from '../controllers/cash_controller.js'
 
-const router = express.Router()
+const router = Router()
 
-router.get('/', cash_controller.fetch_cash_equivalences)
+router.get('/', fetch_cash_equivalences)
 
 export default router

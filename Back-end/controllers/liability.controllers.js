@@ -1,4 +1,4 @@
-import { liabilityService } from "../services/liability.service.js";
+import { liabilityService } from "../services/liability.service.js"
 
 export const liabilityController = async (req,res) => {
   

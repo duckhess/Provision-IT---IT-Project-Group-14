@@ -1,15 +1,6 @@
 import assetModel from "../models/asset.model.js";
 import assetValueModel from "../models/asset_value.model.js";
-
-const FILE_TIMELINE = {
-    1: '2023',
-    2: '2024',
-    3: '2025',
-};
-
-function toTimeline(fileId) {
-  return FILE_TIMELINE[fileId] || `File ${fileId}`;
-}
+import { get_period } from './timeline_service.js'
 
 const toJsNumber = (v) => {
   if (v == null) return v;
@@ -25,8 +16,7 @@ const results = (r) => ({
   AccountDesciption : r.AccountDesciption,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  FileID : r.FileID,
-  Timeline: toTimeline(r.FileID),   
+  Period: r.Period, 
   Value : toJsNumber(r.Value)
 })
 
@@ -64,12 +54,16 @@ export async function assetService(filters = {}) {
 
   const filteredValues = values.filter(v => byId.has(v.AssetsID))
 
+  const fileIDs = [...new Set(filteredValues.map(v => v.FileID))]
+  const timelineMap = await get_period(fileIDs)
+
   return filteredValues.map(v => {
     const meta = byId.get(v.AssetsID);
     return results({
       ...v,                 
       AccountDesciption: meta.AccountDesciption,  
-      Unit: meta.Unit, 
+      Unit: meta.Unit,
+      Period: timelineMap.get(v?.FileID),
     });
   });
 }

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const LiabilityValueSchema = new mongoose.Schema(
  {
@@ -8,6 +8,6 @@ const LiabilityValueSchema = new mongoose.Schema(
   Value: { type: mongoose.Types.Decimal128, required: true}            
  },
  { collection: 'liabilities_values', timestamps: false }
-);
+)
 
-export default mongoose.model('liabilities_values', LiabilityValueSchema);
+export default mongoose.model('liabilities_values', LiabilityValueSchema)

@@ -19,10 +19,10 @@ export const list_industries_controller = async (req,res) => {
     
     }
     
-    const item = await get_industry_by_id_service(industry_id);
-    if (!item) return res.status(404).json({ error: "Not found" });
+    const item = await get_industry_by_id_service(industry_id)
+    if (!item) return res.status(404).json({ error: "Not found" })
 
-    return res.json(item);
+    return res.json(item)
 
     }
 

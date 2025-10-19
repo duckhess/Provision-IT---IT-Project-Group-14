@@ -1,4 +1,4 @@
-import { best4MetricsService } from "../services/best_four_metrics.service.js";
+import { best4MetricsService } from "../services/best_four_metrics.service.js"
 
 export async function bestMetricsController(req, res) {
 

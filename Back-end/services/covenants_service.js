@@ -1,7 +1,7 @@
 import covenants_schema from '../models/covenants.js'
 import covenants_values_schema from '../models/covenants_values.js'
 
-const filter_covenants = async (filters = {}) => {
+export async function filter_covenants(filters = {}) {
     const matching_params = {}
 
     if(filters.covenantsid) matching_params.CovenantsID = Number(filters.covenantsid)
@@ -28,8 +28,4 @@ const filter_covenants = async (filters = {}) => {
             Analysis: v.Analysis
         }
     })
-}
-
-export default {
-    filter_covenants
 }

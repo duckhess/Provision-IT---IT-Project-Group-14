@@ -1,9 +1,9 @@
 import wcm_schema from '../models/working_capital_movements.js'
 import wcm_values_schema from '../models/wcm_values.js'
 import wcm_forecasts_schema from '../models/wcm_forecasts.js'
-// import timeline_service from './timeline_service.js'
+import { get_period } from './timeline_service.js'
 
-const filter_wcm = async (filters = {}) => {
+export async function filter_wcm(filters = {}) {
     const matching_params = {}
 
     if (filters.capitalid) matching_params.CapitalID = Number(filters.capitalid)
@@ -28,16 +28,8 @@ const filter_wcm = async (filters = {}) => {
     const mapped_document = new Map()
     document.forEach(w => mapped_document.set(w.CapitalID, w))
 
-    // let timeline = new Map()
-    // if (filters.fileid) {
-    //     const period = await timeline_service.get_period(filters.fileid)
-    //     timeline.set(filters.fileid, period)
-    // } else {
-        // const unique_fileids = [...new Set(value.map(v => v.FileID))]
-        // const timeline = await timeline_service.get_period(unique_fileids)
-    // }
-
-    // const timeline = await timeline_service.filter(value)
+    const fileIDs = [...new Set(value.map(v => v.FileID))]
+    const timelineMap = await get_period(fileIDs)
 
     return value.map(v => {
         const movements = mapped_document.get(v.CapitalID)
@@ -48,15 +40,11 @@ const filter_wcm = async (filters = {}) => {
             Metric: movements.Metric,
             Unit: movements.Unit,
             ApplicationID: v.ApplicationID,
-            // Period: parseInt((timeline.get(`${v.FileID}`))?.period.toString()),
+            Period: timelineMap.get(v.FileID),
             Value: parseFloat(v.Value),
             "Avg Historical Forecast": parseFloat(forecast?.["Avg Historical Forecast"].toString()),
             "User Forecast": parseFloat(forecast?.["User Forecast"].toString())
         }
     })
 
-}
-
-export default {
-    filter_wcm
 }

@@ -1,15 +1,6 @@
 import liabilityModel from "../models/liability.model.js";
 import liabilityValueModel from "../models/liability_value.model.js";
-
-const FILE_TIMELINE = {
-    1: '2023',
-    2: '2024',
-    3: '2025',
-};
-
-function toTimeline(fileId) {
-  return FILE_TIMELINE[fileId] || `File ${fileId}`;
-}
+import { get_period } from './timeline_service.js'
 
 const toJsNumber = (v) => {
   if (v == null) return v;
@@ -24,8 +15,7 @@ const results = (r) => ({
   MetricName: r.Metric,
   Unit: r.Unit,
   ApplicationID : r.ApplicationID,
-  FileID : r.FileID,
-  Timeline: toTimeline(r.FileID),   
+  Period: r.Period,
   Value : toJsNumber(r.Value)
 })
 
@@ -63,12 +53,16 @@ export async function liabilityService(filters = {}) {
 
   const filteredValues = values.filter(v => byId.has(v.LiabilitiesID))
 
+  const fileIDs = [...new Set(filteredValues.map(v => v.FileID))]
+  const timelineMap = await get_period(fileIDs)
+
   return filteredValues.map(v => {
     const meta = byId.get(v.LiabilitiesID);
     return results({
       ...v,                 
-      Metric: meta.Metric,  
-      Unit: meta.Unit, 
+      Metric: meta.Metric,
+      Unit: meta.Unit,
+      Period: timelineMap.get(v?.FileID),
     });
   });
 }

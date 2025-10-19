@@ -1,8 +1,8 @@
-import express from 'express'
-import abs_controller from '../controllers/abs_controller.js'
+import { Router } from "express"
+import { fetch_abs } from '../controllers/abs_controller.js'
 
-const router = express.Router()
+const router = Router()
 
-router.get('/', abs_controller.fetch_abs)
+router.get('/', fetch_abs)
 
 export default router

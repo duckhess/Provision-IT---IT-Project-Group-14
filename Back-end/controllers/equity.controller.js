@@ -1,4 +1,4 @@
-import { equityService } from "../services/equity.service.js";
+import { equityService } from "../services/equity.service.js"
 
 export const equityController = async (req,res) => {
   

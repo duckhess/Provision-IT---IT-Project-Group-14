@@ -1,7 +1,7 @@
 import abs_schema from '../models/abs_benchmarkings.js'
 import abs_values_schema from '../models/abs_values.js'
 
-const filter_abs = async (filters = {}) => {
+export async function filter_abs(filters = {}) {
     const matching_params = {}
 
     if (filters.absid) matching_params.ABSID = Number(filters.absid)

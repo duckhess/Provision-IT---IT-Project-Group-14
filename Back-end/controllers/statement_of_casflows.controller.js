@@ -1,4 +1,4 @@
-import { socService } from "../services/statement_of_cashflows.service.js";
+import { socService } from "../services/statement_of_cashflows.service.js"
 
 export const socController = async (req,res) => {
   
