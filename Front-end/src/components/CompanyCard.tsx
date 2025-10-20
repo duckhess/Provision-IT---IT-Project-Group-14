@@ -77,7 +77,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
 
   return (
     <div
-      className={`p-4 rounded cursor-pointer mb-2 ${
+      className={`relative p-4 rounded cursor-pointer mb-2 ${
         isActive ? 'bg-blue-100 border-blue-400' : 'bg-white'
       }`}
       onClick={() => onClick(id)}
@@ -85,6 +85,17 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
       <h3 className='font-bold'>{companyName}</h3>
       <p className='text-gray-600 text-sm'>{companyCardDetails?.projectShortDescription}</p>
       <p className='text-gray-400 text-xs'> Est. {companyCardDetails?.estDate}</p>
+
+      {/* <img
+  src={`/Pic/${id}_logo.png`}
+  onError={(e) => (e.currentTarget.src = "/Pic/default_logo.png")}
+  alt={`${companyName} logo`}
+  className="absolute bottom-2 right-2 w-10 h-10 object-contain"
+/> */}
+
+      <img 
+      src={`/Pic/${id}_logo.png`} 
+      className='absolute bottom-2 right-2 w-8 h-8 rounded-full border border-gray-200 shadow-sm object-contain'></img>
     </div>
   );
 };
