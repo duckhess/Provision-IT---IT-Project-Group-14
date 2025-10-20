@@ -9,12 +9,14 @@ type ABSBenchmarkingSmallProps  = {
   passRate: number;
 }
 
+export const getScoreColor = (score : number) => {
+  if (score >= 70) return "text-green-600";
+  if (score >= 50) return "text-yellow-500";
+  return "text-red-500";
+};
+
 const ABSBenchmarkingSmall : React.FC<ABSBenchmarkingSmallProps> = ({code, passNum, failNum, passRate}) => {
-  const getScoreColor = (score : number) => {
-    if (score >= 70) return "text-green-600";
-    if (score >= 50) return "text-yellow-500";
-    return "text-red-500";
-  };
+
 
   return (
   <div className = "flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
