@@ -29,6 +29,7 @@ const SearchPage: React.FC = () => {
         const response = await axios.get<Company[]> (
           "/api/companies"
         );
+        console.log("Data: " + response.data);
         setAllCompanies(response.data);
 
         if(query) {

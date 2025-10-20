@@ -15,7 +15,7 @@ const CompanyList: React.FC = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await axios.get<Company[]>("http://localhost:5000/companies");
+        const response = await axios.get<Company[]>("/api/companies");
         setCompanies(response.data); 
       } catch (err: any) {
         setError(err.message || "An error occurred");

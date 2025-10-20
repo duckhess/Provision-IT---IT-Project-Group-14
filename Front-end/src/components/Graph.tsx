@@ -8,7 +8,7 @@ type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
 interface Dataset {
   name: string; // label
-  data: { x: number; y: number }[];
+  data: { x: number; y: number, extra?:any }[];
   metric: Metric;
   unit: Unit;
 }
@@ -46,10 +46,13 @@ function mergeDatasets(datasets: Dataset[]) {
 }
 
 function Graph({ datasets, unit, title }: GraphProps) {
+  console.log(datasets);
   const mergedData = mergeDatasets(datasets);
 
   switch (unit) {
     case "%":
+      console.log("Dataset: ", datasets);
+      console.log("Merged Dataset: ", mergedData);
       return (
         <LineGraph datasets={datasets} mergedSets={mergedData} yLabel="%" title={title}></LineGraph>
       );

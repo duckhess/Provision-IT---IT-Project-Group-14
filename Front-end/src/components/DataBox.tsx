@@ -1,6 +1,6 @@
 import Graph from "./Graph";
 import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
-import type { Metric } from "../Types/Types";
+import type { Metric } from "./Types/Types.tsx";
 import Covenants from "./filterBusinessPage/Covenants/Covenants.tsx";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
