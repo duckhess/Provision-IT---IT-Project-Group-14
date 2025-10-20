@@ -116,8 +116,8 @@ return Object.values(grouped).map((items) => {
     return {
       name: first.MetricName ??
     first.Metric ??
-    first.AccountDescription ?? // ✅ correct key
-    first.accountDescription ?? // ✅ lowercase variant, just in case
+    first.AccountDescription ?? 
+    first.accountDescription ??
     endpoint,
       metric: endpoint as Metric,
       unit: first.Unit as Unit,
@@ -156,7 +156,7 @@ const transformTimelineForecastMetrics = (
       null;
 
     return {
-      name: first.AccountDescription ?? first.Metric ?? "Unknown",
+      name: first.AccountDescription ?? first.Metric ?? first.MetricName ?? "Unknown",
       metric: metricCategory,
       unit: first.Unit as Unit,
       data: [
@@ -182,7 +182,7 @@ const transformCovenants = (
 
   return Object.entries(groupedByCategory).map(([category, items]) => {
     const metricList = items.map(item => ({
-      name: item.Metric,
+      name: item.MetricName,
       pass: item.Analysis,
       calc_value: Number(item.Value),
       abs_value: item.Benchmark,

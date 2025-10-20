@@ -98,15 +98,29 @@ const transformTimelineMetricsPerCompany = (
     grouped[id].push(item);
   });
 
-  return Object.values(grouped).map((items) => ({
-    name: items[0].MetricName ?? items[0].AccountDescription ?? items[0].name ?? endpoint,
-    metric: endpoint as Metric,
-    unit: items[0].Unit as Unit,
-    data: items.map((d) => ({
-      x: Number(d.Timeline),
-      y: Number(d.Value),
-    })),
-  }));
+return Object.values(grouped).map((items) => {
+    const first = items[0];
+
+    // Try to detect possible x/y field names automatically
+    const xKey = ["Timeline", "Period", "Year", "Date"].find((k) => k in first) ?? "Period";
+    const yKey = ["Value", "Amount", "Balance", "Val"].find((k) => k in first) ?? "Value";
+
+    const data = items.map((d) => ({
+      x: Number(d[xKey]),
+      y: Number(d[yKey]),
+    }));
+
+    return {
+      name: first.MetricName ??
+    first.Metric ??
+    first.AccountDescription ?? 
+    first.accountDescription ??
+    endpoint,
+      metric: endpoint as Metric,
+      unit: first.Unit as Unit,
+      data,
+    };
+  });
 };
 
 const transformTimelineForecastMetrics = (
@@ -131,16 +145,23 @@ const transformTimelineForecastMetrics = (
 
   return Object.values(grouped).map((items) => {
     const first = items[0];
+
+    // Safely handle both “Avg Historical Forecast” and “Avg Hist Forecast”
+    const avgHistoricalForecast =
+      first["Avg Historical Forecast"] ??
+      first["Avg Hist Forecast"] ??
+      null;
+
     return {
-      name: first.AccountDescription ?? first.Metric ?? "Unknown",
+      name: first.AccountDescription ?? first.Metric ?? first.MetricName ?? "Unknown",
       metric: metricCategory,
       unit: first.Unit as Unit,
       data: [
-        { x: "Avg Hist Forecast", y: first["Avg Hist Forecast"] },
+        { x: "Avg Historical Forecast", y: avgHistoricalForecast },
         { x: "User Forecast", y: first["User Forecast"] },
       ],
-    };
-  });
+  };
+ });
 };
 
 /* -------------------- COVENANTS -------------------- */
@@ -158,7 +179,7 @@ const transformCovenants = (
 
   return Object.entries(groupedByCategory).map(([category, items]) => {
     const metricList = items.map(item => ({
-      name: item.Metric,
+      name: item.MetricName,
       pass: item.Analysis,
       calc_value: Number(item.Value),
       abs_value: item.Benchmark,
@@ -185,7 +206,7 @@ const transformCovenants = (
 
     return {
       name: category,
-      metric: "covenants",
+      metric: "covenants" as Metric,
       unit: category as Unit,
       data: [metricList],
       metadata: { threeYearAvgSuccess },
