@@ -33,37 +33,6 @@ interface BackendCompanyData {
   LongApplicationDescription: string;
 }
 
-// Move dummy data OUTSIDE component
-// const dummyCompanies: CompanyData[] = [
-//   {
-//     id: "1",
-//     name: "GreenTech Energy",
-//     companyDescription:
-//       "Pioneering renewable energy solutions for urban areas. Focused on reducing carbon footprints with smart grid technology.",
-//     projectDescription:
-//       "Developed AI-driven solar panels that increase energy efficiency by 20%.",
-//     companyImageUrl: "/images/greentech.jpg",
-//   },
-//   {
-//     id: "2",
-//     name: "AgroFuture",
-//     companyDescription:
-//       "Revolutionizing sustainable agriculture with AI-powered tools that optimize crop yields and minimize waste.",
-//     projectDescription:
-//       "Launched a smart irrigation system that reduces water usage by 30%.",
-//     companyImageUrl: "/images/agrofuture.jpg",
-//   },
-//   {
-//     id: "3",
-//     name: "HealthBridge",
-//     companyDescription:
-//       "Connecting communities with affordable healthcare services using digital platforms and local partnerships.",
-//     projectDescription:
-//       "Created a telemedicine app connecting patients to doctors in rural areas.",
-//     companyImageUrl: "/images/healthbridge.jpg",
-//   },
-// ];
-
 const BusinessPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
   console.log("Company ID from url: ", companyId);
