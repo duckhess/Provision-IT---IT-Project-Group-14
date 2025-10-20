@@ -42,7 +42,7 @@ export async function best4MetricsService(filters = {}) {
         MetricName: d.Metric,
         Unit,
         Data: rows.map(r => ({
-          Timeline: r.Period,
+          Timeline: r.Timeline,
           Value: r.Value,
         })),
       }
