@@ -26,12 +26,14 @@ interface BackendCompanyData {
   LongGeneralDescription: string;
   ShortApplicationDescription: string;
   LongApplicationDescription: string;
+  GovernanceScore : number;
 }
 
 interface CompanyDataNeeded {
   ApplicationID : number,
   SocialScore : number,
   EnvironmentalScore : number,
+  GovernanceScore : number,
 }
 
 interface Company{
@@ -108,6 +110,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
             ApplicationID : firstCompany.ApplicationID,
             SocialScore : firstCompany.SocialScore,
             EnvironmentalScore : firstCompany.EnvironmentalScore,
+            GovernanceScore : firstCompany.GovernanceScore,
           });
         } else {
           console.warn("data needed in search page grid not available");
@@ -237,7 +240,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
     {dataNeeded ? (<>
         <div className="overflow-y-auto h-full">
-          <EGSScore social = {dataNeeded.SocialScore} environment = {dataNeeded.EnvironmentalScore} ></EGSScore>
+          <EGSScore social = {dataNeeded.SocialScore} environment = {dataNeeded.EnvironmentalScore} governance={dataNeeded.GovernanceScore}></EGSScore>
         </div>
         <div className="overflow-y-auto h-full">
           <CovenanatsSummary applicationId = {dataNeeded.ApplicationID}></CovenanatsSummary>
