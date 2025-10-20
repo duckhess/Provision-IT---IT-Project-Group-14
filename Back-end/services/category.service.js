@@ -77,10 +77,10 @@ export async function derive_success_rates(filters = {}) {
       Category: category,
       "Spot % Success": spot.total
         ? ((spot.pass / spot.total) * 100)
-        : null,
+        : 0,
       "3 yr Average % Success": avg.total
         ? ((avg.pass / avg.total) * 100)
-        : null,
+        : 0,
     })
   }
 
