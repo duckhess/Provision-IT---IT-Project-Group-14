@@ -150,7 +150,11 @@ const BusinessPage: React.FC = () => {
               </div>
 
             <div className="mt-6 flex justify-center">
-              <button className="bg-blue-300 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-400">Invest</button>
+              <button 
+                className="bg-blue-300 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-400"
+                onClick = {()=>alert("You have clicked the invest button!")}>
+                  Invest
+              </button>
             </div>
           </div>
 

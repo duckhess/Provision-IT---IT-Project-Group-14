@@ -1,13 +1,14 @@
 import React from 'react'
-import {FaLeaf, FaThumbsDown, FaThumbsUp, FaUsers, FaHandPaper} from "react-icons/fa"
+import {FaLeaf, FaThumbsDown, FaThumbsUp, FaUsers, FaHandPaper, FaUniversity} from "react-icons/fa"
 import { RadialBarChart , ResponsiveContainer, RadialBar, Legend, PolarRadiusAxis} from 'recharts';
 
 
 interface EGSScoreProps {
     social : number;
     environment : number;
+    governance : number;
 }
-const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
+const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment, governance}) => {
 
      const getScoreColor = (score : number) => {
             if (score >= 75) return "text-green-600";
@@ -22,9 +23,9 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
         }
   return (
     <div className="flex flex-col items-start w-full h-[800px] bg-gray-100 rounded-lg shadow p-4">
-        <h2 className='text-xl font-bold mb-4'> Environment and Social Score </h2>
+        <h2 className='text-xl font-bold mb-4'> ESG Score </h2>
 
-        <div className='grid grid-rows-3 gap-4 w-full h-full'>
+        <div className='grid grid-rows-4 gap-4 w-full h-full'>
 
             {/*Radial Graph */}
             <div className="flex justify-enter items-center w-full h-full">
@@ -35,7 +36,8 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
                         outerRadius="80%"
                         data={[
                             { name: "Environment", value: environment, fill : "#22c55e" },
-                            { name: "Social", value: social, fill : "#3b82f6"},]}
+                            { name: "Social", value: social, fill : "#3b82f6"},
+                            { name: "Governance", value: governance, fill: "#eab308"}]}
                         startAngle={90}
                         endAngle={-270}>
                         <PolarRadiusAxis domain = {[0, 100]} tick = {false}/>
@@ -70,6 +72,18 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment}) => {
                 <div className='flex items-center gap-2'>
                     <span className = {`text-xl font-bold ${getScoreColor(social)}`}>{social}</span>
                     <span className = "ml-3">{getThumbIcon(social)}</span>
+                </div>
+            </div>
+
+            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
+                <div className='flex items-center gap-1'>
+                    <FaUniversity className='text-yellow-500 text-3xl' />
+                    <span className = "font-semibold text-gray-700 ml-3">Governance </span>
+                </div>
+
+                <div className='flex items-center gap-2'>
+                    <span className = {`text-xl font-bold ${getScoreColor(governance)}`}>{governance}</span>
+                    <span className = "ml-3">{getThumbIcon(governance)}</span>
                 </div>
             </div>
         </div>
