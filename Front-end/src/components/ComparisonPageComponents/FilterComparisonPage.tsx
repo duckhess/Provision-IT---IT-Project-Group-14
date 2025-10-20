@@ -136,7 +136,7 @@ const transformTimelineForecastMetrics = (
       metric: metricCategory,
       unit: first.Unit as Unit,
       data: [
-        { x: "Avg Historical Forecast", y: first["Avg Historical Forecast"] },
+        { x: "Avg Hist Forecast", y: first["Avg Hist Forecast"] },
         { x: "User Forecast", y: first["User Forecast"] },
       ],
     };

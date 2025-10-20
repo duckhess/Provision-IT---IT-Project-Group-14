@@ -1,19 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
-import companyData from "../data/CompanyData.json"
 import Summary from "../components/BasicSummary"
 import SearchBarComponent from "../components/searchBar/SearchBarComponent";
 import axios from "axios";
-
-  // type CompanyInfo = {
-  //     id: number,
-  //     title: string,
-  //     category: string,
-  //     description: string,
-  //     funding: string,
-  //     useOfFunds: string,
-  //     imageUrl: string
-  // }
 
   interface Company {
     companyId: number;
@@ -96,9 +85,10 @@ const HomePage: React.FC = () => {
             toward succesful direct transparent investing.
           </p>
         </div>
-        <div className="h-[500px] w-full bg-gray-300 rounded-md flex items-center 
+
+        <div className="h-[500px] w-full bg-gray-300 rounded-lg flex items-center 
           justify-center">
-          [ Static Image Placeholder ]
+         <img src='homePage.jpg' className="h-full w-full object-cover rounded-lg"></img>
         </div>
       </section>
 

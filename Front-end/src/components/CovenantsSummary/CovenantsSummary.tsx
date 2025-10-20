@@ -144,8 +144,8 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
       const keyRatiosRes = await keyResponse.json();
       const covenantsRes = await covResponse.json();
       
-      console.log("key ratio raw reposnse", keyRatiosRes);
-      console.log("covenants raw resposne ", covenantsRes);
+      // console.log("key ratio raw reposnse", keyRatiosRes);
+      // console.log("covenants raw resposne ", covenantsRes);
 
       // this is working 
       const keyRatios : KeyRatio[] = Array.isArray(keyRatiosRes) ? keyRatiosRes : [];

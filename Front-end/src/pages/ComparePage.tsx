@@ -49,14 +49,18 @@ const ComparePage: React.FC = () => {
               }}
             />
             {companyA && (
-              <p className="text-center text-gray-700">
-                Selected: {companyA.companyName}
-              </p>
+            <div className="flex justify-center"> 
+               <div className=" bg-white px-5 py-3 rounded-2xl shadwon-sm w-full text-center">
+                <span className = "block text-gray-500 text-sm">Selected</span>
+                <span className="block text-gray-900 text-base font-semibold">{companyA.companyName}</span>
+              </div>
+            </div>
+             
             )}
           </section>
 
           {/* RIGHT (Company B) */}
-          <section className="space-y-6">
+          <section className="space-y-6 mb-8">
             <SearchBarComponent
               allCompanies={allCompanies}
               setSearchResults={(companies) => {
@@ -64,9 +68,12 @@ const ComparePage: React.FC = () => {
               }}
             />
             {companyB && (
-              <p className="text-center text-gray-700">
-                Selected: {companyB.companyName}
-              </p>
+              <div className="flex justify-center"> 
+               <div className=" bg-white px-5 py-3 rounded-2xl shadwon-sm w-full text-center">
+                <span className = "block text-gray-500 text-sm">Selected</span>
+                <span className="block text-gray-900 text-base font-semibold">{companyB.companyName}</span>
+              </div>
+            </div>
             )}
           </section>
         </div>
