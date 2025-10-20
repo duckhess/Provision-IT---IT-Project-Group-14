@@ -13,6 +13,7 @@ const results = (r) => ({
   Amount: r.Amount,
   EnvironmentalScore: r.EnvironmentalScore,
   SocialScore: r.SocialScore,
+  GovernanceScore: r.GovernanceScore,
   ShortGeneralDescription: r.ShortGeneralDescription,
   LongGeneralDescription: r.LongGeneralDescription,
   ShortApplicationDescription: r.ShortApplicationDescription,

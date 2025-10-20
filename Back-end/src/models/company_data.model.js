@@ -13,6 +13,7 @@ const CompanyDataSchema = new mongoose.Schema(
     Amount: { type: String, required: true },
     EnvironmentalScore: { type: Number },
     SocialScore: { type: Number },
+    GovernanceScore: { type: Number},
     ShortGeneralDescription: { type: String },
     LongGeneralDescription: { type: String },
     ShortApplicationDescription: { type: String },
