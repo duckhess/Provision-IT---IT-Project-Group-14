@@ -148,16 +148,23 @@ const transformTimelineForecastMetrics = (
 
   return Object.values(grouped).map((items) => {
     const first = items[0];
+
+    // Safely handle both “Avg Historical Forecast” and “Avg Hist Forecast”
+    const avgHistoricalForecast =
+      first["Avg Historical Forecast"] ??
+      first["Avg Hist Forecast"] ??
+      null;
+
     return {
       name: first.AccountDescription ?? first.Metric ?? "Unknown",
       metric: metricCategory,
       unit: first.Unit as Unit,
       data: [
-        { x: "Avg Hist Forecast", y: first["Avg Hist Forecast"] },
+        { x: "Avg Historical Forecast", y: avgHistoricalForecast },
         { x: "User Forecast", y: first["User Forecast"] },
       ],
-    };
-  });
+  };
+ });
 };
 
 /* -------------------- COVENANTS -------------------- */
