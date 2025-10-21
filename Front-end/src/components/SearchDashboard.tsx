@@ -1,8 +1,7 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState} from 'react';
 import CompanyCard from '../components/CompanyCard';
 import Summary from '../components/BasicSummary';
 import SearchPageGrid from './SearchPageGrid.tsx';
-import axios from "axios";
 
 interface receivedCompaniesProps {
   companies: { companyId: number; companyName: string }[];

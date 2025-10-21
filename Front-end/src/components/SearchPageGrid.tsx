@@ -26,12 +26,14 @@ interface BackendCompanyData {
   LongGeneralDescription: string;
   ShortApplicationDescription: string;
   LongApplicationDescription: string;
+  GovernanceScore : number;
 }
 
 interface CompanyDataNeeded {
   ApplicationID : number,
   SocialScore : number,
   EnvironmentalScore : number,
+  GovernanceScore : number,
 }
 
 interface Company{
@@ -55,7 +57,7 @@ interface BackendBestMetrics {
 
 interface BackendWCM {
   CapitalID : number;
-  Metric : string;
+  MetricName : string;
   Unit : Unit;
   ApplicationID : number;
   Period : number;
@@ -108,6 +110,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
             ApplicationID : firstCompany.ApplicationID,
             SocialScore : firstCompany.SocialScore,
             EnvironmentalScore : firstCompany.EnvironmentalScore,
+            GovernanceScore : firstCompany.GovernanceScore,
           });
         } else {
           console.warn("data needed in search page grid not available");
@@ -192,12 +195,12 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
         const metricMap = new Map<string, BackendWCM[]>();
         backendData.forEach(item => {
           if(item.Unit !== "$"){
-            console.warn(`Skipping row for metric ${item.Metric} with unit ${item.Unit}`);
+            console.warn(`Skipping row for metric ${item.MetricName} with unit ${item.Unit}`);
             return;
           }
 
-          if(!metricMap.has(item.Metric)) metricMap.set(item.Metric, []);
-          metricMap.get(item.Metric)!.push(item);
+          if(!metricMap.has(item.MetricName)) metricMap.set(item.MetricName, []);
+          metricMap.get(item.MetricName)!.push(item);
         });
 
         console.log("metric map,", metricMap);
@@ -212,7 +215,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
                   x: "User Forecast",
                   y: item["User Forecast"]
                 }))),
-              metric: items[0].Metric as Metric,
+              metric: items[0].MetricName as Metric,
               unit: '$' as Unit,
           }));
         console.log("final datasets: ", data);
@@ -237,7 +240,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
     {dataNeeded ? (<>
         <div className="overflow-y-auto h-full">
-          <EGSScore social = {dataNeeded.SocialScore} environment = {dataNeeded.EnvironmentalScore} ></EGSScore>
+          <EGSScore social = {dataNeeded.SocialScore} environment = {dataNeeded.EnvironmentalScore} governance={dataNeeded.GovernanceScore}></EGSScore>
         </div>
         <div className="overflow-y-auto h-full">
           <CovenanatsSummary applicationId = {dataNeeded.ApplicationID}></CovenanatsSummary>

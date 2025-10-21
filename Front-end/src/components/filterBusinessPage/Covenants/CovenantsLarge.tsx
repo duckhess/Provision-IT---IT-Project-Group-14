@@ -32,15 +32,18 @@ const CovenantsLarge : React.FC<CovenantsLargeProps> = ({category, pass_list, fa
         
         <p className = " text-black break-words">Category : {category} </p>
         <p>
-                spot % Rate:  
-                <span className={`ml-1.5 font-semi-bold ${spotPercentageRate >= 70 ? "text-green-600" : spotPercentageRate < 50 ? "text-red-600" : "text-yellow-600"}`}>
-                {spotPercentageRate.toFixed(2)}%</span>
-        </p>
+           Spot % Success :  
+           <span className={`ml-1.5 font-semi-bold ${getScoreColor(spotPercentageRate)}`}>
+           {spotPercentageRate.toFixed(2)}%
+           </span>
+         </p>
+
         <p>
-                Three Year Average Success:  
-                <span className={`ml-1.5 font-semi-bold ${threeYearAverageSuccess>= 70 ? "text-green-600" : threeYearAverageSuccess < 50 ? "text-red-600" : "text-yellow-600"}`}>
-                {threeYearAverageSuccess.toFixed(2)}%</span>
-        </p>
+            Three Year Average Success:  
+            <span className={`ml-1.5 font-semi-bold ${getScoreColor(threeYearAverageSuccess)}`}>
+            {threeYearAverageSuccess.toFixed(2)}%
+            </span>
+         </p>
 
         <div className="grid grid-cols-2 w-full h-[65%] mt-4 gap-4">
             <div className = "bg-green-50 p-2 rounded-md h-full flex flex-col overflow-y-scroll scrollbar-hide">

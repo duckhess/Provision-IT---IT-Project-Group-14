@@ -69,10 +69,6 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
       fetchCompanies(id);
     }, [id]);
 
-//     useEffect(() => {
-//   console.log("CompanyCardDetails updated:", companyCardDetails);
-// }, [companyCardDetails]);
-
 
 
   return (
@@ -85,13 +81,6 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
       <h3 className='font-bold'>{companyName}</h3>
       <p className='text-gray-600 text-sm'>{companyCardDetails?.projectShortDescription}</p>
       <p className='text-gray-400 text-xs'> Est. {companyCardDetails?.estDate}</p>
-
-      {/* <img
-  src={`/Pic/${id}_logo.png`}
-  onError={(e) => (e.currentTarget.src = "/Pic/default_logo.png")}
-  alt={`${companyName} logo`}
-  className="absolute bottom-2 right-2 w-10 h-10 object-contain"
-/> */}
 
       <img 
       src={`/Pic/${id}_logo.png`} 
