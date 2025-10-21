@@ -40,7 +40,7 @@ const ABSBenchmarkingLarge : React.FC<ABSBenchmarkingProps>= ({code, pass_list, 
 
         <div className="grid grid-cols-2 w-full h-[65%] mt-4 gap-4">
             <div className = "bg-green-50 p-2 rounded-md h-full flex flex-col overflow-y-scroll scrollbar-hide">
-                <div className='flex items-center justify-between mb-2'>
+                <div className='flex items-center justify-between mb-2' data-testid="passHeader">
                     <div className='flex items-center gap-2'>
                         <FaCheck className='text-green-400 text-xl' />
                         <h3 className='font-bold text-lg'>Pass</h3>
@@ -49,7 +49,7 @@ const ABSBenchmarkingLarge : React.FC<ABSBenchmarkingProps>= ({code, pass_list, 
                 </div>
             
 
-                <div className = "flex-1 rounded-md p-2">
+                <div className = "flex-1 rounded-md p-2" data-testid="passSection">
                     <ul className='list-disc pl-5'>
                     {pass_list.map(metric => (
                         <li key = {metric.name} title = {`Calc : ${metric.calc_value} ABS : ${metric.abs_value}`}  
@@ -62,7 +62,7 @@ const ABSBenchmarkingLarge : React.FC<ABSBenchmarkingProps>= ({code, pass_list, 
             </div>
 
             <div className = "bg-red-50 p-2 rounded-md h-full flex flex-col overflow-y-scroll scrollbar-hide">
-                <div className='flex items-center justify-between mb-2'>
+                <div className='flex items-center justify-between mb-2' data-testid="failHeader">
                     <div className='flex items-center gap-2'>
                         <FaTimes className='text-red-400 text-xl' />
                         <h3 className='font-bold text-lg'>Fail</h3>
@@ -71,7 +71,7 @@ const ABSBenchmarkingLarge : React.FC<ABSBenchmarkingProps>= ({code, pass_list, 
                 </div>
             
 
-                <div className = "flex-1 rounded-md p-2">
+                <div className = "flex-1 rounded-md p-2" data-testid="failSection">
                     <ul className='list-disc pl-5'>
                     {fail_list.map(metric => (
                         <li key = {metric.name} title = {`Calc : ${metric.calc_value} ABS : ${metric.abs_value}`}  
