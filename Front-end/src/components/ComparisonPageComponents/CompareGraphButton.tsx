@@ -90,7 +90,7 @@ interface CompanyDataset {
 }
 
 interface CompareGraphButtonProps {
-  selectedKeys: string[];
+  selectedKeys: string[]; // unique keys like "Revenue__Forecast"
   companyDatasets: CompanyDataset[];
 }
 
@@ -98,79 +98,56 @@ export const CompareGraphButton: React.FC<CompareGraphButtonProps> = ({
   selectedKeys,
   companyDatasets,
 }) => {
-  // Filter to only selected datasets for each company
+  // Build a mapping from dataset uniqueKey -> Dataset for each company
   const filteredCompanyDatasets = companyDatasets.map(({ company, datasets }) => {
     const selected = datasets.filter(
-      (ds) =>
-        selectedKeys.includes(ds.name) ||
-        selectedKeys.includes(ds.metric)
+      (ds) => selectedKeys.includes(`${ds.name}__${ds.metric}`)
     );
     return { company, datasets: selected };
   });
 
-  // For each company, group datasets by metric+unit combo and split into chunks of 4
-  const groupedByCompany: Record<
-    string, // company
-    Record<string, Dataset[][]> // metricKey -> chunks
-  > = {};
-
-  filteredCompanyDatasets.forEach(({ company, datasets }) => {
-    const grouped: Record<string, Dataset[]> = {};
-    datasets.forEach(ds => {
-      const key = `${ds.metric}_${ds.unit}`;
-      if (!grouped[key]) grouped[key] = [];
-      grouped[key].push(ds);
-    });
-
-    const chunked: Record<string, Dataset[][]> = {};
-    Object.entries(grouped).forEach(([key, group]) => {
-      const chunks: Dataset[][] = [];
-      for (let i = 0; i < group.length; i += 4) {
-        chunks.push(group.slice(i, i + 4));
-      }
-      chunked[key] = chunks;
-    });
-
-    groupedByCompany[company] = chunked;
-  });
-
-  // Get all metricKeys across companies
-  const allMetricKeys = Array.from(
+  // Determine all unique keys to display (across companies)
+  const allUniqueKeys = Array.from(
     new Set(
-      Object.values(groupedByCompany)
-        .flatMap(g => Object.keys(g))
+      filteredCompanyDatasets.flatMap(({ datasets }) =>
+        datasets.map((ds) => `${ds.name}__${ds.metric}`)
+      )
     )
   );
 
   return (
-    <div className="space-y-8">
-      {allMetricKeys.map(metricKey => {
-        // Determine how many graphs we need for this metricKey (max chunks across companies)
-        const numGraphs = Math.max(
-          ...Object.values(groupedByCompany).map(g => g[metricKey]?.length || 0)
-        );
+    <div className="space-y-6">
+      {allUniqueKeys.map((uniqueKey) => {
+        const [name, metric] = uniqueKey.split("__");
+        return (
+          <div key={uniqueKey} className="grid grid-cols-2 gap-4 items-stretch">
+            {filteredCompanyDatasets.map(({ company, datasets }) => {
+              // Find the dataset for this uniqueKey
+              const ds = datasets.find(
+                (d) => `${d.name}__${d.metric}` === uniqueKey
+              );
 
-        return Array.from({ length: numGraphs }).map((_, idx) => (
-          <div key={`${metricKey}_${idx}`} className="grid grid-cols-2 gap-6 items-stretch">
-            {filteredCompanyDatasets.map(({ company }) => {
-              const chunks = groupedByCompany[company][metricKey] || [];
-              const datasets = chunks[idx] || [{
-                name: metricKey.split("_")[0],
-                metric: metricKey.split("_")[0] as Metric,
-                unit: metricKey.split("_")[1] as Unit,
-                data: [],
-              }];
+              // If dataset doesn't exist, pass empty placeholder so graph still renders
+              const datasetToPass: Dataset = ds
+                ? ds
+                : {
+                    name,
+                    metric: metric as Metric,
+                    unit: "Benchmark" as Unit,
+                    data: [],
+                  };
+                console.log(ds);
               return (
                 <DataBox
-                  key={`${company}_${metricKey}_${idx}`}
-                  datasets={datasets}
-                  metric={datasets[0].metric}
-                  unit={datasets[0].unit}
+                  key={`${company}_${uniqueKey}`}
+                  datasets={[datasetToPass]}
+                  metric={datasetToPass.metric}
+                  unit={datasetToPass.unit}
                 />
               );
             })}
           </div>
-        ));
+        );
       })}
     </div>
   );

@@ -1,3 +1,5 @@
+import CovenanatsSummary from "./CovenantsSummary/CovenantsSummary.tsx";
+import EGSScore from "./EGSScore/EGSScore.tsx";
 import Graph from "./Graph";
 import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
 import type { Metric } from "./Types/Types.tsx";
@@ -55,13 +57,7 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
         </div>
       );
 
-    case "Duration":
-      return (
-        <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} title={metric}/>
-            <br/>
-        </div>
-      );
+
     case "equities":
       return (
         <div className="flex flex-col">
@@ -129,6 +125,27 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
       return (
         <div className="flex flex-col">
             <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
+    case "EGS":
+      const egsDataset = datasets.find(d => d.name === "EGS Score");
+      return (
+        <div className="flex flex-col">
+            <EGSScore
+              environment={egsDataset?.data.find(d => d.x === "Environmental")?.y}
+              social={egsDataset?.data.find(d => d.x === "Social")?.y}
+            />
+            <br/>
+        </div>
+      );
+
+    case "Covenant Summary":
+      console.log(datasets[0].data[0]);
+      return (
+        <div className="flex flex-col">
+            <CovenanatsSummary applicationId={datasets[0].data[0]}/>
             <br/>
         </div>
       );

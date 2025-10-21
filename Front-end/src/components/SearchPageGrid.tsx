@@ -3,10 +3,10 @@ import EGSScore from "./EGSScore/EGSScore";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Graph from "./Graph"
+import type { Metric } from "./Types/Types";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 // type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmarking" | "Forecast";
-type Metric = "Ratio" | "Revenue" | "Duration" | "Forecast" | "Statement of Cashflow" | "ABS Benchmarking" | "Liabilities" | "Income Statements" | "Equities" | "Financial Statements" | "Key Ratios" | "Working Capital Movements" | "equities" | "liabilities" | "income_statements" |"financial_statements" | "key_ratios" | "working_capital_movements" | "cash_equivalences" | "covenants" | "assets";
 type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 

@@ -133,6 +133,7 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => setExpanded((prev) => !prev);
   const [datasets, setDatasets] = useState<CategoryItem[] | null>(null);
+  console.log(`APP ID = ${JSON.stringify(applicationId, null, 2)}`);
 
   useEffect(() => {
     const loadData = async () => {

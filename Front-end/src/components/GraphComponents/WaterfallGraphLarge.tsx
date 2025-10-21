@@ -1,5 +1,5 @@
 import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
-import type { Metric } from "../../Types/Types";
+import type { Metric } from "../Types/Types";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
@@ -125,7 +125,16 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
                     {/* year and value (needs to be "change", dont change to pv)*/}
                     <div className="flex justify-between">
                       <span>{year}</span>
-                      <span>{change.toLocaleString()}</span>
+                      
+                      <span>
+                        {change !== undefined && change !== null
+                          ? change.toLocaleString()
+                          : (() => {
+                              console.log("Invalid change value:", change, "for year:", year);
+                              return "N/A";
+                            })()
+                        }
+                      </span>
                     </div>
                   </div>
                 );
