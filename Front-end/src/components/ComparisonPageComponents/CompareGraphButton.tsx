@@ -90,7 +90,8 @@ interface CompanyDataset {
 }
 
 interface CompareGraphButtonProps {
-  selectedKeys: string[]; // unique keys like "Revenue__Forecast"
+  // unique keys like "Revenue__Forecast"
+  selectedKeys: string[]; 
   companyDatasets: CompanyDataset[];
 }
 

@@ -136,6 +136,7 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
             <EGSScore
               environment={egsDataset?.data.find(d => d.x === "Environmental")?.y}
               social={egsDataset?.data.find(d => d.x === "Social")?.y}
+              governance={egsDataset?.data.find(d => d.x === "Governance")?.y}
             />
             <br/>
         </div>

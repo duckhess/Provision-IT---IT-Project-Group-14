@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import SideBarFilterButton from './sideBar/SideBarFilterButton';
 import SidebarFilter from './sideBar/SidebarFilter';
 import { GraphButton } from '../GraphButton';
-import type { Metric } from '../../Types/Types';
+import type { Metric } from '../Types/Types';
 import axios from "axios";
 
 // ------------------------------

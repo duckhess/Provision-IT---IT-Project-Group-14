@@ -482,7 +482,7 @@ const transformTimelineForecastMetrics = (
 
   return Object.values(grouped).map((items) => {
     const first = items[0];
-    const finalName = first.AccountDescription ?? first.Metric ?? "Unknown";
+    const finalName = first.AccountDescription ?? first.MetricName ?? "Unknown";
     return {
       name: finalName,
       metric: metricCategory,
@@ -552,12 +552,13 @@ const transformEGS = (companyData: any[]): Dataset[] => {
   const first = companyData[0];
   return [
   {
-    name: "EGS Score",  // single dataset
+    name: "EGS Score",  
     metric: "EGS",
     unit: "%",
     data: [
       { x: "Environmental", y: first.EnvironmentalScore ?? 0},
       { x: "Social", y: first.SocialScore ?? 0},
+      { x: "Governance", y: first.GovernanceScore ?? 0}
     ],
   },
   ];
