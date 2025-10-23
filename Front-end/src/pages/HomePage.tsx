@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";
-import Summary from "../components/BasicSummary"
+import Summary from "../components/Carousel/BasicSummary"
 import SearchBarComponent from "../components/searchBar/SearchBarComponent";
 import axios from "axios";
 

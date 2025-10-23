@@ -1,26 +1,55 @@
 import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
-import type { Metric } from "../../Types/Types";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-
-interface Dataset {
-  name: string;
-  data: { x: number; y: number }[];
-  metric: Metric;
-  unit: Unit;
-}
+import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
   datasets: Dataset[];
-  mergedSets: any[]; // flattened merged data
+  mergedSets: any[]; 
   title: String;
 }
 
 const greenShades = ["#22c55e", "#166534", "#22c55e", "#166534"]; 
 const redShades   = ["#ef4444", "#ef4444", "#ef4444", "#ef4444"];
 
+// function buildWaterfallData(mergedSets: any[]) {
+//   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
+//   const result: any[] = [];
+
+//   keys.forEach((key) => {
+//     let cumulative = 0;
+
+//     mergedSets.forEach((row, i) => {
+//       const value = row[key];
+
+//       if (i === 0) {
+//         result.push({
+//           name: String(row.x), 
+//           key,                 
+//           change: value,
+//           pv: 0,
+//         });
+//         cumulative = value;
+//       } else {
+//         const prevValue = mergedSets[i - 1][key];
+//         const diff = value - prevValue;
+
+//         result.push({
+//           name: String(row.x),
+//           key,
+//           change: diff,
+//           pv: cumulative,
+//         });
+
+//         cumulative += diff;
+//       }
+//     });
+//   });
+
+//   return result;
+// }
+
 function buildWaterfallData(mergedSets: any[]) {
+  if (!mergedSets || mergedSets.length === 0) return [];
+
   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
   const result: any[] = [];
 
@@ -31,9 +60,10 @@ function buildWaterfallData(mergedSets: any[]) {
       const value = row[key];
 
       if (i === 0) {
+        // First value just starts from 0
         result.push({
-          name: String(row.x), 
-          key,                 
+          name: String(row.x),
+          key,
           change: value,
           pv: 0,
         });
@@ -42,11 +72,14 @@ function buildWaterfallData(mergedSets: any[]) {
         const prevValue = mergedSets[i - 1][key];
         const diff = value - prevValue;
 
+        // Adjust baseline for negative changes
+        const baseline = diff >= 0 ? cumulative : cumulative + diff;
+
         result.push({
           name: String(row.x),
           key,
           change: diff,
-          pv: cumulative,
+          pv: baseline,
         });
 
         cumulative += diff;
@@ -57,20 +90,22 @@ function buildWaterfallData(mergedSets: any[]) {
   return result;
 }
 
-const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
+
+const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
+  
   const data = buildWaterfallData(mergedSets);
+
+  // console.log("data = ",data);
 
   // Compute unique metrics in order of appearance
   const metricOrder = Array.from(
     new Set(data.map(entry => entry.key))
   );
-  console.log(metricOrder);
-
-  console.log("merged datasets", mergedSets);
+  //console.log(metricOrder);
 
   return (
-    <div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">
-     <div className ="px-4 w-full">
+    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
+      <div className ="px-4 w-full">
         <h2 className='text-black text-xl font-bold border-b mb-4 inline-block break-words w-full'>
           {title}
         </h2>
@@ -115,6 +150,7 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
               content={({ active, payload }) => {
                 if (!active || !payload || !payload.length) return null;
 
+                // data format : (year, metricName, change, pv)
                 const { name: year, key: metricName, change } = payload[0].payload;
 
                 return (
@@ -125,7 +161,16 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
                     {/* year and value (needs to be "change", dont change to pv)*/}
                     <div className="flex justify-between">
                       <span>{year}</span>
-                      <span>{change.toLocaleString()}</span>
+                      
+                      <span>
+                        {change !== undefined && change !== null
+                          ? change.toLocaleString()
+                          : (() => {
+                              console.log("Invalid change value:", change, "for year:", year);
+                              return "N/A";
+                            })()
+                        }
+                      </span>
                     </div>
                   </div>
                 );
@@ -152,8 +197,10 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
+
+
     </div>
   );
 };
 
-export default WaterfallGraphLarge;
+export default WaterfallGraphSmall;

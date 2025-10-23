@@ -1,28 +1,11 @@
 import { Link } from "react-router-dom";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import type { BackendCompanyData } from "../Types/Types";
 
 type Company = {
   companyId : number;
   companyName : string;
-}
-
-interface BackendCompanyData {
-  CompanyID: number;
-  CompanyName: string;
-  Industry: string;
-  IndustryID: number;
-  ApplicationID: number;
-  YearEstablished: string;
-  Location: string;
-  UsageOfFunds: string;
-  Amount: string;
-  EnvironmentalScore: number;
-  SocialScore: number;
-  ShortGeneralDescription: string;
-  LongGeneralDescription: string;
-  ShortApplicationDescription: string;
-  LongApplicationDescription: string;
 }
 
 type CompanyInfo = {

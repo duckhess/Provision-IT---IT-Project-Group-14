@@ -1,8 +1,8 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import SearchBarComponent from "../components/searchBar/SearchBarComponent";
-import FilterSearchPage from "../components/filterSearchPage/FilterSearchPage";
-import SearchDashboard from "../components/SearchDashboard";
+import FilterSearchPage from "../components/SearchPageComponents/filterSearchPage/FilterSearchPage";
+import SearchDashboard from "../components/SearchPageComponents/SearchDashboard";
 import axios from "axios";
 import {useLocation} from "react-router-dom";
 

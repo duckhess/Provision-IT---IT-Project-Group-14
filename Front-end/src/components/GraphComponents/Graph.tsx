@@ -1,20 +1,10 @@
-import LineGraph from "./GraphComponents/LineGraph";
-import BarGraph from "./GraphComponents/BarGraph";
-import WaterfallGraph from "./GraphComponents/WaterfallGraph";
-import type { Metric } from "./Types/Types.tsx";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-
-interface Dataset {
-  name: string; // label
-  data: { x: number; y: number, extra?:any }[];
-  metric: Metric;
-  unit: Unit;
-}
+import LineGraph from "./LineGraph/LineGraph.tsx";
+import BarGraph from "./BarGraph/BarGraph.tsx";
+import WaterfallGraph from "./WaterfallGraph/WaterfallGraph.tsx";
+import type { Unit, Dataset } from "../Types/Types.tsx";
 
 interface GraphProps {
-  datasets: Dataset[]; // up to 4 datasets
+  datasets: Dataset[]; 
   unit: Unit;
   title: String;
 }
@@ -75,6 +65,11 @@ function Graph({ datasets, unit, title }: GraphProps) {
     case "Times":
       return (
         <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="×" title={title}></BarGraph>
+      );
+
+      case "ratio":
+      return (
+        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="" title={title}></BarGraph>
       );
 
     default:

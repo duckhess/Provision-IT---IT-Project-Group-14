@@ -1,4 +1,4 @@
-import DataBox from "../GraphComponents/DataBox.tsx";
+import DataBox from "./DataBox.tsx";
 import type { Dataset, Metric, Unit, CompanyDataset } from "../Types/Types.tsx";
 import React from "react";
 
@@ -7,7 +7,7 @@ interface CompareGraphButtonProps {
   companyDatasets: CompanyDataset[];
 }
 
-export const CompareGraphButton: React.FC<CompareGraphButtonProps> = ({
+export const GraphButton: React.FC<CompareGraphButtonProps> = ({
   selectedKeys,
   companyDatasets,
 }) => {

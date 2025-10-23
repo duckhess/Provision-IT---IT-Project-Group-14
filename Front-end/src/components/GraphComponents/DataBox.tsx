@@ -1,29 +1,17 @@
-import Graph from "./Graph";
-import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
-import type { Metric } from "./Types/Types.tsx";
-import Covenants from "./filterBusinessPage/Covenants/Covenants.tsx";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-interface Dataset {
-  // label
-  name: string;
-   
-  data: any[];
-  metric: Metric;
-  unit: Unit;
-  metadata?: Record<string, any>;
-}
+import CovenanatsSummary from "./CovenantsSummary/CovenantsSummary.tsx";
+import EGSScore from "./EGSScore/EGSScore.tsx";
+import Graph from "./Graph.tsx";
+import ABSBenchmarking from "./ABSBenchmarkingComponent/ABSBenchmarking.tsx";
+import type { Dataset, Unit, Metric } from "../Types/Types.tsx";
+import Covenants from "../filterBusinessPage/Covenants/Covenants.tsx";
 
 interface GraphProps {
-  datasets: Dataset[]; // up to 4 datasets
+  datasets: Dataset[]; 
   unit: Unit;
-  // section: Section;
   metric: Metric;
 }
 
 function DataBox({ datasets, unit, metric}: GraphProps) {
-  // console.log(metric);
   switch (metric) {
     case "Ratio":
       return (
@@ -55,13 +43,7 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
         </div>
       );
 
-    case "Duration":
-      return (
-        <div className="flex flex-col">
-            <Graph datasets={datasets} unit={unit} title={metric}/>
-            <br/>
-        </div>
-      );
+
     case "equities":
       return (
         <div className="flex flex-col">
@@ -129,6 +111,28 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
       return (
         <div className="flex flex-col">
             <Graph datasets={datasets} unit={unit} title={metric}/>
+            <br/>
+        </div>
+      );
+
+    case "EGS":
+      const egsDataset = datasets.find(d => d.name === "EGS Score");
+      return (
+        <div className="flex flex-col">
+            <EGSScore
+              environment={egsDataset?.data.find(d => d.x === "Environmental")?.y}
+              social={egsDataset?.data.find(d => d.x === "Social")?.y}
+              governance={egsDataset?.data.find(d => d.x === "Governance")?.y}
+            />
+            <br/>
+        </div>
+      );
+
+    case "Covenant Summary":
+      console.log(datasets[0].data[0]);
+      return (
+        <div className="flex flex-col">
+            <CovenanatsSummary applicationId={datasets[0].data[0]}/>
             <br/>
         </div>
       );
