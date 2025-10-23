@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
             <div className="flex flex-col space-y-1 items-end">
                 <Link to = "/profile">Profile Page</Link>
                 <Link to = "/login">Login Page</Link>
-                <Link to = "#">About Page</Link>
+                <a href="#" onClick={(e) => e.preventDefault()}>About Page</a>
             </div>
 
         </div>
