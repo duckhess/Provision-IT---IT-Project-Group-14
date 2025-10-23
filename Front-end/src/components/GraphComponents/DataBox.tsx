@@ -3,7 +3,7 @@ import EGSScore from "./EGSScore/EGSScore.tsx";
 import Graph from "./Graph.tsx";
 import ABSBenchmarking from "./ABSBenchmarkingComponent/ABSBenchmarking.tsx";
 import type { Dataset, Unit, Metric } from "../Types/Types.tsx";
-import Covenants from "../filterBusinessPage/Covenants/Covenants.tsx";
+import Covenants from "./Covenants/Covenants.tsx";
 
 interface GraphProps {
   datasets: Dataset[]; 
