@@ -97,9 +97,6 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
       );
 
     case "covenants":
-      console.log("Name: " + datasets[0].name);
-      console.log("Metrics: " + JSON.stringify(datasets[0].data, null, 2));
-      console.log("3 Yr: " + datasets[0].metadata?.threeYearAvgSuccess);
       return (
         <div className="flex flex-col">
             <Covenants category={datasets[0].name} metric_list={datasets[0].data[0]} threeYearAverageSuccess={datasets[0].metadata?.threeYearAvgSuccess} />
@@ -129,7 +126,6 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
       );
 
     case "Covenant Summary":
-      console.log(datasets[0].data[0]);
       return (
         <div className="flex flex-col">
             <CovenanatsSummary applicationId={datasets[0].data[0]}/>

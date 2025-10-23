@@ -41,8 +41,6 @@ function Graph({ datasets, unit, title }: GraphProps) {
 
   switch (unit) {
     case "%":
-      console.log("Dataset: ", datasets);
-      console.log("Merged Dataset: ", mergedData);
       return (
         <LineGraph datasets={datasets} mergedSets={mergedData} yLabel="%" title={title}></LineGraph>
       );
@@ -59,7 +57,7 @@ function Graph({ datasets, unit, title }: GraphProps) {
 
     case "Ratio":
       return (
-        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="" title={title}></BarGraph>
+        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="Ratio" title={title}></BarGraph>
       );
     
     case "Times":
@@ -69,7 +67,7 @@ function Graph({ datasets, unit, title }: GraphProps) {
 
       case "ratio":
       return (
-        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="" title={title}></BarGraph>
+        <BarGraph datasets={datasets} mergedSets={mergedData} yLabel="Ratio" title={title}></BarGraph>
       );
 
     default:
