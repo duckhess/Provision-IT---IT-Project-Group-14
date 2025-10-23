@@ -56,6 +56,14 @@ const Summary: React.FC<{company: Company}> = ({company}) => {
   
           } catch (err){
             console.error("error fetching companies data",err);
+            setCompanyInfo({
+              title : "no company name",
+              category : "no industry category",
+              description : "no company description",
+              funding : "funding is missing",
+              useOfFunds : "no usage of funds",
+              imageUrl : ""
+            });
           } finally {
             setLoading(false);
           }
