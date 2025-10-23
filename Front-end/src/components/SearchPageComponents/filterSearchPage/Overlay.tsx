@@ -17,9 +17,11 @@ type OverlayProps = {
         location: string
     }>>
     onApplyFilters?:()=>void;
+    industryOptions : string[];
+    locationOptions : string[];
 }
 
-const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters, onApplyFilters}) => {
+const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters, onApplyFilters, industryOptions, locationOptions}) => {
   return (
     <div className='fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50'>
         <div className='relative bg-white w-96 h-96 rounded-2xl shadow-xl flex flex-col p-6'>
@@ -57,13 +59,13 @@ const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters, onApply
 
             <DropdownFilter 
                 title = "Industry" 
-                options = {["Household", "Real estate","Food Processing","Advertising"]}
+                options = {industryOptions}
                 value = {filters.industry}
                 onChange = {(val)=>setFilters(prev=>({...prev, industry: val}))}>
                 </DropdownFilter>
             <DropdownFilter 
                 title = "Location" 
-                options = {["Sydney", "Melbourne", "Brisbane", "Perth"]}
+                options = {locationOptions}
                 value = {filters.location}
                 onChange = {(val)=>setFilters(prev=>({...prev, location: val}))}>
             </DropdownFilter>
