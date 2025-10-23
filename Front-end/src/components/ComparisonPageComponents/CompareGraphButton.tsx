@@ -1,6 +1,6 @@
-import React from "react";
 import DataBox from "../GraphComponents/DataBox.tsx";
-import type { Metric, Unit, Dataset, CompanyDataset } from "../Types/Types.tsx";
+import type { Dataset, Metric, Unit, CompanyDataset } from "../Types/Types.tsx";
+import React from "react";
 
 interface CompareGraphButtonProps {
   selectedKeys: string[]; 
@@ -11,56 +11,85 @@ export const CompareGraphButton: React.FC<CompareGraphButtonProps> = ({
   selectedKeys,
   companyDatasets,
 }) => {
-  // Build a mapping from dataset uniqueKey -> Dataset for each company
+  // Filter datasets to match selected name__metric keys
   const filteredCompanyDatasets = companyDatasets.map(({ company, datasets }) => {
-    const selected = datasets.filter(
-      (ds) => selectedKeys.includes(`${ds.name}__${ds.metric}`)
+    const selected = datasets.filter((ds) =>
+      selectedKeys.includes(`${ds.name}__${ds.metric}`)
     );
     return { company, datasets: selected };
   });
 
-  // Determine all unique keys to display (across companies)
-  const allUniqueKeys = Array.from(
+  // Group by metric+unit combo per company, chunk into 4s for layout
+  const groupedByCompany: Record<
+    string, // company name
+    Record<string, Dataset[][]> // metricKey -> chunks
+  > = {};
+
+  filteredCompanyDatasets.forEach(({ company, datasets }) => {
+    const grouped: Record<string, Dataset[]> = {};
+    datasets.forEach((ds) => {
+      const key = `${ds.metric}_${ds.unit}`;
+      if (!grouped[key]) grouped[key] = [];
+      grouped[key].push(ds);
+    });
+
+    const chunked: Record<string, Dataset[][]> = {};
+    Object.entries(grouped).forEach(([key, group]) => {
+      const chunks: Dataset[][] = [];
+      for (let i = 0; i < group.length; i += 4) {
+        chunks.push(group.slice(i, i + 4));
+      }
+      chunked[key] = chunks;
+    });
+
+    groupedByCompany[company] = chunked;
+  });
+
+  // Collect all unique metric/unit combinations across companies
+  const allMetricKeys = Array.from(
     new Set(
-      filteredCompanyDatasets.flatMap(({ datasets }) =>
-        datasets.map((ds) => `${ds.name}__${ds.metric}`)
-      )
+      Object.values(groupedByCompany).flatMap((g) => Object.keys(g))
     )
   );
 
+  // Render each metric/unit group as grid of DataBoxes
   return (
-    <div className="space-y-6">
-      {allUniqueKeys.map((uniqueKey) => {
-        const [name, metric] = uniqueKey.split("__");
-        return (
-          <div key={uniqueKey} className="grid grid-cols-2 gap-4 items-stretch">
-            {filteredCompanyDatasets.map(({ company, datasets }) => {
-              // Find the dataset for this uniqueKey
-              const ds = datasets.find(
-                (d) => `${d.name}__${d.metric}` === uniqueKey
-              );
-
-              // If dataset doesn't exist, pass empty placeholder so graph still renders
-              const datasetToPass: Dataset = ds
-                ? ds
-                : {
-                    name,
-                    metric: metric as Metric,
-                    unit: "Benchmark" as Unit,
-                    data: [],
-                  };
-                console.log(ds);
-              return (
-                <DataBox
-                  key={`${company}_${uniqueKey}`}
-                  datasets={[datasetToPass]}
-                  metric={datasetToPass.metric}
-                  unit={datasetToPass.unit}
-                />
-              );
-            })}
-          </div>
+    <div className="grid grid-cols-2 gap-6">
+      {allMetricKeys.map((metricKey) => {
+        const numGraphs = Math.max(
+          ...Object.values(groupedByCompany).map(
+            (g) => g[metricKey]?.length || 0
+          )
         );
+
+        return Array.from({ length: numGraphs }).map((_, idx) => {
+          return filteredCompanyDatasets.map(({ company }) => {
+            const chunks = groupedByCompany[company][metricKey] || [];
+            const datasetsForGraph =
+              chunks[idx] ||
+              [
+                {
+                  name: metricKey.split("_")[0],
+                  metric: metricKey.split("_")[0] as Metric,
+                  unit: metricKey.split("_")[1] as Unit,
+                  data: [],
+                },
+              ];
+
+            return (
+              <div
+                key={`${company}_${metricKey}_${idx}`}
+                className="w-full h-full"
+              >
+                <DataBox
+                  datasets={datasetsForGraph}
+                  metric={datasetsForGraph[0].metric}
+                  unit={datasetsForGraph[0].unit}
+                />
+              </div>
+            );
+          });
+        });
       })}
     </div>
   );

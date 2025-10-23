@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import type { BackendCompanyData } from './Types/Types';
+import type { BackendCompanyData } from '../Types/Types';
 import axios from "axios";
 
 interface CompanyCardProps {

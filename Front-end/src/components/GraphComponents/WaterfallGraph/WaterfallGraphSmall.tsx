@@ -10,7 +10,46 @@ interface GraphProps {
 const greenShades = ["#22c55e", "#166534", "#22c55e", "#166534"]; 
 const redShades   = ["#ef4444", "#ef4444", "#ef4444", "#ef4444"];
 
+// function buildWaterfallData(mergedSets: any[]) {
+//   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
+//   const result: any[] = [];
+
+//   keys.forEach((key) => {
+//     let cumulative = 0;
+
+//     mergedSets.forEach((row, i) => {
+//       const value = row[key];
+
+//       if (i === 0) {
+//         result.push({
+//           name: String(row.x), 
+//           key,                 
+//           change: value,
+//           pv: 0,
+//         });
+//         cumulative = value;
+//       } else {
+//         const prevValue = mergedSets[i - 1][key];
+//         const diff = value - prevValue;
+
+//         result.push({
+//           name: String(row.x),
+//           key,
+//           change: diff,
+//           pv: cumulative,
+//         });
+
+//         cumulative += diff;
+//       }
+//     });
+//   });
+
+//   return result;
+// }
+
 function buildWaterfallData(mergedSets: any[]) {
+  if (!mergedSets || mergedSets.length === 0) return [];
+
   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
   const result: any[] = [];
 
@@ -21,9 +60,10 @@ function buildWaterfallData(mergedSets: any[]) {
       const value = row[key];
 
       if (i === 0) {
+        // First value just starts from 0
         result.push({
-          name: String(row.x), 
-          key,                 
+          name: String(row.x),
+          key,
           change: value,
           pv: 0,
         });
@@ -32,11 +72,14 @@ function buildWaterfallData(mergedSets: any[]) {
         const prevValue = mergedSets[i - 1][key];
         const diff = value - prevValue;
 
+        // Adjust baseline for negative changes
+        const baseline = diff >= 0 ? cumulative : cumulative + diff;
+
         result.push({
           name: String(row.x),
           key,
           change: diff,
-          pv: cumulative,
+          pv: baseline,
         });
 
         cumulative += diff;
@@ -46,6 +89,7 @@ function buildWaterfallData(mergedSets: any[]) {
 
   return result;
 }
+
 
 const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
   

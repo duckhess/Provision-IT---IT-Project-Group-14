@@ -268,7 +268,7 @@ const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
       }
     }
 
-    // ✅ Append Covenant Summary dataset (not fetched, but synthetic)
+    // Append Covenant Summary dataset (not fetched, but synthetic)
     datasets.push(createCovenantSummaryDataset(applicationId));
 
     return datasets;

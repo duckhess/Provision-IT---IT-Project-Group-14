@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import CompanyCard from '../CompanyCard.tsx';
+import CompanyCard from './CompanyCard.tsx';
 import Summary from '../Carousel/BasicSummary.tsx';
 import SearchPageGrid from './SearchPageGrid.tsx';
 

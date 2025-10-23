@@ -1,11 +1,6 @@
 import DataBox from "./DataBox.tsx";
-import type { Dataset, Metric, Unit } from "../Types/Types.tsx";
+import type { Dataset, Metric, Unit, CompanyDataset } from "../Types/Types.tsx";
 import React from "react";
-
-interface CompanyDataset {
-  company: string;
-  datasets: Dataset[];
-}
 
 interface CompareGraphButtonProps {
   selectedKeys: string[]; 
