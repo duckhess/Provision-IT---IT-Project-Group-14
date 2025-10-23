@@ -1,31 +1,17 @@
 import CovenanatsSummary from "./CovenantsSummary/CovenantsSummary.tsx";
 import EGSScore from "./EGSScore/EGSScore.tsx";
-import Graph from "./Graph";
-import ABSBenchmarking from "./GraphComponents/ABSBenchmarkingComponent/ABSBenchmarking";
-import type { Metric } from "./Types/Types.tsx";
-import Covenants from "./filterBusinessPage/Covenants/Covenants.tsx";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-interface Dataset {
-  // label
-  name: string;
-   
-  data: any[];
-  metric: Metric;
-  unit: Unit;
-  metadata?: Record<string, any>;
-}
+import Graph from "./Graph.tsx";
+import ABSBenchmarking from "./ABSBenchmarkingComponent/ABSBenchmarking.tsx";
+import type { Dataset, Unit, Metric } from "../Types/Types.tsx";
+import Covenants from "../filterBusinessPage/Covenants/Covenants.tsx";
 
 interface GraphProps {
-  datasets: Dataset[]; // up to 4 datasets
+  datasets: Dataset[]; 
   unit: Unit;
-  // section: Section;
   metric: Metric;
 }
 
 function DataBox({ datasets, unit, metric}: GraphProps) {
-  // console.log(metric);
   switch (metric) {
     case "Ratio":
       return (

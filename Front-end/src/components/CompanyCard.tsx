@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import type { BackendCompanyData } from './Types/Types';
 import axios from "axios";
 
 interface CompanyCardProps {
@@ -12,24 +13,6 @@ interface CompanyCardProps {
 interface CompanyCardInfo {
   projectShortDescription: string;
   estDate: string;
-}
-
-interface BackendCompanyData {
-  CompanyID: number;
-  CompanyName: string;
-  Industry: string;
-  IndustryID: number;
-  ApplicationID: number;
-  YearEstablished: string;
-  Location: string;
-  UsageOfFunds: string;
-  Amount: string;
-  EnvironmentalScore: number;
-  SocialScore: number;
-  ShortGeneralDescription: string;
-  LongGeneralDescription: string;
-  ShortApplicationDescription: string;
-  LongApplicationDescription: string;
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, isActive }) => {

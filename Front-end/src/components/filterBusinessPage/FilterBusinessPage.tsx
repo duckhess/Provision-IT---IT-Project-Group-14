@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import SideBarFilterButton from './sideBar/SideBarFilterButton';
 import SidebarFilter from './sideBar/SidebarFilter';
-import { GraphButton } from '../GraphButton';
-import type { Metric } from '../Types/Types';
+import { GraphButton } from '../GraphComponents/GraphButton';
+import type { Metric, Unit, Dataset } from '../Types/Types';
 import axios from "axios";
 
 /* -------------------- TYPES -------------------- */
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
 const endpoints = [
   "abs_benchmarkings",
@@ -23,13 +21,6 @@ const endpoints = [
   "covenants",
 ];
 
-interface Dataset {
-  name: string;
-  data: any[];
-  metric: Metric;
-  unit: Unit;
-  metadata?: Record<string, any>;
-}
 
 interface Company {
   companyId: number;

@@ -1,19 +1,9 @@
 import { ResponsiveContainer, BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Cell } from "recharts";
-import type { Metric } from "../Types/Types";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-
-interface Dataset {
-  name: string;
-  data: { x: number; y: number }[];
-  metric: Metric;
-  unit: Unit;
-}
+import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
   datasets: Dataset[];
-  mergedSets: any[]; // flattened merged data
+  mergedSets: any[]; 
   title: String;
 }
 
@@ -57,20 +47,21 @@ function buildWaterfallData(mergedSets: any[]) {
   return result;
 }
 
-const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
+const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
+  
   const data = buildWaterfallData(mergedSets);
+
+  // console.log("data = ",data);
 
   // Compute unique metrics in order of appearance
   const metricOrder = Array.from(
     new Set(data.map(entry => entry.key))
   );
-  console.log(metricOrder);
-
-  console.log("merged datasets", mergedSets);
+  //console.log(metricOrder);
 
   return (
-    <div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">
-     <div className ="px-4 w-full">
+    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
+      <div className ="px-4 w-full">
         <h2 className='text-black text-xl font-bold border-b mb-4 inline-block break-words w-full'>
           {title}
         </h2>
@@ -115,6 +106,7 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
               content={({ active, payload }) => {
                 if (!active || !payload || !payload.length) return null;
 
+                // data format : (year, metricName, change, pv)
                 const { name: year, key: metricName, change } = payload[0].payload;
 
                 return (
@@ -161,8 +153,10 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
+
+
     </div>
   );
 };
 
-export default WaterfallGraphLarge;
+export default WaterfallGraphSmall;

@@ -1,18 +1,8 @@
 import { ResponsiveContainer, LineChart, CartesianGrid, Line, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-import type { Metric } from "../../Types/Types";
-
-
-interface Dataset {
-  name: string; // label
-  data: { x: number; y: number }[];
-  metric: Metric;
-  unit: Unit;
-}
+import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
-  datasets: Dataset[]; // up to 4 datasets
+  datasets: Dataset[]; 
   mergedSets: Dataset[];
   yLabel: String;
   title: String;
@@ -20,12 +10,12 @@ interface GraphProps {
 
 const colors = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300"];
 
-const LineGraphLarge = ({ datasets, mergedSets, yLabel, title }: GraphProps) => {
+const LineGraphSmall = ({ datasets, mergedSets, yLabel, title }: GraphProps) => {
   return (
 
     
-<div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">
-  <div className ="px-4 w-full">
+<div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
+    <div className ="px-4 w-full">
       <h2 className='text-black text-xl font-bold border-b mb-4 inline-block'>
         {title}
       </h2>
@@ -55,4 +45,4 @@ const LineGraphLarge = ({ datasets, mergedSets, yLabel, title }: GraphProps) => 
   )
 }
 
-export default LineGraphLarge
+export default LineGraphSmall

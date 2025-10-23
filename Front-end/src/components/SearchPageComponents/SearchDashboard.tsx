@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
-import CompanyCard from '../components/CompanyCard';
-import Summary from '../components/BasicSummary';
+import CompanyCard from '../CompanyCard.tsx';
+import Summary from '../Carousel/BasicSummary.tsx';
 import SearchPageGrid from './SearchPageGrid.tsx';
 
 interface receivedCompaniesProps {

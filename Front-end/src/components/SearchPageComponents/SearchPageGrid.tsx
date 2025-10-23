@@ -1,13 +1,11 @@
-import CovenanatsSummary from "./CovenantsSummary/CovenantsSummary";
-import EGSScore from "./EGSScore/EGSScore";
+import CovenanatsSummary from "../GraphComponents/CovenantsSummary/CovenantsSummary";
+import EGSScore from "../GraphComponents/EGSScore/EGSScore";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Graph from "./Graph"
-import type { Metric } from "./Types/Types";
+import Graph from "../GraphComponents/Graph"
+import type { Metric } from "../Types/Types";
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-// type Metric = "Ratio" | "Revenue" | "Duration" | "ABS Benchmarking" | "Forecast";
-type Section = "Ratio" | "ABS Benchmarking" | "Statement of Cashflow" | "Forecast";
 
 
 interface BackendCompanyData {
@@ -73,11 +71,6 @@ interface Dataset{
   unit : Unit;
 }
 
-// interface Data{
-//   datasets : Dataset[];
-//   unit : string;
-//   title : string;
-// }
 
 const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
@@ -149,11 +142,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
         const dataNeeded : Dataset[] = backendData.map(metric => ({
           name : metric.MetricName,
           data : metric.Data
-          // .map(d=>({
-          //   x:Number(d.Timeline),
-          //   y:Number(d.Value),
-          // })).filter(
-          //   d=>!isNaN(d.x) && !isNaN(d.y)),
           .filter(d=>typeof d.Timeline==="number" && typeof d.Value==="number")
           .map(d=>({x:d.Timeline, y:d.Value})),
           metric : metric.Table as Metric,

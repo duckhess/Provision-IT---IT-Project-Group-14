@@ -1,23 +1,8 @@
 import React from "react";
-import DataBox from "../DataBox";
-import type { Metric } from "../Types/Types.tsx";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-interface Dataset {
-  name: string;
-  data: any[];
-  metric: Metric;
-  unit: Unit;
-}
-
-interface CompanyDataset {
-  company: string;
-  datasets: Dataset[];
-}
+import DataBox from "../GraphComponents/DataBox.tsx";
+import type { Metric, Unit, Dataset, CompanyDataset } from "../Types/Types.tsx";
 
 interface CompareGraphButtonProps {
-  // unique keys like "Revenue__Forecast"
   selectedKeys: string[]; 
   companyDatasets: CompanyDataset[];
 }

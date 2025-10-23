@@ -1,20 +1,10 @@
 import { useState } from "react";
 import LineGraphSmall from "./LineGraphSmall";
 import LineGraphLarge from "./LineGraphLarge";
-import type { Metric } from "../../Types/Types";
-
-type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
-
-
-interface Dataset {
-  name: string; // label
-  data: { x: number; y: number }[];
-  metric: Metric;
-  unit: Unit;
-}
+import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
-  datasets: Dataset[]; // up to 4 datasets
+  datasets: Dataset[]; 
   mergedSets: Dataset[];
   yLabel: String;
   title: String;
