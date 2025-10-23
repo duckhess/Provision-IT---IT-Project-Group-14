@@ -5,9 +5,7 @@ import { GraphButton } from '../GraphButton';
 import type { Metric } from '../Types/Types';
 import axios from "axios";
 
-// ------------------------------
-// Types
-// ------------------------------
+/* -------------------- TYPES -------------------- */
 
 type Unit = "%" | "$" | "days" | "Benchmark" | "Times" | "Ratio";
 
@@ -101,12 +99,12 @@ const transformTimelineMetricsPerCompany = (
     grouped[id].push(item);
   });
 
-return Object.values(grouped).map((items) => {
+  return Object.values(grouped).map((items) => {
     const first = items[0];
-
-    // Try to detect possible x/y field names automatically
-    const xKey = ["Timeline", "Period", "Year", "Date"].find((k) => k in first) ?? "Period";
-    const yKey = ["Value", "Amount", "Balance", "Val"].find((k) => k in first) ?? "Value";
+    const xKey =
+      ["Timeline", "Period", "Year", "Date"].find((k) => k in first) ?? "Period";
+    const yKey =
+      ["Value", "Amount", "Balance", "Val"].find((k) => k in first) ?? "Value";
 
     const data = items.map((d) => ({
       x: Number(d[xKey]),
@@ -114,11 +112,12 @@ return Object.values(grouped).map((items) => {
     }));
 
     return {
-      name: first.MetricName ??
-    first.Metric ??
-    first.AccountDescription ?? 
-    first.accountDescription ??
-    endpoint,
+      name:
+        first.MetricName ??
+        first.Metric ??
+        first.AccountDescription ??
+        first.accountDescription ??
+        endpoint,
       metric: endpoint as Metric,
       unit: first.Unit as Unit,
       data,
@@ -148,23 +147,22 @@ const transformTimelineForecastMetrics = (
 
   return Object.values(grouped).map((items) => {
     const first = items[0];
-
-    // Safely handle both “Avg Historical Forecast” and “Avg Hist Forecast”
     const avgHistoricalForecast =
       first["Avg Historical Forecast"] ??
       first["Avg Hist Forecast"] ??
       null;
 
     return {
-      name: first.AccountDescription ?? first.Metric ?? first.MetricName ?? "Unknown",
+      name:
+        first.AccountDescription ?? first.Metric ?? first.MetricName ?? "Unknown",
       metric: metricCategory,
       unit: first.Unit as Unit,
       data: [
         { x: "Avg Historical Forecast", y: avgHistoricalForecast },
         { x: "User Forecast", y: first["User Forecast"] },
       ],
-  };
- });
+    };
+  });
 };
 
 /* -------------------- COVENANTS -------------------- */
@@ -174,31 +172,29 @@ const transformCovenants = (
   keyRatios: Dataset[]
 ): CovenantDataset[] => {
   const groupedByCategory: Record<string, any[]> = {};
-  covenantsRaw.forEach(item => {
+  covenantsRaw.forEach((item) => {
     const category = item.Category ?? "Uncategorized";
     if (!groupedByCategory[category]) groupedByCategory[category] = [];
     groupedByCategory[category].push(item);
   });
 
   return Object.entries(groupedByCategory).map(([category, items]) => {
-    const metricList = items.map(item => ({
+    const metricList = items.map((item) => ({
       name: item.MetricName,
       pass: item.Analysis,
       calc_value: Number(item.Value),
       abs_value: item.Benchmark,
     }));
 
-    // Calculate threeYearAvgSuccess
     let passCount = 0;
-    metricList.forEach(metric => {
-      if (!metric.name) return; // skip if metric name is undefined/null
-      const kr = keyRatios.find(k => {
-        if (!k.name) return false; // skip if key ratio name is undefined
+    metricList.forEach((metric) => {
+      if (!metric.name) return;
+      const kr = keyRatios.find((k) => {
+        if (!k.name) return false;
         return k.name.trim().toLowerCase() === metric.name.trim().toLowerCase();
       });
       if (kr && kr.data.length > 0) {
-        const avg =
-          kr.data.reduce((sum, d) => sum + d.y, 0) / kr.data.length;
+        const avg = kr.data.reduce((sum, d) => sum + d.y, 0) / kr.data.length;
         const latest = kr.data[kr.data.length - 1].y;
         if (avg > latest) passCount += 1;
       }
@@ -217,6 +213,15 @@ const transformCovenants = (
   });
 };
 
+/* -------------------- SYNTHETIC METRIC: COVENANT SUMMARY -------------------- */
+
+const createCovenantSummaryDataset = (applicationId: number): Dataset => ({
+  name: "Covenant Summary",
+  data: [applicationId],
+  metric: "Covenant Summary" as Metric,
+  unit: "%" as Unit,
+});
+
 /* -------------------- FETCH -------------------- */
 
 const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
@@ -229,7 +234,6 @@ const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
     );
     const responses = await Promise.all(requests);
 
-    // Extract key_ratios for use in covenants
     const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
     const keyRatios = keyRatiosRes?.data ?? [];
 
@@ -246,12 +250,22 @@ const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
           break;
         case "forecasts":
           datasets.push(
-            ...transformTimelineForecastMetrics(data, companyId, "Forecast", "ForecastID")
+            ...transformTimelineForecastMetrics(
+              data,
+              companyId,
+              "Forecast",
+              "ForecastID"
+            )
           );
           break;
         case "working_capital_movements":
           datasets.push(
-            ...transformTimelineForecastMetrics(data, companyId, "working_capital_movements", "CapitalID")
+            ...transformTimelineForecastMetrics(
+              data,
+              companyId,
+              "working_capital_movements",
+              "CapitalID"
+            )
           );
           break;
         case "covenants":
@@ -263,6 +277,9 @@ const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
       }
     }
 
+    // ✅ Append Covenant Summary dataset (not fetched, but synthetic)
+    datasets.push(createCovenantSummaryDataset(applicationId));
+
     return datasets;
   } catch (err) {
     console.error(`Error fetching datasets for company ${companyId}:`, err);
@@ -270,24 +287,22 @@ const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
   }
 };
 
+/* -------------------- MAIN COMPONENT -------------------- */
 
-
-// dont change anything here, this is working good 
-const FilterBusinessPage : React.FC<FilterBusinessPageProps> = ({companyA}) => {
+const FilterBusinessPage: React.FC<FilterBusinessPageProps> = ({ companyA }) => {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
-  const [selectedDataSets, setSelectedDataSets] = useState<Dataset[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [companyMetric, setCompanyMetric] = useState<Company | null>(null);
   const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async() => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        if(companyA?.companyId){
+        if (companyA?.companyId) {
           const dataSetsA = await fetchCompanyDatasets(companyA.companyId);
-          setCompanyMetric({...companyA, datasets: dataSetsA});
+          setCompanyMetric({ ...companyA, datasets: dataSetsA });
         }
       } finally {
         setLoading(false);
@@ -296,40 +311,26 @@ const FilterBusinessPage : React.FC<FilterBusinessPageProps> = ({companyA}) => {
     fetchData();
   }, [companyA]);
 
-  useEffect(() => {
-    console.log("selected data sets: ", companyMetric);
-  })
+  const companyDatasets: CompanyDataset[] = [
+    {
+      company: companyMetric?.companyName ?? "Company A",
+      datasets: companyMetric?.datasets ?? [],
+    },
+  ];
 
-  const companyDatasets : CompanyDataset[] = [{
-    company : companyMetric?.companyName ?? "Company A",
-    datasets : companyMetric?.datasets ?? [],
-  }]
-
-  useEffect(() => {
-    console.log("selected data sets: ", companyDatasets);
-  })
-
-  const allDatasets: Dataset[] = [];
+  // --- 🔹 Build allDatasets list for SidebarFilter (unique name__metric keys)
+  const allDatasets: (Dataset & { uniqueKey: string })[] = [];
   const seen = new Set<string>();
 
-  console.log("CompanyDatasets Raw:", companyDatasets);
   companyDatasets.forEach(({ datasets }) => {
     datasets.forEach((ds) => {
-    const cleanName = ds.name?.trim().toLowerCase(); // normalize
-    if (!cleanName) return; // skip undefined or empty names
-
-      if (!seen.has(cleanName)) {
-        allDatasets.push({
-          name: ds.name,
-          metric: ds.metric,
-          unit: ds.unit,
-          data: [],
-        });
-        seen.add(ds.name);
+      const uniqueKey = `${ds.name}__${ds.metric}`;
+      if (!seen.has(uniqueKey)) {
+        allDatasets.push({ ...ds, uniqueKey });
+        seen.add(uniqueKey);
       }
     });
   });
-
 
   const handleToggleSelection = (key: string) => {
     setSelectedKeys((prev) =>
@@ -342,33 +343,23 @@ const FilterBusinessPage : React.FC<FilterBusinessPageProps> = ({companyA}) => {
     setSidebarOpen(false);
   };
 
-  // const handleGenerate = () => {
-  //   const selected = dummyData.filter((d) => selectedKeys.includes(d.name));
-  //   setSelectedDataSets(selected);
-  //   setSidebarOpen(false);
-  // };
-
-  console.log("company datasets ", companyDatasets);
-  console.log("")
-
   return (
     <div className="grid grid-rows-[35px]">
       <div>
         <SideBarFilterButton onClick={() => setSidebarOpen(!sidebarOpen)} />
 
-      {sidebarOpen && (
-        <SidebarFilter
-          onClose={handleGenerate}
-          datasets={allDatasets} // simplified: just pass all dataset names
-          selectedKeys={selectedKeys}
-          toggleSelection={handleToggleSelection}
-        />
-      )}
+        {sidebarOpen && (
+          <SidebarFilter
+            onClose={handleGenerate}
+            datasets={allDatasets}
+            selectedKeys={selectedKeys}
+            toggleSelection={handleToggleSelection}
+          />
+        )}
       </div>
-      
-      <div className="flex-1 p-4">
-        {finalSelectedKeys.length > 0 && companyA  && (
 
+      <div className="flex-1 p-4">
+        {finalSelectedKeys.length > 0 && companyA && (
           <GraphButton
             selectedKeys={finalSelectedKeys}
             companyDatasets={companyDatasets}
