@@ -170,15 +170,16 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
 
     return (
         <div>
-            <FilterButton onClick={()=>setShowOverlay(true)}></FilterButton>
+            <FilterButton data-testid="filterButton" onClick={()=>setShowOverlay(true)}></FilterButton>
             {showOverlay && 
             <Overlay 
-              onClose={()=>setShowOverlay(false)}
-              filters = {filters}
-              setFilters = {setFilters}
-              industryOptions={industryOptions}
-              locationOptions={locationOptions}
-              onApplyFilters={()=>{
+            data-testid="overlay"
+            onClose={()=>setShowOverlay(false)}
+            filters = {filters}
+            setFilters = {setFilters}
+            industryOptions={industryOptions}
+            locationOptions={locationOptions}
+            onApplyFilters={()=>{
                 applyFilters();
                 setShowOverlay(false);
               }}>

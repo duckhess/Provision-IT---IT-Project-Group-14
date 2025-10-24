@@ -23,7 +23,7 @@ type OverlayProps = {
 
 const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters, onApplyFilters, industryOptions, locationOptions}) => {
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50'>
+    <div data-testid="overlay" className='fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50'>
         <div className='relative bg-white w-96 h-96 rounded-2xl shadow-xl flex flex-col p-6'>
             {/* close button */}
             <button 
