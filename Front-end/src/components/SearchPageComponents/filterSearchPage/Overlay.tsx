@@ -28,13 +28,15 @@ const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters, onApply
             {/* close button */}
             <button 
             onClick = {onClose}
-            className = "absolute top-3 right-3 text-gray-500 hover:text-gray-700">
+            className = "absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+            data-testid="closeButton">
                 <FiX size={24}></FiX>
             </button>
             
             <h2 className='text-xl font-bold mb-4'>Please apply the filters below </h2>
 
             <DropdownFilter 
+                data-testid="filterFundNeeded"
                 title = "Fund Needed" 
                 options = {["Below $1,500,000", "$1,500,000-$3,000,000", "Above $3,000,000"]}
                 value = {
@@ -58,12 +60,15 @@ const  Overlay : React.FC<OverlayProps>= ({onClose, filters, setFilters, onApply
             </DropdownFilter>
 
             <DropdownFilter 
+                data-testid="filterIndustry"
                 title = "Industry" 
                 options = {industryOptions}
                 value = {filters.industry}
                 onChange = {(val)=>setFilters(prev=>({...prev, industry: val}))}>
-                </DropdownFilter>
+            </DropdownFilter>
+
             <DropdownFilter 
+                data-testid="filterLocation"
                 title = "Location" 
                 options = {locationOptions}
                 value = {filters.location}

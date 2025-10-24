@@ -5,9 +5,10 @@ type DropdownFilterProps = {
     options : string[]
     value: string
     onChange : (value: string) =>void
+    'data-testid' ?: string;
 }
 
-const DropdownFilter:React.FC<DropdownFilterProps>= ({title, options, value, onChange }) => {
+const DropdownFilter:React.FC<DropdownFilterProps>= ({title, options, value, onChange, 'data-testid':testId}) => {
   
     const [open, setOpen] = useState(false)
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -34,7 +35,7 @@ const DropdownFilter:React.FC<DropdownFilterProps>= ({title, options, value, onC
     }
 
     return (
-    <div className='flex flex-col mb-4 relative' ref = {dropdownRef}>
+    <div className='flex flex-col mb-4 relative' ref = {dropdownRef} data-testid={testId} >
         <label className='mb-2 font-medium'>{title}</label>
 
         <div
