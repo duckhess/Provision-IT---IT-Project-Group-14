@@ -45,6 +45,10 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
 
         } catch (err){
           console.error("error fetching companies data",err);
+          setCompanyCardDetails({
+            projectShortDescription: "No description available",
+            estDate : 'N/A',
+          });
         } finally {
           setLoading(false);
         }
