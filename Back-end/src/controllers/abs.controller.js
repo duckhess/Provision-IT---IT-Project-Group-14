@@ -1,6 +1,6 @@
 import { filter_abs } from "../services/abs.service.js";
 
-export const fetch_abs_controller = async (req, res) => {
+export const fetch_abs = async (req, res) => {
   try {
     const filter_queries = {};
     for (const key in req.query) {

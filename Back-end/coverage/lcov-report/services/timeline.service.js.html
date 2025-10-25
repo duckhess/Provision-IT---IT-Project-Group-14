@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,40 +88,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import timeline_schema from "../models/timelines.js";
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >get_period(</span>file_ids = <span class="branch-0 cbranch-no" title="branch not covered" >[])</span> {
+export async function get_period(file_ids = []) {
   // file_ids expected to be an array of numbers
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!Array.isArray(file_ids) || file_ids.length === 0) {</span>
-<span class="cstat-no" title="statement not covered" >    return new Map(); </span>// return empty map if no file_ids
+  if (!Array.isArray(file_ids) || file_ids.length === 0) {
+    return new Map(); // return empty map if no file_ids
   }
 &nbsp;
   // Query Timelines collection with the FileIDs
-  const timelines = <span class="cstat-no" title="statement not covered" >await timeline_schema.find({ FileID: { $in: file_ids } }).lean();</span>
+  const timelines = await timeline_schema.find({ FileID: { $in: file_ids } }).lean();
 &nbsp;
   // Map FileID =&gt; period
-  const period_map = <span class="cstat-no" title="statement not covered" >new Map();</span>
-<span class="cstat-no" title="statement not covered" >  timelines.forEach(<span class="fstat-no" title="function not covered" >(d</span>oc) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    period_map.set(doc.FileID, doc.period);</span>
+  const period_map = new Map();
+  timelines.forEach((doc) =&gt; {
+    period_map.set(doc.FileID, doc.period);
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return period_map;</span>
+  return period_map;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -130,7 +130,7 @@ export async function <span class="fstat-no" title="function not covered" >get_p
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T15:24:46.595Z
+                at 2025-10-25T17:07:15.518Z
             </div>
         <script src="../prettify.js"></script>
         <script>

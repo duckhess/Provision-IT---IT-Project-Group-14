@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>8/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,25 +101,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,26 +133,26 @@
 import financial_values_schema from "../models/financial_statements_values.js";
 import { get_period } from "./timeline.service.js";
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >filter_statements(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
-  const matching_params = <span class="cstat-no" title="statement not covered" >{};</span>
+export async function filter_statements(filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+  const matching_params = {};
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (filters.financialid) <span class="cstat-no" title="statement not covered" >matching_params.FinancialID = Number(filters.financialid);</span></span>
-<span class="cstat-no" title="statement not covered" >  if (filters.applicationid) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid);</span></span>
-<span class="cstat-no" title="statement not covered" >  if (filters.fileid) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid);</span></span>
+  if (filters.financialid) matching_params.FinancialID = Number(filters.financialid);
+  if (filters.applicationid) matching_params.ApplicationID = Number(filters.applicationid);
+  if (filters.fileid) matching_params.FileID = Number(filters.fileid);
 &nbsp;
-  const value = <span class="cstat-no" title="statement not covered" >await financial_values_schema.find(matching_params).lean();</span>
+  const value = await financial_values_schema.find(matching_params).lean();
 &nbsp;
-  const document = <span class="cstat-no" title="statement not covered" >await financial_schema.find().lean();</span>
-  const mapped_document = <span class="cstat-no" title="statement not covered" >new Map();</span>
-<span class="cstat-no" title="statement not covered" >  document.forEach(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; <span class="cstat-no" title="statement not covered" >mapped_document.set(f.FinancialID, f))</span>;</span>
+  const document = await financial_schema.find().lean();
+  const mapped_document = new Map();
+  document.forEach((f) =&gt; mapped_document.set(f.FinancialID, f));
 &nbsp;
   // ✅ rename for ESLint
-  const file_ids = <span class="cstat-no" title="statement not covered" >[...new Set(value.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)];</span>
-  const timeline_map = <span class="cstat-no" title="statement not covered" >await get_period(file_ids);</span>
+  const file_ids = [...new Set(value.map((v) =&gt; v.FileID))];
+  const timeline_map = await get_period(file_ids);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return value.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; {</span>
-    const financials = <span class="cstat-no" title="statement not covered" >mapped_document.get(v.FinancialID);</span>
-<span class="cstat-no" title="statement not covered" >    return {</span>
+  return value.map((v) =&gt; {
+    const financials = mapped_document.get(v.FinancialID);
+    return {
       FinancialID: v.FinancialID,
       MetricName: financials.Metric,
       Unit: financials.Unit,
@@ -169,7 +169,7 @@ export async function <span class="fstat-no" title="function not covered" >filte
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T15:24:46.595Z
+                at 2025-10-25T17:07:15.518Z
             </div>
         <script src="../prettify.js"></script>
         <script>

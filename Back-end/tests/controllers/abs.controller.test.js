@@ -5,7 +5,7 @@ jest.unstable_mockModule("../../src/services/abs.service.js", () => ({
 }));
 
 const { filter_abs } = await import("../../src/services/abs.service.js");
-const { fetch_abs_controller } = await import("../../src/controllers/abs.controller.js");
+const { fetch_abs } = await import("../../src/controllers/abs.controller.js");
 
 const make_res = () => {
   const res = {};
@@ -31,7 +31,7 @@ describe("fetch_abs_controller", () => {
     const mock_data = [{ abs_id: 1, value: 100 }];
     filter_abs.mockResolvedValue(mock_data);
 
-    await fetch_abs_controller(req, res);
+    await fetch_abs(req, res);
 
     expect(filter_abs).toHaveBeenCalledWith({
       abs_id: "1",
@@ -51,7 +51,7 @@ describe("fetch_abs_controller", () => {
 
     const console_spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-    await fetch_abs_controller(req, res);
+    await fetch_abs(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });
