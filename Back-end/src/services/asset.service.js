@@ -25,10 +25,10 @@ const format_results = (record) => ({
 
 export async function asset_service(filters = {}) {
   const matching_params = {};
-  if (filters.assets_id != null) matching_params.AssetsID = Number(filters.assets_id);
-  if (filters.application_id != null)
-    matching_params.ApplicationID = Number(filters.application_id);
-  if (filters.file_id != null) matching_params.FileID = Number(filters.file_id);
+  if (filters.assetsid != null) matching_params.AssetsID = Number(filters.assetsid);
+  if (filters.applicationid != null)
+    matching_params.ApplicationID = Number(filters.applicationid);
+  if (filters.fileid != null) matching_params.FileID = Number(filters.fileid);
 
   const value_docs = await asset_value_model.find(matching_params).select("-__v -_id").lean();
   if (value_docs.length === 0) return [];
@@ -36,8 +36,8 @@ export async function asset_service(filters = {}) {
   const fetched_ids = [...new Set(value_docs.map((v) => v.AssetsID))];
   const key_query = { AssetsID: { $in: fetched_ids } };
 
-  if (filters.account_description && String(filters.account_description).trim() !== "") {
-    const description_regex = String(filters.account_description)
+  if (filters.accountdescription && String(filters.accountdescription).trim() !== "") {
+    const description_regex = String(filters.accountdescription)
       .trim()
       .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     key_query.AccountDescription = { $regex: description_regex, $options: "i" };

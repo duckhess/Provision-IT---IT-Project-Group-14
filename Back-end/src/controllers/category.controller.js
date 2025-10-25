@@ -8,6 +8,7 @@ export async function fetch_success_rates(req, res) {
       }
     const data = await derive_success_rates(filter_queries)
     res.status(200).json(data)
+
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
