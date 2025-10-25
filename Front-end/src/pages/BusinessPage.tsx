@@ -1,3 +1,4 @@
+
 import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterBusinessPage from "../components/filterBusinessPage/FilterBusinessPage";
@@ -131,7 +132,7 @@ const BusinessPage: React.FC = () => {
             {company.companyImageUrl ? (
                <img src = {company.companyImageUrl} className="w-full h-auto rounded-lg shadow-md object-cover"/>
             ) : (
-              <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
+              <div data-testid="picturePlaceholder" className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
                 Picture Placeholder
               </div>
             )}
