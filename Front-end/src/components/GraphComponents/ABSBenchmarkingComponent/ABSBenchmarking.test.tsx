@@ -1,9 +1,6 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import {describe, it, expect} from "vitest";
-import React from "react";
 import ABSBenchmarking from './ABSBenchmarking';
-import ABSBenchmarkingSmall from './ABSBenchmarkingSmall';
-import ABSBenchmarkingLarge from './ABSBenchmarkingLarge';
 
 describe('ABSBenchmarking Component', () => {
   const mockMetrics = [

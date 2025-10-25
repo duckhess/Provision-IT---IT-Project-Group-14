@@ -38,7 +38,7 @@ const CovenantsSmall : React.FC<CovenantsSmallProps> = ({category, passNum, fail
              <span className = "font-semibold text-black ml-3">Pass </span>
            </div>
      
-           <div className='flex items-center gap-2'>
+           <div className='flex items-center gap-2' data-testid="passNumSmall">
              <span className = 'text-black font-semibold text-xl'>{passNum}</span>
            </div>
      
@@ -50,7 +50,7 @@ const CovenantsSmall : React.FC<CovenantsSmallProps> = ({category, passNum, fail
              <span className = "font-semibold text-black ml-3">Fail </span>
            </div>
      
-           <div className='flex items-center gap-2'>
+           <div className='flex items-center gap-2' data-testid="failNumSmall">
              <span className = 'text-black font-semibold text-xl'>{failNum}</span>
            </div>
      
