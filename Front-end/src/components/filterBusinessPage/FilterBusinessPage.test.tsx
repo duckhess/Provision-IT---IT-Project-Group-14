@@ -4,7 +4,6 @@ import FilterBusinessPage from "./FilterBusinessPage";
 import { vi } from "vitest";
 import type { Dataset } from "../Types/Types";
 
-// ---- Mock dependencies ----
 vi.mock("../MetricFormatting/MetricFormat", () => ({
   fetchCompanyDatasets: vi.fn(),
 }));
@@ -43,13 +42,11 @@ vi.mock("./sideBar/SidebarFilter", () => ({
 
 import { fetchCompanyDatasets } from "../MetricFormatting/MetricFormat";
 
-// ---- Mock data ----
 const mockDatasetA: Dataset[] = [
   { name: "Revenue", metric: "income_statements", unit: "$", data: [] },
   { name: "Profit", metric: "income_statements", unit: "$", data: [] },
 ];
 
-// ---- Tests ----
 describe("FilterBusinessPage Component", () => {
   beforeEach(() => {
     vi.clearAllMocks();
