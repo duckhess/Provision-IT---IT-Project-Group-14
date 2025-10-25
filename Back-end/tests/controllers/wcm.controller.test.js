@@ -1,17 +1,16 @@
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/wcm.service.js", () => ({
   filter_wcm: jest.fn(),
 }));
 
 const { filter_wcm } = await import("../../src/services/wcm.service.js");
-const { fetch_wcm }  = await import("../../src/controllers/wcm.controller.js");
+const { fetch_wcm } = await import("../../src/controllers/wcm.controller.js");
 
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 
@@ -27,10 +26,10 @@ describe("fetch_wcm controller", () => {
         Unit: "$",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ companyid: 1001, metric: "NWC", value: 4200 }];
-    filter_wcm.mockResolvedValue(mockData);
+    const mock_data = [{ companyid: 1001, metric: "NWC", value: 4200 }];
+    filter_wcm.mockResolvedValue(mock_data);
 
     await fetch_wcm(req, res);
 
@@ -40,13 +39,13 @@ describe("fetch_wcm controller", () => {
       fileid: "3",
       unit: "$",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
   test("Negative: service throws → responds 500 with error message", async () => {
     const req = { query: { CompanyID: "1001" } };
-    const res = makeRes();
+    const res = make_res();
 
     filter_wcm.mockRejectedValue(new Error("DB failure"));
 

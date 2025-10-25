@@ -1,4 +1,3 @@
-// tests/controllers/abs.controller.test.js
 import { jest } from "@jest/globals";
 
 jest.unstable_mockModule("../../src/services/abs.service.js", () => ({
@@ -6,58 +5,57 @@ jest.unstable_mockModule("../../src/services/abs.service.js", () => ({
 }));
 
 const { filter_abs } = await import("../../src/services/abs.service.js");
-const { fetch_abs } = await import("../../src/controllers/abs.controller.js");
+const { fetch_abs_controller } = await import("../../src/controllers/abs.controller.js");
 
-
-const makeRes = () => {
+const make_res = () => {
   const res = {};
-  res.status = jest.fn(() => res); 
+  res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };
 
-describe("fetch_abs controller", () => {
+describe("fetch_abs_controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test(" Positive: returns filtered documents and lowercases query keys", async () => {
+  test("✅ positive: returns filtered documents and lowercases query keys", async () => {
     const req = {
       query: {
-        ABSID: "1",
-        FileID: "2",
+        abs_id: "1",
+        file_id: "2",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ absid: 1, value: 100 }];
-    filter_abs.mockResolvedValue(mockData);
+    const mock_data = [{ abs_id: 1, value: 100 }];
+    filter_abs.mockResolvedValue(mock_data);
 
-    await fetch_abs(req, res);
+    await fetch_abs_controller(req, res);
 
     expect(filter_abs).toHaveBeenCalledWith({
-      absid: "1",
-      fileid: "2",
+      abs_id: "1",
+      file_id: "2",
     });
 
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
-  test(" Negative: service throws error, responds 500", async () => {
-    const req = { query: { ABSID: "1" } };
-    const res = makeRes();
+  test("❌ negative: service throws error, responds 500", async () => {
+    const req = { query: { abs_id: "1" } };
+    const res = make_res();
 
     const error = new Error("DB failure");
     filter_abs.mockRejectedValue(error);
 
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const console_spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-    await fetch_abs(req, res);
+    await fetch_abs_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });
 
-    consoleSpy.mockRestore();
+    console_spy.mockRestore();
   });
 });

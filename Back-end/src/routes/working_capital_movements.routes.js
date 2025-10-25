@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { fetch_wcm } from '../controllers/wcm.controller.js'
+import { Router as express_router } from "express";
+import { fetch_wcm } from "../controllers/wcm.controller.js";
 
-const router = Router()
+const router = express_router();
 
-router.get('/', fetch_wcm)
+router.get("/", fetch_wcm);
 
-export default router
+export default router;

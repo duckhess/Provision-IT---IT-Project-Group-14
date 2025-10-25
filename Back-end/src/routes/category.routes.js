@@ -1,10 +1,8 @@
-// routes/success_rate.routes.js
-import express from 'express'
-import { fetch_success_rates } from '../controllers/category.controller.js'
+import { Router as express_router } from "express";
+import { fetch_success_rates } from "../controllers/category.controller.js";
 
-const router = express.Router()
+const router = express_router();
 
-// GET /api/success-rate?applicationid=123
-router.get('/', fetch_success_rates)
+router.get("/", fetch_success_rates);
 
-export default router
+export default router;

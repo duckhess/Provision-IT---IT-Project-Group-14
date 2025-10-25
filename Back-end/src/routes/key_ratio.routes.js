@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { keyRatioController } from "../controllers/key_ratio.controller.js"
+import { Router as express_router } from "express";
+import { key_ratio_controller } from "../controllers/key_ratio.controller.js";
 
-const router = Router()
+const router = express_router();
 
-router.get('/', keyRatioController)
+router.get("/", key_ratio_controller);
 
-export default router
+export default router;

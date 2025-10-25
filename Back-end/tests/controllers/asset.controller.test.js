@@ -1,67 +1,65 @@
-// tests/controllers/asset.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/asset.service.js", () => ({
-  assetService: jest.fn(), 
+  asset_service: jest.fn(),
 }));
 
-const { assetService } = await import("../../src/services/asset.service.js");
-const { assetController } = await import("../../src/controllers/asset.controllers.js"); // <-- plural
+const { asset_service } = await import("../../src/services/asset.service.js");
+const { asset_controller } = await import("../../src/controllers/asset.controllers.js");
 
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };
 
-describe("assetController", () => {
+describe("asset_controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("Positive: returns JSON and passes lower-cased filters", async () => {
+  test("positive: returns JSON and passes lower-cased filters", async () => {
     const req = {
       query: {
-        AssetsID: "1",
-        Unit: "$",
-        ApplicationID: "2",
-        FileID: "3",
-        AccountDescription: "Cash and equivalents",
+        assets_id: "1",
+        unit: "$",
+        application_id: "2",
+        file_id: "3",
+        account_description: "Cash and equivalents",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ AssetsID: 1, MetricName: "Test Metric", Value: 123 }];
-    assetService.mockResolvedValue(mockData);
+    const mock_data = [{ assets_id: 1, metric_name: "Test Metric", value: 123 }];
+    asset_service.mockResolvedValue(mock_data);
 
-    await assetController(req, res);
+    await asset_controller(req, res);
 
-    expect(assetService).toHaveBeenCalledWith({
-      assetsid: "1",
+    expect(asset_service).toHaveBeenCalledWith({
+      assets_id: "1",
       unit: "$",
-      applicationid: "2",
-      fileid: "3",
-      accountdescription: "Cash and equivalents",
+      application_id: "2",
+      file_id: "3",
+      account_description: "Cash and equivalents",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
-  test("Negative: when service throws, responds 500 with error", async () => {
-    const req = { query: { AssetsID: "1" } };
-    const res = makeRes();
+  test("negative: when service throws, responds 500 with error", async () => {
+    const req = { query: { assets_id: "1" } };
+    const res = make_res();
 
-    assetService.mockRejectedValue(new Error("DB down"));
+    asset_service.mockRejectedValue(new Error("DB down")); // ✅
 
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const console_spy = jest.spyOn(console, "error").mockImplementation(() => {}); // ✅
 
-    await assetController(req, res);
+    await asset_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB down" });
 
-    consoleSpy.mockRestore();
+    console_spy.mockRestore();
   });
 });

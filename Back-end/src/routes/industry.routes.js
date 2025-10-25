@@ -1,12 +1,8 @@
-import { Router } from "express"
-import {
-  list_industries_controller,
-} from "../controllers/industry.controller.js"
+import { Router as express_router } from "express";
+import { list_industries_controller } from "../controllers/industry.controller.js";
 
-const router = Router()
+const router = express_router();
 
-router.get("/", list_industries_controller)
+router.get("/", list_industries_controller);
 
-
-
-export default router
+export default router;

@@ -124,7 +124,13 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,7 +145,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -155,12 +160,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,92 +169,109 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import keyRatioModel from "../models/key_ratio.model.js"
-import keyRatioValueModel from "../models/key_ratios_values.model.js"
-import { get_period } from './timeline_service.js'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import key_ratio_model from "../models/key_ratio.model.js";
+import key_ratio_value_model from "../models/key_ratios_values.model.js";
+import { get_period } from "./timeline.service.js";
 &nbsp;
 const results = <span class="fstat-no" title="function not covered" >(r</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{</span>
-  KeyRatioID: r.KeyRatioID,  
+  KeyRatioID: r.KeyRatioID,
   MetricName: r.Metric,
   Unit: r.Unit,
   Category: r.Category,
-  ApplicationID : r.ApplicationID,
-  Timeline: r.Period,   
-  Value : r.Value
-})
+  ApplicationID: r.ApplicationID,
+  Timeline: r.Period,
+  Value: r.Value,
+});
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >ratioService(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+export async function <span class="fstat-no" title="function not covered" >ratio_service(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+  const matching_params = <span class="cstat-no" title="statement not covered" >{};</span>
+<span class="cstat-no" title="statement not covered" >  if (filters.keyratioid != null) <span class="cstat-no" title="statement not covered" >matching_params.KeyRatioID = Number(filters.keyratioid);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.applicationid != null) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.fileid != null) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid);</span></span>
 &nbsp;
-  const matching_params = <span class="cstat-no" title="statement not covered" >{}</span>
-<span class="cstat-no" title="statement not covered" >  if (filters.keyratioid != null) <span class="cstat-no" title="statement not covered" >matching_params.KeyRatioID = Number(filters.keyratioid)</span></span>
-<span class="cstat-no" title="statement not covered" >  if (filters.applicationid != null) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid)</span></span>
-<span class="cstat-no" title="statement not covered" >  if (filters.fileid != null) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid)</span></span>
-  
-  const values = <span class="cstat-no" title="statement not covered" >await keyRatioValueModel.find(matching_params).select("-__v -_id").lean()</span>
-<span class="cstat-no" title="statement not covered" >  if (values.length === 0) <span class="cstat-no" title="statement not covered" >return []</span></span>
+  const values = <span class="cstat-no" title="statement not covered" >await key_ratio_value_model.find(matching_params).select("-__v -_id").lean();</span>
+<span class="cstat-no" title="statement not covered" >  if (values.length === 0) <span class="cstat-no" title="statement not covered" >return [];</span></span>
 &nbsp;
-  // find keyratioid in keyratio table
-  const fetchedIDs = <span class="cstat-no" title="statement not covered" >[...new Set(values.map(<span class="fstat-no" title="function not covered" >v </span>=&gt; <span class="cstat-no" title="statement not covered" >v.KeyRatioID)</span>)]</span>
-  const keyQuery = <span class="cstat-no" title="statement not covered" >{ KeyRatioID: { $in: fetchedIDs } }</span>
+  // find keyratioid in key ratio table
+  const fetched_ids = <span class="cstat-no" title="statement not covered" >[...new Set(values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.KeyRatioID)</span>)];</span>
+  const key_query = <span class="cstat-no" title="statement not covered" >{ KeyRatioID: { $in: fetched_ids } };</span>
 &nbsp;
-  // filter metric name 
+  // filter metric name
 <span class="cstat-no" title="statement not covered" >  if (filters.metric &amp;&amp; String(filters.metric).trim() !== "") {</span>
-  const metricRegex = <span class="cstat-no" title="statement not covered" >String(filters.metric).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;")</span>
-<span class="cstat-no" title="statement not covered" >  keyQuery.Metric = { $regex: metricRegex, $options: "i" }</span>
+    const metric_regex = <span class="cstat-no" title="statement not covered" >String(filters.metric)</span>
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
+<span class="cstat-no" title="statement not covered" >    key_query.Metric = { $regex: metric_regex, $options: "i" };</span>
   }
 &nbsp;
-  //filter unit
+  // filter unit
 <span class="cstat-no" title="statement not covered" >  if (filters.unit &amp;&amp; String(filters.unit).trim() !== "") {</span>
-    const unitRegex = <span class="cstat-no" title="statement not covered" >String(filters.unit).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;")</span>
-<span class="cstat-no" title="statement not covered" >    keyQuery.Unit = { $regex: unitRegex, $options: "i" }</span>
+    const unit_regex = <span class="cstat-no" title="statement not covered" >String(filters.unit)</span>
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
+<span class="cstat-no" title="statement not covered" >    key_query.Unit = { $regex: unit_regex, $options: "i" };</span>
   }
 &nbsp;
-  // find metric name and unit in key ratio table 
-  const keyDocs = <span class="cstat-no" title="statement not covered" >await keyRatioModel.find(keyQuery).select("-_id KeyRatioID Metric Unit Category ").lean()</span>
-<span class="cstat-no" title="statement not covered" >  if (keyDocs.length === 0) <span class="cstat-no" title="statement not covered" >return []</span></span>
+  // find metric name and unit in key ratio table
+  const key_docs = <span class="cstat-no" title="statement not covered" >await key_ratio_model</span>
+    .find(key_query)
+    .select("-_id KeyRatioID Metric Unit Category ")
+    .lean();
+<span class="cstat-no" title="statement not covered" >  if (key_docs.length === 0) <span class="cstat-no" title="statement not covered" >return [];</span></span>
 &nbsp;
-  const byId = <span class="cstat-no" title="statement not covered" >new Map(keyDocs.map(<span class="fstat-no" title="function not covered" >d </span>=&gt; <span class="cstat-no" title="statement not covered" >[d.KeyRatioID, d])</span>)</span>
+  const by_id = <span class="cstat-no" title="statement not covered" >new Map(key_docs.map(<span class="fstat-no" title="function not covered" >(d</span>) =&gt; <span class="cstat-no" title="statement not covered" >[d.KeyRatioID, d])</span>);</span>
+  const filtered_values = <span class="cstat-no" title="statement not covered" >values.filter(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >by_id.has(v.KeyRatioID))</span>;</span>
 &nbsp;
-  const filteredValues = <span class="cstat-no" title="statement not covered" >values.filter(<span class="fstat-no" title="function not covered" >v </span>=&gt; <span class="cstat-no" title="statement not covered" >byId.has(v.KeyRatioID))</span></span>
+  const file_ids = <span class="cstat-no" title="statement not covered" >[...new Set(filtered_values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)];</span>
+  const timeline_map = <span class="cstat-no" title="statement not covered" >await get_period(file_ids);</span>
 &nbsp;
-  const fileIDs = <span class="cstat-no" title="statement not covered" >[...new Set(filteredValues.map(<span class="fstat-no" title="function not covered" >v </span>=&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)]</span>
-  const timelineMap = <span class="cstat-no" title="statement not covered" >await get_period(fileIDs)</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return filteredValues.map(<span class="fstat-no" title="function not covered" >v </span>=&gt; {</span>
-    const meta = <span class="cstat-no" title="statement not covered" >byId.get(v.KeyRatioID)</span>
+<span class="cstat-no" title="statement not covered" >  return filtered_values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; {</span>
+    const meta = <span class="cstat-no" title="statement not covered" >by_id.get(v.KeyRatioID);</span>
 <span class="cstat-no" title="statement not covered" >    return results({</span>
-      ...v,                 
-      Metric: meta.Metric,  
+      ...v,
+      Metric: meta.Metric,
       Unit: meta.Unit,
       Category: meta.Category,
-      Period: timelineMap.get(v?.FileID),
-    })
-  })
-}</pre></td></tr></table></pre>
+      Period: timeline_map.get(v?.FileID),
+    });
+  });
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-20T04:48:07.269Z
+                at 2025-10-25T15:24:46.595Z
             </div>
         <script src="../prettify.js"></script>
         <script>
