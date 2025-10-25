@@ -10,7 +10,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-      "lint:report": "eslint . -f json -o lint-report.json"
+    "lint:report": "eslint . -f json -o lint-report.json"
   },
   "author": "",
   "license": "ISC",

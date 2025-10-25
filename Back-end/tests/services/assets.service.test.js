@@ -53,7 +53,7 @@ describe("asset_service", () => {
     mock_find_select_lean(asset_model, mock_key_docs);
     get_period.mockResolvedValue(mock_timeline);
 
-    const result = await asset_service({ application_id: "1" });
+    const result = await asset_service({ applicationid: "1" });
 
     expect(asset_value_model.find).toHaveBeenCalledWith({ ApplicationID: 1 });
     expect(asset_model.find).toHaveBeenCalled();
