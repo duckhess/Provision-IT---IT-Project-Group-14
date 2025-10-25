@@ -1,8 +1,9 @@
-import incomeModel from "../models/income_statement.model.js";
-import incomeValueModel from "../models/income_statement_values.model.js";
-import { get_period } from "./timeline_service.js";
+import income_model from "../models/income_statement.model.js";
+import income_value_model from "../models/income_statement_values.model.js";
+import { get_period } from "./timeline.service.js";
+import mongoose from "mongoose";
 
-const toJsNumber = (v) => {
+const to_js_number = (v) => {
   if (v == null) return v;
   if (
     typeof v === "object" &&
@@ -19,56 +20,51 @@ const results = (r) => ({
   Unit: r.Unit,
   ApplicationID: r.ApplicationID,
   Timeline: r.Period,
-  Value: toJsNumber(r.Value),
+  Value: to_js_number(r.Value),
 });
 
-export async function incomeService(filters = {}) {
+export async function income_service(filters = {}) {
   const matching_params = {};
   if (filters.incomeid != null) matching_params.IncomeID = Number(filters.incomeid);
   if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid);
   if (filters.fileid != null) matching_params.FileID = Number(filters.fileid);
 
-  const values = await incomeValueModel.find(matching_params).select("-__v -_id").lean();
+  const values = await income_value_model.find(matching_params).select("-__v -_id").lean();
   if (values.length === 0) return [];
 
-  // find equityid in equity table
-  const fetchedIDs = [...new Set(values.map((v) => v.IncomeID))];
-  const keyQuery = { IncomeID: { $in: fetchedIDs } };
+  const fetched_ids = [...new Set(values.map((v) => v.IncomeID))];
+  const key_query = { IncomeID: { $in: fetched_ids } };
 
-  // filter metric
   if (filters.metric && String(filters.metric).trim() !== "") {
-    const metricRegex = String(filters.metric)
+    const metric_regex = String(filters.metric)
       .trim()
       .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    keyQuery.Metric = { $regex: metricRegex, $options: "i" };
+    key_query.Metric = { $regex: metric_regex, $options: "i" };
   }
 
-  //filter unit
   if (filters.unit && String(filters.unit).trim() !== "") {
-    const unitRegex = String(filters.unit)
+    const unit_regex = String(filters.unit)
       .trim()
       .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    keyQuery.Unit = { $regex: unitRegex, $options: "i" };
+    key_query.Unit = { $regex: unit_regex, $options: "i" };
   }
 
-  const keyDocs = await incomeModel.find(keyQuery).select("-_id IncomeID Metric Unit ").lean();
-  if (keyDocs.length === 0) return [];
+  const key_docs = await income_model.find(key_query).select("-_id IncomeID Metric Unit ").lean();
+  if (key_docs.length === 0) return [];
 
-  //join by id
-  const byId = new Map(keyDocs.map((d) => [d.IncomeID, d]));
+  const by_id = new Map(key_docs.map((d) => [d.IncomeID, d]));
+  const filtered_values = values.filter((v) => by_id.has(v.IncomeID));
 
-  const filteredValues = values.filter((v) => byId.has(v.IncomeID));
+  const file_ids = [...new Set(filtered_values.map((v) => v.FileID))];
+  const timeline_map = await get_period(file_ids);
 
-  const fileIDs = [...new Set(filteredValues.map((v) => v.FileID))];
-  const timelineMap = await get_period(fileIDs);
-
-  return filteredValues.map((v) => {
-    const meta = byId.get(v.IncomeID);
+  return filtered_values.map((v) => {
+    const meta = by_id.get(v.IncomeID);
     return results({
       ...v,
       Metric: meta.Metric,
       Unit: meta.Unit,
-      Period: timelineMap.get(v?.FileID),
+      Period: timeline_map.get(v?.FileID),
     });
   });
 }

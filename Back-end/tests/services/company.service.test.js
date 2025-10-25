@@ -68,8 +68,6 @@ describe("list_companies_service", () => {
 
     const result = await list_companies_service();
 
-    expect(result).toEqual([
-      { companyId: 77, companyName: "MinimalCo", industryId: 9 },
-    ]);
+    expect(result).toEqual([{ companyId: 77, companyName: "MinimalCo", industryId: 9 }]);
   });
 });

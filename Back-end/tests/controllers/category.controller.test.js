@@ -1,4 +1,3 @@
-// tests/controllers/success_rate.controller.test.js
 import { jest } from "@jest/globals";
 
 // --- Mock the service used by the controller ---
@@ -11,7 +10,7 @@ const { derive_success_rates } = await import("../../src/services/category.servi
 const { fetch_success_rates } = await import("../../src/controllers/category.controller.js");
 
 // --- Helper: express-like res stub with chaining ---
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
@@ -27,13 +26,12 @@ describe("fetch_success_rates controller", () => {
     const req = {
       query: {
         applicationid: "2", // simulate HTTP query strings
-        // any extra filters should be forwarded unchanged
-        category: "Liquidity",
+        category: "Liquidity", // any extra filters should be forwarded unchanged
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [
+    const mock_data = [
       {
         ApplicationID: 2,
         Category: "Liquidity",
@@ -41,7 +39,7 @@ describe("fetch_success_rates controller", () => {
         "3 yr Average % Success": 100,
       },
     ];
-    derive_success_rates.mockResolvedValue(mockData);
+    derive_success_rates.mockResolvedValue(mock_data);
 
     await fetch_success_rates(req, res);
 
@@ -50,22 +48,22 @@ describe("fetch_success_rates controller", () => {
 
     // controller explicitly sets status(200)
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
   });
 
   test("Negative: when service throws, responds 500 with error", async () => {
     const req = { query: { applicationid: "bad" } };
-    const res = makeRes();
+    const res = make_res();
 
     derive_success_rates.mockRejectedValue(new Error("ApplicationID is required"));
 
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const console_spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
     await fetch_success_rates(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "ApplicationID is required" });
 
-    consoleSpy.mockRestore();
+    console_spy.mockRestore();
   });
 });

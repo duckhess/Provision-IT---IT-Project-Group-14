@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { incomeController } from "../controllers/income_statement.controller.js";
+import { Router as express_router } from "express";
+import { income_controller } from "../controllers/income_statement.controller.js";
 
-const router = Router();
+const router = express_router();
 
-router.get("/", incomeController);
+router.get("/", income_controller);
 
 export default router;

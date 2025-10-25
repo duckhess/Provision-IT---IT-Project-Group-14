@@ -1,6 +1,6 @@
-import { liabilityService } from "../services/liability.service.js";
+import { liability_service } from "../services/liability.service.js";
 
-export const liabilityController = async (req, res) => {
+export const liability_controller = async (req, res) => {
   try {
     const parameters = {};
     for (const key in req.query) {
@@ -15,7 +15,7 @@ export const liabilityController = async (req, res) => {
       fileid: parameters.fileid,
     };
 
-    const liabilities = await liabilityService(filters);
+    const liabilities = await liability_service(filters);
     return res.json(liabilities);
   } catch (err) {
     return res.status(500).json({ error: err.message });

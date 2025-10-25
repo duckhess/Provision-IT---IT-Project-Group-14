@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const finanical_values_schema = new mongoose.Schema({
   FinancialID: { type: Number, required: true },

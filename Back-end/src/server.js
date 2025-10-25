@@ -52,8 +52,3 @@ app.use("/statement_of_cashflows", soc_router);
 app.use("/company_data", company_data_router);
 app.use("/best_data", best_four_router);
 app.use("/category", category_router);
-
-//http://localhost:3000/companies
-//http://localhost:3000/industries
-//http://localhost:3000/industries?industryID=5
-//http://localhost:3000/keyRatios?unit=%&fileid=2

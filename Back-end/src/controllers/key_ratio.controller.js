@@ -1,6 +1,6 @@
-import { ratioService } from "../services/key_ratio.service.js";
+import { ratio_service } from "../services/key_ratio.service.js";
 
-export const keyRatioController = async (req, res) => {
+export const key_ratio_controller = async (req, res) => {
   try {
     const parameters = {};
     for (const key in req.query) {
@@ -15,7 +15,7 @@ export const keyRatioController = async (req, res) => {
       fileid: parameters.fileid,
     };
 
-    const ratios = await ratioService(filters);
+    const ratios = await ratio_service(filters);
     return res.json(ratios);
   } catch (err) {
     return res.status(500).json({ error: err.message });

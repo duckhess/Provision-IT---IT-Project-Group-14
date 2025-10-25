@@ -2,11 +2,11 @@ import { filter_cash_equivalences } from "../services/cash_equivalences.service.
 
 export const fetch_cash_equivalences = async (req, res) => {
   try {
-    const filter_querries = {};
+    const filter_queries = {};
     for (const key in req.query) {
-      filter_querries[key.toLowerCase()] = req.query[key];
+      filter_queries[key.toLowerCase()] = req.query[key];
     }
-    const cash_document = await filter_cash_equivalences(filter_querries);
+    const cash_document = await filter_cash_equivalences(filter_queries);
     res.json(cash_document);
   } catch (error) {
     res.status(500).json({ error: error.message });

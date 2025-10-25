@@ -1,20 +1,20 @@
 import { jest } from "@jest/globals";
 
 jest.unstable_mockModule("../../src/services/liability.service.js", () => ({
-  liabilityService: jest.fn(),
+  liability_service: jest.fn(),
 }));
 
-const { liabilityService } = await import("../../src/services/liability.service.js");
-const { liabilityController } = await import("../../src/controllers/liability.controller.js");
+const { liability_service } = await import("../../src/services/liability.service.js");
+const { liability_controller } = await import("../../src/controllers/liability.controller.js");
 
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };
 
-describe("liabilityController", () => {
+describe("liability_controller", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("Positive: returns liabilities with lowercased filters", async () => {
@@ -27,31 +27,31 @@ describe("liabilityController", () => {
         FileID: "3",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ liabilityid: 5, metric: "Debt Ratio", value: 0.62 }];
-    liabilityService.mockResolvedValue(mockData);
+    const mock_data = [{ liabilityid: 5, metric: "Debt Ratio", value: 0.62 }];
+    liability_service.mockResolvedValue(mock_data);
 
-    await liabilityController(req, res);
+    await liability_controller(req, res);
 
-    expect(liabilityService).toHaveBeenCalledWith({
+    expect(liability_service).toHaveBeenCalledWith({
       metric: "Debt Ratio",
       unit: "%",
       liabilityid: "5",
       applicationid: "2",
       fileid: "3",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
   test("Negative: service throws → 500", async () => {
     const req = { query: { LiabilityID: "5" } };
-    const res = makeRes();
+    const res = make_res();
 
-    liabilityService.mockRejectedValue(new Error("DB failure"));
+    liability_service.mockRejectedValue(new Error("DB failure"));
 
-    await liabilityController(req, res);
+    await liability_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });

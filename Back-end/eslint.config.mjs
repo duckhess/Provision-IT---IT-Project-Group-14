@@ -1,4 +1,5 @@
-// eslint.config.mjs
+/* eslint-disable id-match */
+
 import js from "@eslint/js";
 import globals from "globals";
 import jestPlugin from "eslint-plugin-jest";
@@ -15,20 +16,23 @@ export default [
     },
     plugins: { jest: jestPlugin, unicorn, prettier },
     rules: {
-      // enforce snake_case for identifiers you write
       "id-match": [
         "error",
-        "^[a-z][a-z0-9_]*$",
-        { properties: false, onlyDeclarations: false, ignoreDestructuring: false },
+        "^[a-z][a-z0-9_]*$|^[A-Z][a-zA-Z0-9]*$|^[A-Z0-9_]+$",
+        {
+          properties: false,
+          onlyDeclarations: false,
+          ignoreDestructuring: false,
+        },
       ],
-      // enforce snake_case file names
+
       "unicorn/filename-case": ["error", { cases: { snakeCase: true } }],
-      // run Prettier via ESLint
+
       "prettier/prettier": "error",
     },
     ignores: ["node_modules/**", "dist/**", "coverage/**"],
   },
-  // Jest-specific rules for test files
+
   {
     files: ["**/*.test.js", "**/*.spec.js"],
     languageOptions: { globals: { ...globals.jest } },

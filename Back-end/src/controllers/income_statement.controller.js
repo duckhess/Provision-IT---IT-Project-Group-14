@@ -1,6 +1,6 @@
-import { incomeService } from "../services/income_statement.service.js";
+import { income_service } from "../services/income_statement.service.js";
 
-export const incomeController = async (req, res) => {
+export const income_controller = async (req, res) => {
   try {
     const parameters = {};
     for (const key in req.query) {
@@ -15,7 +15,7 @@ export const incomeController = async (req, res) => {
       fileid: parameters.fileid,
     };
 
-    const incomes = await incomeService(filters);
+    const incomes = await income_service(filters);
     return res.json(incomes);
   } catch (err) {
     return res.status(500).json({ error: err.message });

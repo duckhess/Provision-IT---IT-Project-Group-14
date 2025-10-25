@@ -7,7 +7,6 @@ const results = (r) => ({
 
 export async function get_industry_by_id_service(id) {
   const row = await Industry.findOne({ IndustryID: id }).lean();
-
   return row ? results(row) : null;
 }
 

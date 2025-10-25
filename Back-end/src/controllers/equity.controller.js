@@ -1,6 +1,6 @@
-import { equityService } from "../services/equity.service.js";
+import { equity_service } from "../services/equity.service.js";
 
-export const equityController = async (req, res) => {
+export const equity_controller = async (req, res) => {
   try {
     const parameters = {};
     for (const key in req.query) {
@@ -15,7 +15,7 @@ export const equityController = async (req, res) => {
       fileid: parameters.fileid,
     };
 
-    const equities = await equityService(filters);
+    const equities = await equity_service(filters);
     return res.json(equities);
   } catch (err) {
     return res.status(500).json({ error: err.message });

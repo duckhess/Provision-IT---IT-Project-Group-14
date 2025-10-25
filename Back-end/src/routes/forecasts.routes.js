@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router as express_router } from "express";
 import { fetch_forecasts } from "../controllers/forecast.controller.js";
 
-const router = Router();
+const router = express_router();
 
 router.get("/", fetch_forecasts);
 

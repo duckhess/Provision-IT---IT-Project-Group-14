@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { bestMetricsController } from "../controllers/best_four_metrics.controller.js";
+import { Router as express_router } from "express";
+import { best_metrics_controller } from "../controllers/best_four_metrics.controller.js";
 
-const router = Router();
+const router = express_router();
 
-router.get("/", bestMetricsController);
+router.get("/", best_metrics_controller);
 
 export default router;

@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const forecast_forecasts_schema = new mongoose.Schema({
   ForecastID: { type: Number, required: true },

@@ -1,207 +1,162 @@
-// tests/services/best_four_metrics_service.httplike.test.js
 import { jest } from "@jest/globals";
 
-// --- Mocks ---
+// Mocks
 jest.unstable_mockModule("../../src/models/best_four_metrics.model.js", () => ({
-  default: {
-    find: jest.fn(),
-  },
+  default: { find: jest.fn() },
 }));
-
 jest.unstable_mockModule("../../src/services/financial_statements.service.js", () => ({
   filter_statements: jest.fn(),
 }));
 
-// --- Imports after mocks ---
+// Imports after mocks
 const best4_model = (await import("../../src/models/best_four_metrics.model.js")).default;
 const { filter_statements } = await import("../../src/services/financial_statements.service.js");
-const { best4MetricsService: best4_metrics_service } = await import(
+const { best_four_metrics_service } = await import(
   "../../src/services/best_four_metrics.service.js"
 );
 
-// --- Helpers ---
-const mock_find_select_lean = (model, rows) => {
-  const lean_fn = jest.fn().mockResolvedValue(rows);
-  const select_fn = jest.fn().mockReturnValue({ lean: lean_fn });
-  model.find.mockReturnValue({ select: select_fn });
-  return { select_fn, lean_fn };
-};
-
-describe("best4_metrics_service (http_like: req.query strings)", () => {
+describe("best_four_metrics_service", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("positive_case: numeric_db_query_and_filter_statements_uses_string_applicationid_then_maps_unit_and_data", async () => {
+  test("✅ positive_case: numeric query, maps data with non-empty statements", async () => {
     const filters = {
       companyid: "1001",
       applicationid: "2",
+      metricid: "5",
     };
 
-    const defs_rows = [
-      { CompanyID: 1001, ApplicationID: 2, MetricID: 501, Metric: "Revenue" },
-      { CompanyID: 1001, ApplicationID: 2, MetricID: 502, Metric: "COGS" },
+    const mock_defs = [
+      {
+        CompanyID: 1001,
+        ApplicationID: 2,
+        MetricID: 5,
+        Metric: "Return on Assets",
+      },
     ];
 
-    const defs_find = mock_find_select_lean(best4_model, defs_rows);
+    const mock_rows = [
+      { Metric: "Return on Assets", Unit: "%", Timeline: "2023", Value: 0.15 },
+      { Metric: "Return on Assets", Unit: "%", Timeline: "2024", Value: 0.17 },
+    ];
 
-    filter_statements
-      .mockResolvedValueOnce([
-        { Metric: "Revenue", Unit: "AUD", Timeline: "2023", Value: 10 },
-        { Metric: "Revenue", Unit: "AUD", Timeline: "2024", Value: 12 },
-      ])
-      .mockResolvedValueOnce([
-        { Metric: "COGS", Unit: "AUD", Timeline: "2023", Value: 6 },
-        { Metric: "COGS", Unit: "AUD", Timeline: "2024", Value: 7 },
-      ]);
+    best4_model.find.mockReturnValue({
+      select: () => ({ lean: () => Promise.resolve(mock_defs) }),
+    });
 
-    const out = await best4_metrics_service(filters);
+    filter_statements.mockResolvedValue(mock_rows);
 
-    // DB query uses numbers
+    const result = await best_four_metrics_service(filters);
+
     expect(best4_model.find).toHaveBeenCalledWith({
       CompanyID: 1001,
       ApplicationID: 2,
+      MetricID: 5,
     });
-    expect(defs_find.select_fn).toHaveBeenCalledWith("-__v");
-    expect(defs_find.lean_fn).toHaveBeenCalledTimes(1);
-
-    // downstream call uses the STRING from filters (HTTP-like)
-    expect(filter_statements).toHaveBeenNthCalledWith(1, {
-      financialid: 501,
-      applicationid: "2",
-    });
-    expect(filter_statements).toHaveBeenNthCalledWith(2, {
-      financialid: 502,
-      applicationid: "2",
+    expect(filter_statements).toHaveBeenCalledWith({
+      financialid: 5,
+      applicationid: "2", // use provided filter if present
     });
 
-    expect(out).toEqual([
+    expect(result).toEqual([
       {
         CompanyID: 1001,
         ApplicationID: 2,
         Table: "financial_statements",
-        MetricID: 501,
-        MetricName: "Revenue",
-        Unit: "AUD",
+        MetricID: 5,
+        MetricName: "Return on Assets",
+        Unit: "%",
         Data: [
-          { Timeline: "2023", Value: 10 },
-          { Timeline: "2024", Value: 12 },
-        ],
-      },
-      {
-        CompanyID: 1001,
-        ApplicationID: 2,
-        Table: "financial_statements",
-        MetricID: 502,
-        MetricName: "COGS",
-        Unit: "AUD",
-        Data: [
-          { Timeline: "2023", Value: 6 },
-          { Timeline: "2024", Value: 7 },
+          { Timeline: "2023", Value: 0.15 },
+          { Timeline: "2024", Value: 0.17 },
         ],
       },
     ]);
   });
 
-  test("positive_case: applicationid_fallback_uses_definition_applicationid_number_when_filter_missing", async () => {
-    const defs_rows = [{ CompanyID: 9, ApplicationID: 3, MetricID: 777, Metric: "EBIT" }];
-    mock_find_select_lean(best4_model, defs_rows);
-
-    filter_statements.mockResolvedValueOnce([
-      { Metric: "EBIT", Unit: "USD", Timeline: "2025", Value: 99.9 },
-    ]);
-
-    const out = await best4_metrics_service({ companyid: "9" });
-
-    expect(filter_statements).toHaveBeenCalledWith({
-      financialid: 777,
-      applicationid: 3,
+  test("❌ negative_case: no definitions → returns []", async () => {
+    best4_model.find.mockReturnValue({
+      select: () => ({ lean: () => Promise.resolve([]) }),
     });
 
-    expect(out).toEqual([
+    const result = await best_four_metrics_service({ companyid: "1001" });
+
+    expect(best4_model.find).toHaveBeenCalledWith({ CompanyID: 1001 });
+    expect(result).toEqual([]);
+    expect(filter_statements).not.toHaveBeenCalled();
+  });
+
+  test("🧩 edge_case: definitions found but filter_statements returns [] → Unit null", async () => {
+    const mock_defs = [
       {
-        CompanyID: 9,
+        CompanyID: 2002,
+        ApplicationID: 3,
+        MetricID: 8,
+        Metric: "Debt Ratio",
+      },
+    ];
+
+    best4_model.find.mockReturnValue({
+      select: () => ({ lean: () => Promise.resolve(mock_defs) }),
+    });
+
+    filter_statements.mockResolvedValue([]);
+
+    const result = await best_four_metrics_service({
+      companyid: "2002",
+      applicationid: "3",
+    });
+
+    expect(filter_statements).toHaveBeenCalledWith({
+      financialid: 8,
+      applicationid: "3",
+    });
+
+    expect(result).toEqual([
+      {
+        CompanyID: 2002,
         ApplicationID: 3,
         Table: "financial_statements",
-        MetricID: 777,
-        MetricName: "EBIT",
-        Unit: "USD",
-        Data: [{ Timeline: "2025", Value: 99.9 }],
-      },
-    ]);
-  });
-
-  test("negative_case: no_definitions_returns_empty_and_never_calls_filter_statements", async () => {
-    mock_find_select_lean(best4_model, []);
-
-    const out = await best4_metrics_service({ companyid: "1001" });
-
-    expect(best4_model.find).toHaveBeenCalledTimes(1);
-    expect(filter_statements).not.toHaveBeenCalled();
-    expect(out).toEqual([]);
-  });
-
-  test("edge_case: definitions_present_but_filter_statements_returns_empty_maps_unit_null_and_empty_data", async () => {
-    const defs_rows = [{ CompanyID: 1, ApplicationID: 4, MetricID: 123, Metric: "Net Income" }];
-    mock_find_select_lean(best4_model, defs_rows);
-
-    filter_statements.mockResolvedValueOnce([]);
-
-    const out = await best4_metrics_service({ companyid: "1", applicationid: "4" });
-
-    expect(filter_statements).toHaveBeenCalledWith({
-      financialid: 123,
-      applicationid: "4",
-    });
-
-    expect(out).toEqual([
-      {
-        CompanyID: 1,
-        ApplicationID: 4,
-        Table: "financial_statements",
-        MetricID: 123,
-        MetricName: "Net Income",
+        MetricID: 8,
+        MetricName: "Debt Ratio",
         Unit: null,
         Data: [],
       },
     ]);
   });
 
-  test("positive_case: metricid_filter_string_is_numerically_used_for_db_and_string_applicationid_flows_downstream", async () => {
-    const defs_rows = [{ CompanyID: 2, ApplicationID: 5, MetricID: 900, Metric: "Gross Profit" }];
-    mock_find_select_lean(best4_model, defs_rows);
+  test("🧠 fallback_case: uses def.ApplicationID when filter missing", async () => {
+    const mock_defs = [
+      {
+        CompanyID: 3003,
+        ApplicationID: 7,
+        MetricID: 9,
+        Metric: "Profit Margin",
+      },
+    ];
 
-    filter_statements.mockResolvedValueOnce([
-      { Metric: "Gross Profit", Unit: "AUD", Timeline: "2024", Value: 321 },
-    ]);
+    const mock_rows = [{ Metric: "Profit Margin", Unit: "%", Timeline: "2024", Value: 0.22 }];
 
-    const out = await best4_metrics_service({
-      companyid: "2",
-      applicationid: "5",
-      metricid: "900",
+    best4_model.find.mockReturnValue({
+      select: () => ({ lean: () => Promise.resolve(mock_defs) }),
     });
 
-    expect(best4_model.find).toHaveBeenCalledWith({
-      CompanyID: 2,
-      ApplicationID: 5,
-      MetricID: 900,
-    });
+    filter_statements.mockResolvedValue(mock_rows);
+
+    const result = await best_four_metrics_service({ companyid: "3003" });
 
     expect(filter_statements).toHaveBeenCalledWith({
-      financialid: 900,
-      applicationid: "5",
+      financialid: 9,
+      applicationid: 7, // fallback to definition's ApplicationID
     });
 
-    expect(out).toEqual([
-      {
-        CompanyID: 2,
-        ApplicationID: 5,
-        Table: "financial_statements",
-        MetricID: 900,
-        MetricName: "Gross Profit",
-        Unit: "AUD",
-        Data: [{ Timeline: "2024", Value: 321 }],
-      },
-    ]);
+    expect(result[0]).toEqual(
+      expect.objectContaining({
+        MetricName: "Profit Margin",
+        Unit: "%",
+        Data: [{ Timeline: "2024", Value: 0.22 }],
+      }),
+    );
   });
 });

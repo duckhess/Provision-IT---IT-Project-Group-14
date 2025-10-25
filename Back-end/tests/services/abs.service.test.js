@@ -98,7 +98,6 @@ describe("filter_abs service", () => {
       Analysis: false,
     });
 
-    // No value rows → empty mapped response
     expect(result).toEqual([]);
   });
 });

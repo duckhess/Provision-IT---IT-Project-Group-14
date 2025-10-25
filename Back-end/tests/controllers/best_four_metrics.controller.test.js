@@ -1,62 +1,61 @@
-// tests/controllers/best_four_metrics.controller.test.js
 import { jest } from "@jest/globals";
 
 jest.unstable_mockModule("../../src/services/best_four_metrics.service.js", () => ({
-  best4MetricsService: jest.fn(),
+  best_four_metrics_service: jest.fn(),
 }));
 
-const { best4MetricsService } = await import("../../src/services/best_four_metrics.service.js");
-const { bestMetricsController } = await import(
+const { best_four_metrics_service } = await import(
+  "../../src/services/best_four_metrics.service.js"
+);
+const { best_metrics_controller } = await import(
   "../../src/controllers/best_four_metrics.controller.js"
 );
 
-// Helper: mock Express response object
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };
 
-describe("bestMetricsController", () => {
+describe("best_metrics_controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("Positive: returns data from service", async () => {
+  test("positive: lowercases query keys and returns JSON", async () => {
     const req = {
-      query: { CompanyID: "1001", ApplicationID: "2", MetricID: "5" },
+      query: {
+        companyID: "1001",
+        applicationID: "2",
+        metricID: "5",
+      },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ CompanyID: 1001, Metric: "Return on Assets", Value: 0.15 }];
-    best4MetricsService.mockResolvedValue(mockData);
+    const mock_data = [{ CompanyID: 1001, MetricID: 5 }];
+    best_four_metrics_service.mockResolvedValue(mock_data);
 
-    await bestMetricsController(req, res);
+    await best_metrics_controller(req, res);
 
-    expect(best4MetricsService).toHaveBeenCalledWith({
+    expect(best_four_metrics_service).toHaveBeenCalledWith({
       companyid: "1001",
       applicationid: "2",
       metricid: "5",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
-  test("Negative: handles service error gracefully", async () => {
-    const req = { query: { CompanyID: "1001" } };
-    const res = makeRes();
+  test("negative: service throws → responds 500 with error", async () => {
+    const req = { query: { companyID: "1001" } };
+    const res = make_res();
 
-    const error = new Error("Database connection failed");
-    best4MetricsService.mockRejectedValue(error);
+    best_four_metrics_service.mockRejectedValue(new Error("DB down"));
 
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
-
-    await bestMetricsController(req, res);
+    await best_metrics_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ error: "Database connection failed" });
-
-    consoleSpy.mockRestore();
+    expect(res.json).toHaveBeenCalledWith({ error: "DB down" });
   });
 });

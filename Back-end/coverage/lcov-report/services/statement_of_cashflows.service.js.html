@@ -141,18 +141,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -195,7 +196,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -211,11 +211,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import socModel from "../models/statement_of_cashflows.model.js";
-import socValueModel from "../models/statement_of_cashflows_values.models.js";
-import { get_period } from "./timeline_service.js";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import soc_model from "../models/statement_of_cashflows.model.js";
+import soc_value_model from "../models/statement_of_cashflows_values.models.js";
+import { get_period } from "./timeline.service.js";
+import mongoose from "mongoose";
 &nbsp;
-const toJsNumber = <span class="fstat-no" title="function not covered" >(v</span>) =&gt; {
+const to_js_number = <span class="fstat-no" title="function not covered" >(v</span>) =&gt; {
 <span class="cstat-no" title="statement not covered" >  if (v == null) <span class="cstat-no" title="statement not covered" >return v;</span></span>
 <span class="cstat-no" title="statement not covered" >  if (</span>
     typeof v === "object" &amp;&amp;
@@ -232,56 +233,55 @@ const results = <span class="fstat-no" title="function not covered" >(r</span>) 
   Unit: r.Unit,
   ApplicationID: r.ApplicationID,
   Timeline: r.Period,
-  Value: toJsNumber(r.Value),
+  Value: to_js_number(r.Value),
 });
 &nbsp;
-export async function <span class="fstat-no" title="function not covered" >socService(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+export async function <span class="fstat-no" title="function not covered" >soc_service(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
   const matching_params = <span class="cstat-no" title="statement not covered" >{};</span>
 <span class="cstat-no" title="statement not covered" >  if (filters.cashflowid != null) <span class="cstat-no" title="statement not covered" >matching_params.CashflowID = Number(filters.cashflowid);</span></span>
 <span class="cstat-no" title="statement not covered" >  if (filters.applicationid != null) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid);</span></span>
 <span class="cstat-no" title="statement not covered" >  if (filters.fileid != null) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid);</span></span>
 &nbsp;
-  const values = <span class="cstat-no" title="statement not covered" >await socValueModel.find(matching_params).select("-__v -_id").lean();</span>
+  const values = <span class="cstat-no" title="statement not covered" >await soc_value_model.find(matching_params).select("-__v -_id").lean();</span>
 <span class="cstat-no" title="statement not covered" >  if (values.length === 0) <span class="cstat-no" title="statement not covered" >return [];</span></span>
 &nbsp;
   // find cashflowid in soc table
-  const fetchedIDs = <span class="cstat-no" title="statement not covered" >[...new Set(values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.CashflowID)</span>)];</span>
-  const keyQuery = <span class="cstat-no" title="statement not covered" >{ CashflowID: { $in: fetchedIDs } };</span>
+  const fetched_ids = <span class="cstat-no" title="statement not covered" >[...new Set(values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.CashflowID)</span>)];</span>
+  const key_query = <span class="cstat-no" title="statement not covered" >{ CashflowID: { $in: fetched_ids } };</span>
 &nbsp;
   // filter metric
 <span class="cstat-no" title="statement not covered" >  if (filters.metric &amp;&amp; String(filters.metric).trim() !== "") {</span>
-    const metricRegex = <span class="cstat-no" title="statement not covered" >String(filters.metric)</span>
+    const metric_regex = <span class="cstat-no" title="statement not covered" >String(filters.metric)</span>
       .trim()
       .replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
-<span class="cstat-no" title="statement not covered" >    keyQuery.Metric = { $regex: metricRegex, $options: "i" };</span>
+<span class="cstat-no" title="statement not covered" >    key_query.Metric = { $regex: metric_regex, $options: "i" };</span>
   }
 &nbsp;
-  //filter unit
+  // filter unit
 <span class="cstat-no" title="statement not covered" >  if (filters.unit &amp;&amp; String(filters.unit).trim() !== "") {</span>
-    const unitRegex = <span class="cstat-no" title="statement not covered" >String(filters.unit)</span>
+    const unit_regex = <span class="cstat-no" title="statement not covered" >String(filters.unit)</span>
       .trim()
       .replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
-<span class="cstat-no" title="statement not covered" >    keyQuery.Unit = { $regex: unitRegex, $options: "i" };</span>
+<span class="cstat-no" title="statement not covered" >    key_query.Unit = { $regex: unit_regex, $options: "i" };</span>
   }
 &nbsp;
-  const keyDocs = <span class="cstat-no" title="statement not covered" >await socModel.find(keyQuery).select("-_id CashflowID Metric Unit ").lean();</span>
-<span class="cstat-no" title="statement not covered" >  if (keyDocs.length === 0) <span class="cstat-no" title="statement not covered" >return [];</span></span>
+  const key_docs = <span class="cstat-no" title="statement not covered" >await soc_model.find(key_query).select("-_id CashflowID Metric Unit ").lean();</span>
+<span class="cstat-no" title="statement not covered" >  if (key_docs.length === 0) <span class="cstat-no" title="statement not covered" >return [];</span></span>
 &nbsp;
-  //join by id
-  const byId = <span class="cstat-no" title="statement not covered" >new Map(keyDocs.map(<span class="fstat-no" title="function not covered" >(d</span>) =&gt; <span class="cstat-no" title="statement not covered" >[d.CashflowID, d])</span>);</span>
+  // join by id
+  const by_id = <span class="cstat-no" title="statement not covered" >new Map(key_docs.map(<span class="fstat-no" title="function not covered" >(d</span>) =&gt; <span class="cstat-no" title="statement not covered" >[d.CashflowID, d])</span>);</span>
+  const filtered_values = <span class="cstat-no" title="statement not covered" >values.filter(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >by_id.has(v.CashflowID))</span>;</span>
 &nbsp;
-  const filteredValues = <span class="cstat-no" title="statement not covered" >values.filter(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >byId.has(v.CashflowID))</span>;</span>
+  const file_ids = <span class="cstat-no" title="statement not covered" >[...new Set(filtered_values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)];</span>
+  const timeline_map = <span class="cstat-no" title="statement not covered" >await get_period(file_ids);</span>
 &nbsp;
-  const fileIDs = <span class="cstat-no" title="statement not covered" >[...new Set(filteredValues.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)];</span>
-  const timelineMap = <span class="cstat-no" title="statement not covered" >await get_period(fileIDs);</span>
-&nbsp;
-<span class="cstat-no" title="statement not covered" >  return filteredValues.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; {</span>
-    const meta = <span class="cstat-no" title="statement not covered" >byId.get(v.CashflowID);</span>
+<span class="cstat-no" title="statement not covered" >  return filtered_values.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; {</span>
+    const meta = <span class="cstat-no" title="statement not covered" >by_id.get(v.CashflowID);</span>
 <span class="cstat-no" title="statement not covered" >    return results({</span>
       ...v,
       Metric: meta.Metric,
       Unit: meta.Unit,
-      Period: timelineMap.get(v?.FileID),
+      Period: timeline_map.get(v?.FileID),
     });
   });
 }
@@ -292,7 +292,7 @@ export async function <span class="fstat-no" title="function not covered" >socSe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-25T05:43:56.623Z
+                at 2025-10-25T15:24:46.595Z
             </div>
         <script src="../prettify.js"></script>
         <script>

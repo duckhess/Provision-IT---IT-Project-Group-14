@@ -1,4 +1,3 @@
-// __tests__/company_data_service.test.js
 import { jest } from "@jest/globals";
 
 // --- Mocks ---
@@ -10,7 +9,7 @@ jest.unstable_mockModule("../../src/models/company_data.model.js", () => ({
 
 // --- Imports after mocks ---
 const company_data_model = (await import("../../src/models/company_data.model.js")).default;
-const { companyDataService: company_data_service } = await import("../../src/services/company_data.service.js");
+const { company_data_service } = await import("../../src/services/company_data.service.js");
 
 // --- Helper ---
 const mock_find_select_lean = (model, rows) => {
@@ -46,9 +45,11 @@ describe("company_data_service", () => {
         SocialScore: 75,
         GovernanceScore: 90,
         ShortGeneralDescription: "Ride-sharing startup",
-        LongGeneralDescription: "UrbanRide provides eco-friendly ride-sharing and fleet management services.",
+        LongGeneralDescription:
+          "UrbanRide provides eco-friendly ride-sharing and fleet management services.",
         ShortApplicationDescription: "Seeking funding for EV fleet",
-        LongApplicationDescription: "Funds will be used to purchase electric vehicles and expand charging infrastructure.",
+        LongApplicationDescription:
+          "Funds will be used to purchase electric vehicles and expand charging infrastructure.",
       },
     ];
 
@@ -56,7 +57,6 @@ describe("company_data_service", () => {
 
     const result = await company_data_service(filters);
 
-    // --- Verifications ---
     expect(company_data_model.find).toHaveBeenCalledWith({
       CompanyID: 1001,
       ApplicationID: 5,
@@ -79,9 +79,11 @@ describe("company_data_service", () => {
         SocialScore: 75,
         GovernanceScore: 90,
         ShortGeneralDescription: "Ride-sharing startup",
-        LongGeneralDescription: "UrbanRide provides eco-friendly ride-sharing and fleet management services.",
+        LongGeneralDescription:
+          "UrbanRide provides eco-friendly ride-sharing and fleet management services.",
         ShortApplicationDescription: "Seeking funding for EV fleet",
-        LongApplicationDescription: "Funds will be used to purchase electric vehicles and expand charging infrastructure.",
+        LongApplicationDescription:
+          "Funds will be used to purchase electric vehicles and expand charging infrastructure.",
       },
     ]);
   });
@@ -98,9 +100,7 @@ describe("company_data_service", () => {
   });
 
   test("edge_case: only_applicationid_provided_filters_correctly", async () => {
-    const mock_rows = [
-      { CompanyID: 2020, CompanyName: "EcoTech", ApplicationID: 7 },
-    ];
+    const mock_rows = [{ CompanyID: 2020, CompanyName: "EcoTech", ApplicationID: 7 }];
 
     const find_mock = mock_find_select_lean(company_data_model, mock_rows);
 

@@ -1,7 +1,7 @@
 import forecast_schema from "../models/forecast.js";
 import forecast_values_schema from "../models/forecast_values.js";
 import forecast_forecasts_schema from "../models/forecast_forecasts.js";
-import { get_period } from "./timeline_service.js";
+import { get_period } from "./timeline.service.js";
 
 export async function filter_forecasts(filters = {}) {
   const matching_params = {};
@@ -28,8 +28,8 @@ export async function filter_forecasts(filters = {}) {
     mapped_value.set(key, f);
   });
 
-  const fileIDs = [...new Set(value.map((v) => v.FileID))];
-  const timelineMap = await get_period(fileIDs);
+  const file_ids = [...new Set(value.map((v) => v.FileID))];
+  const timeline_map = await get_period(file_ids);
 
   return forecast.map((f) => {
     const forecasting = mapped_document.get(f.ForecastID);
@@ -40,7 +40,7 @@ export async function filter_forecasts(filters = {}) {
       MetricName: forecasting.AccountDescription,
       Unit: forecasting.Unit,
       ApplicationID: f.ApplicationID,
-      Timeline: timelineMap.get(v?.FileID),
+      Timeline: timeline_map.get(v?.FileID),
       ...(v && { Value: parseFloat(v?.Value) }),
       "Avg Hist Forecast": parseFloat(f["Avg Hist Forecast"]),
       "Avg Hist % Change": parseFloat(f["Avg Hist % Change"]),

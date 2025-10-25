@@ -9,18 +9,18 @@ export async function filter_abs(filters = {}) {
   if (filters.anziccode) matching_params.ANZICCode = Number(filters.anziccode);
   if (filters.analysis !== undefined) matching_params.Analysis = filters.analysis === "true";
 
-  const value = await abs_values_schema.find(matching_params).lean();
+  const value_rows = await abs_values_schema.find(matching_params).lean();
 
-  const document = await abs_schema.find().lean();
-  const mapped_document = new Map();
-  document.forEach((a) => mapped_document.set(a.ABSID, a));
+  const bench_docs = await abs_schema.find().lean();
+  const mapped_bench = new Map();
+  bench_docs.forEach((a) => mapped_bench.set(a.ABSID, a));
 
-  const response = value.map((v) => {
-    const benchmark = mapped_document.get(v.ABSID);
+  const response = value_rows.map((v) => {
+    const benchmark = mapped_bench.get(v.ABSID);
     return {
       ABSID: v.ABSID,
-      Benchmark: benchmark.Benchmark,
-      Unit: benchmark.Unit,
+      Benchmark: benchmark?.Benchmark,
+      Unit: benchmark?.Unit,
       ApplicationID: v.ApplicationID,
       ANZICCode: v.ANZICCode,
       Field: v.Field,

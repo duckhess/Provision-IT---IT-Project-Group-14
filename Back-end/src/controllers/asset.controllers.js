@@ -1,24 +1,24 @@
-import { assetService } from "../services/asset.service.js";
+import { asset_service } from "../services/asset.service.js";
 
-export const assetController = async (req, res) => {
+export const asset_controller = async (req, res) => {
   try {
-    const parameters = {};
+    const filter_parameters = {};
     for (const key in req.query) {
-      parameters[key.toLowerCase()] = req.query[key];
+      filter_parameters[key.toLowerCase()] = req.query[key];
     }
 
     const filters = {
-      assetsid: parameters.assetsid,
-      unit: parameters.unit,
-      applicationid: parameters.applicationid,
-      fileid: parameters.fileid,
-      accountdescription: parameters.accountdescription,
+      assets_id: filter_parameters.assets_id,
+      unit: filter_parameters.unit,
+      application_id: filter_parameters.application_id,
+      file_id: filter_parameters.file_id,
+      account_description: filter_parameters.account_description,
     };
 
-    const assets = await assetService(filters);
-    return res.json(assets);
-  } catch (err) {
-    console.error("AssetController error:", err);
-    return res.status(500).json({ error: err.message });
+    const asset_data = await asset_service(filters);
+    return res.json(asset_data);
+  } catch (error) {
+    console.error("asset_controller error:", error);
+    return res.status(500).json({ error: error.message });
   }
 };

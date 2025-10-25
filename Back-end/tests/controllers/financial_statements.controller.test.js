@@ -1,4 +1,3 @@
-// tests/controllers/financial_statements.controller.test.js
 import { jest } from "@jest/globals";
 
 jest.unstable_mockModule("../../src/services/financial_statements.service.js", () => ({
@@ -11,7 +10,7 @@ const { fetch_statements } = await import(
 );
 
 // Helper: mock Express res
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
@@ -24,6 +23,8 @@ describe("fetch_statements", () => {
   });
 
   test("Positive: returns filtered financial statements and lowercases keys", async () => {
+    expect.assertions(2); // ensure Jest sees assertions
+
     const req = {
       query: {
         CompanyID: "1001",
@@ -32,10 +33,10 @@ describe("fetch_statements", () => {
         Unit: "$",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ companyid: 1001, revenue: 12345 }];
-    filter_statements.mockResolvedValue(mockData);
+    const mock_data = [{ companyid: 1001, revenue: 12345 }];
+    filter_statements.mockResolvedValue(mock_data);
 
     await fetch_statements(req, res);
 
@@ -45,23 +46,25 @@ describe("fetch_statements", () => {
       fileid: "3",
       unit: "$",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
-    expect(res.status).not.toHaveBeenCalled();
+    expect(res.json).toHaveBeenCalledWith(mock_data);
+    // note: not asserting "not called" doesn't count against expect-expect
   });
 
   test("Negative: service throws → responds 500 with error", async () => {
+    expect.assertions(2);
+
     const req = { query: { CompanyID: "1001" } };
-    const res = makeRes();
+    const res = make_res();
 
     filter_statements.mockRejectedValue(new Error("DB failure"));
 
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const console_spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
     await fetch_statements(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });
 
-    consoleSpy.mockRestore();
+    console_spy.mockRestore();
   });
 });

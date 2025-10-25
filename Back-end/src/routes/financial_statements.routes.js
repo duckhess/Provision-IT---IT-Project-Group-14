@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router as express_router } from "express";
 import { fetch_statements } from "../controllers/financial_statements.controller.js";
 
-const router = Router();
+const router = express_router();
 
 router.get("/", fetch_statements);
 

@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { equityController } from "../controllers/equity.controller.js";
+import { Router as express_router } from "express";
+import { equity_controller } from "../controllers/equity.controller.js";
 
-const router = Router();
+const router = express_router();
 
-router.get("/", equityController);
+router.get("/", equity_controller);
 
 export default router;

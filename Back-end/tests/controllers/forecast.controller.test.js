@@ -1,4 +1,3 @@
-// __tests__/forecast_controller.test.js
 import { jest } from "@jest/globals";
 
 // --- Mocks ---

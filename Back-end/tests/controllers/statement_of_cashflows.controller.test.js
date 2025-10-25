@@ -1,22 +1,22 @@
 import { jest } from "@jest/globals";
 
 jest.unstable_mockModule("../../src/services/statement_of_cashflows.service.js", () => ({
-  socService: jest.fn(),
+  soc_service: jest.fn(),
 }));
 
-const { socService } = await import("../../src/services/statement_of_cashflows.service.js");
-const { socController } = await import(
+const { soc_service } = await import("../../src/services/statement_of_cashflows.service.js");
+const { soc_controller } = await import(
   "../../src/controllers/statement_of_cashflows.controller.js"
 );
 
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };
 
-describe("socController (statement of cashflows)", () => {
+describe("soc_controller (statement of cashflows)", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("Positive: returns SOC with lowercased filters", async () => {
@@ -29,31 +29,31 @@ describe("socController (statement of cashflows)", () => {
         FileID: "3",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ cashflowid: 4, metric: "Operating Cash Flow", value: 12000 }];
-    socService.mockResolvedValue(mockData);
+    const mock_data = [{ cashflowid: 4, metric: "Operating Cash Flow", value: 12000 }];
+    soc_service.mockResolvedValue(mock_data);
 
-    await socController(req, res);
+    await soc_controller(req, res);
 
-    expect(socService).toHaveBeenCalledWith({
+    expect(soc_service).toHaveBeenCalledWith({
       metric: "Operating Cash Flow",
       unit: "$",
       cashflowid: "4",
       applicationid: "2",
       fileid: "3",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
   test("Negative: service throws → 500", async () => {
     const req = { query: { CashFlowID: "4" } };
-    const res = makeRes();
+    const res = make_res();
 
-    socService.mockRejectedValue(new Error("DB failure"));
+    soc_service.mockRejectedValue(new Error("DB failure"));
 
-    await socController(req, res);
+    await soc_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });

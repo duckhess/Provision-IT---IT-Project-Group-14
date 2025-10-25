@@ -1,4 +1,3 @@
-// tests/services/cash_equivalences_service.test.js
 import { jest } from "@jest/globals";
 
 // --- Mocks ---
@@ -14,14 +13,14 @@ jest.unstable_mockModule("../../src/models/cash_equivalences.js", () => ({
   },
 }));
 
-jest.unstable_mockModule("../../src/services/timeline_service.js", () => ({
+jest.unstable_mockModule("../../src/services/timeline.service.js", () => ({
   get_period: jest.fn(),
 }));
 
 // --- Imports after mocks ---
 const cash_values_schema = (await import("../../src/models/cash_values.js")).default;
 const cash_schema = (await import("../../src/models/cash_equivalences.js")).default;
-const { get_period } = await import("../../src/services/timeline_service.js");
+const { get_period } = await import("../../src/services/timeline.service.js");
 const { filter_cash_equivalences } = await import(
   "../../src/services/cash_equivalences.service.js"
 );
@@ -70,7 +69,7 @@ describe("filter_cash_equivalences (http_like: req.query strings)", () => {
     expect(cash_schema.find).toHaveBeenCalledWith();
     expect(docs_find.lean_fn).toHaveBeenCalledTimes(1);
 
-    // timeline computed for distinct fileIDs
+    // timeline computed for distinct file_ids
     expect(get_period).toHaveBeenCalledWith([3]);
 
     // final mapped output
@@ -103,7 +102,7 @@ describe("filter_cash_equivalences (http_like: req.query strings)", () => {
       ApplicationID: 1,
     });
 
-    // docs + timeline still called, but with empty fileIDs
+    // docs + timeline still called, but with empty file_ids
     expect(cash_schema.find).toHaveBeenCalledWith();
     expect(get_period).toHaveBeenCalledWith([]);
 
