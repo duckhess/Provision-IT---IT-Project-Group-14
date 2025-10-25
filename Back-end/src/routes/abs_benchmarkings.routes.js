@@ -1,8 +1,8 @@
 import { Router as express_router } from "express";
-import { fetch_abs_controller } from "../controllers/abs.controller.js";
+import { fetch_abs } from "../controllers/abs.controller.js";
 
 const router = express_router();
 
-router.get("/", fetch_abs_controller);
+router.get("/", fetch_abs);
 
 export default router;

@@ -44,7 +44,10 @@ describe("fetch_success_rates controller", () => {
     await fetch_success_rates(req, res);
 
     // service called with the exact req.query (HTTP-like)
-    expect(derive_success_rates).toHaveBeenCalledWith(req.query);
+    expect(derive_success_rates).toHaveBeenCalledWith({
+      applicationid: "2",
+      category: "Liquidity",
+    });
 
     // controller explicitly sets status(200)
     expect(res.status).toHaveBeenCalledWith(200);

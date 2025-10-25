@@ -5,7 +5,7 @@ jest.unstable_mockModule("../../src/services/asset.service.js", () => ({
 }));
 
 const { asset_service } = await import("../../src/services/asset.service.js");
-const { asset_controller } = await import("../../src/controllers/asset.controllers.js");
+const { asset_controller } = await import("../../src/controllers/asset.controller.js");
 
 const make_res = () => {
   const res = {};
