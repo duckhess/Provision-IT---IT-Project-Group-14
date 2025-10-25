@@ -26,7 +26,7 @@ const SearchDashboard: React.FC<receivedCompaniesProps> = ({companies}) => {
       {/* Left panel */}
         <div className="w-1/4 pr-4 border-r overflow-y-auto">
         
-        {companies && companies.length > 0 ? (
+      {companies && companies.length > 0 ? (
           
           companies.map((company) => (
             <CompanyCard

@@ -131,8 +131,6 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
         }
     }, [allCompanies, setSearchResults])
 
-    // useEffect(()=>
-    //     console.log("allComapnyData", companyData),[companyData])
 
     const industryOptions = Array.from(new Set(companyData.map(c=>c.industry).filter(Boolean)));
      const locationOptions = Array.from(new Set(companyData.map(c=>c.location).filter(Boolean)));
@@ -172,15 +170,16 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
 
     return (
         <div>
-            <FilterButton onClick={()=>setShowOverlay(true)}></FilterButton>
+            <FilterButton data-testid="filterButton" onClick={()=>setShowOverlay(true)}></FilterButton>
             {showOverlay && 
             <Overlay 
-              onClose={()=>setShowOverlay(false)}
-              filters = {filters}
-              setFilters = {setFilters}
-              industryOptions={industryOptions}
-              locationOptions={locationOptions}
-              onApplyFilters={()=>{
+            data-testid="overlay"
+            onClose={()=>setShowOverlay(false)}
+            filters = {filters}
+            setFilters = {setFilters}
+            industryOptions={industryOptions}
+            locationOptions={locationOptions}
+            onApplyFilters={()=>{
                 applyFilters();
                 setShowOverlay(false);
               }}>

@@ -224,7 +224,8 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
   }, [workingCapitalMovement])
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
+    <div role="grid"
+    className="grid grid-cols-2 grid-rows-2 gap-4 items-stretch h-full">
 
     {dataNeeded ? (<>
         <div className="overflow-y-auto h-full">
