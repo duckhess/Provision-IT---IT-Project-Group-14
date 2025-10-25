@@ -1,4 +1,3 @@
-// src/pages/BusinessPage.tsx
 import React, { use, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterBusinessPage from "../components/filterBusinessPage/FilterBusinessPage";
