@@ -32,8 +32,8 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
           .filter((item: any) => item.Category !== "Dividend Payout") // exclude this
           .map((item: any) => ({
             name: item.Category,
-            averageSuccess: item["3 yr Average % Success"],
-            spotPercentageSuccess: item["Spot % Success"],
+            averageSuccess: parseFloat(item["3 yr Average % Success"].toFixed(2)),
+            spotPercentageSuccess: parseFloat(item["Spot % Success"].toFixed(2)),
           }));
 
         console.log("Mapped categories: ", categories);

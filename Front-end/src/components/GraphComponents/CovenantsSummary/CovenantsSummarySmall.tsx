@@ -45,8 +45,8 @@ const CovenantsSummarySmall : React.FC<CategoryProps> = ({datasets}) => {
                     <PolarGrid/>
                     <PolarAngleAxis 
                         dataKey="name" tick = {<CustomTick />}/>
-                    <Radar name = "3 Year Average % Success" dataKey = "spotPercentageSuccess" stroke = "green" fill = "green" fillOpacity={0.5}/>
-                    <Radar name = "Spot % Sucess" dataKey = "averageSuccess" stroke = "blue" fill = "blue" fillOpacity={0.2}/>
+                    <Radar name = "3 Year Average % Success" dataKey = "spotPercentageSuccess" stroke = "green" fill = "green" fillOpacity={0.5} data-testid="radarSpotSmall"/>
+                    <Radar name = "Spot % Sucess" dataKey = "averageSuccess" stroke = "blue" fill = "blue" fillOpacity={0.2} data-testid="radarAvgSmall"/>
                     <Legend verticalAlign = "bottom" height = {36}></Legend> 
                     <Tooltip formatter = {(value : number) => `${value}%`}/>
                 </RadarChart>
