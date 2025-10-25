@@ -8,11 +8,11 @@ export const asset_controller = async (req, res) => {
     }
 
     const filters = {
-      assets_id: filter_parameters.assets_id,
+      assetsid: filter_parameters.assetsid,
       unit: filter_parameters.unit,
-      application_id: filter_parameters.application_id,
-      file_id: filter_parameters.file_id,
-      account_description: filter_parameters.account_description,
+      applicationid: filter_parameters.applicationid,
+      fileid: filter_parameters.fileid,
+      accountdescription: filter_parameters.accountdescription,
     };
 
     const asset_data = await asset_service(filters);
