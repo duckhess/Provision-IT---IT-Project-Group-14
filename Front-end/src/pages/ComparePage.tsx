@@ -52,7 +52,7 @@ const ComparePage: React.FC = () => {
             <div className="flex justify-center"> 
                <div className=" bg-white px-5 py-3 rounded-2xl shadwon-sm w-full text-center">
                 <span className = "block text-gray-500 text-sm">Selected</span>
-                <span className="block text-gray-900 text-base font-semibold">{companyA.companyName}</span>
+                <span className="block text-gray-900 text-base font-semibold" data-testid="companyAName">{companyA.companyName}</span>
               </div>
             </div>
              
@@ -71,7 +71,7 @@ const ComparePage: React.FC = () => {
               <div className="flex justify-center"> 
                <div className=" bg-white px-5 py-3 rounded-2xl shadwon-sm w-full text-center">
                 <span className = "block text-gray-500 text-sm">Selected</span>
-                <span className="block text-gray-900 text-base font-semibold">{companyB.companyName}</span>
+                <span className="block text-gray-900 text-base font-semibold" data-testid="companyBName">{companyB.companyName}</span>
               </div>
             </div>
             )}
