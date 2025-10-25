@@ -19,7 +19,7 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment, governanc
 
     const getThumbIcon = (score : number) =>{
         if (score >= 75) return <FaThumbsUp className='text-green-600 text-xl' title='Good'/>;
-        if (score >= 50) return <FaHandPaper className='text-yellow-600 text-xl' title='Good'/>;
+        if (score >= 50) return <FaHandPaper className='text-yellow-600 text-xl' title='Medium'/>;
         return <FaThumbsDown className='text-red-500 text-xl'/>;
     }
 
@@ -30,40 +30,40 @@ const EGSScoreSmall : React.FC<EGSScoreProps> = ({social, environment, governanc
 
         <div className='grid grid-rows-3 gap-4 w-full max-w-full h-full'>
             {/*Environment */}
-            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
+            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between' >
                 <div className='flex items-center gap-1'>
                     <FaLeaf className='text-green-500 text-3xl' />
                     <span className = "font-semibold text-gray-700 ml-3">Environment </span>
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <span className = {`text-xl font-bold ${getScoreColor(environment)}`}>{environment}</span>
-                    <span className = "ml-3">{getThumbIcon(environment)}</span>
+                    <span className = {`text-xl font-bold ${getScoreColor(environment)}`} data-testid="envScore">{environment}</span>
+                    <span className = "ml-3" data-testid="envThumb">{getThumbIcon(environment)}</span>
                 </div>
             </div>
 
             {/* Social */}
-            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
+            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between' >
                 <div className='flex items-center gap-1'>
                     <FaUsers className='text-blue-500 text-3xl' />
                     <span className = "font-semibold text-gray-700 ml-3">Social </span>
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <span className = {`text-xl font-bold ${getScoreColor(social)}`}>{social}</span>
-                    <span className = "ml-3">{getThumbIcon(social)}</span>
+                    <span className = {`text-xl font-bold ${getScoreColor(social)}`} data-testid="socialScore">{social}</span>
+                    <span className = "ml-3" data-testid="socialThumb">{getThumbIcon(social)}</span>
                 </div>
             </div>
 
-            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between'>
+            <div className=' bg-white rounded-lg p-4 shadow-md flex items-center justify-between' >
                 <div className='flex items-center gap-1'>
                     <FaUniversity className='text-yellow-500 text-3xl' />
                     <span className = "font-semibold text-gray-700 ml-3">Governance </span>
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <span className = {`text-xl font-bold ${getScoreColor(governance)}`}>{governance}</span>
-                    <span className = "ml-3">{getThumbIcon(governance)}</span>
+                    <span className = {`text-xl font-bold ${getScoreColor(governance)}`} data-testid="govScore">{governance}</span>
+                    <span className = "ml-3" data-testid="govThumb">{getThumbIcon(governance)}</span>
                 </div>
             </div>
             
