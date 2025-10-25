@@ -3,7 +3,7 @@ import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
   datasets: Dataset[];
-  mergedSets: Dataset[];
+  mergedSets: Array<{ [key: string]: number | string }>;
   yLabel: String;
   title: String;
 }

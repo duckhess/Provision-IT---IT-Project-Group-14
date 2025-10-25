@@ -44,13 +44,13 @@ const HomePage: React.FC = () => {
     fetchCompanies();
   }, []);
 
-  // Rotate cards every 10 seconds : carousel
+  // Rotate cards every 30 seconds : carousel
   useEffect(() => {
     if (allCompanies.length === 0) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % allCompanies.length);
-    }, 60000); // 10,000 ms = 10 seconds
+    }, 30000); // 30,000 ms = 30 seconds
 
     return () => clearInterval(interval);
   }, [allCompanies]);

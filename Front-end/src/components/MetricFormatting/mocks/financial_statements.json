@@ -1,0 +1,386 @@
+[
+  {
+    "FinancialID": 1,
+    "MetricName": "Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 3729525
+  },
+  {
+    "FinancialID": 1,
+    "MetricName": "Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 3019410
+  },
+  {
+    "FinancialID": 1,
+    "MetricName": "Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 3704382
+  },
+  {
+    "FinancialID": 2,
+    "MetricName": "Non Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 1522677
+  },
+  {
+    "FinancialID": 2,
+    "MetricName": "Non Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 1994932
+  },
+  {
+    "FinancialID": 2,
+    "MetricName": "Non Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 4463481
+  },
+  {
+    "FinancialID": 3,
+    "MetricName": "Total Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 5252202
+  },
+  {
+    "FinancialID": 3,
+    "MetricName": "Total Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 5014341
+  },
+  {
+    "FinancialID": 3,
+    "MetricName": "Total Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 8167863
+  },
+  {
+    "FinancialID": 4,
+    "MetricName": "Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 1137720
+  },
+  {
+    "FinancialID": 4,
+    "MetricName": "Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 966396
+  },
+  {
+    "FinancialID": 4,
+    "MetricName": "Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 1917820
+  },
+  {
+    "FinancialID": 5,
+    "MetricName": "Non Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 930315
+  },
+  {
+    "FinancialID": 5,
+    "MetricName": "Non Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 1528151
+  },
+  {
+    "FinancialID": 5,
+    "MetricName": "Non Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 1963688
+  },
+  {
+    "FinancialID": 6,
+    "MetricName": "Total Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 2068035
+  },
+  {
+    "FinancialID": 6,
+    "MetricName": "Total Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 2494547
+  },
+  {
+    "FinancialID": 6,
+    "MetricName": "Total Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 3881508
+  },
+  {
+    "FinancialID": 7,
+    "MetricName": "Equity",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 3184167
+  },
+  {
+    "FinancialID": 7,
+    "MetricName": "Equity",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 2519795
+  },
+  {
+    "FinancialID": 7,
+    "MetricName": "Equity",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 4286355
+  },
+  {
+    "FinancialID": 8,
+    "MetricName": "Net Revenue",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 15766553
+  },
+  {
+    "FinancialID": 8,
+    "MetricName": "Net Revenue",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 13736093
+  },
+  {
+    "FinancialID": 8,
+    "MetricName": "Net Revenue",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 15699648
+  },
+  {
+    "FinancialID": 9,
+    "MetricName": "Cost of Goods Sold",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 12326088
+  },
+  {
+    "FinancialID": 9,
+    "MetricName": "Cost of Goods Sold",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 11123405
+  },
+  {
+    "FinancialID": 9,
+    "MetricName": "Cost of Goods Sold",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 12222437
+  },
+  {
+    "FinancialID": 10,
+    "MetricName": "Gross Profit",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 3440466
+  },
+  {
+    "FinancialID": 10,
+    "MetricName": "Gross Profit",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 2612688
+  },
+  {
+    "FinancialID": 10,
+    "MetricName": "Gross Profit",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 3477211
+  },
+  {
+    "FinancialID": 11,
+    "MetricName": "Other Income",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 232860
+  },
+  {
+    "FinancialID": 11,
+    "MetricName": "Other Income",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 319437
+  },
+  {
+    "FinancialID": 11,
+    "MetricName": "Other Income",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 371514
+  },
+  {
+    "FinancialID": 12,
+    "MetricName": "Depreciation",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 133758
+  },
+  {
+    "FinancialID": 12,
+    "MetricName": "Depreciation",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 172402
+  },
+  {
+    "FinancialID": 12,
+    "MetricName": "Depreciation",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 283548
+  },
+  {
+    "FinancialID": 13,
+    "MetricName": "Interest",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 17661
+  },
+  {
+    "FinancialID": 13,
+    "MetricName": "Interest",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 78
+  },
+  {
+    "FinancialID": 13,
+    "MetricName": "Interest",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 38939
+  },
+  {
+    "FinancialID": 14,
+    "MetricName": "Other Expenses",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 2709194
+  },
+  {
+    "FinancialID": 14,
+    "MetricName": "Other Expenses",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 2432864
+  },
+  {
+    "FinancialID": 14,
+    "MetricName": "Other Expenses",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 2895266
+  },
+  {
+    "FinancialID": 15,
+    "MetricName": "Profit/Loss For The Period",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 812712
+  },
+  {
+    "FinancialID": 15,
+    "MetricName": "Profit/Loss For The Period",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 326782
+  },
+  {
+    "FinancialID": 15,
+    "MetricName": "Profit/Loss For The Period",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 630973
+  },
+  {
+    "FinancialID": 16,
+    "MetricName": "EBITDA",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 964131
+  },
+  {
+    "FinancialID": 16,
+    "MetricName": "EBITDA",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 499261
+  },
+  {
+    "FinancialID": 16,
+    "MetricName": "EBITDA",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 953459
+  }
+]

@@ -1,0 +1,133 @@
+[
+  {
+    "ABSID": 2,
+    "Benchmark": "Total Expenses/Total Income",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 94,
+    "CalcValue": 83.61,
+    "Analysis": true
+  },
+  {
+    "ABSID": 5,
+    "Benchmark": "Net Profit/Loss (-) Margin",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 6,
+    "CalcValue": 4.02,
+    "Analysis": false
+  },
+  {
+    "ABSID": 6,
+    "Benchmark": "EBITDA/Net Revenue",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 7,
+    "CalcValue": 6.07,
+    "Analysis": false
+  },
+  {
+    "ABSID": 8,
+    "Benchmark": "EBITDA Margin",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 7,
+    "CalcValue": 24.77,
+    "Analysis": true
+  },
+  {
+    "ABSID": 10,
+    "Benchmark": "Total Other Income/Net Profit/Loss Before Tax",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 20,
+    "CalcValue": 58.88,
+    "Analysis": true
+  },
+  {
+    "ABSID": 1,
+    "Benchmark": "Wages and Salaries/Revenue",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 14,
+    "CalcValue": 7.44,
+    "Analysis": true
+  },
+  {
+    "ABSID": 7,
+    "Benchmark": "Interest Cover",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 7.5,
+    "CalcValue": 17.2,
+    "Analysis": true
+  },
+  {
+    "ABSID": 11,
+    "Benchmark": "Depreciation and Amortisation/Net Revenue",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 1,
+    "CalcValue": 1.81,
+    "Analysis": true
+  },
+  {
+    "ABSID": 3,
+    "Benchmark": "Total Expenses/Revenue",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 96,
+    "CalcValue": 20.5,
+    "Analysis": true
+  },
+  {
+    "ABSID": 4,
+    "Benchmark": "Operating Profit Before Tax/Total Income",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 6,
+    "CalcValue": 16.39,
+    "Analysis": true
+  },
+  {
+    "ABSID": 9,
+    "Benchmark": "Total Other Income/Revenue",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 1,
+    "CalcValue": 2.37,
+    "Analysis": true
+  },
+  {
+    "ABSID": 12,
+    "Benchmark": "Interest/Revenue",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "ANZICCode": 42,
+    "Field": "Other Store-Based Retailing",
+    "ABSValue": 1,
+    "CalcValue": 0.25,
+    "Analysis": false
+  }
+]

@@ -3,7 +3,7 @@ import type { Dataset } from '../../Types/Types';
 
 interface GraphProps {
   datasets: Dataset[]; 
-  mergedSets: Dataset[];
+  mergedSets: Array<{ [key: string]: number | string }>;
   yLabel: String
   title: String
 }
@@ -22,7 +22,10 @@ const BarGraphSmall = ({ datasets, mergedSets, yLabel, title }: GraphProps) => {
   </div>
   <div className="w-full h-full">
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={mergedSets}>
+        <BarChart
+          data={mergedSets}
+          margin={{ top: 20, right: 20, left: 20, bottom: 20 }} // 👈 add left margin
+        >
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="x" />
         <YAxis tickFormatter={(v) => `${v}${yLabel}`} />

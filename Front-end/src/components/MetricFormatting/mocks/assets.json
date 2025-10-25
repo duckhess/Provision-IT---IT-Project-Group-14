@@ -1,0 +1,130 @@
+[
+  {
+    "AssetsID": 1,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Current Receivables)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "AssetsID": 1,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Current Receivables)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "AssetsID": 2,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Non Current Receivables)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 178859
+  },
+  {
+    "AssetsID": 2,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Non Current Receivables)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": -1983427
+  },
+  {
+    "AssetsID": 3,
+    "MetricName": "Loans Requiring Clarification - Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "AssetsID": 3,
+    "MetricName": "Loans Requiring Clarification - Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "AssetsID": 4,
+    "MetricName": "Other Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 225
+  },
+  {
+    "AssetsID": 4,
+    "MetricName": "Other Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": -1229
+  },
+  {
+    "AssetsID": 5,
+    "MetricName": "Other Non Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -324821
+  },
+  {
+    "AssetsID": 5,
+    "MetricName": "Other Non Current Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 303741
+  },
+  {
+    "AssetsID": 6,
+    "MetricName": "Property, Plant and Equipment",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -268219
+  },
+  {
+    "AssetsID": 6,
+    "MetricName": "Property, Plant and Equipment",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 672305
+  },
+  {
+    "AssetsID": 7,
+    "MetricName": "Working Capital",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 933158
+  },
+  {
+    "AssetsID": 7,
+    "MetricName": "Working Capital",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": -96973
+  },
+  {
+    "AssetsID": 8,
+    "MetricName": "Net Increase / Decrease (-) in Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 519203
+  },
+  {
+    "AssetsID": 8,
+    "MetricName": "Net Increase / Decrease (-) in Assets",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": -1105584
+  }
+]

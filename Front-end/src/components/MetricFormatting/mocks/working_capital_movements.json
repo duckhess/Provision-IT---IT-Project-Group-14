@@ -1,0 +1,49 @@
+[
+  {
+    "CapitalID": 1,
+    "MetricName": "Change In Net Working Capital",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 933158.43,
+    "Avg Historical Forecast": -408126,
+    "User Forecast": 662926
+  },
+  {
+    "CapitalID": 2,
+    "MetricName": "Increase / Decrease (-) In Funds From Operations",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 161291.6,
+    "Avg Historical Forecast": 814915,
+    "User Forecast": 949826
+  },
+  {
+    "CapitalID": 3,
+    "MetricName": "Increase In Funds / Funding Required (-)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Value": null,
+    "Avg Historical Forecast": 406789,
+    "User Forecast": 1612752
+  },
+  {
+    "CapitalID": 4,
+    "MetricName": "Interest Cover/Increase in Funds/Funding Required",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": null,
+    "Avg Historical Forecast": 22.4,
+    "User Forecast": 47.69
+  },
+  {
+    "CapitalID": 5,
+    "MetricName": "Interest Cover/Increase in Funds/Funding Required (*excluding other non operating income and expenses)",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": null,
+    "Avg Historical Forecast": 5.36,
+    "User Forecast": 32.69
+  }
+]

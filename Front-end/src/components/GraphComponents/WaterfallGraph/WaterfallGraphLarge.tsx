@@ -3,7 +3,7 @@ import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
   datasets: Dataset[];
-  mergedSets: any[]; // flattened merged data
+  mergedSets: any[]; 
   title: String;
 }
 
@@ -136,7 +136,6 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
             <Bar dataKey="change" stackId="a">
               {data.map((entry, index) => {
                 const metricIndex = metricOrder.indexOf(entry.key);
-                // {console.log(metricIndex)};
                 const green = greenShades[metricIndex % greenShades.length];
                 const red = redShades[metricIndex % redShades.length];
 

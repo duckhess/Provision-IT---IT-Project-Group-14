@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BarGraphSmall > renders without crashing and matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4"
+  >
+    <div
+      class="px-4 w-full"
+    >
+      <h2
+        class="text-black text-xl font-bold border-b mb-4 inline-block"
+      >
+        Income Statements
+      </h2>
+    </div>
+    <div
+      class="w-full h-full"
+    >
+      <div>
+        <div>
+          <div />
+          <div />
+          <div />
+          <div />
+          <div
+            data-testid="mock-legend"
+          >
+            <span>
+              Revenue
+            </span>
+            <span>
+              Expenses
+            </span>
+          </div>
+          <div
+            data-testid="bar-Revenue"
+          />
+          <div
+            data-testid="bar-Expenses"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

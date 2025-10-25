@@ -3,7 +3,7 @@ import type { Dataset } from "../../Types/Types";
 
 interface GraphProps {
   datasets: Dataset[]; 
-  mergedSets: Dataset[];
+  mergedSets: Array<{ [key: string]: number | string }>;
   yLabel: String;
   title: String;
 }
@@ -36,6 +36,7 @@ const LineGraphSmall = ({ datasets, mergedSets, yLabel, title }: GraphProps) => 
             stroke={colors[i % colors.length]}
             strokeWidth={i + 1}
             strokeDasharray="5 5"
+            data-testid={`line-${ds.name.replace(/\s+/g, "-")}`}
           />
         ))}
       </LineChart>

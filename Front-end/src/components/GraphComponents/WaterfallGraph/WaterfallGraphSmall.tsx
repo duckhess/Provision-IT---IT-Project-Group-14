@@ -10,46 +10,7 @@ interface GraphProps {
 const greenShades = ["#22c55e", "#166534", "#22c55e", "#166534"]; 
 const redShades   = ["#ef4444", "#ef4444", "#ef4444", "#ef4444"];
 
-// function buildWaterfallData(mergedSets: any[]) {
-//   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
-//   const result: any[] = [];
-
-//   keys.forEach((key) => {
-//     let cumulative = 0;
-
-//     mergedSets.forEach((row, i) => {
-//       const value = row[key];
-
-//       if (i === 0) {
-//         result.push({
-//           name: String(row.x), 
-//           key,                 
-//           change: value,
-//           pv: 0,
-//         });
-//         cumulative = value;
-//       } else {
-//         const prevValue = mergedSets[i - 1][key];
-//         const diff = value - prevValue;
-
-//         result.push({
-//           name: String(row.x),
-//           key,
-//           change: diff,
-//           pv: cumulative,
-//         });
-
-//         cumulative += diff;
-//       }
-//     });
-//   });
-
-//   return result;
-// }
-
 function buildWaterfallData(mergedSets: any[]) {
-  if (!mergedSets || mergedSets.length === 0) return [];
-
   const keys = Object.keys(mergedSets[0]).filter(k => k !== "x");
   const result: any[] = [];
 
@@ -60,10 +21,9 @@ function buildWaterfallData(mergedSets: any[]) {
       const value = row[key];
 
       if (i === 0) {
-        // First value just starts from 0
         result.push({
-          name: String(row.x),
-          key,
+          name: String(row.x), 
+          key,                 
           change: value,
           pv: 0,
         });
@@ -72,14 +32,11 @@ function buildWaterfallData(mergedSets: any[]) {
         const prevValue = mergedSets[i - 1][key];
         const diff = value - prevValue;
 
-        // Adjust baseline for negative changes
-        const baseline = diff >= 0 ? cumulative : cumulative + diff;
-
         result.push({
           name: String(row.x),
           key,
           change: diff,
-          pv: baseline,
+          pv: cumulative,
         });
 
         cumulative += diff;
@@ -90,22 +47,20 @@ function buildWaterfallData(mergedSets: any[]) {
   return result;
 }
 
-
-const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
-  
+const WaterfallGraphSmall = ({ mergedSets, title}: GraphProps) => {
   const data = buildWaterfallData(mergedSets);
-
-  // console.log("data = ",data);
 
   // Compute unique metrics in order of appearance
   const metricOrder = Array.from(
     new Set(data.map(entry => entry.key))
   );
-  //console.log(metricOrder);
+  console.log(metricOrder);
+
+  console.log("merged datasets", mergedSets);
 
   return (
     <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
-      <div className ="px-4 w-full">
+     <div className ="px-4 w-full">
         <h2 className='text-black text-xl font-bold border-b mb-4 inline-block break-words w-full'>
           {title}
         </h2>
@@ -150,7 +105,6 @@ const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
               content={({ active, payload }) => {
                 if (!active || !payload || !payload.length) return null;
 
-                // data format : (year, metricName, change, pv)
                 const { name: year, key: metricName, change } = payload[0].payload;
 
                 return (
@@ -182,7 +136,6 @@ const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
             <Bar dataKey="change" stackId="a">
               {data.map((entry, index) => {
                 const metricIndex = metricOrder.indexOf(entry.key);
-                // {console.log(metricIndex)};
                 const green = greenShades[metricIndex % greenShades.length];
                 const red = redShades[metricIndex % redShades.length];
 
@@ -197,8 +150,6 @@ const WaterfallGraphSmall = ({ mergedSets, title }: GraphProps) => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-
-
     </div>
   );
 };
