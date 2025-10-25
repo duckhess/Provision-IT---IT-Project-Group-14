@@ -1,17 +1,16 @@
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/wcm.service.js", () => ({
   filter_wcm: jest.fn(),
 }));
 
 const { filter_wcm } = await import("../../src/services/wcm.service.js");
-const { fetch_wcm }  = await import("../../src/controllers/wcm.controller.js");
+const { fetch_wcm } = await import("../../src/controllers/wcm.controller.js");
 
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 

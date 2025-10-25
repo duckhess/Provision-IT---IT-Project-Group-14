@@ -1,11 +1,9 @@
 // tests/controllers/company_data.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/company_data.service.js", () => ({
   companyDataService: jest.fn(),
 }));
-
 
 const { companyDataService } = await import("../../src/services/company_data.service.js");
 const { dataController } = await import("../../src/controllers/company_data.controller.js");
@@ -14,7 +12,7 @@ const { dataController } = await import("../../src/controllers/company_data.cont
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json  = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 

@@ -1,18 +1,21 @@
 // tests/controllers/cash_equivalences.controller.test.js
 import { jest } from "@jest/globals";
 
-jest.unstable_mockModule("../../src/services/cash_service.js", () => ({
+jest.unstable_mockModule("../../src/services/cash_equivalences.service.js", () => ({
   filter_cash_equivalences: jest.fn(),
 }));
 
-const { filter_cash_equivalences } = await import("../../src/services/cash_service.js");
-const { fetch_cash_equivalences } = await import("../../src/controllers/cash_equivalences.controller.js");
-
+const { filter_cash_equivalences } = await import(
+  "../../src/services/cash_equivalences.service.js"
+);
+const { fetch_cash_equivalences } = await import(
+  "../../src/controllers/cash_equivalences.controller.js"
+);
 
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json  = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 

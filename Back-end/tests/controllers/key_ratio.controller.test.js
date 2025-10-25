@@ -10,7 +10,7 @@ const { keyRatioController } = await import("../../src/controllers/key_ratio.con
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 
@@ -18,13 +18,15 @@ describe("keyRatioController", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("Positive: returns ratios with lowercased filters", async () => {
-    const req = { query: {
-      Metric: "Current Ratio",
-      Unit: "x",
-      KeyRatioID: "11",
-      ApplicationID: "2",
-      FileID: "3",
-    }};
+    const req = {
+      query: {
+        Metric: "Current Ratio",
+        Unit: "x",
+        KeyRatioID: "11",
+        ApplicationID: "2",
+        FileID: "3",
+      },
+    };
     const res = makeRes();
 
     const mockData = [{ keyratioid: 11, metric: "Current Ratio", value: 1.8 }];

@@ -1,11 +1,9 @@
 // tests/controllers/income_statement.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/income_statement.service.js", () => ({
   incomeService: jest.fn(),
 }));
-
 
 const { incomeService } = await import("../../src/services/income_statement.service.js");
 const { incomeController } = await import("../../src/controllers/income_statement.controller.js");
@@ -14,7 +12,7 @@ const { incomeController } = await import("../../src/controllers/income_statemen
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 

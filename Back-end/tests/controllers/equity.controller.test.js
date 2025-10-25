@@ -5,7 +5,6 @@ jest.unstable_mockModule("../../src/services/equity.service.js", () => ({
   equityService: jest.fn(),
 }));
 
-
 const { equityService } = await import("../../src/services/equity.service.js");
 const { equityController } = await import("../../src/controllers/equity.controller.js");
 
@@ -13,7 +12,7 @@ const { equityController } = await import("../../src/controllers/equity.controll
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 

@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { bestMetricsController } from "../controllers/best_four_metrics.controller.js"
+import { Router } from "express";
+import { bestMetricsController } from "../controllers/best_four_metrics.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', bestMetricsController)
+router.get("/", bestMetricsController);
 
-export default router
+export default router;

@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { liabilityController } from "../controllers/liability.controller.js"
+import { Router } from "express";
+import { liabilityController } from "../controllers/liability.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', liabilityController)
+router.get("/", liabilityController);
 
-export default router
+export default router;

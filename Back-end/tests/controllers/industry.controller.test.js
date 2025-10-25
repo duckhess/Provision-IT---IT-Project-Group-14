@@ -1,24 +1,21 @@
 // tests/controllers/industry.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/industry.service.js", () => ({
   list_industries_service: jest.fn(),
   get_industry_by_id_service: jest.fn(),
 }));
 
-
-const {
-  list_industries_service,
-  get_industry_by_id_service,
-} = await import("../../src/services/industry.service.js");
+const { list_industries_service, get_industry_by_id_service } = await import(
+  "../../src/services/industry.service.js"
+);
 const { list_industries_controller } = await import("../../src/controllers/industry.controller.js");
 
 // Minimal Express-like res mock
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 
@@ -29,7 +26,10 @@ describe("list_industries_controller", () => {
     const req = { query: {} };
     const res = makeRes();
 
-    const mockList = [{ id: 1, name: "Real Estate" }, { id: 2, name: "Manufacturing" }];
+    const mockList = [
+      { id: 1, name: "Real Estate" },
+      { id: 2, name: "Manufacturing" },
+    ];
     list_industries_service.mockResolvedValue(mockList);
 
     await list_industries_controller(req, res);

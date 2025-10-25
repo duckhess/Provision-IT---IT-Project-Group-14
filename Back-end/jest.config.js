@@ -3,11 +3,7 @@ export default {
   roots: ["<rootDir>/tests"],
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: [
-    "src/**/*.js", 
-    "!src/**/index.js",
-    "!**/node_modules/**"
-  ],
+  collectCoverageFrom: ["src/**/*.js", "!src/**/index.js", "!**/node_modules/**"],
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov"],
 };

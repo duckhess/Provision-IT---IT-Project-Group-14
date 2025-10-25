@@ -11,15 +11,16 @@ const SRC_DIR = path.resolve(__dirname, "../src");
 
 // Ignore list: add files that start servers or do heavy side effects on import.
 const IGNORE_BASENAMES = new Set([
-  "server.js", // common entry that calls app.listen()
-  "index.js",  // if it bootstraps things
+  "server.js", 
+
+  "index.js", 
 ]);
 
 // Ignore directories that cause model re-registration or heavy side effects
 const IGNORE_DIRS = new Set([
-  "models",  // prevent OverwriteModelError from Mongoose
-  "config",  // optional: skip DB connection configs
-  "seed",    // optional: skip data seeding scripts
+  "models",
+  "config", 
+  "seed",    
 ]);
 
 async function importTree(dir) {

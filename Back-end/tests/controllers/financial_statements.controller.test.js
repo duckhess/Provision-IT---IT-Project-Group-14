@@ -1,19 +1,20 @@
 // tests/controllers/financial_statements.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/financial_statements.service.js", () => ({
   filter_statements: jest.fn(),
 }));
 
 const { filter_statements } = await import("../../src/services/financial_statements.service.js");
-const { fetch_statements }  = await import("../../src/controllers/financial_statements.controller.js");
+const { fetch_statements } = await import(
+  "../../src/controllers/financial_statements.controller.js"
+);
 
 // Helper: mock Express res
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 

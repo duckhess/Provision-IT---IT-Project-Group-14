@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { fetch_forecasts } from '../controllers/forecast.controller.js'
+import { Router } from "express";
+import { fetch_forecasts } from "../controllers/forecast.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', fetch_forecasts)
+router.get("/", fetch_forecasts);
 
-export default router
+export default router;

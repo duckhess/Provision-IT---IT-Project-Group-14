@@ -6,12 +6,14 @@ jest.unstable_mockModule("../../src/services/best_four_metrics.service.js", () =
 }));
 
 const { best4MetricsService } = await import("../../src/services/best_four_metrics.service.js");
-const { bestMetricsController } = await import("../../src/controllers/best_four_metrics.controller.js");
+const { bestMetricsController } = await import(
+  "../../src/controllers/best_four_metrics.controller.js"
+);
 
 // Helper: mock Express response object
 const makeRes = () => {
   const res = {};
-  res.status = jest.fn(() => res); 
+  res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };

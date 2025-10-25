@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { fetch_statements } from '../controllers/financial_statements.controller.js'
+import { Router } from "express";
+import { fetch_statements } from "../controllers/financial_statements.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', fetch_statements)
+router.get("/", fetch_statements);
 
-export default router
+export default router;

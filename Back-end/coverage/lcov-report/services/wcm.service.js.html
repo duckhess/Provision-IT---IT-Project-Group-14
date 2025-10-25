@@ -159,62 +159,62 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import wcm_schema from '../models/working_capital_movements.js'
-import wcm_values_schema from '../models/wcm_values.js'
-import wcm_forecasts_schema from '../models/wcm_forecasts.js'
-import { get_period } from './timeline_service.js'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import wcm_schema from "../models/working_capital_movements.js";
+import wcm_values_schema from "../models/wcm_values.js";
+import wcm_forecasts_schema from "../models/wcm_forecasts.js";
+import { get_period } from "./timeline_service.js";
 &nbsp;
 export async function <span class="fstat-no" title="function not covered" >filter_wcm(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
-    const matching_params = <span class="cstat-no" title="statement not covered" >{}</span>
+  const matching_params = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (filters.capitalid) <span class="cstat-no" title="statement not covered" >matching_params.CapitalID = Number(filters.capitalid)</span></span>
-<span class="cstat-no" title="statement not covered" >    if (filters.applicationid) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid)</span></span>
-<span class="cstat-no" title="statement not covered" >    if (filters.fileid) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid)</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.capitalid) <span class="cstat-no" title="statement not covered" >matching_params.CapitalID = Number(filters.capitalid);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.applicationid) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.fileid) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid);</span></span>
 &nbsp;
-    const document = <span class="cstat-no" title="statement not covered" >await wcm_schema.find().lean()</span>
-    const mapped_document = <span class="cstat-no" title="statement not covered" >new Map()</span>
-<span class="cstat-no" title="statement not covered" >    document.forEach(<span class="fstat-no" title="function not covered" >w </span>=&gt; <span class="cstat-no" title="statement not covered" >mapped_document.set(w.CapitalID, w))</span></span>
+  const document = <span class="cstat-no" title="statement not covered" >await wcm_schema.find().lean();</span>
+  const mapped_document = <span class="cstat-no" title="statement not covered" >new Map();</span>
+<span class="cstat-no" title="statement not covered" >  document.forEach(<span class="fstat-no" title="function not covered" >(w</span>) =&gt; <span class="cstat-no" title="statement not covered" >mapped_document.set(w.CapitalID, w))</span>;</span>
 &nbsp;
-    const forecast = <span class="cstat-no" title="statement not covered" >await wcm_forecasts_schema.find(matching_params).lean()</span>
-    const forecast_filters = <span class="cstat-no" title="statement not covered" >forecast.map(<span class="fstat-no" title="function not covered" >d </span>=&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
-        CapitalID: d.CapitalID,
-        ApplicationID: d.ApplicationID
-    }))
+  const forecast = <span class="cstat-no" title="statement not covered" >await wcm_forecasts_schema.find(matching_params).lean();</span>
+  const forecast_filters = <span class="cstat-no" title="statement not covered" >forecast.map(<span class="fstat-no" title="function not covered" >(d</span>) =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+    CapitalID: d.CapitalID,
+    ApplicationID: d.ApplicationID,
+  }));
 &nbsp;
-    const value = <span class="cstat-no" title="statement not covered" >await wcm_values_schema.find({$or: forecast_filters}).lean()</span>
-    const mapped_value = <span class="cstat-no" title="statement not covered" >new Map()</span>
-<span class="cstat-no" title="statement not covered" >    value.forEach(<span class="fstat-no" title="function not covered" >f </span>=&gt; {</span>
-        const key = <span class="cstat-no" title="statement not covered" >`${f.CapitalID}`</span>
-<span class="cstat-no" title="statement not covered" >        mapped_value.set(key, f)</span>
-    })
+  const value = <span class="cstat-no" title="statement not covered" >await wcm_values_schema.find({ $or: forecast_filters }).lean();</span>
+  const mapped_value = <span class="cstat-no" title="statement not covered" >new Map();</span>
+<span class="cstat-no" title="statement not covered" >  value.forEach(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; {</span>
+    const key = <span class="cstat-no" title="statement not covered" >`${f.CapitalID}`;</span>
+<span class="cstat-no" title="statement not covered" >    mapped_value.set(key, f);</span>
+  });
 &nbsp;
-    const fileIDs = <span class="cstat-no" title="statement not covered" >[...new Set(value.map(<span class="fstat-no" title="function not covered" >v </span>=&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)]</span>
-    const timelineMap = <span class="cstat-no" title="statement not covered" >await get_period(fileIDs)</span>
+  const fileIDs = <span class="cstat-no" title="statement not covered" >[...new Set(value.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)];</span>
+  const timelineMap = <span class="cstat-no" title="statement not covered" >await get_period(fileIDs);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return forecast.map(<span class="fstat-no" title="function not covered" >f </span>=&gt; {</span>
-        const movements = <span class="cstat-no" title="statement not covered" >mapped_document.get(f.CapitalID)</span>
-        const key = <span class="cstat-no" title="statement not covered" >`${f.CapitalID}`</span>
-        const v = <span class="cstat-no" title="statement not covered" >mapped_value.get(key)</span>
-<span class="cstat-no" title="statement not covered" >        return {</span>
-            CapitalID: f.CapitalID,
-            MetricName: movements.Metric,
-            Unit: movements.Unit,
-            ApplicationID: f.ApplicationID,
-            Timeline: timelineMap.get(v?.FileID),
-            Value: parseFloat(v?.Value),
-            "Avg Historical Forecast": parseFloat(f?.["Avg Historical Forecast"].toString()),
-            "User Forecast": parseFloat(f?.["User Forecast"].toString())
-        }
-    })
-&nbsp;
-}</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >  return forecast.map(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; {</span>
+    const movements = <span class="cstat-no" title="statement not covered" >mapped_document.get(f.CapitalID);</span>
+    const key = <span class="cstat-no" title="statement not covered" >`${f.CapitalID}`;</span>
+    const v = <span class="cstat-no" title="statement not covered" >mapped_value.get(key);</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      CapitalID: f.CapitalID,
+      MetricName: movements.Metric,
+      Unit: movements.Unit,
+      ApplicationID: f.ApplicationID,
+      Timeline: timelineMap.get(v?.FileID),
+      Value: parseFloat(v?.Value),
+      "Avg Historical Forecast": parseFloat(f?.["Avg Historical Forecast"].toString()),
+      "User Forecast": parseFloat(f?.["User Forecast"].toString()),
+    };
+  });
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-20T04:48:07.269Z
+                at 2025-10-25T05:43:56.623Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -8,10 +8,9 @@ jest.unstable_mockModule("../../src/services/abs.service.js", () => ({
 const { filter_abs } = await import("../../src/services/abs.service.js");
 const { fetch_abs } = await import("../../src/controllers/abs.controller.js");
 
-
 const makeRes = () => {
   const res = {};
-  res.status = jest.fn(() => res); 
+  res.status = jest.fn(() => res);
   res.json = jest.fn(() => res);
   return res;
 };
@@ -21,7 +20,7 @@ describe("fetch_abs controller", () => {
     jest.clearAllMocks();
   });
 
-  test(" Positive: returns filtered documents and lowercases query keys", async () => {
+  test("Positive: returns filtered documents and lowercases query keys", async () => {
     const req = {
       query: {
         ABSID: "1",
@@ -44,7 +43,7 @@ describe("fetch_abs controller", () => {
     expect(res.status).not.toHaveBeenCalled();
   });
 
-  test(" Negative: service throws error, responds 500", async () => {
+  test("Negative: service throws error, responds 500", async () => {
     const req = { query: { ABSID: "1" } };
     const res = makeRes();
 

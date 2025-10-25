@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { fetch_abs } from '../controllers/abs.controller.js'
+import { Router } from "express";
+import { fetch_abs } from "../controllers/abs.controller.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', fetch_abs)
+router.get("/", fetch_abs);
 
-export default router
+export default router;

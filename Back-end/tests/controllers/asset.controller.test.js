@@ -1,9 +1,8 @@
 // tests/controllers/asset.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/asset.service.js", () => ({
-  assetService: jest.fn(), 
+  assetService: jest.fn(),
 }));
 
 const { assetService } = await import("../../src/services/asset.service.js");

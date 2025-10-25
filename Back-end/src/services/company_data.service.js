@@ -1,5 +1,4 @@
-import dataModel from "../models/company_data.model.js"
-
+import dataModel from "../models/company_data.model.js";
 
 const results = (r) => ({
   CompanyID: r.CompanyID,
@@ -17,26 +16,16 @@ const results = (r) => ({
   ShortGeneralDescription: r.ShortGeneralDescription,
   LongGeneralDescription: r.LongGeneralDescription,
   ShortApplicationDescription: r.ShortApplicationDescription,
-  LongApplicationDescription: r.LongApplicationDescription
-})
+  LongApplicationDescription: r.LongApplicationDescription,
+});
 
 export async function companyDataService(filters = {}) {
+  const matching_params = {};
+  if (filters.companyid != null) matching_params.CompanyID = Number(filters.companyid);
+  if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid);
 
-  const matching_params = {}
-  if (filters.companyid != null) matching_params.CompanyID = Number(filters.companyid)
-  if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid)
-  
-  const values = await dataModel.find(matching_params).select("-__v -_id").lean()
-  if (values.length === 0) return []
-  
+  const values = await dataModel.find(matching_params).select("-__v -_id").lean();
+  if (values.length === 0) return [];
 
-return values.map(results)
-
+  return values.map(results);
 }
-
-
-
-
-
-
-

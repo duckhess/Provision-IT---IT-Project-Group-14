@@ -94,7 +94,8 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,45 +126,47 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import financial_schema from '../models/financial_statements.js'
-import financial_values_schema from '../models/financial_statements_values.js'
-import { get_period } from './timeline_service.js'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import financial_schema from "../models/financial_statements.js";
+import financial_values_schema from "../models/financial_statements_values.js";
+import { get_period } from "./timeline_service.js";
 &nbsp;
 export async function <span class="fstat-no" title="function not covered" >filter_statements(</span>filters = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
-    const matching_params = <span class="cstat-no" title="statement not covered" >{}</span>
+  const matching_params = <span class="cstat-no" title="statement not covered" >{};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (filters.financialid) <span class="cstat-no" title="statement not covered" >matching_params.FinancialID = Number(filters.financialid)</span></span>
-<span class="cstat-no" title="statement not covered" >    if (filters.applicationid) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid)</span></span>
-<span class="cstat-no" title="statement not covered" >    if (filters.fileid) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid)</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.financialid) <span class="cstat-no" title="statement not covered" >matching_params.FinancialID = Number(filters.financialid);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.applicationid) <span class="cstat-no" title="statement not covered" >matching_params.ApplicationID = Number(filters.applicationid);</span></span>
+<span class="cstat-no" title="statement not covered" >  if (filters.fileid) <span class="cstat-no" title="statement not covered" >matching_params.FileID = Number(filters.fileid);</span></span>
 &nbsp;
-    const value = <span class="cstat-no" title="statement not covered" >await financial_values_schema.find(matching_params).lean()</span>
+  const value = <span class="cstat-no" title="statement not covered" >await financial_values_schema.find(matching_params).lean();</span>
 &nbsp;
-    const document = <span class="cstat-no" title="statement not covered" >await financial_schema.find().lean()</span>
-    const mapped_document = <span class="cstat-no" title="statement not covered" >new Map()</span>
-<span class="cstat-no" title="statement not covered" >    document.forEach(<span class="fstat-no" title="function not covered" >f </span>=&gt; <span class="cstat-no" title="statement not covered" >mapped_document.set(f.FinancialID, f))</span></span>
+  const document = <span class="cstat-no" title="statement not covered" >await financial_schema.find().lean();</span>
+  const mapped_document = <span class="cstat-no" title="statement not covered" >new Map();</span>
+<span class="cstat-no" title="statement not covered" >  document.forEach(<span class="fstat-no" title="function not covered" >(f</span>) =&gt; <span class="cstat-no" title="statement not covered" >mapped_document.set(f.FinancialID, f))</span>;</span>
 &nbsp;
-    const fileIDs = <span class="cstat-no" title="statement not covered" >[...new Set(value.map(<span class="fstat-no" title="function not covered" >v </span>=&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)]</span>
-    const timelineMap = <span class="cstat-no" title="statement not covered" >await get_period(fileIDs)</span>
+  const fileIDs = <span class="cstat-no" title="statement not covered" >[...new Set(value.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; <span class="cstat-no" title="statement not covered" >v.FileID)</span>)];</span>
+  const timelineMap = <span class="cstat-no" title="statement not covered" >await get_period(fileIDs);</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return value.map(<span class="fstat-no" title="function not covered" >v </span>=&gt; {</span>
-        const financials = <span class="cstat-no" title="statement not covered" >mapped_document.get(v.FinancialID)</span>
-<span class="cstat-no" title="statement not covered" >        return  {</span>
-            FinancialID: v.FinancialID,
-            MetricName: financials.Metric,
-            Unit: financials.Unit,
-            ApplicationID: v.ApplicationID,
-            Timeline: timelineMap.get(v?.FileID),
-            Value: parseFloat(v.Value)
-        }
-    })
-}</pre></td></tr></table></pre>
+<span class="cstat-no" title="statement not covered" >  return value.map(<span class="fstat-no" title="function not covered" >(v</span>) =&gt; {</span>
+    const financials = <span class="cstat-no" title="statement not covered" >mapped_document.get(v.FinancialID);</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      FinancialID: v.FinancialID,
+      MetricName: financials.Metric,
+      Unit: financials.Unit,
+      ApplicationID: v.ApplicationID,
+      Timeline: timelineMap.get(v.FileID),
+      Value: parseFloat(v.Value),
+    };
+  });
+}
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-10-20T04:48:07.269Z
+                at 2025-10-25T05:43:56.623Z
             </div>
         <script src="../prettify.js"></script>
         <script>

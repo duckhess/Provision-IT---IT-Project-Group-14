@@ -5,12 +5,12 @@ jest.unstable_mockModule("../../src/services/liability.service.js", () => ({
 }));
 
 const { liabilityService } = await import("../../src/services/liability.service.js");
-const { liabilityController } = await import("../../src/controllers/liability.controller.js"); 
+const { liabilityController } = await import("../../src/controllers/liability.controller.js");
 
 const makeRes = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 
@@ -18,13 +18,15 @@ describe("liabilityController", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("Positive: returns liabilities with lowercased filters", async () => {
-    const req = { query: {
-      Metric: "Debt Ratio",
-      Unit: "%",
-      LiabilityID: "5",
-      ApplicationID: "2",
-      FileID: "3",
-    }};
+    const req = {
+      query: {
+        Metric: "Debt Ratio",
+        Unit: "%",
+        LiabilityID: "5",
+        ApplicationID: "2",
+        FileID: "3",
+      },
+    };
     const res = makeRes();
 
     const mockData = [{ liabilityid: 5, metric: "Debt Ratio", value: 0.62 }];

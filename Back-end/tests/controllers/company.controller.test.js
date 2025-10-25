@@ -13,8 +13,8 @@ const { list_companies_controller } = await import("../../src/controllers/compan
 // Minimal Express-like response mock
 const makeRes = () => {
   const res = {};
-  res.status = jest.fn(() => res);  // enable chaining
-  res.json   = jest.fn(() => res);
+  res.status = jest.fn(() => res); // enable chaining
+  res.json = jest.fn(() => res);
   return res;
 };
 
@@ -24,7 +24,7 @@ describe("list_companies_controller", () => {
   });
 
   test("Positive: returns companies as JSON", async () => {
-    const req = { };               // no query/body needed
+    const req = {}; // no query/body needed
     const res = makeRes();
 
     const mockData = [
@@ -41,12 +41,11 @@ describe("list_companies_controller", () => {
   });
 
   test("Negative: service throws → responds 500 with error", async () => {
-    const req = { };
+    const req = {};
     const res = makeRes();
 
     list_companies_service.mockRejectedValue(new Error("DB failure"));
 
- 
     const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
     await list_companies_controller(req, res);
