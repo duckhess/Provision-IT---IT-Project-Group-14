@@ -28,7 +28,7 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment, governanc
         <div className='grid grid-rows-4 gap-4 w-full h-full'>
 
             {/*Radial Graph */}
-            <div className="flex justify-enter items-center w-full h-full">
+            <div className="flex justify-enter items-center w-full h-full" data-testid="radialBar">
                 <ResponsiveContainer width="95%" height="100%">
                     <RadialBarChart 
                         cx = "25%"
@@ -57,8 +57,8 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment, governanc
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <span className = {`text-xl font-bold ${getScoreColor(environment)}`}>{environment}</span>
-                    <span className = "ml-3">{getThumbIcon(environment)}</span>
+                    <span className = {`text-xl font-bold ${getScoreColor(environment)}`} data-testid="envScoreLarge">{environment}</span>
+                    <span className = "ml-3" data-testid="envThumbLarge">{getThumbIcon(environment)}</span>
                 </div>
             </div>
         
@@ -70,8 +70,8 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment, governanc
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <span className = {`text-xl font-bold ${getScoreColor(social)}`}>{social}</span>
-                    <span className = "ml-3">{getThumbIcon(social)}</span>
+                    <span className = {`text-xl font-bold ${getScoreColor(social)}`} data-testid="socialScoreLarge">{social}</span>
+                    <span className = "ml-3" data-testid="socialThumbLarge">{getThumbIcon(social)}</span>
                 </div>
             </div>
 
@@ -82,8 +82,8 @@ const EGSScoreLarge : React.FC<EGSScoreProps> = ({social, environment, governanc
                 </div>
 
                 <div className='flex items-center gap-2'>
-                    <span className = {`text-xl font-bold ${getScoreColor(governance)}`}>{governance}</span>
-                    <span className = "ml-3">{getThumbIcon(governance)}</span>
+                    <span className = {`text-xl font-bold ${getScoreColor(governance)}`} data-testid="govScoreLarge">{governance}</span>
+                    <span className = "ml-3" data-testid="govThumbLarge">{getThumbIcon(governance)}</span>
                 </div>
             </div>
         </div>
