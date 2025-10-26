@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { assetController } from "../controllers/asset.controllers.js"
+import { Router as express_router } from "express";
+import { asset_controller } from "../controllers/asset.controller.js";
 
-const router = Router()
+const router = express_router();
 
-router.get('/', assetController)
+router.get("/", asset_controller);
 
-export default router
+export default router;

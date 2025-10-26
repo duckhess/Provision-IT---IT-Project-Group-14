@@ -1,8 +1,8 @@
-import { Router } from "express"
-import { dataController } from "../controllers/company_data.controller.js"
+import { Router as express_router } from "express";
+import { data_controller } from "../controllers/company_data.controller.js";
 
-const router = Router()
+const router = express_router();
 
-router.get('/', dataController)
+router.get("/", data_controller);
 
-export default router
+export default router;

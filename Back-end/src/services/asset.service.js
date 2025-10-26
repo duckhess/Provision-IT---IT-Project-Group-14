@@ -1,71 +1,73 @@
-import assetModel from "../models/asset.model.js"
-import assetValueModel from "../models/asset_value.model.js"
-import { get_period } from './timeline_service.js'
+import asset_model from "../models/asset.model.js";
+import asset_value_model from "../models/asset_value.model.js";
+import { get_period } from "./timeline.service.js";
+import mongoose from "mongoose";
 
-const toJsNumber = (v) => {
-  if (v == null) return v
-  if (typeof v === "object" && (v._bsontype === "Decimal128" || v instanceof mongoose.Types.Decimal128)) {
-    return parseFloat(v.toString()) 
+const to_js_number = (value) => {
+  if (value == null) return value;
+  if (
+    typeof value === "object" &&
+    (value._bsontype === "Decimal128" || value instanceof mongoose.Types.Decimal128)
+  ) {
+    return parseFloat(value.toString());
   }
-  return v
-}
+  return value;
+};
 
-const results = (r) => ({
-  AssetsID: r.AssetsID,  
-  MetricName : r.MetricName,
-  Unit: r.Unit,
-  ApplicationID : r.ApplicationID,
-  Timeline: r.Period, 
-  Value : toJsNumber(r.Value)
-})
+const format_results = (record) => ({
+  AssetsID: record.AssetsID,
+  MetricName: record.MetricName,
+  Unit: record.Unit,
+  ApplicationID: record.ApplicationID,
+  Timeline: record.Period,
+  Value: to_js_number(record.Value),
+});
 
-export async function assetService(filters = {}) {
-  const matching_params = {}
-  if (filters.assetsid != null) matching_params.AssetsID = Number(filters.assetsid)
-  if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid)
-  if (filters.fileid != null) matching_params.FileID = Number(filters.fileid)
+export async function asset_service(filters = {}) {
+  const matching_params = {};
+  if (filters.assetsid != null) matching_params.AssetsID = Number(filters.assetsid);
+  if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid);
+  if (filters.fileid != null) matching_params.FileID = Number(filters.fileid);
 
-  const values = await assetValueModel.find(matching_params).select("-__v -_id").lean()
-  if (values.length === 0) return []
+  const value_docs = await asset_value_model.find(matching_params).select("-__v -_id").lean();
+  if (value_docs.length === 0) return [];
 
-  // find assetsid in asset table
-  const fetchedIDs = [...new Set(values.map(v =>v.AssetsID))]
-  const keyQuery = {AssetsID: { $in: fetchedIDs } }
+  const fetched_ids = [...new Set(value_docs.map((v) => v.AssetsID))];
+  const key_query = { AssetsID: { $in: fetched_ids } };
 
-  // account description filter (correct field name)
   if (filters.accountdescription && String(filters.accountdescription).trim() !== "") {
-  const descriptionRegex = String(filters.accountdescription).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
-  keyQuery.AccountDescription = { $regex: descriptionRegex, $options: "i" }
-  keyQuery.AccountDescription = { $regex: descriptionRegex, $options: "i" }
+    const description_regex = String(filters.accountdescription)
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    key_query.AccountDescription = { $regex: description_regex, $options: "i" };
   }
 
-  // unit filter
   if (filters.unit && String(filters.unit).trim() !== "") {
-    const unitRegex = String(filters.unit).trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    keyQuery.Unit = { $regex: unitRegex, $options: "i" };
+    const unit_regex = String(filters.unit)
+      .trim()
+      .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    key_query.Unit = { $regex: unit_regex, $options: "i" };
   }
 
-  
-  const keyDocs = await assetModel.find(keyQuery).select("-_id AssetsID AccountDescription Unit ").lean()
-  if (keyDocs.length === 0) return []
+  const key_docs = await asset_model
+    .find(key_query)
+    .select("-_id AssetsID AccountDescription Unit")
+    .lean();
+  if (key_docs.length === 0) return [];
 
-  const byId = new Map(keyDocs.map((d) => [d.AssetsID, d]))
-  const filteredValues = values.filter((v) => byId.has(v.AssetsID))
+  const by_id = new Map(key_docs.map((doc) => [doc.AssetsID, doc]));
+  const filtered_values = value_docs.filter((v) => by_id.has(v.AssetsID));
 
-  const fileIDs = [...new Set(filteredValues.map(v => v.FileID))]
-  const timelineMap = await get_period(fileIDs)
+  const file_ids = [...new Set(filtered_values.map((v) => v.FileID))];
+  const timeline_map = await get_period(file_ids);
 
-  return filteredValues.map(v => {
-    const meta = byId.get(v.AssetsID)
-    return results({
-      ...v,                 
-      MetricName: meta.AccountDescription,  
+  return filtered_values.map((v) => {
+    const meta = by_id.get(v.AssetsID);
+    return format_results({
+      ...v,
+      MetricName: meta.AccountDescription,
       Unit: meta.Unit,
-      Period: timelineMap.get(v?.FileID),
-    })
-  })
+      Period: timeline_map.get(v?.FileID),
+    });
+  });
 }
-
-
-
-
