@@ -16,6 +16,7 @@ export const endpoints = [
   "covenants",
 ];
 
+/* -------------------- TYPES -------------------- */
 
 export interface Company {
   companyId: number;
@@ -136,7 +137,10 @@ export const transformTimelineForecastMetrics = (
 
     return {
       name:
-        first.AccountDescription ?? first.Metric ?? first.MetricName ?? "Unknown",
+        first.AccountDescription ??
+        first.Metric ??
+        first.MetricName ??
+        "Unknown",
       metric: metricCategory,
       unit: first.Unit as Unit,
       data: [
@@ -149,51 +153,60 @@ export const transformTimelineForecastMetrics = (
 
 /* -------------------- COVENANTS -------------------- */
 
-export const transformCovenants = (
+export const transformCovenants = async (
   covenantsRaw: any[],
-  keyRatios: Dataset[]
-): CovenantDataset[] => {
+  applicationId: number
+): Promise<CovenantDataset[]> => {
   const groupedByCategory: Record<string, any[]> = {};
+
+  // Group covenants by category
   covenantsRaw.forEach((item) => {
     const category = item.Category ?? "Uncategorized";
     if (!groupedByCategory[category]) groupedByCategory[category] = [];
     groupedByCategory[category].push(item);
   });
 
-  return Object.entries(groupedByCategory).map(([category, items]) => {
-    const metricList = items.map((item) => ({
-      name: item.MetricName,
-      pass: item.Analysis,
-      calc_value: Number(item.Value),
-      abs_value: item.Benchmark,
-    }));
+  const covenantDatasets = await Promise.all(
+    Object.entries(groupedByCategory).map(async ([category, items]) => {
+      const metricList = items.map((item) => ({
+        name: item.MetricName,
+        pass: item.Analysis,
+        calc_value: Number(item.Value),
+        abs_value: item.Benchmark,
+      }));
 
-    let passCount = 0;
-    metricList.forEach((metric) => {
-      if (!metric.name) return;
-      const kr = keyRatios.find((k) => {
-        if (!k.name) return false;
-        return k.name.trim().toLowerCase() === metric.name.trim().toLowerCase();
-      });
-      if (kr && kr.data.length > 0) {
-        const avg = kr.data.reduce((sum, d) => sum + d.y, 0) / kr.data.length;
-        const latest = kr.data[kr.data.length - 1].y;
-        if (avg > latest) passCount += 1;
+      let threeYearAvgSuccess = 0;
+      try {
+        const response = await axios.get(
+          `/api/category/?applicationid=${encodeURIComponent(applicationId)}`
+        );
+        if (response.data && Array.isArray(response.data)) {
+          const match = response.data.find(
+            (entry) =>
+              entry.ApplicationID === applicationId &&
+              entry.Category?.trim().toLowerCase() === category.trim().toLowerCase()
+          );
+          if (match && typeof match["3 yr Average % Success"] === "number") {
+            threeYearAvgSuccess = match["3 yr Average % Success"];
+          }
+        }
+      } catch (error) {
+        console.warn(`Failed to fetch success data for ${category}:`, error);
       }
-    });
 
-    const threeYearAvgSuccess =
-      metricList.length > 0 ? (passCount / metricList.length) * 100 : 0;
+      return {
+        name: category,
+        metric: "covenants" as Metric,
+        unit: category as Unit,
+        data: [metricList],
+        metadata: { threeYearAvgSuccess },
+      };
+    })
+  );
 
-    return {
-      name: category,
-      metric: "covenants" as Metric,
-      unit: category as Unit,
-      data: [metricList],
-      metadata: { threeYearAvgSuccess },
-    };
-  });
+  return covenantDatasets;
 };
+
 
 /* -------------------- SYNTHETIC METRIC: COVENANT SUMMARY -------------------- */
 
@@ -204,24 +217,29 @@ export const createCovenantSummaryDataset = (applicationId: number): Dataset => 
   unit: "%" as Unit,
 });
 
-
 /* -------------------- FETCH -------------------- */
 
-export const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]> => {
+export const fetchCompanyDatasets = async (
+  companyId: number
+): Promise<Dataset[]> => {
   try {
     const applicationId =
       companyId >= 1001 && companyId <= 1004 ? companyId - 1000 : companyId;
 
-    const requests = endpoints.map((endpoint) =>
-      axios.get(`/api/${endpoint}?applicationID=${applicationId}`)
+    // Fetch all endpoints in parallel
+    const responses = await Promise.all(
+      endpoints.map((endpoint) =>
+        axios.get(`/api/${endpoint}?applicationID=${applicationId}`)
+      )
     );
-    const responses = await Promise.all(requests);
-
-    const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
-    const keyRatios = keyRatiosRes?.data ?? [];
 
     const datasets: Dataset[] = [];
 
+    // Extract key ratios (used by other transforms)
+    const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
+    const keyRatios = keyRatiosRes?.data ?? [];
+
+    // Process each dataset
     for (let i = 0; i < responses.length; i++) {
       const endpoint = endpoints[i];
       const data = responses[i].data;
@@ -241,9 +259,11 @@ export const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]
             ...transformTimelineForecastMetrics(data, companyId, "working_capital_movements", "CapitalID")
           );
           break;
-        case "covenants":
-          datasets.push(...transformCovenants(data, keyRatios));
+        case "covenants": {
+          const covenantDatasets = await transformCovenants(data, applicationId);
+          datasets.push(...covenantDatasets);
           break;
+        }
         case "company_data":
           datasets.push(...transformEGS(data));
           break;
@@ -253,9 +273,7 @@ export const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]
       }
     }
 
-
     datasets.push(createCovenantSummaryDataset(applicationId));
-
     return datasets;
   } catch (err) {
     console.error(`Error fetching datasets for company ${companyId}:`, err);
@@ -263,26 +281,28 @@ export const fetchCompanyDatasets = async (companyId: number): Promise<Dataset[]
   }
 };
 
+/* -------------------- OTHER TRANSFORMS -------------------- */
+
 export const transformCovenantSummary = (companyId: number): Dataset => ({
   name: "Covenant Summary",
   metric: "Covenant Summary" as Metric,
   unit: "%",
-  data: [(companyId - 1000)],
+  data: [companyId - 1000],
 });
 
 export const transformEGS = (companyData: any[]): Dataset[] => {
   if (!companyData || companyData.length === 0) return [];
   const first = companyData[0];
   return [
-  {
-    name: "EGS Score",  
-    metric: "EGS",
-    unit: "%",
-    data: [
-      { x: "Environmental", y: first.EnvironmentalScore ?? 0},
-      { x: "Social", y: first.SocialScore ?? 0},
-      { x: "Governance", y: first.GovernanceScore ?? 0}
-    ],
-  },
+    {
+      name: "EGS Score",
+      metric: "EGS",
+      unit: "%",
+      data: [
+        { x: "Environmental", y: first.EnvironmentalScore ?? 0 },
+        { x: "Social", y: first.SocialScore ?? 0 },
+        { x: "Governance", y: first.GovernanceScore ?? 0 },
+      ],
+    },
   ];
 };
