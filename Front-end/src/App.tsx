@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
+import NavBar from "./components/NavigationBar/NavBar";
+import Footer from "./components/Footer/Footer";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import ProfilePage from "./pages/ProfilePage";
 import ComparePage from "./pages/ComparePage";
 import LoginPage from "./pages/LoginPage";
 import BusinessPage from "./pages/BusinessPage";
-import FilterComparisonPage from "./components/ComparisonPageComponents/FilterComparisonPage";
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
         <Footer />
       </div>
     </Router>
-    // <FilterComparisonPage/>
   );
 }
 

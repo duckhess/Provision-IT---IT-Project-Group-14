@@ -1,0 +1,45 @@
+@startuml Research Company
+title Research Company Flow 
+
+autonumber
+actor Investor
+participant "Web App" as Web
+participant "Auth Service" as Auth
+participant "Application Backend" as Backend
+database "Data Store" as Store
+
+ref over Investor, Web, Auth
+  Login Flow (see: login_flow.puml)
+end ref
+
+ref over Investor, Web, Backend, Store
+  Main Page Load (see: main_page.puml)
+end ref
+
+== Choose a Company to Research ==
+alt Search by name
+  Investor -> Web: Type in search bar
+  Web -> Investor: Show matching companies
+  Investor -> Web: Click a company from results
+else Browse dynamic list
+  Investor -> Web: Scroll list and click on a company
+end
+
+== Navigate to Company Tab ==
+Web -> Investor: Redirect to company tab
+
+== Load Company Profile (Company Tab) ==
+Investor -> Web: Access company tab
+activate Web
+Web -> Backend: Request company profile + 3-year metrics
+activate Backend
+Backend -> Store: Query profile, metrics
+activate Store
+Store --> Backend: Profile + 3-year metrics
+deactivate Store
+Backend --> Web: Company data (intro, image, metrics)
+deactivate Backend
+Web --> Investor: Render company profile (intro, image, graphs)
+deactivate Web
+
+@enduml

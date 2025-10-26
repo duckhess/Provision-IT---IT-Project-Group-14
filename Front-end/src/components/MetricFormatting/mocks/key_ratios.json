@@ -1,0 +1,350 @@
+[
+  {
+    "KeyRatioID": 1,
+    "MetricName": "Current Ratio",
+    "Unit": "Ratio",
+    "Category": "Liquidity",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 3.28
+  },
+  {
+    "KeyRatioID": 1,
+    "MetricName": "Current Ratio",
+    "Unit": "Ratio",
+    "Category": "Liquidity",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 3.12
+  },
+  {
+    "KeyRatioID": 1,
+    "MetricName": "Current Ratio",
+    "Unit": "Ratio",
+    "Category": "Liquidity",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 1.93
+  },
+  {
+    "KeyRatioID": 2,
+    "MetricName": "Quick Ratio (Acid Test)",
+    "Unit": "Ratio",
+    "Category": "Liquidity",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 1.87
+  },
+  {
+    "KeyRatioID": 2,
+    "MetricName": "Quick Ratio (Acid Test)",
+    "Unit": "Ratio",
+    "Category": "Liquidity",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 1.39
+  },
+  {
+    "KeyRatioID": 2,
+    "MetricName": "Quick Ratio (Acid Test)",
+    "Unit": "Ratio",
+    "Category": "Liquidity",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0.96
+  },
+  {
+    "KeyRatioID": 3,
+    "MetricName": "Debt Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 39
+  },
+  {
+    "KeyRatioID": 3,
+    "MetricName": "Debt Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 50
+  },
+  {
+    "KeyRatioID": 3,
+    "MetricName": "Debt Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 48
+  },
+  {
+    "KeyRatioID": 4,
+    "MetricName": "Equity Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 61
+  },
+  {
+    "KeyRatioID": 4,
+    "MetricName": "Equity Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 50
+  },
+  {
+    "KeyRatioID": 4,
+    "MetricName": "Equity Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 52
+  },
+  {
+    "KeyRatioID": 5,
+    "MetricName": "Quasi Equity Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 61
+  },
+  {
+    "KeyRatioID": 5,
+    "MetricName": "Quasi Equity Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 61
+  },
+  {
+    "KeyRatioID": 5,
+    "MetricName": "Quasi Equity Ratio",
+    "Unit": "%",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 64
+  },
+  {
+    "KeyRatioID": 6,
+    "MetricName": "Gross Profit Margin",
+    "Unit": "%",
+    "Category": "Profitability",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 22
+  },
+  {
+    "KeyRatioID": 6,
+    "MetricName": "Gross Profit Margin",
+    "Unit": "%",
+    "Category": "Profitability",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 19
+  },
+  {
+    "KeyRatioID": 6,
+    "MetricName": "Gross Profit Margin",
+    "Unit": "%",
+    "Category": "Profitability",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 22
+  },
+  {
+    "KeyRatioID": 7,
+    "MetricName": "Net Profit/Loss (-) Margin",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 5
+  },
+  {
+    "KeyRatioID": 7,
+    "MetricName": "Net Profit/Loss (-) Margin",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 2
+  },
+  {
+    "KeyRatioID": 7,
+    "MetricName": "Net Profit/Loss (-) Margin",
+    "Unit": "%",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 4
+  },
+  {
+    "KeyRatioID": 8,
+    "MetricName": "Return on Total Assets",
+    "Unit": "%",
+    "Category": "Profitability",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 16
+  },
+  {
+    "KeyRatioID": 8,
+    "MetricName": "Return on Total Assets",
+    "Unit": "%",
+    "Category": "Profitability",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 7
+  },
+  {
+    "KeyRatioID": 8,
+    "MetricName": "Return on Total Assets",
+    "Unit": "%",
+    "Category": "Profitability",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 8
+  },
+  {
+    "KeyRatioID": 9,
+    "MetricName": "Average Receivables Period (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 48
+  },
+  {
+    "KeyRatioID": 9,
+    "MetricName": "Average Receivables Period (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 32
+  },
+  {
+    "KeyRatioID": 9,
+    "MetricName": "Average Receivables Period (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 42
+  },
+  {
+    "KeyRatioID": 10,
+    "MetricName": "Average Creditors Period (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 10
+  },
+  {
+    "KeyRatioID": 10,
+    "MetricName": "Average Creditors Period (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 16
+  },
+  {
+    "KeyRatioID": 10,
+    "MetricName": "Average Creditors Period (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 29
+  },
+  {
+    "KeyRatioID": 11,
+    "MetricName": "Inventory Turnover (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 37
+  },
+  {
+    "KeyRatioID": 11,
+    "MetricName": "Inventory Turnover (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 45
+  },
+  {
+    "KeyRatioID": 11,
+    "MetricName": "Inventory Turnover (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 41
+  },
+  {
+    "KeyRatioID": 12,
+    "MetricName": "Operating Cycle (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 75
+  },
+  {
+    "KeyRatioID": 12,
+    "MetricName": "Operating Cycle (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 60
+  },
+  {
+    "KeyRatioID": 12,
+    "MetricName": "Operating Cycle (days)",
+    "Unit": "days",
+    "Category": "Efficiency & Working-Capital",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 54
+  },
+  {
+    "KeyRatioID": 13,
+    "MetricName": "Interest Cover",
+    "Unit": "ratio",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2023,
+    "Value": 47.02
+  },
+  {
+    "KeyRatioID": 13,
+    "MetricName": "Interest Cover",
+    "Unit": "ratio",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 4192.66
+  },
+  {
+    "KeyRatioID": 13,
+    "MetricName": "Interest Cover",
+    "Unit": "ratio",
+    "Category": "Solvency (Leverage)",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 17.2
+  }
+]

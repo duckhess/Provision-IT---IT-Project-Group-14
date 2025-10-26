@@ -1,0 +1,200 @@
+[
+  {
+    "CovenantsID": 14,
+    "MetricName": "Average Collection Period (days)",
+    "Benchmark": 30,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 41.57,
+    "Comparator": false,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 15,
+    "MetricName": "Average Payment Period (days)",
+    "Benchmark": 45,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 28.59,
+    "Comparator": true,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 1,
+    "MetricName": "Current Ratio",
+    "Benchmark": 88,
+    "Category": "Liquidity",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 1.93,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 5,
+    "MetricName": "Quasi Equity Ratio",
+    "Benchmark": 15,
+    "Category": "Solvency (Leverage)",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 63.93,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 10,
+    "MetricName": "Interest Cover",
+    "Benchmark": 3,
+    "Category": "Solvency (Leverage)",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 17.2,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 2,
+    "MetricName": "Quick Ratio (Acid Test)",
+    "Benchmark": 1,
+    "Category": "Liquidity",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 0.96,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 4,
+    "MetricName": "Equity Ratio",
+    "Benchmark": 60,
+    "Category": "Solvency (Leverage)",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 52.48,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 6,
+    "MetricName": "Capitalisation Ratio",
+    "Benchmark": 123,
+    "Category": "Solvency (Leverage)",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 190.55,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 9,
+    "MetricName": "Return on Total Assets",
+    "Benchmark": 8,
+    "Category": "Profitability",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 8.2,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 11,
+    "MetricName": "Receivables Turnover",
+    "Benchmark": 2,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 8.79,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 16,
+    "MetricName": "Inventory Turnover (days)",
+    "Benchmark": 50,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 40.94,
+    "Comparator": true,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 18,
+    "MetricName": "Dividend Ratio",
+    "Benchmark": 1,
+    "Category": "Dividend Payout",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": -0.12,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 3,
+    "MetricName": "Debt Ratio",
+    "Benchmark": 40,
+    "Category": "Solvency (Leverage)",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 47.52,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 7,
+    "MetricName": "Gross Profit Margin",
+    "Benchmark": 40,
+    "Category": "Profitability",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 22.15,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 8,
+    "MetricName": "Net Profit Margin",
+    "Benchmark": 15,
+    "Category": "Profitability",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 4.02,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 12,
+    "MetricName": "Inventory Turnover",
+    "Benchmark": 2,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 0,
+    "Comparator": true,
+    "Analysis": false
+  },
+  {
+    "CovenantsID": 13,
+    "MetricName": "Creditors Turnover",
+    "Benchmark": 2,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 12.77,
+    "Comparator": false,
+    "Analysis": true
+  },
+  {
+    "CovenantsID": 17,
+    "MetricName": "Operating Cycle (days)",
+    "Benchmark": 30,
+    "Category": "Efficiency & Working-Capital",
+    "Unit": "ratio",
+    "ApplicationID": 1,
+    "Value": 53.92,
+    "Comparator": false,
+    "Analysis": false
+  }
+]

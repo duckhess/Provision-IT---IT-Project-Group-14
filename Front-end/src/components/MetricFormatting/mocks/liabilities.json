@@ -1,0 +1,146 @@
+[
+  {
+    "LiabilityID": 1,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "LiabilityID": 1,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "LiabilityID": 2,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Non Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 508767
+  },
+  {
+    "LiabilityID": 2,
+    "MetricName": "Beneficiary, Related Entity or Shareholder Loans or Entitlements (Non Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 407710
+  },
+  {
+    "LiabilityID": 3,
+    "MetricName": "Current Taxes or Duties Payable",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -146480
+  },
+  {
+    "LiabilityID": 3,
+    "MetricName": "Current Taxes or Duties Payable",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 95762
+  },
+  {
+    "LiabilityID": 4,
+    "MetricName": "Financial Liabilities (Non Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 324417
+  },
+  {
+    "LiabilityID": 4,
+    "MetricName": "Financial Liabilities (Non Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 27827
+  },
+  {
+    "LiabilityID": 5,
+    "MetricName": "Loans Requiring Clarification - Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -235348
+  },
+  {
+    "LiabilityID": 5,
+    "MetricName": "Loans Requiring Clarification - Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "LiabilityID": 6,
+    "MetricName": "Other Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 46342
+  },
+  {
+    "LiabilityID": 6,
+    "MetricName": "Other Current Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 39881
+  },
+  {
+    "LiabilityID": 7,
+    "MetricName": "Other Non Currrent Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "LiabilityID": 7,
+    "MetricName": "Other Non Currrent Liabilities",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "LiabilityID": 8,
+    "MetricName": "Financial Liabilities (Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -177363
+  },
+  {
+    "LiabilityID": 8,
+    "MetricName": "Financial Liabilities (Current Payable)",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 127204
+  },
+  {
+    "LiabilityID": 9,
+    "MetricName": "Net Increase / Decrease (-) in Liabilties",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 320335
+  },
+  {
+    "LiabilityID": 9,
+    "MetricName": "Net Increase / Decrease (-) in Liabilties",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 698384
+  }
+]

@@ -29,7 +29,7 @@ const ABSBenchmarking : React.FC<ABSBenchmarkingProps>= ({code, metric_list}) =>
   return (
     <div className="flex flex-col gap-2 w-full h-full">
         {expanded ? (
-            <div onClick = {toggleExpand} className='cursor-pointer'>
+            <div onClick = {toggleExpand} className='cursor-pointer' data-testid="absLarge">
 
             <ABSBenchmarkingLarge 
                 code = {code} 
@@ -38,7 +38,7 @@ const ABSBenchmarking : React.FC<ABSBenchmarkingProps>= ({code, metric_list}) =>
                 passRate={passRate}>            
             </ABSBenchmarkingLarge> 
         </div> ) : (
-            <div onClick = {toggleExpand} className='cursor-pointer'>
+            <div onClick = {toggleExpand} className='cursor-pointer' data-testid="absSmall">
             <ABSBenchmarkingSmall 
                 code = {code} 
                 passNum = {passMetrics.length} 

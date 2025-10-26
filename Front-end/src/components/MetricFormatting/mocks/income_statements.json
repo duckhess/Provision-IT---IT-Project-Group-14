@@ -1,0 +1,178 @@
+[
+  {
+    "IncomeID": 1,
+    "MetricName": "Revenue",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 13736093
+  },
+  {
+    "IncomeID": 1,
+    "MetricName": "Revenue",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 15699648
+  },
+  {
+    "IncomeID": 2,
+    "MetricName": "Cost of Sales",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 11123405
+  },
+  {
+    "IncomeID": 2,
+    "MetricName": "Cost of Sales",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 12222437
+  },
+  {
+    "IncomeID": 3,
+    "MetricName": "Other Income",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 195119
+  },
+  {
+    "IncomeID": 3,
+    "MetricName": "Other Income",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 245033
+  },
+  {
+    "IncomeID": 4,
+    "MetricName": "Foreign Exchange Gain",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "IncomeID": 4,
+    "MetricName": "Foreign Exchange Gain",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "IncomeID": 5,
+    "MetricName": "Foreign Exchange Loss",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "IncomeID": 5,
+    "MetricName": "Foreign Exchange Loss",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "IncomeID": 6,
+    "MetricName": "Interest Paid",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 78
+  },
+  {
+    "IncomeID": 6,
+    "MetricName": "Interest Paid",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 38939
+  },
+  {
+    "IncomeID": 7,
+    "MetricName": "Interest Received",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 124318
+  },
+  {
+    "IncomeID": 7,
+    "MetricName": "Interest Received",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 126480
+  },
+  {
+    "IncomeID": 8,
+    "MetricName": "Expenses Paid",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 2432864
+  },
+  {
+    "IncomeID": 8,
+    "MetricName": "Expenses Paid",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 2895266
+  },
+  {
+    "IncomeID": 9,
+    "MetricName": "Depreciation",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 172402
+  },
+  {
+    "IncomeID": 9,
+    "MetricName": "Depreciation",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 283548
+  },
+  {
+    "IncomeID": 10,
+    "MetricName": "Profit/Loss for Period",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 326782
+  },
+  {
+    "IncomeID": 10,
+    "MetricName": "Profit/Loss for Period",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 630973
+  },
+  {
+    "IncomeID": 11,
+    "MetricName": "Net Increase / Decrease (-) in Income Statement",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 499183
+  },
+  {
+    "IncomeID": 11,
+    "MetricName": "Net Increase / Decrease (-) in Income Statement",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 914521
+  }
+]

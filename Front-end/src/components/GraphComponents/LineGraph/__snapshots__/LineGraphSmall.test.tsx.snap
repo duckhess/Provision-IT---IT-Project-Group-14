@@ -1,0 +1,47 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LineGraphSmall > matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4"
+  >
+    <div
+      class="px-4 w-full"
+    >
+      <h2
+        class="text-black text-xl font-bold border-b mb-4 inline-block"
+      >
+        Key Ratios
+      </h2>
+    </div>
+    <div
+      class="w-full h-full"
+    >
+      <div>
+        <div>
+          <div />
+          <div />
+          <div />
+          <div />
+          <div
+            data-testid="mock-legend"
+          >
+            <span>
+              Operating Cycle
+            </span>
+            <span>
+              Quick Ratio (Acid Test)
+            </span>
+          </div>
+          <div
+            data-testid="line-Operating Cycle"
+          />
+          <div
+            data-testid="line-Quick Ratio (Acid Test)"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

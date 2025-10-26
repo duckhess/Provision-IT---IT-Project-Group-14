@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
-import companyData from "../data/CompanyData.json"
-import Summary from "../components/BasicSummary"
+import {useNavigate} from "react-router-dom";
+import Summary from "../components/Carousel/BasicSummary"
+import SearchBarComponent from "../components/searchBar/SearchBarComponent";
+import axios from "axios";
 
-
-  type Company = {
-      id: number,
-      title: string,
-      category: string,
-      description: string,
-      funding: string,
-      useOfFunds: string,
-      imageUrl: string
+  interface Company {
+    companyId: number;
+    companyName: string;
   }
 
   const CompanyCard: React.FC<{ company: Company }> = ({ company }) => {
@@ -21,46 +17,43 @@ import Summary from "../components/BasicSummary"
     );
   };
 
+
 const HomePage: React.FC = () => {
-  const [companies, setCompanies] = useState<Company[]>([]);
+  // const [companies, setCompanies] = useState<CompanyInfo[]>([]);
+  const [allCompanies, setAllCompanies] = useState<Company []>([]);
+  // const [suggestedCompanies, setSuggestedCompanies] = useState <Company[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
 
-// Dummy data until backend is ready
-  useEffect(() => {
-    const dummyData: Company[] = [
-      {
-        id: companyData[0].id,
-        title: companyData[0].title,
-        category: companyData[0].category,
-        description: companyData[0].description,
-        funding: companyData[0].funding,
-        useOfFunds: companyData[0].useOfFunds,
-        imageUrl: companyData[0].imageUrl
-      },
+  const handleSearchClick = (input : string) => {
+    navigate(`/search?query=${encodeURIComponent(input)}`);
+  };
 
-      {
-        id: companyData[1].id,
-        title: companyData[1].title,
-        category: companyData[1].category,
-        description: companyData[1].description,
-        funding: companyData[1].funding,
-        useOfFunds: companyData[1].useOfFunds,
-        imageUrl: companyData[1].imageUrl
-      },
-    ];
-    setCompanies(dummyData);
+
+  useEffect (() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get<Company[]> (
+          "/api/companies"
+        );
+        setAllCompanies(response.data);
+      } catch (err){
+        console.error("error fetching companies data",err);
+      } 
+    };
+    fetchCompanies();
   }, []);
 
-  // Rotate cards every 10 seconds
+  // Rotate cards every 30 seconds : carousel
   useEffect(() => {
-    if (companies.length === 0) return;
+    if (allCompanies.length === 0) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % companies.length);
-    }, 60000); // 10,000 ms = 10 seconds
+      setCurrentIndex((prev) => (prev + 1) % allCompanies.length);
+    }, 30000); // 30,000 ms = 30 seconds
 
     return () => clearInterval(interval);
-  }, [companies]);
+  }, [allCompanies]);
 
   return (
     <main className="max-w-7xl mx-auto px-20 py-20 space-y-16">
@@ -68,8 +61,12 @@ const HomePage: React.FC = () => {
       <section className="items-center">
         <h1 className="text-2xl font-semibold mb-4 text-center">Welcome</h1>
 
-        <div className="w-full bg-gray-200 rounded-md h-10 flex items-center justify-center">
-          <span className="text-gray-500">[ Search Bar Placeholder ]</span>
+        <div className="w-full flex items-center justify-center">
+            <SearchBarComponent 
+              allCompanies={allCompanies} 
+              setSearchResults={() => {}}
+              handleSearchClick = {handleSearchClick}></SearchBarComponent>
+          {/* <span className="text-gray-500">[ Search Bar Placeholder ]</span> */}
         </div>
       </section>
 
@@ -88,16 +85,17 @@ const HomePage: React.FC = () => {
             toward succesful direct transparent investing.
           </p>
         </div>
-        <div className="h-full min-h-[328px] max-h-[329px] w-full bg-gray-300 rounded-md flex items-center 
+
+        <div className="h-[500px] w-full bg-gray-300 rounded-lg flex items-center 
           justify-center">
-          [ Static Image Placeholder ]
+         <img src='homePage.jpg' className="h-full w-full object-cover rounded-lg"></img>
         </div>
       </section>
 
-      {/* Investment highlight section with rotating cards */}
+      {/* Investment highlight section with rotating cards (showing all available companies for now)*/}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center py-2">
-          {companies.length > 0 && (
-            <CompanyCard company={companies[currentIndex]} />
+          {allCompanies.length > 0 && (
+            <CompanyCard company={allCompanies[currentIndex]} />
           )}
         <div className="space-y-3">
           <h3 className="text-2xl font-semibold">

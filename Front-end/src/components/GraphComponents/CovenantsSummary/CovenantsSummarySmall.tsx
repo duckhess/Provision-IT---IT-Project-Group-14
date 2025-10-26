@@ -1,0 +1,59 @@
+import React from 'react'
+import { PolarAngleAxis, 
+        PolarGrid, 
+        Radar, 
+        RadarChart, 
+        ResponsiveContainer, 
+        Tooltip,
+        Legend,
+} from 'recharts';
+
+interface CategoryItem {
+    name : string;
+    averageSuccess : number;
+    spotPercentageSuccess: number;
+}
+
+interface CategoryProps {
+    datasets : CategoryItem[];
+}
+
+const CustomTick = ({ payload, x, y, textAnchor, ...rest }: any) => {
+  const words = payload.value.split(" ");
+  return (
+    <text x={x} y={y} textAnchor={textAnchor} {...rest}>
+      {words.map((word: string, index: number) => (
+        <tspan
+          key={index}
+          x={x}
+          dy={index === 0 ? 0 : 15} 
+        >
+          {word}
+        </tspan>
+      ))}
+    </text>
+  );
+};
+
+const CovenantsSummarySmall : React.FC<CategoryProps> = ({datasets}) => {
+  return (
+    <div className="flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
+        <h2 className='text-xl font-bold mb-4'> Covenants Summary</h2>
+        <div className="w-full h-full">
+            <ResponsiveContainer width = "100%" height = "100%">
+                <RadarChart outerRadius = "65%" data = {datasets} margin={{ top: 30, right: 30, bottom: 30, left: 30 }}>
+                    <PolarGrid/>
+                    <PolarAngleAxis 
+                        dataKey="name" tick = {<CustomTick />}/>
+                    <Radar name = "3 Year Average % Success" dataKey = "spotPercentageSuccess" stroke = "green" fill = "green" fillOpacity={0.5} data-testid="radarSpotSmall"/>
+                    <Radar name = "Spot % Sucess" dataKey = "averageSuccess" stroke = "blue" fill = "blue" fillOpacity={0.2} data-testid="radarAvgSmall"/>
+                    <Legend verticalAlign = "bottom" height = {36}></Legend> 
+                    <Tooltip formatter = {(value : number) => `${value}%`}/>
+                </RadarChart>
+            </ResponsiveContainer>
+        </div>
+    </div>
+  )
+}
+
+export default CovenantsSummarySmall

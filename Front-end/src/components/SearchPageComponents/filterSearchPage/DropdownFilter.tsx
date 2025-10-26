@@ -1,0 +1,82 @@
+import React,{useState, useRef, useEffect} from 'react'
+
+type DropdownFilterProps = {
+    title : string
+    options : string[]
+    value: string
+    onChange : (value: string) =>void
+    'data-testid' ?: string;
+}
+
+const DropdownFilter:React.FC<DropdownFilterProps>= ({title, options, value, onChange, 'data-testid':testId}) => {
+  
+    const [open, setOpen] = useState(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() =>{
+        const handleClickOutside = (event : MouseEvent) => {
+            if(dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
+    const handleChange = (value:string) => {
+        setOpen(false)
+        if(onChange) onChange(value)
+    }
+
+    const handlePlacholderClick = () => {
+        setOpen(false)
+        if(onChange) onChange("")
+    }
+
+    return (
+    <div className='flex flex-col mb-4 relative' ref = {dropdownRef} data-testid={testId} >
+        <label className='mb-2 font-medium'>{title}</label>
+
+        <div
+            data-testid="dropdownTrigger" 
+            className = "border border-gray-300 rounded-lg px-3 py-2 cursor-pointer relative bg-white"
+            onClick = {() => setOpen(!open)}>
+                {value || `Select ${title.toLocaleLowerCase()}`}
+        </div>
+
+        {open && (
+            < div   
+              className = "absolute mt-1 w-full max-h-36 overflow-y-auto border border-gray-300 rounded-lg bg-white z-10 shadow-lg"
+              data-testid="dropdownOptions">
+
+                {/**Reset the options */}
+                <div
+                  className='px-3 py-2 hover:bg-gray-100 cursor-pointer'
+                  onClick = {handlePlacholderClick} 
+                  data-testid="resetOptions">
+
+                  Select {title.toLowerCase()}    
+                </div>
+
+                {/**Available option under the category */}
+                {options.map((option)=>(
+                <div
+                  key = {option}
+                  className='px-3 py-2 hover:bg-gray-100 cursor-pointer'
+                  onClick = {()=>handleChange(option)}
+                  data-testid={`option-${option}`}>
+                  
+                  {option} 
+                </div> 
+            ))}
+            
+            </div>
+        )}
+
+    </div>
+  ) 
+
+}
+
+export default DropdownFilter

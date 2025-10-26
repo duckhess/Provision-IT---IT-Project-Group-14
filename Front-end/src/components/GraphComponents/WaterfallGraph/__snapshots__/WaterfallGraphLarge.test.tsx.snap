@@ -1,0 +1,60 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`WaterfallGraphLarge > renders correctly and matches snapshot 1`] = `
+<div>
+  <div
+    class="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4"
+  >
+    <div
+      class="px-4 w-full"
+    >
+      <h2
+        class="text-black text-xl font-bold border-b mb-4 inline-block break-words w-full"
+      >
+        Key Ratios
+      </h2>
+    </div>
+    <div
+      class="w-full h-full"
+    >
+      <div>
+        <div
+          data-testid="mock-bar-chart"
+        >
+          <div
+            data-testid="mock-grid"
+          />
+          <div
+            data-testid="mock-xaxis"
+          />
+          <div
+            data-testid="mock-yaxis"
+          />
+          <div
+            data-testid="mock-tooltip"
+          />
+          <div
+            data-testid="mock-bar-pv"
+          />
+          <div
+            data-testid="mock-bar-change"
+          >
+            <div
+              data-testid="mock-cell-#22c55e"
+            />
+            <div
+              data-testid="mock-cell-#ef4444"
+            />
+            <div
+              data-testid="mock-cell-#166534"
+            />
+            <div
+              data-testid="mock-cell-#ef4444"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

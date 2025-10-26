@@ -1,9 +1,66 @@
 import React from "react";
+import {useState, useEffect} from "react";
 import SearchBarComponent from "../components/searchBar/SearchBarComponent";
-import FilterSearchPage from "../components/filterSearchPage/FilterSearchPage";
-import SearchDashboard from "../components/SearchDashboard";
+import FilterSearchPage from "../components/SearchPageComponents/filterSearchPage/FilterSearchPage";
+import SearchDashboard from "../components/SearchPageComponents/SearchDashboard";
+import axios from "axios";
+import {useLocation} from "react-router-dom";
+
+interface Company {
+  companyId: number;
+  companyName: string;
+}
+
 
 const SearchPage: React.FC = () => {
+  const [allCompanies, setAllCompanies] = useState<Company[]>([]);
+  // const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
+  const [searchResults, setSearchResults] = useState<Company[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const location = useLocation();
+  const query = new URLSearchParams(location.search).get("query")?.toLowerCase() || "";
+  //console.log("query : ", query);
+
+  useEffect (() => {
+    const fetchCompanies = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get<Company[]> (
+          "/api/companies"
+        );
+        console.log("Data: " + response.data);
+        setAllCompanies(response.data);
+
+        if(query) {
+          const queryTrimmed = query.trim().toLowerCase();
+          const filtered = allCompanies.filter(
+            (company) => 
+              company.companyName.toLowerCase().includes(queryTrimmed)
+          ); 
+          console.log("filter query", filtered);
+          setSearchResults(filtered);
+        } else {
+          setSearchResults(allCompanies);
+        }
+
+        // show all comapnies when there is no input in search bar 
+        setSearchResults(response.data);
+
+        console.log("all companies", response.data);
+      } catch (err){
+        console.error("error fetching companies data",err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCompanies();
+  }, []);
+
+  // console.log("all companies", allCompanies);
+  // console.log("search result", searchResults);
+
+
   return (
     <main className="w-full max-w-7xl mx-auto py-20 space-y-12 px-20">
 
@@ -13,16 +70,18 @@ const SearchPage: React.FC = () => {
 
         <div className="flex gap-4 items-center">
           {/* Search Bar */}
-          <SearchBarComponent/>
+          <SearchBarComponent allCompanies={allCompanies} setSearchResults = {setSearchResults}/>
           
           {/* Filter Button */}
-          <FilterSearchPage/>
+          <FilterSearchPage allCompanies={allCompanies} setSearchResults={setSearchResults}/>
         </div>
 
         <hr className="my-6 border-t border-gray-600" />
       </section>
       <section className="align-middle h-[65%]">
-        <SearchDashboard/>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (<SearchDashboard companies = {searchResults} />)}
       </section>
 
       {/* Pagination */}

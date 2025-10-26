@@ -1,0 +1,66 @@
+[
+  {
+    "EquityID": 1,
+    "MetricName": "Dividends",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "EquityID": 1,
+    "MetricName": "Dividends",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 511443
+  },
+  {
+    "EquityID": 2,
+    "MetricName": "Reserves",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": 0
+  },
+  {
+    "EquityID": 2,
+    "MetricName": "Reserves",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 0
+  },
+  {
+    "EquityID": 3,
+    "MetricName": "Settlement Capital",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -1005028
+  },
+  {
+    "EquityID": 3,
+    "MetricName": "Settlement Capital",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 1321445
+  },
+  {
+    "EquityID": 4,
+    "MetricName": "Net Increase / Decrease (-) in Equity",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2024,
+    "Value": -1005028
+  },
+  {
+    "EquityID": 4,
+    "MetricName": "Net Increase / Decrease (-) in Equity",
+    "Unit": "$",
+    "ApplicationID": 1,
+    "Timeline": 2025,
+    "Value": 1832888
+  }
+]
