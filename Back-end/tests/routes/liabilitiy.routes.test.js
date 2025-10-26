@@ -28,7 +28,7 @@ describe("liability.routes", () => {
   test("Positive: GET /liability calls liability_controller and returns 200 with data", async () => {
     const mock_data = [
       { liability_id: 1, name: "Short-term Debt", amount: 1000 },
-      { liability_id: 2, name: "Long-term Debt", amount: 5000 }
+      { liability_id: 2, name: "Long-term Debt", amount: 5000 },
     ];
     liability_controller.mockImplementation((req, res) => res.json(mock_data));
 

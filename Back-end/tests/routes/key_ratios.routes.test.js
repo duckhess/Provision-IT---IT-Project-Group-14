@@ -28,7 +28,7 @@ describe("key_ratio.routes", () => {
   test("Positive: GET /key-ratio calls key_ratio_controller and returns 200 with data", async () => {
     const mock_data = [
       { ratio_id: 1, name: "Debt to Equity", value: 1.5 },
-      { ratio_id: 2, name: "Current Ratio", value: 2.0 }
+      { ratio_id: 2, name: "Current Ratio", value: 2.0 },
     ];
     key_ratio_controller.mockImplementation((req, res) => res.json(mock_data));
 

@@ -28,7 +28,7 @@ describe("covenants.routes", () => {
   test("Positive: GET /covenants calls fetch_covenants and returns 200 with data", async () => {
     const mock_data = [
       { covenant_id: 1, name: "Covenant A" },
-      { covenant_id: 2, name: "Covenant B" }
+      { covenant_id: 2, name: "Covenant B" },
     ];
     fetch_covenants.mockImplementation((req, res) => res.json(mock_data));
 

@@ -24,7 +24,7 @@ const { get_period } = await import("../../src/services/timeline.service.js");
 const { filter_wcm } = await import("../../src/services/wcm.service.js");
 
 // Helper to mock .find().lean()
-const mockFindLean = (model, rows) => {
+const mock_find_lean = (model, rows) => {
   const lean_function = jest.fn().mockResolvedValue(rows);
   model.find.mockReturnValue({ lean: lean_function });
   return { lean_function };
@@ -40,9 +40,9 @@ describe("wcm.service filter_wcm", () => {
   // ------------------
 
   test("Negative: No filters → returns empty array if no forecasts", async () => {
-    mockFindLean(wcm_schema, []);
-    mockFindLean(wcm_forecasts_schema, []);
-    mockFindLean(wcm_values_schema, []);
+    mock_find_lean(wcm_schema, []);
+    mock_find_lean(wcm_forecasts_schema, []);
+    mock_find_lean(wcm_values_schema, []);
     get_period.mockResolvedValue(new Map());
 
     const result = await filter_wcm({});
@@ -50,10 +50,12 @@ describe("wcm.service filter_wcm", () => {
   });
 
   test("Negative: Forecast exists but no values → returns NaN for Value and undefined Timeline", async () => {
-    const forecast_data = [{ CapitalID: 1, ApplicationID: 10, "Avg Historical Forecast": 100, "User Forecast": 200 }];
-    mockFindLean(wcm_schema, [{ CapitalID: 1, Metric: "Cash", Unit: "USD" }]);
-    mockFindLean(wcm_forecasts_schema, forecast_data);
-    mockFindLean(wcm_values_schema, []);
+    const forecast_data = [
+      { CapitalID: 1, ApplicationID: 10, "Avg Historical Forecast": 100, "User Forecast": 200 },
+    ];
+    mock_find_lean(wcm_schema, [{ CapitalID: 1, Metric: "Cash", Unit: "USD" }]);
+    mock_find_lean(wcm_forecasts_schema, forecast_data);
+    mock_find_lean(wcm_values_schema, []);
     get_period.mockResolvedValue(new Map());
 
     const result = await filter_wcm({});
@@ -67,13 +69,15 @@ describe("wcm.service filter_wcm", () => {
 
   test("Positive: Single forecast with matching value → returns full mapped object", async () => {
     const movements = [{ CapitalID: 1, Metric: "Cash", Unit: "USD" }];
-    const forecasts = [{ CapitalID: 1, ApplicationID: 10, "Avg Historical Forecast": 100, "User Forecast": 200 }];
+    const forecasts = [
+      { CapitalID: 1, ApplicationID: 10, "Avg Historical Forecast": 100, "User Forecast": 200 },
+    ];
     const values = [{ CapitalID: 1, ApplicationID: 10, FileID: 5, Value: 123 }];
     const timeline_map = new Map([[5, 202510]]);
 
-    mockFindLean(wcm_schema, movements);
-    mockFindLean(wcm_forecasts_schema, forecasts);
-    mockFindLean(wcm_values_schema, values);
+    mock_find_lean(wcm_schema, movements);
+    mock_find_lean(wcm_forecasts_schema, forecasts);
+    mock_find_lean(wcm_values_schema, values);
     get_period.mockResolvedValue(timeline_map);
 
     const result = await filter_wcm({});
@@ -109,9 +113,9 @@ describe("wcm.service filter_wcm", () => {
       [6, 202511],
     ]);
 
-    mockFindLean(wcm_schema, movements);
-    mockFindLean(wcm_forecasts_schema, forecasts);
-    mockFindLean(wcm_values_schema, values);
+    mock_find_lean(wcm_schema, movements);
+    mock_find_lean(wcm_forecasts_schema, forecasts);
+    mock_find_lean(wcm_values_schema, values);
     get_period.mockResolvedValue(timeline_map);
 
     const result = await filter_wcm({});
@@ -126,13 +130,15 @@ describe("wcm.service filter_wcm", () => {
 
   test("Positive: Filters applied → hits all filter branches", async () => {
     const movements = [{ CapitalID: 1, Metric: "Cash", Unit: "USD" }];
-    const forecasts = [{ CapitalID: 1, ApplicationID: 10, "Avg Historical Forecast": 100, "User Forecast": 200 }];
+    const forecasts = [
+      { CapitalID: 1, ApplicationID: 10, "Avg Historical Forecast": 100, "User Forecast": 200 },
+    ];
     const values = [{ CapitalID: 1, ApplicationID: 10, FileID: 5, Value: 123 }];
     const timeline_map = new Map([[5, 202510]]);
 
-    mockFindLean(wcm_schema, movements);
-    mockFindLean(wcm_forecasts_schema, forecasts);
-    mockFindLean(wcm_values_schema, values);
+    mock_find_lean(wcm_schema, movements);
+    mock_find_lean(wcm_forecasts_schema, forecasts);
+    mock_find_lean(wcm_values_schema, values);
     get_period.mockResolvedValue(timeline_map);
 
     const result = await filter_wcm({ capitalid: 1, applicationid: 10, fileid: 5 });

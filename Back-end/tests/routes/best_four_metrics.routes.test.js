@@ -9,8 +9,11 @@ jest.unstable_mockModule("../../src/controllers/best_four_metrics.controller.js"
 }));
 
 // Import after mocking
-const { best_metrics_controller } = await import("../../src/controllers/best_four_metrics.controller.js");
-const best_four_metrics_routes = (await import("../../src/routes/best_four_metrics.routes.js")).default;
+const { best_metrics_controller } = await import(
+  "../../src/controllers/best_four_metrics.controller.js"
+);
+const best_four_metrics_routes = (await import("../../src/routes/best_four_metrics.routes.js"))
+  .default;
 
 describe("best_four_metrics.routes", () => {
   let app_instance;

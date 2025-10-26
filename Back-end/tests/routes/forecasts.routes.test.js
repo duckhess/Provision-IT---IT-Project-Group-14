@@ -28,7 +28,7 @@ describe("forecast.routes", () => {
   test("Positive: GET /forecast calls fetch_forecasts and returns 200 with data", async () => {
     const mock_data = [
       { forecast_id: 1, name: "Forecast A", value: 100 },
-      { forecast_id: 2, name: "Forecast B", value: 200 }
+      { forecast_id: 2, name: "Forecast B", value: 200 },
     ];
     fetch_forecasts.mockImplementation((req, res) => res.json(mock_data));
 

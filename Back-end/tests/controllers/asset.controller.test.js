@@ -22,11 +22,11 @@ describe("asset_controller", () => {
   test("positive: returns JSON and passes lower-cased filters", async () => {
     const req = {
       query: {
-        assets_id: "1",
+        assetsid: "1",
         unit: "$",
-        application_id: "2",
-        file_id: "3",
-        account_description: "Cash and equivalents",
+        applicationid: "2",
+        fileid: "3",
+        accountdescription: "Cash and equivalents",
       },
     };
     const res = make_res();
@@ -37,11 +37,11 @@ describe("asset_controller", () => {
     await asset_controller(req, res);
 
     expect(asset_service).toHaveBeenCalledWith({
-      assets_id: "1",
+      assetsid: "1",
       unit: "$",
-      application_id: "2",
-      file_id: "3",
-      account_description: "Cash and equivalents",
+      applicationid: "2",
+      fileid: "3",
+      accountdescription: "Cash and equivalents",
     });
     expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();

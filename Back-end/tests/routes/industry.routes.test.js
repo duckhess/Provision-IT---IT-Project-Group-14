@@ -28,7 +28,7 @@ describe("industry.routes", () => {
   test("Positive: GET /industry calls list_industries_controller and returns 200 with data", async () => {
     const mock_data = [
       { industry_id: 1, name: "Technology" },
-      { industry_id: 2, name: "Finance" }
+      { industry_id: 2, name: "Finance" },
     ];
     list_industries_controller.mockImplementation((req, res) => res.json(mock_data));
 

@@ -26,8 +26,7 @@ const format_results = (record) => ({
 export async function asset_service(filters = {}) {
   const matching_params = {};
   if (filters.assetsid != null) matching_params.AssetsID = Number(filters.assetsid);
-  if (filters.applicationid != null)
-    matching_params.ApplicationID = Number(filters.applicationid);
+  if (filters.applicationid != null) matching_params.ApplicationID = Number(filters.applicationid);
   if (filters.fileid != null) matching_params.FileID = Number(filters.fileid);
 
   const value_docs = await asset_value_model.find(matching_params).select("-__v -_id").lean();

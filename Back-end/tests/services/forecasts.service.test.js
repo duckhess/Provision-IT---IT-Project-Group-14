@@ -21,7 +21,7 @@ const { get_period } = await import("../../src/services/timeline.service.js");
 const { filter_forecasts } = await import("../../src/services/forecast.service.js");
 
 // Helper to mock .find().lean()
-const mockFindLean = (model, rows) => {
+const mock_find_lean = (model, rows) => {
   const lean_function = jest.fn().mockResolvedValue(rows);
   model.find.mockReturnValue({ lean: lean_function });
   return { lean_function };
@@ -33,9 +33,9 @@ describe("filter_forecasts service", () => {
   });
 
   test("Negative Test Case: no filters → returns empty array when collections are empty", async () => {
-    mockFindLean(forecast_schema, []);
-    mockFindLean(forecast_forecasts_schema, []);
-    mockFindLean(forecast_values_schema, []);
+    mock_find_lean(forecast_schema, []);
+    mock_find_lean(forecast_forecasts_schema, []);
+    mock_find_lean(forecast_values_schema, []);
     get_period.mockResolvedValue(new Map());
 
     const result = await filter_forecasts({});
@@ -67,14 +67,17 @@ describe("filter_forecasts service", () => {
     ];
     const values = [{ ForecastID: 1, ApplicationID: 2, FileID: 99, Value: "200" }];
 
-    mockFindLean(forecast_schema, documents);
-    mockFindLean(forecast_forecasts_schema, forecasts);
-    mockFindLean(forecast_values_schema, values);
+    mock_find_lean(forecast_schema, documents);
+    mock_find_lean(forecast_forecasts_schema, forecasts);
+    mock_find_lean(forecast_values_schema, values);
     get_period.mockResolvedValue(new Map([[99, 202510]]));
 
     const result = await filter_forecasts(filters);
 
-    expect(forecast_forecasts_schema.find).toHaveBeenCalledWith({ ForecastID: 1, ApplicationID: 2 });
+    expect(forecast_forecasts_schema.find).toHaveBeenCalledWith({
+      ForecastID: 1,
+      ApplicationID: 2,
+    });
     expect(result[0].Value).toBe(200);
     expect(result[0].Timeline).toBe(202510);
     expect(result[0].MetricName).toBe("Revenue");
@@ -83,9 +86,11 @@ describe("filter_forecasts service", () => {
   test("FileID filter branch: fetches forecasts correctly by fileid", async () => {
     const filters = { fileid: "99" };
 
-    mockFindLean(forecast_schema, [{ ForecastID: 1, AccountDescription: "Revenue", Unit: "$" }]);
-    mockFindLean(forecast_forecasts_schema, [{ ForecastID: 1, ApplicationID: 2 }]);
-    mockFindLean(forecast_values_schema, [{ ForecastID: 1, ApplicationID: 2, FileID: 99, Value: "123" }]);
+    mock_find_lean(forecast_schema, [{ ForecastID: 1, AccountDescription: "Revenue", Unit: "$" }]);
+    mock_find_lean(forecast_forecasts_schema, [{ ForecastID: 1, ApplicationID: 2 }]);
+    mock_find_lean(forecast_values_schema, [
+      { ForecastID: 1, ApplicationID: 2, FileID: 99, Value: "123" },
+    ]);
     get_period.mockResolvedValue(new Map([[99, 202510]]));
 
     const result = await filter_forecasts(filters);
@@ -110,10 +115,15 @@ describe("filter_forecasts service", () => {
       { ForecastID: 2, ApplicationID: 3, FileID: 100, Value: "2000" },
     ];
 
-    mockFindLean(forecast_schema, documents);
-    mockFindLean(forecast_forecasts_schema, forecasts);
-    mockFindLean(forecast_values_schema, values);
-    get_period.mockResolvedValue(new Map([[99, 202510], [100, 202511]]));
+    mock_find_lean(forecast_schema, documents);
+    mock_find_lean(forecast_forecasts_schema, forecasts);
+    mock_find_lean(forecast_values_schema, values);
+    get_period.mockResolvedValue(
+      new Map([
+        [99, 202510],
+        [100, 202511],
+      ]),
+    );
 
     const result = await filter_forecasts(filters);
 

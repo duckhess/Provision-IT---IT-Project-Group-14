@@ -9,8 +9,12 @@ jest.unstable_mockModule("../../src/controllers/financial_statements.controller.
 }));
 
 // Import after mocking
-const { fetch_statements } = await import("../../src/controllers/financial_statements.controller.js");
-const financial_statements_routes = (await import("../../src/routes/financial_statements.routes.js")).default;
+const { fetch_statements } = await import(
+  "../../src/controllers/financial_statements.controller.js"
+);
+const financial_statements_routes = (
+  await import("../../src/routes/financial_statements.routes.js")
+).default;
 
 describe("financial_statements.routes", () => {
   let app_instance;
@@ -28,7 +32,7 @@ describe("financial_statements.routes", () => {
   test("Positive: GET /financial-statements calls fetch_statements and returns 200 with data", async () => {
     const mock_data = [
       { statement_id: 1, type: "Balance Sheet", amount: 1000 },
-      { statement_id: 2, type: "Income Statement", amount: 500 }
+      { statement_id: 2, type: "Income Statement", amount: 500 },
     ];
     fetch_statements.mockImplementation((req, res) => res.json(mock_data));
 

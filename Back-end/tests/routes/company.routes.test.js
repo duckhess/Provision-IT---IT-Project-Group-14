@@ -28,7 +28,7 @@ describe("company.routes", () => {
   test("Positive: GET /company calls list_companies_controller and returns 200 with data", async () => {
     const mock_data = [
       { company_id: 1, name: "OpenAI" },
-      { company_id: 2, name: "Example Corp" }
+      { company_id: 2, name: "Example Corp" },
     ];
     list_companies_controller.mockImplementation((req, res) => res.json(mock_data));
 

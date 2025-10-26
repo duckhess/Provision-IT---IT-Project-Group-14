@@ -11,14 +11,15 @@ const { get_industry_by_id_service, list_industries_service } = await import(
 );
 
 // Helper to mock .find().lean()
-const mockFindLean = (model, rows) => {
+const mock_find_lean = (model, rows) => {
   const lean_function = jest.fn().mockResolvedValue(rows);
-  model.find.mockReturnValue({ select: jest.fn().mockReturnValue({ lean: lean_function }) });
-  return { lean_function };
+  const select_function = jest.fn().mockReturnValue({ lean: lean_function });
+  model.find.mockReturnValue({ select: select_function });
+  return { select_function, lean_function };
 };
 
 // Helper to mock .findOne().lean()
-const mockFindOneLean = (model, row) => {
+const mock_find_one_lean = (model, row) => {
   const lean_function = jest.fn().mockResolvedValue(row);
   model.findOne.mockReturnValue({ lean: lean_function });
   return { lean_function };
@@ -31,7 +32,7 @@ describe("Industry Service Tests", () => {
 
   test("Positive Test Case: get industry by ID returns formatted object", async () => {
     const mock_industry = { IndustryID: 1, IndustryName: "Technology" };
-    mockFindOneLean(industry_schema, mock_industry);
+    mock_find_one_lean(industry_schema, mock_industry);
 
     const result = await get_industry_by_id_service(1);
 
@@ -40,7 +41,7 @@ describe("Industry Service Tests", () => {
   });
 
   test("Negative Test Case: get industry by ID returns null if not found", async () => {
-    mockFindOneLean(industry_schema, null);
+    mock_find_one_lean(industry_schema, null);
 
     const result = await get_industry_by_id_service(999);
 
@@ -49,11 +50,11 @@ describe("Industry Service Tests", () => {
   });
 
   test("Positive Test Case: list_industries_service returns list of formatted industries", async () => {
-    const mockIndustries = [
+    const mock_industries = [
       { IndustryID: 1, IndustryName: "Technology" },
       { IndustryID: 2, IndustryName: "Healthcare" },
     ];
-    mockFindLean(industry_schema, mockIndustries);
+    mock_find_lean(industry_schema, mock_industries);
 
     const result = await list_industries_service();
 

@@ -19,7 +19,9 @@ jest.unstable_mockModule("../../src/services/timeline.service.js", () => ({
 }));
 
 // --- Imports after mocks ---
-const cashflow_values_schema = (await import("../../src/models/statement_of_cashflows_values.models.js")).default;
+const cashflow_values_schema = (
+  await import("../../src/models/statement_of_cashflows_values.models.js")
+).default;
 const cashflow_schema = (await import("../../src/models/statement_of_cashflows.model.js")).default;
 const { get_period } = await import("../../src/services/timeline.service.js");
 const { soc_service } = await import("../../src/services/statement_of_cashflows.service.js");
@@ -46,13 +48,9 @@ describe("statement_of_cashflows.service", () => {
       unit: "USD",
     };
 
-    const values_rows = [
-      { CashflowID: 1, ApplicationID: 2, FileID: 3, Value: 100.5 },
-    ];
+    const values_rows = [{ CashflowID: 1, ApplicationID: 2, FileID: 3, Value: 100.5 }];
 
-    const key_docs = [
-      { CashflowID: 1, Metric: "Revenue", Unit: "USD" },
-    ];
+    const key_docs = [{ CashflowID: 1, Metric: "Revenue", Unit: "USD" }];
 
     mock_find_select_lean(cashflow_values_schema, values_rows);
     mock_find_select_lean(cashflow_schema, key_docs);

@@ -9,7 +9,9 @@ jest.unstable_mockModule("../../src/controllers/statement_of_cashflows.controlle
 }));
 
 // Import after mocking
-const { soc_controller } = await import("../../src/controllers/statement_of_cashflows.controller.js");
+const { soc_controller } = await import(
+  "../../src/controllers/statement_of_cashflows.controller.js"
+);
 const soc_routes = (await import("../../src/routes/statement_of_cashflows.routes.js")).default;
 
 describe("statement_of_cashflows.routes", () => {
@@ -28,7 +30,7 @@ describe("statement_of_cashflows.routes", () => {
   test("Positive: GET /statement-of-cashflows calls soc_controller and returns 200 with data", async () => {
     const mock_data = [
       { soc_id: 1, type: "Operating", amount: 2000 },
-      { soc_id: 2, type: "Investing", amount: -500 }
+      { soc_id: 2, type: "Investing", amount: -500 },
     ];
     soc_controller.mockImplementation((req, res) => res.json(mock_data));
 

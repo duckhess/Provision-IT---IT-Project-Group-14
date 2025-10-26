@@ -1,7 +1,7 @@
-import wcm_schema from '../models/working_capital_movements.model.js'
-import wcm_values_schema from '../models/wcm_values.model.js'
-import wcm_forecasts_schema from '../models/wcm_forecasts.model.js'
-import { get_period } from './timeline.service.js'
+import wcm_schema from "../models/working_capital_movements.model.js";
+import wcm_values_schema from "../models/wcm_values.model.js";
+import wcm_forecasts_schema from "../models/wcm_forecasts.model.js";
+import { get_period } from "./timeline.service.js";
 
 export async function filter_wcm(filters = {}) {
   const matching_params = {};

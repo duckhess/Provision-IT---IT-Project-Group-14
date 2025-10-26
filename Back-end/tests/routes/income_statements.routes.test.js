@@ -10,7 +10,8 @@ jest.unstable_mockModule("../../src/controllers/income_statement.controller.js",
 
 // Import after mocking
 const { income_controller } = await import("../../src/controllers/income_statement.controller.js");
-const income_statement_routes = (await import("../../src/routes/income_statement.routes.js")).default;
+const income_statement_routes = (await import("../../src/routes/income_statement.routes.js"))
+  .default;
 
 describe("income_statement.routes", () => {
   let app_instance;
@@ -28,7 +29,7 @@ describe("income_statement.routes", () => {
   test("Positive: GET /income-statement calls income_controller and returns 200 with data", async () => {
     const mock_data = [
       { statement_id: 1, type: "Income Statement", amount: 5000 },
-      { statement_id: 2, type: "Income Statement", amount: 7000 }
+      { statement_id: 2, type: "Income Statement", amount: 7000 },
     ];
     income_controller.mockImplementation((req, res) => res.json(mock_data));
 

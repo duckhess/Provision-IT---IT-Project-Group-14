@@ -28,7 +28,7 @@ describe("wcm.routes", () => {
   test("Positive: GET /wcm calls fetch_wcm and returns 200 with data", async () => {
     const mock_data = [
       { wcm_id: 1, name: "Metric A", value: 10 },
-      { wcm_id: 2, name: "Metric B", value: 20 }
+      { wcm_id: 2, name: "Metric B", value: 20 },
     ];
     fetch_wcm.mockImplementation((req, res) => res.json(mock_data));
 

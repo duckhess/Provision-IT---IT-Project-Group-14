@@ -28,7 +28,7 @@ describe("equity.routes", () => {
   test("Positive: GET /equity calls equity_controller and returns 200 with data", async () => {
     const mock_data = [
       { equity_id: 1, name: "Equity A", value: 100 },
-      { equity_id: 2, name: "Equity B", value: 200 }
+      { equity_id: 2, name: "Equity B", value: 200 },
     ];
     equity_controller.mockImplementation((req, res) => res.json(mock_data));
 

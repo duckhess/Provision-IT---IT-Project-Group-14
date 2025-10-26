@@ -17,7 +17,7 @@ const { get_period } = await import("../../src/services/timeline.service.js");
 const { ratio_service } = await import("../../src/services/key_ratio.service.js");
 
 // Helper to mock .find().lean()
-const mockFindLean = (model, rows) => {
+const mock_find_lean = (model, rows) => {
   const lean_function = jest.fn().mockResolvedValue(rows);
   model.find.mockReturnValue({ select: jest.fn(() => ({ lean: lean_function })) });
   return { lean_function };
@@ -29,7 +29,7 @@ describe("ratio_service", () => {
   });
 
   test("No filters → returns empty array when values are empty", async () => {
-    mockFindLean(ratio_values_schema, []);
+    mock_find_lean(ratio_values_schema, []);
     const result = await ratio_service({});
     expect(ratio_values_schema.find).toHaveBeenCalledWith({});
     expect(result).toEqual([]);
@@ -41,8 +41,8 @@ describe("ratio_service", () => {
     const values_docs = [{ KeyRatioID: 1, ApplicationID: 2, FileID: 10, Value: 123 }];
     const key_docs = [{ KeyRatioID: 1, Metric: "Metric1", Unit: "Unit1", Category: "Cat1" }];
 
-    mockFindLean(ratio_values_schema, values_docs);
-    mockFindLean(key_ratio_schema, key_docs);
+    mock_find_lean(ratio_values_schema, values_docs);
+    mock_find_lean(key_ratio_schema, key_docs);
     get_period.mockResolvedValue(new Map([[10, 202510]]));
 
     const result = await ratio_service(filters);
@@ -67,8 +67,8 @@ describe("ratio_service", () => {
     const values_docs = [{ KeyRatioID: 1, ApplicationID: 2, FileID: 11, Value: 456 }];
     const key_docs = [{ KeyRatioID: 1, Metric: "Metric1", Unit: "Unit1", Category: "Cat1" }];
 
-    mockFindLean(ratio_values_schema, values_docs);
-    mockFindLean(key_ratio_schema, key_docs);
+    mock_find_lean(ratio_values_schema, values_docs);
+    mock_find_lean(key_ratio_schema, key_docs);
     get_period.mockResolvedValue(new Map([[11, 202511]]));
 
     const result = await ratio_service(filters);
@@ -86,8 +86,8 @@ describe("ratio_service", () => {
     const values_docs = [{ KeyRatioID: 2, ApplicationID: 3, FileID: 12, Value: 789 }];
     const key_docs = [{ KeyRatioID: 2, Metric: "Metric2", Unit: "Unit1", Category: "Cat2" }];
 
-    mockFindLean(ratio_values_schema, values_docs);
-    mockFindLean(key_ratio_schema, key_docs);
+    mock_find_lean(ratio_values_schema, values_docs);
+    mock_find_lean(key_ratio_schema, key_docs);
     get_period.mockResolvedValue(new Map([[12, 202512]]));
 
     const result = await ratio_service(filters);
@@ -111,9 +111,14 @@ describe("ratio_service", () => {
       { KeyRatioID: 2, Metric: "Metric2", Unit: "U2", Category: "C2" },
     ];
 
-    mockFindLean(ratio_values_schema, values_docs);
-    mockFindLean(key_ratio_schema, key_docs);
-    get_period.mockResolvedValue(new Map([[101, 202510], [102, 202511]]));
+    mock_find_lean(ratio_values_schema, values_docs);
+    mock_find_lean(key_ratio_schema, key_docs);
+    get_period.mockResolvedValue(
+      new Map([
+        [101, 202510],
+        [102, 202511],
+      ]),
+    );
 
     const result = await ratio_service(filters);
 

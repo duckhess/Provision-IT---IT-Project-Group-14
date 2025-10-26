@@ -9,7 +9,7 @@ const timeline_schema = (await import("../../src/models/timelines.js")).default;
 const { get_period } = await import("../../src/services/timeline.service.js");
 
 // Helper to mock .find().lean()
-const mockFindLean = (model, rows) => {
+const mock_find_lean = (model, rows) => {
   const lean_function = jest.fn().mockResolvedValue(rows);
   model.find.mockReturnValue({ lean: lean_function });
   return { lean_function };
@@ -37,7 +37,7 @@ describe("timeline.service get_period", () => {
   });
 
   test("Negative: fileIDs not found in DB → returns empty map", async () => {
-    mockFindLean(timeline_schema, []);
+    mock_find_lean(timeline_schema, []);
     const result = await get_period([999]);
     expect(result.size).toBe(0);
   });
@@ -46,30 +46,30 @@ describe("timeline.service get_period", () => {
   // Positive Test Cases
   // ------------------
 
-  test("Positive: Single fileID → returns correct period map", async () => {
-    const fileID = 101;
+  test("Positive: Single file_id → returns correct period map", async () => {
+    const file_id = 101;
     const period = 202510;
 
-    mockFindLean(timeline_schema, [{ FileID: fileID, period }]);
+    mock_find_lean(timeline_schema, [{ FileID: file_id, period }]);
 
-    const result = await get_period([fileID]);
-    expect(timeline_schema.find).toHaveBeenCalledWith({ FileID: { $in: [fileID] } });
-    expect(result.get(fileID)).toBe(period);
+    const result = await get_period([file_id]);
+    expect(timeline_schema.find).toHaveBeenCalledWith({ FileID: { $in: [file_id] } });
+    expect(result.get(file_id)).toBe(period);
     expect(result.size).toBe(1);
   });
 
-  test("Positive: Multiple fileIDs → returns map of fileID to period", async () => {
-    const fileIDs = [101, 102];
+  test("Positive: Multiple file_ids → returns map of file_id to period", async () => {
+    const file_ids = [101, 102];
     const rows = [
       { FileID: 101, period: 202510 },
       { FileID: 102, period: 202511 },
     ];
 
-    mockFindLean(timeline_schema, rows);
+    mock_find_lean(timeline_schema, rows);
 
-    const result = await get_period(fileIDs);
+    const result = await get_period(file_ids);
 
-    expect(timeline_schema.find).toHaveBeenCalledWith({ FileID: { $in: fileIDs } });
+    expect(timeline_schema.find).toHaveBeenCalledWith({ FileID: { $in: file_ids } });
     expect(result.get(101)).toBe(202510);
     expect(result.get(102)).toBe(202511);
     expect(result.size).toBe(2);

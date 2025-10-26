@@ -18,7 +18,7 @@ const { get_period } = await import("../../src/services/timeline.service.js");
 const { liability_service } = await import("../../src/services/liability.service.js");
 
 // Helper to mock .find().select().lean()
-const mockFindSelectLean = (model, rows) => {
+const mock_find_select_lean = (model, rows) => {
   const lean_function = jest.fn().mockResolvedValue(rows);
   const select_function = jest.fn(() => ({ lean: lean_function }));
   model.find.mockReturnValue({ select: select_function });
@@ -32,8 +32,8 @@ describe("liability_service", () => {
 
   // ---------- Negative Test Cases ----------
   test("Negative case: no matching values → returns empty array", async () => {
-    mockFindSelectLean(liability_values_schema, []);
-    mockFindSelectLean(liability_schema, []);
+    mock_find_select_lean(liability_values_schema, []);
+    mock_find_select_lean(liability_schema, []);
     get_period.mockResolvedValue(new Map());
 
     const result = await liability_service({});
@@ -45,8 +45,8 @@ describe("liability_service", () => {
   test("Negative case: keyDocs filter excludes all liability docs → returns empty array", async () => {
     // values found, but liability_schema returns nothing
     const value_docs = [{ LiabilitiesID: 1, ApplicationID: 2, FileID: 99, Value: 100 }];
-    mockFindSelectLean(liability_values_schema, value_docs);
-    mockFindSelectLean(liability_schema, []); // no docs matched in liability_schema
+    mock_find_select_lean(liability_values_schema, value_docs);
+    mock_find_select_lean(liability_schema, []); // no docs matched in liability_schema
     get_period.mockResolvedValue(new Map([[99, 202510]]));
 
     const result = await liability_service({ liabilityid: "1" });
@@ -57,12 +57,17 @@ describe("liability_service", () => {
   // ---------- Positive Test Cases ----------
   test("Positive case: returns mapped liabilities with Decimal128 and filtered by metric/unit", async () => {
     const value_docs = [
-      { LiabilitiesID: 1, ApplicationID: 2, FileID: 99, Value: mongoose.Types.Decimal128.fromString("123.45") },
+      {
+        LiabilitiesID: 1,
+        ApplicationID: 2,
+        FileID: 99,
+        Value: mongoose.Types.Decimal128.fromString("123.45"),
+      },
     ];
     const liability_docs = [{ LiabilitiesID: 1, Metric: "Revenue", Unit: "$" }];
 
-    mockFindSelectLean(liability_values_schema, value_docs);
-    mockFindSelectLean(liability_schema, liability_docs);
+    mock_find_select_lean(liability_values_schema, value_docs);
+    mock_find_select_lean(liability_schema, liability_docs);
     get_period.mockResolvedValue(new Map([[99, 202510]]));
 
     const result = await liability_service({ liabilityid: "1", metric: "Revenue", unit: "$" });
@@ -79,8 +84,8 @@ describe("liability_service", () => {
     const value_docs = [{ LiabilitiesID: 1, ApplicationID: 2, FileID: 99, Value: 500 }];
     const liability_docs = [{ LiabilitiesID: 1, Metric: "Profit", Unit: "$" }];
 
-    mockFindSelectLean(liability_values_schema, value_docs);
-    mockFindSelectLean(liability_schema, liability_docs);
+    mock_find_select_lean(liability_values_schema, value_docs);
+    mock_find_select_lean(liability_schema, liability_docs);
     get_period.mockResolvedValue(new Map([[99, 202511]]));
 
     const result = await liability_service({ fileid: "99" });
@@ -101,9 +106,14 @@ describe("liability_service", () => {
       { LiabilitiesID: 2, Metric: "Profit", Unit: "$" },
     ];
 
-    mockFindSelectLean(liability_values_schema, value_docs);
-    mockFindSelectLean(liability_schema, liability_docs);
-    get_period.mockResolvedValue(new Map([[99, 202510], [100, 202511]]));
+    mock_find_select_lean(liability_values_schema, value_docs);
+    mock_find_select_lean(liability_schema, liability_docs);
+    get_period.mockResolvedValue(
+      new Map([
+        [99, 202510],
+        [100, 202511],
+      ]),
+    );
 
     const result = await liability_service({});
 

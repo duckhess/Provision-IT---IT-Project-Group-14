@@ -9,8 +9,11 @@ jest.unstable_mockModule("../../src/controllers/cash_equivalences.controller.js"
 }));
 
 // Import after mocking
-const { fetch_cash_equivalences } = await import("../../src/controllers/cash_equivalences.controller.js");
-const cash_equivalences_routes = (await import("../../src/routes/cash_equivalences.routes.js")).default;
+const { fetch_cash_equivalences } = await import(
+  "../../src/controllers/cash_equivalences.controller.js"
+);
+const cash_equivalences_routes = (await import("../../src/routes/cash_equivalences.routes.js"))
+  .default;
 
 describe("cash_equivalences.routes", () => {
   let app_instance;
