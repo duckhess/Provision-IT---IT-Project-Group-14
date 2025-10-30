@@ -14,7 +14,7 @@ vi.mock("recharts", async (importOriginal) => {
     XAxis: () => <div />,
     YAxis: () => <div />,
     Tooltip: () => <div />,
-    Legend: ({ payload }: any) => (
+    Legend: ({ }: any) => (
       <div data-testid="mock-legend">
         {/* Mock the legend items for testing */}
         <span>Revenue</span>

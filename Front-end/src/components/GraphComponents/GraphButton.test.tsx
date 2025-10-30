@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { GraphButton } from "./GraphButton";
 import type { CompanyDataset } from "../Types/Types";

@@ -4,11 +4,18 @@ import axios from 'axios';
 import { MemoryRouter } from 'react-router-dom';
 
 // Mock child components
-vi.mock('../components/searchBar/SearchBarComponent', () => ({
-  default: ({ setSearchResults, allCompanies, handleSearchClick }: any) => (
+vi.mock("../components/searchBar/SearchBarComponent", () => ({
+  default: ({
+    setSearchResults,
+    allCompanies,
+    handleSearchClick = () => {},
+  }: any) => (
     <button
       data-testid="searchButton"
-      onClick={() => setSearchResults([allCompanies[0]])}
+      onClick={() => {
+        handleSearchClick();
+        setSearchResults([allCompanies[0]]);
+      }}
     >
       Search
     </button>

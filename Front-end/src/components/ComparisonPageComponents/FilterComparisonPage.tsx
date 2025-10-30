@@ -27,7 +27,7 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
 }) => {
   const [companyAMetric, setCompanyAMetric] = useState<Company | null>(null);
   const [companyBMetric, setCompanyBMetric] = useState<Company | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -71,7 +71,7 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
 
   const allDatasets: (Dataset & { uniqueKey: string })[] = [];
   const seen = new Set<string>();
-  
+
   // Build allDatasets list for SidebarFilter (unique name__metric keys)
   companyDatasets.forEach(({ datasets }) => {
     datasets.forEach((ds) => {

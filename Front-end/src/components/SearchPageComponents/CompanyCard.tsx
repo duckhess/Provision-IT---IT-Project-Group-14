@@ -17,7 +17,7 @@ interface CompanyCardInfo {
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, isActive }) => {
   const [companyCardDetails, setCompanyCardDetails] = useState<CompanyCardInfo | null>(null);
-  const [loading, setLoading] = useState<boolean> (false);
+  const [_, setLoading] = useState<boolean> (false);
 
   useEffect (() => {
       const fetchCompanies = async (id : number) => {

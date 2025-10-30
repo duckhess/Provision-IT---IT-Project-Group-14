@@ -15,7 +15,7 @@ const FilterBusinessPage: React.FC<FilterBusinessPageProps> = ({ companyA }) => 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [companyMetric, setCompanyMetric] = useState<Company | null>(null);
   const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {

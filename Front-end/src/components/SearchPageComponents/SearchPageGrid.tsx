@@ -76,7 +76,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
   //for companyData
   const [dataNeeded,setDataNeeded] = useState<CompanyDataNeeded>();
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   // for bestMetrics
   const [bestMetrics, setBestMetrics] = useState<Dataset[]>([]);

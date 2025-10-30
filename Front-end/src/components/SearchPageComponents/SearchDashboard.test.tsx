@@ -1,6 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import SearchDashboard from './SearchDashboard';
-import axios from 'axios';
 
 // Mock child components
 vi.mock('./CompanyCard.tsx', () => ({

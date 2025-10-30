@@ -55,7 +55,7 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
     });
 
     const [companyData, setCompanyData] = useState<DataNeeded[]>([])
-    const [loading, setLoading] = useState<Boolean>(false);
+    const [_, setLoading] = useState<Boolean>(false);
 
     useEffect(()=>{
         const fetchCompanyData = async() => {

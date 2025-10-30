@@ -236,8 +236,8 @@ export const fetchCompanyDatasets = async (
     const datasets: Dataset[] = [];
 
     // Extract key ratios (used by other transforms)
-    const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
-    const keyRatios = keyRatiosRes?.data ?? [];
+    // const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
+    // const keyRatios = keyRatiosRes?.data ?? [];
 
     // Process each dataset
     for (let i = 0; i < responses.length; i++) {

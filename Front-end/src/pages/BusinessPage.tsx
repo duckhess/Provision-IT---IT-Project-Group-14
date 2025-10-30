@@ -1,5 +1,5 @@
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterBusinessPage from "../components/filterBusinessPage/FilterBusinessPage";
 import axios from "axios";
@@ -38,7 +38,7 @@ const BusinessPage: React.FC = () => {
   console.log("Company ID from url: ", companyId);
 
   const [company, setCompany] = useState<CompanyData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [_, setLoading] = useState<boolean>(true);
   
   useEffect(() => {
     const fetchCompany = async () => {
