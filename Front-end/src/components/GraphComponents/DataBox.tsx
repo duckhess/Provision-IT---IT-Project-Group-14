@@ -23,7 +23,7 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
     case "ABS Benchmarking":
       return (
         <div className="flex flex-col">
-            <ABSBenchmarking code = {datasets[0].metadata?.ANZICCode} metric_list = {datasets[0].data}></ABSBenchmarking>
+            <ABSBenchmarking code = {datasets[0].metadata?.ANZICCode} metricList = {datasets[0].data}></ABSBenchmarking>
         </div>
       );
 
@@ -99,7 +99,7 @@ function DataBox({ datasets, unit, metric}: GraphProps) {
     case "covenants":
       return (
         <div className="flex flex-col">
-            <Covenants category={datasets[0].name} metric_list={datasets[0].data[0]} threeYearAverageSuccess={datasets[0].metadata?.threeYearAvgSuccess} />
+            <Covenants category={datasets[0].name} metricList={datasets[0].data[0]} threeYearAverageSuccess={datasets[0].metadata?.threeYearAvgSuccess} />
             <br/>
         </div>
       );

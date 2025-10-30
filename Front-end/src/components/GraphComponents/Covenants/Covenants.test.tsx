@@ -10,9 +10,9 @@ vi.mock('react-icons/fa', () => ({
 
 describe('Covenants Component', () => {
   const mockMetrics = [
-    { name: 'Metric A', pass: true, calc_value: 10, abs_value: 8 },
-    { name: 'Metric B', pass: true, calc_value: 20, abs_value: 15 },
-    { name: 'Metric C', pass: false, calc_value: 5, abs_value: 10 },
+    { name: 'Metric A', pass: true, calcValue: 10, absValue: 8 },
+    { name: 'Metric B', pass: true, calcValue: 20, absValue: 15 },
+    { name: 'Metric C', pass: false, calcValue: 5, absValue: 10 },
   ];
 
   const category = 'Finance';
@@ -22,7 +22,7 @@ describe('Covenants Component', () => {
     render(
       <Covenants
         category={category}
-        metric_list={mockMetrics}
+        metricList={mockMetrics}
         threeYearAverageSuccess={threeYearAverageSuccess}
       />
     );
@@ -39,7 +39,7 @@ describe('Covenants Component', () => {
     render(
       <Covenants
         category={category}
-        metric_list={mockMetrics}
+        metricList={mockMetrics}
         threeYearAverageSuccess={threeYearAverageSuccess}
       />
     );
@@ -67,7 +67,7 @@ describe('Covenants Component', () => {
     render(
       <Covenants
         category={category}
-        metric_list={mockMetrics}
+        metricList={mockMetrics}
         threeYearAverageSuccess={threeYearAverageSuccess}
       />
     );
@@ -90,7 +90,7 @@ describe('Covenants Component', () => {
     render(
       <Covenants
         category={category}
-        metric_list={mockMetrics}
+        metricList={mockMetrics}
         threeYearAverageSuccess={threeYearAverageSuccess}
       />
     );

@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaCheck, FaTimes } from 'react-icons/fa';
+import getScoreColour from '../../../utils/getScoreColour';
 
 
 type ABSBenchmarkingSmallProps  = {
@@ -8,12 +9,6 @@ type ABSBenchmarkingSmallProps  = {
   failNum: number;
   passRate: number;
 }
-
-export const getScoreColor = (score : number) => {
-  if (score >= 70) return "text-green-600";
-  if (score >= 50) return "text-yellow-500";
-  return "text-red-500";
-};
 
 const ABSBenchmarkingSmall : React.FC<ABSBenchmarkingSmallProps> = ({code, passNum, failNum, passRate}) => {
 
@@ -28,7 +23,7 @@ const ABSBenchmarkingSmall : React.FC<ABSBenchmarkingSmallProps> = ({code, passN
 
     <p>
       Pass Rate :  
-      <span className={`ml-1.5 font-semi-bold ${getScoreColor(passRate)}`}>
+      <span className={`ml-1.5 font-semi-bold ${getScoreColour(passRate)}`}>
       {passRate.toFixed(2)}%
       </span>
     </p>

@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import SidebarFilter from './SidebarFilter';
 import type { Dataset } from '../../Types/Types';

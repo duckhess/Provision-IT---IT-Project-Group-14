@@ -5,7 +5,7 @@ import { vi } from "vitest";
 import type { Dataset } from "../Types/Types";
 
 // ---- Mock dependencies ----
-vi.mock("../MetricFormatting/MetricFormat.tsx", () => ({
+vi.mock('../../utils/MetricFormatting/MetricFormat', () => ({
   fetchCompanyDatasets: vi.fn(),
 }));
 
@@ -42,7 +42,7 @@ vi.mock("../filterBusinessPage/sideBar/SidebarFilter", () => ({
 }));
 
 // ---- Imports after mocks ----
-import { fetchCompanyDatasets } from "../MetricFormatting/MetricFormat.tsx";
+import { fetchCompanyDatasets } from "../../utils/MetricFormatting/MetricFormat.tsx";
 
 // ---- Mock Data ----
 const mockDatasetA: Dataset[] = [

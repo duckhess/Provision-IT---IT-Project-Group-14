@@ -4,7 +4,7 @@ import FilterBusinessPage from "./FilterBusinessPage";
 import { vi } from "vitest";
 import type { Dataset } from "../Types/Types";
 
-vi.mock("../MetricFormatting/MetricFormat", () => ({
+vi.mock('../../utils/MetricFormatting/MetricFormat', () => ({
   fetchCompanyDatasets: vi.fn(),
 }));
 
@@ -40,7 +40,7 @@ vi.mock("./sideBar/SidebarFilter", () => ({
   ),
 }));
 
-import { fetchCompanyDatasets } from "../MetricFormatting/MetricFormat";
+import { fetchCompanyDatasets } from "../../utils/MetricFormatting/MetricFormat";
 
 const mockDatasetA: Dataset[] = [
   { name: "Revenue", metric: "income_statements", unit: "$", data: [] },

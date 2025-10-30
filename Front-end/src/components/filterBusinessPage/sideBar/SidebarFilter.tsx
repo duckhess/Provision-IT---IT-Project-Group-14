@@ -26,11 +26,13 @@ const SidebarFilter: React.FC<SidebarFilterProps> = ({
       <h3 className="font-black mb-3 text-lg">Select Metrics</h3>
 
       {Object.entries(grouped).map(([metricCategory, metricDatasets]) => (
+        // show the category of the metric (table name in excel)
         <div key={metricCategory} className="mb-5">
           <h4 className="font-semibold mb-2 border-b border-gray-200 pb-1">
             {metricCategory}
           </h4>
 
+          {/**For each section, shows all the metrics that is under the category as a checkbox */}
           <div className="flex flex-col gap-2">
             {metricDatasets.map((ds) => {
               const uniqueKey = `${ds.name}__${ds.metric}`;

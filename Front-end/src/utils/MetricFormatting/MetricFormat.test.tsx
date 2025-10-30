@@ -64,8 +64,8 @@ describe("Data Transform Functions", () => {
         ds.data.forEach(item => {
             expect(item).toHaveProperty("name");
             expect(item).toHaveProperty("pass");
-            expect(item).toHaveProperty("calc_value");
-            expect(item).toHaveProperty("abs_value");
+            expect(item).toHaveProperty("calcValue");
+            expect(item).toHaveProperty("absValue");
             expect(item).toHaveProperty("greater");
         });
     });
@@ -144,8 +144,8 @@ describe("Data Transform Functions", () => {
         ds.data[0].forEach((metric) => {
         expect(metric).toHaveProperty("name");
         expect(metric).toHaveProperty("pass");
-        expect(metric).toHaveProperty("calc_value");
-        expect(metric).toHaveProperty("abs_value");
+        expect(metric).toHaveProperty("calcValue");
+        expect(metric).toHaveProperty("absValue");
         });
     });
     });

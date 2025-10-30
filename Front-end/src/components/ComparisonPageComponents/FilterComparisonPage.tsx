@@ -3,7 +3,7 @@ import { GraphButton } from "../GraphComponents/GraphButton.tsx";
 import SideBarFilterButton from "../filterBusinessPage/sideBar/SideBarFilterButton";
 import SidebarFilter from "../filterBusinessPage/sideBar/SidebarFilter";
 import type {  Dataset } from "../Types/Types.tsx";
-import { fetchCompanyDatasets } from "../MetricFormatting/MetricFormat.tsx";
+import { fetchCompanyDatasets } from "../../utils/MetricFormatting/MetricFormat.tsx";
 
 interface Company {
   companyId: number;
@@ -21,10 +21,6 @@ interface FilterComparisonPageProps {
   companyB: Company | null;
 }
 
-
-
-/* -------------------- COMPONENT -------------------- */
-
 const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
   companyA,
   companyB,
@@ -36,6 +32,7 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
   const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // fetch the metrics that available for both company
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -74,7 +71,8 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
 
   const allDatasets: (Dataset & { uniqueKey: string })[] = [];
   const seen = new Set<string>();
-
+  
+  // Build allDatasets list for SidebarFilter (unique name__metric keys)
   companyDatasets.forEach(({ datasets }) => {
     datasets.forEach((ds) => {
       const uniqueKey = `${ds.name}__${ds.metric}`;
@@ -100,7 +98,9 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
   };
 
   return (
+    
     <div className="flex">
+      {/**logic of showing the side bar  */} 
       <SideBarFilterButton onClick={() => setSidebarOpen(!sidebarOpen)} />
       {sidebarOpen && (
         <SidebarFilter
@@ -111,6 +111,7 @@ const FilterComparisonPage: React.FC<FilterComparisonPageProps> = ({
         />
       )}
 
+      {/**Deal with the logic of generating graph based on metric chosen */}
       <div className="flex-1 p-4">
         {finalSelectedKeys.length > 0 && companyA && companyB && (
           <GraphButton

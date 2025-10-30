@@ -4,13 +4,13 @@ import ABSBenchmarking from './ABSBenchmarking';
 
 describe('ABSBenchmarking Component', () => {
   const mockMetrics = [
-    { name: 'Metric A', pass: true, calc_value: 10, abs_value: 8, greater: true },
-    { name: 'Metric B', pass: true, calc_value: 20, abs_value: 15, greater: true },
-    { name: 'Metric C', pass: false, calc_value: 5, abs_value: 10, greater: false },
+    { name: 'Metric A', pass: true, calcValue: 10, absValue: 8, greater: true },
+    { name: 'Metric B', pass: true, calcValue: 20, absValue: 15, greater: true },
+    { name: 'Metric C', pass: false, calcValue: 5, absValue: 10, greater: false },
   ];
 
   it('renders ABSBenchmarkingSmall by default', () => {
-    render(<ABSBenchmarking code="TEST123" metric_list={mockMetrics} />);
+    render(<ABSBenchmarking code="TEST123" metricList={mockMetrics} />);
     expect(screen.getByText(/ABS Benchmarking/i)).toBeInTheDocument();
     expect(screen.getByText(/Pass Rate/i)).toBeInTheDocument();
 
@@ -22,7 +22,7 @@ describe('ABSBenchmarking Component', () => {
     });
 
   it('toggles to ABSBenchmarkingLarge on click', () => {
-    render(<ABSBenchmarking code="TEST123" metric_list={mockMetrics} />);
+    render(<ABSBenchmarking code="TEST123" metricList={mockMetrics} />);
     
     const container = screen.getByText(/ABS Benchmarking/i).parentElement!;
     fireEvent.click(container);
@@ -44,7 +44,7 @@ describe('ABSBenchmarking Component', () => {
   });
 
     it('toggles between small and large views', async () => {
-    render(<ABSBenchmarking code="TEST123" metric_list={mockMetrics} />);
+    render(<ABSBenchmarking code="TEST123" metricList={mockMetrics} />);
     
     // default : small view
     const smallView = screen.getByTestId('absSmall');
@@ -65,7 +65,7 @@ describe('ABSBenchmarking Component', () => {
     });
 
   it('calculates pass/fail metrics correctly', () => {
-    render(<ABSBenchmarking code="TEST123" metric_list={mockMetrics} />);
+    render(<ABSBenchmarking code="TEST123" metricList={mockMetrics} />);
     
     const passSection = screen.getByTestId('passSectionSmall');
     expect(passSection).toHaveTextContent('Pass 2');
@@ -75,7 +75,7 @@ describe('ABSBenchmarking Component', () => {
   });
 
   it('calculates passRate correctly', () => {
-    render(<ABSBenchmarking code="TEST123" metric_list={mockMetrics} />);
+    render(<ABSBenchmarking code="TEST123" metricList={mockMetrics} />);
     
     const passRateText = screen.getByText(/Pass Rate/i).textContent;
     // metric_list has 3 items, 2 passed -> 66.6667%
