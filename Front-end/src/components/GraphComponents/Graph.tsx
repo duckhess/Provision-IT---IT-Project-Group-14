@@ -36,7 +36,6 @@ export function mergeDatasets(datasets: Dataset[]) {
 }
 
 function Graph({ datasets, unit, title }: GraphProps) {
-  console.log(datasets);
   const mergedData = mergeDatasets(datasets);
 
   switch (unit) {

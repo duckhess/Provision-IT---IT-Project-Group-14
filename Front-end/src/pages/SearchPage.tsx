@@ -14,13 +14,11 @@ interface Company {
 
 const SearchPage: React.FC = () => {
   const [allCompanies, setAllCompanies] = useState<Company[]>([]);
-  // const [suggestedCompanies, setSuggestedCompanies] = useState<Company[]>([]);
   const [searchResults, setSearchResults] = useState<Company[]>([]);
   const [loading, setLoading] = useState(false);
 
   const location = useLocation();
   const query = new URLSearchParams(location.search).get("query")?.toLowerCase() || "";
-  //console.log("query : ", query);
 
   useEffect (() => {
     const fetchCompanies = async () => {
@@ -29,7 +27,6 @@ const SearchPage: React.FC = () => {
         const response = await axios.get<Company[]> (
           "/api/companies"
         );
-        console.log("Data: " + response.data);
         setAllCompanies(response.data);
 
         if(query) {
@@ -38,7 +35,6 @@ const SearchPage: React.FC = () => {
             (company) => 
               company.companyName.toLowerCase().includes(queryTrimmed)
           ); 
-          console.log("filter query", filtered);
           setSearchResults(filtered);
         } else {
           setSearchResults(allCompanies);
@@ -46,8 +42,6 @@ const SearchPage: React.FC = () => {
 
         // show all comapnies when there is no input in search bar 
         setSearchResults(response.data);
-
-        console.log("all companies", response.data);
       } catch (err){
         console.error("error fetching companies data",err);
       } finally {
@@ -56,10 +50,6 @@ const SearchPage: React.FC = () => {
     };
     fetchCompanies();
   }, []);
-
-  // console.log("all companies", allCompanies);
-  // console.log("search result", searchResults);
-
 
   return (
     <main className="w-full max-w-7xl mx-auto py-20 space-y-12 px-20">

@@ -16,8 +16,8 @@ const ProfilePage: React.FC = () => {
 
           {/* Basic info */}
           <div>
-            <h2 className="text-2xl font-semibold">Shawn Perera</h2>
-            <p className="text-gray-600">shawn@example.com</p>
+            <h2 className="text-2xl font-semibold">User One</h2>
+            <p className="text-gray-600">user@example.com</p>
             <p className="text-gray-500 text-sm">Joined: January 2024</p>
           </div>
         </div>
@@ -28,7 +28,7 @@ const ProfilePage: React.FC = () => {
         <h3 className="text-xl font-semibold">Account Details</h3>
         <div className="space-y-2 text-gray-700">
           <p>
-            <span className="font-medium">Username:</span> shawn123
+            <span className="font-medium">Username:</span> user123
           </p>
           <p>
             <span className="font-medium">Industry Preference:</span> Technology

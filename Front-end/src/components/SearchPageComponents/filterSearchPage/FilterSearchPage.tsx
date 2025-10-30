@@ -81,10 +81,6 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
 
                             const firstCompay = backend[0]
 
-                            console.log("All data", backend);
-
-                            console.log("BackendAmoutn", firstCompay.Amount);
-
                             const amountNumeric = Number(
                                 firstCompay.Amount.replace(/[^0-9.-]+/g, "")
                             );
@@ -146,9 +142,6 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
             filtered = filtered.filter((c) => c.location === filters.location)
         }
 
-        console.log("Filtering amountRange:", filters.amountRange);
-        console.log("Company amounts:", companyData.map(c => ({name: c.companyName, amountValue: c.amountValue})));
-
         if(filters.amountRange) {
             filtered = filtered.filter((c) => 
             {
@@ -159,8 +152,6 @@ const FilterSearchPage : React.FC<FilterSearchPageProps> = ({allCompanies,setSea
                 return true;
             });
         }
-
-        console.log("Filtered Results", filtered);
 
         setSearchResults(filtered.map(c=>({
             companyId : c.companyID,

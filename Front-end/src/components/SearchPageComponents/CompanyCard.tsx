@@ -26,8 +26,6 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ id, companyName , onClick, is
           const response = await axios.get<BackendCompanyData[]> (
             `/api/company_data?CompanyID=${id}`
           );
-
-        //console.log("Backend reponse", response.data);
         
         // response is parsed as an array
         if (response.data.length > 0) {
