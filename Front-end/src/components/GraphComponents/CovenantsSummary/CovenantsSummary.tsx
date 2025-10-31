@@ -19,7 +19,6 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
   const [expanded, setExpanded] = useState(false);
   const toggleExpand = () => setExpanded((prev) => !prev);
   const [datasets, setDatasets] = useState<CategoryItem[] | null>(null);
-  console.log(`APP ID = ${JSON.stringify(applicationId, null, 2)}`);
 
   useEffect(() => {
     const loadData = async () => {
@@ -36,7 +35,6 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
             spotPercentageSuccess: parseFloat(item["Spot % Success"].toFixed(2)),
           }));
 
-        console.log("Mapped categories: ", categories);
         setDatasets(categories);
       } catch (err) {
         console.log("error fetching categories in Covenants Summary", err);
@@ -45,10 +43,6 @@ const CovenanatsSummary: React.FC<CategoryProps> = ({applicationId}) => {
 
     loadData();
   }, [applicationId]);
-
-  useEffect(()=>{
-    console.log("dataset" , datasets);
-  },[datasets]);
 
   return (
     <div className="flex flex-col gap-2 w-full h-full">

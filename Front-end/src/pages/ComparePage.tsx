@@ -12,7 +12,7 @@ const ComparePage: React.FC = () => {
   const [companyA, setCompanyA] = useState<Company | null>(null);
   const [companyB, setCompanyB] = useState<Company | null>(null);
   const [allCompanies, setAllCompanies] = useState<Company[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   // Fetches companies [ID and Name]
   useEffect(() => {

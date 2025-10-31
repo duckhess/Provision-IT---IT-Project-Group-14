@@ -13,12 +13,12 @@ describe("ABSBenchmarkingLarge", ()=>{
 const mockProps = {
     code: 'TEST123',
     passRate: 80,
-    pass_list: [
-      { name: 'Metric A', pass: true, calc_value: 10, abs_value: 8, greater: true },
-      { name: 'Metric B', pass: true, calc_value: 20, abs_value: 15, greater: true },
+    passList: [
+      { name: 'Metric A', pass: true, calcValue: 10, absValue: 8, greater: true },
+      { name: 'Metric B', pass: true, calcValue: 20, absValue: 15, greater: true },
     ],
-    fail_list: [
-      { name: 'Metric C', pass: false, calc_value: 5, abs_value: 10, greater: false },
+    failList: [
+      { name: 'Metric C', pass: false, calcValue: 5, absValue: 10, greater: false },
     ],
   };
 

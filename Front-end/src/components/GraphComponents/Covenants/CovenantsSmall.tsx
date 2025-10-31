@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaCheck, FaTimes } from 'react-icons/fa';
+import getScoreColour from '../../../utils/getScoreColour';
 
 type CovenantsSmallProps  = {
     category: string;
@@ -9,11 +10,6 @@ type CovenantsSmallProps  = {
 }
 
 const CovenantsSmall : React.FC<CovenantsSmallProps> = ({category, passNum, failNum, spotPercentageRate}) => {
-    const getScoreColor = (score : number) => {
-    if (score >= 70) return "text-green-600";
-    if (score >= 50) return "text-yellow-500";
-    return "text-red-500";
-  };
 
  return (
       <div className = "flex flex-col items-start w-[75%] h-[400px] bg-gray-100 rounded-lg shadow p-4">
@@ -25,7 +21,7 @@ const CovenantsSmall : React.FC<CovenantsSmallProps> = ({category, passNum, fail
      
          <p>
            Spot % Success :  
-           <span className={`ml-1.5 font-semi-bold ${getScoreColor(spotPercentageRate)}`}>
+           <span className={`ml-1.5 font-semi-bold ${getScoreColour(spotPercentageRate)}`}>
            {spotPercentageRate.toFixed(2)}%
            </span>
          </p>

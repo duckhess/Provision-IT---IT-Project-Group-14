@@ -3,21 +3,19 @@ import SideBarFilterButton from './sideBar/SideBarFilterButton';
 import SidebarFilter from './sideBar/SidebarFilter';
 import { GraphButton } from '../GraphComponents/GraphButton';
 import type { Dataset } from '../Types/Types';
-import type { Company, CompanyDataset } from '../MetricFormatting/MetricFormat';
-import { fetchCompanyDatasets } from '../MetricFormatting/MetricFormat';
+import type { Company, CompanyDataset } from '../../utils/MetricFormatting/MetricFormat';
+import { fetchCompanyDatasets } from '../../utils/MetricFormatting/MetricFormat';
 
 interface FilterBusinessPageProps {
   companyA: Company | null;
 }
-
-/* -------------------- MAIN COMPONENT -------------------- */
 
 const FilterBusinessPage: React.FC<FilterBusinessPageProps> = ({ companyA }) => {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [companyMetric, setCompanyMetric] = useState<Company | null>(null);
   const [finalSelectedKeys, setFinalSelectedKeys] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,7 +39,7 @@ const FilterBusinessPage: React.FC<FilterBusinessPageProps> = ({ companyA }) => 
     },
   ];
 
-  // --- 🔹 Build allDatasets list for SidebarFilter (unique name__metric keys)
+  // Build allDatasets list for SidebarFilter (unique name__metric keys)
   const allDatasets: (Dataset & { uniqueKey: string })[] = [];
   const seen = new Set<string>();
 

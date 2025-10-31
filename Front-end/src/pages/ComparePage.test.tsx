@@ -5,7 +5,7 @@ import { vi } from 'vitest';
 
 // Mock child components
 vi.mock('../components/searchBar/SearchBarComponent', () => ({
-  default: ({ setSearchResults, 'data-testid': testId }: any) => (
+  default: ({ setSearchResults}: any) => (
     <button
       data-testid="searchButton"
       onClick={() => setSearchResults([{ companyId: 1, companyName: 'ABC Corp' }])}

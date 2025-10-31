@@ -54,9 +54,6 @@ const WaterfallGraphLarge = ({ mergedSets, title}: GraphProps) => {
   const metricOrder = Array.from(
     new Set(data.map(entry => entry.key))
   );
-  console.log(metricOrder);
-
-  console.log("merged datasets", mergedSets);
 
   return (
     <div className="flex flex-col items-start w-[100%] h-[800px] bg-gray-100 rounded-lg shadow p-4">

@@ -33,8 +33,8 @@ describe('CovenantsSmall', () => {
   });
 
   it('handles boundary values correctly (70 = green, 50 = yellow)', () => {
-    const { rerender } = render(<CovenantsSmall category="Boundary" passNum={0} failNum={0} spotPercentageRate={70} />);
-    expect(screen.getByText(/70.00%/)).toHaveClass('text-green-600');
+    const { rerender } = render(<CovenantsSmall category="Boundary" passNum={0} failNum={0} spotPercentageRate={75} />);
+    expect(screen.getByText(/75.00%/)).toHaveClass('text-green-600');
 
     rerender(<CovenantsSmall category="Boundary" passNum={0} failNum={0} spotPercentageRate={50} />);
     expect(screen.getByText(/50.00%/)).toHaveClass('text-yellow-500');

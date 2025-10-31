@@ -1,5 +1,5 @@
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import FilterBusinessPage from "../components/filterBusinessPage/FilterBusinessPage";
 import axios from "axios";
@@ -35,10 +35,9 @@ interface BackendCompanyData {
 
 const BusinessPage: React.FC = () => {
   const { companyId } = useParams<{ companyId: string }>();
-  console.log("Company ID from url: ", companyId);
 
   const [company, setCompany] = useState<CompanyData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [_, setLoading] = useState<boolean>(true);
   
   useEffect(() => {
     const fetchCompany = async () => {
@@ -71,21 +70,6 @@ const BusinessPage: React.FC = () => {
 
     if(companyId) fetchCompany();
   }, [companyId]);
-
-
-  // useEffect(() => {
-  //   // Simulate API fetch by finding from dummy data
-  //   const fetchCompany = async () => {
-  //     try {
-  //       const data = dummyCompanies.find((c) => c.id === companyId);
-  //       setCompany(data || null);
-  //     } catch (err) {
-  //       console.error("Error fetching company data:", err);
-  //     }
-  //   };
-
-  //   fetchCompany();
-  // }, [companyId]); // only depend on companyId
 
   if (!company) return <p className="text-center py-12">Loading...</p>;
 

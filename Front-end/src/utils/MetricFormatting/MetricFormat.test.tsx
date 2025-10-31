@@ -1,8 +1,9 @@
 import { describe, it, expect, vi } from "vitest";
 import axios from "axios";
+import type { Mock } from "vitest";
 
 vi.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+// const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 // Import raw JSON files
 import absBenchmarkings from "./mocks/abs_benchmarkings.json";
@@ -31,27 +32,27 @@ import {
 /* ------------------ Helpers ------------------ */
 
 // Flexible numeric extractor for any backend field
-function getRawYValue(rawItem: any): number {
-  const possibleKeys = [
-    "Value",
-    "Amount",
-    "Balance",
-    "Val",
-    "CalcValue",
-    "ABSValue",
-    "User Forecast",
-    "Avg Historical Forecast",
-    "Avg Hist Forecast",
-    "Revenue",
-  ];
-    for (const key of possibleKeys) {
-        if (key in rawItem && rawItem[key] != null) {
-            const val = rawItem[key];
-            return typeof val === "number" ? val : Number(val);
-        }
-    }
-    return 0;
-}
+// function getRawYValue(rawItem: any): number {
+//   const possibleKeys = [
+//     "Value",
+//     "Amount",
+//     "Balance",
+//     "Val",
+//     "CalcValue",
+//     "ABSValue",
+//     "User Forecast",
+//     "Avg Historical Forecast",
+//     "Avg Hist Forecast",
+//     "Revenue",
+//   ];
+//     for (const key of possibleKeys) {
+//         if (key in rawItem && rawItem[key] != null) {
+//             const val = rawItem[key];
+//             return typeof val === "number" ? val : Number(val);
+//         }
+//     }
+//     return 0;
+// }
 
 /* ------------------ Tests ------------------ */
 
@@ -64,8 +65,8 @@ describe("Data Transform Functions", () => {
         ds.data.forEach(item => {
             expect(item).toHaveProperty("name");
             expect(item).toHaveProperty("pass");
-            expect(item).toHaveProperty("calc_value");
-            expect(item).toHaveProperty("abs_value");
+            expect(item).toHaveProperty("calcValue");
+            expect(item).toHaveProperty("absValue");
             expect(item).toHaveProperty("greater");
         });
     });
@@ -129,7 +130,7 @@ describe("Data Transform Functions", () => {
         },
     ];
 
-    (axios.get as vi.Mock).mockResolvedValueOnce({ data: mockSuccessData });
+    (axios.get as Mock).mockResolvedValueOnce({ data: mockSuccessData });
 
     const datasets = await transformCovenants(covenants, id);
 
@@ -144,8 +145,8 @@ describe("Data Transform Functions", () => {
         ds.data[0].forEach((metric) => {
         expect(metric).toHaveProperty("name");
         expect(metric).toHaveProperty("pass");
-        expect(metric).toHaveProperty("calc_value");
-        expect(metric).toHaveProperty("abs_value");
+        expect(metric).toHaveProperty("calcValue");
+        expect(metric).toHaveProperty("absValue");
         });
     });
     });

@@ -1,24 +1,21 @@
-// tests/controllers/income_statement.controller.test.js
 import { jest } from "@jest/globals";
 
-
 jest.unstable_mockModule("../../src/services/income_statement.service.js", () => ({
-  incomeService: jest.fn(),
+  income_service: jest.fn(),
 }));
 
-
-const { incomeService } = await import("../../src/services/income_statement.service.js");
-const { incomeController } = await import("../../src/controllers/income_statement.controller.js");
+const { income_service } = await import("../../src/services/income_statement.service.js");
+const { income_controller } = await import("../../src/controllers/income_statement.controller.js");
 
 // Minimal Express-like res mock
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 
-describe("incomeController", () => {
+describe("income_controller", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("Positive: passes lowercased filters and returns JSON", async () => {
@@ -31,36 +28,36 @@ describe("incomeController", () => {
         FileID: "3",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ incomeid: 9, metric: "Net Profit Margin", value: 0.22 }];
-    incomeService.mockResolvedValue(mockData);
+    const mock_data = [{ incomeid: 9, metric: "Net Profit Margin", value: 0.22 }];
+    income_service.mockResolvedValue(mock_data);
 
-    await incomeController(req, res);
+    await income_controller(req, res);
 
-    expect(incomeService).toHaveBeenCalledWith({
+    expect(income_service).toHaveBeenCalledWith({
       metric: "Net Profit Margin",
       unit: "%",
       incomeid: "9",
       applicationid: "2",
       fileid: "3",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
+    expect(res.json).toHaveBeenCalledWith(mock_data);
     expect(res.status).not.toHaveBeenCalled();
   });
 
   test("Negative: service throws → 500 + error message", async () => {
     const req = { query: { IncomeID: "9" } };
-    const res = makeRes();
+    const res = make_res();
 
-    incomeService.mockRejectedValue(new Error("DB failure"));
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    income_service.mockRejectedValue(new Error("DB failure"));
+    const console_spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-    await incomeController(req, res);
+    await income_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });
 
-    consoleSpy.mockRestore();
+    console_spy.mockRestore();
   });
 });

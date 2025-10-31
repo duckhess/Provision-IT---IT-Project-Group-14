@@ -5,24 +5,24 @@ import CovenantsSmall from './CovenantsSmall';
 type MetricItem = {
     name : string;
     pass : boolean;
-    calc_value: number;
-    abs_value: number;
+    calcValue: number;
+    absValue: number;
 }
 
 type CovenantsProps = {
     category : string;
-    metric_list : MetricItem[];
+    metricList : MetricItem[];
     threeYearAverageSuccess : number;
 }
 
-const Covenants: React.FC<CovenantsProps> = ({category, metric_list, threeYearAverageSuccess}) => {
+const Covenants: React.FC<CovenantsProps> = ({category, metricList, threeYearAverageSuccess}) => {
   
   const [expanded, setExpanded] = useState(false);
 
-    const passMetrics = metric_list.filter(m=>m.pass);
-    const failMetrics = metric_list.filter(m=>!m.pass);
+    const passMetrics = metricList.filter(m=>m.pass);
+    const failMetrics = metricList.filter(m=>!m.pass);
 
-    const spotPercentageRate = metric_list.length ? (passMetrics.length / metric_list.length) * 100 : 0;
+    const spotPercentageRate = metricList.length ? (passMetrics.length / metricList.length) * 100 : 0;
 
     const toggleExpand = () => setExpanded((prev)=> !prev);
 
@@ -33,8 +33,8 @@ const Covenants: React.FC<CovenantsProps> = ({category, metric_list, threeYearAv
 
             <CovenantsLarge 
                 category = {category} 
-                pass_list={passMetrics} 
-                fail_list={failMetrics} 
+                passList={passMetrics} 
+                failList={failMetrics} 
                 spotPercentageRate={spotPercentageRate}
                 threeYearAverageSuccess = {threeYearAverageSuccess}>            
             </CovenantsLarge> 

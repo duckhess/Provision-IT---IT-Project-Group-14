@@ -1,11 +1,12 @@
-import React from "react";
+/// <reference types="vitest" />
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import FilterComparisonPage from "./FilterComparisonPage";
 import { vi } from "vitest";
+import type { Mock } from "vitest";
 import type { Dataset } from "../Types/Types";
 
 // ---- Mock dependencies ----
-vi.mock("../MetricFormatting/MetricFormat.tsx", () => ({
+vi.mock('../../utils/MetricFormatting/MetricFormat', () => ({
   fetchCompanyDatasets: vi.fn(),
 }));
 
@@ -42,7 +43,7 @@ vi.mock("../filterBusinessPage/sideBar/SidebarFilter", () => ({
 }));
 
 // ---- Imports after mocks ----
-import { fetchCompanyDatasets } from "../MetricFormatting/MetricFormat.tsx";
+import { fetchCompanyDatasets } from "../../utils/MetricFormatting/MetricFormat.tsx";
 
 // ---- Mock Data ----
 const mockDatasetA: Dataset[] = [
@@ -60,7 +61,7 @@ describe("FilterComparisonPage Component", () => {
     vi.clearAllMocks();
 
     // Use mockImplementation to reliably return datasets per company
-    (fetchCompanyDatasets as unknown as vi.Mock).mockImplementation(
+    (fetchCompanyDatasets as unknown as Mock).mockImplementation(
       (companyId: number) => {
         if (companyId === 1) return Promise.resolve(mockDatasetA);
         if (companyId === 2) return Promise.resolve(mockDatasetB);

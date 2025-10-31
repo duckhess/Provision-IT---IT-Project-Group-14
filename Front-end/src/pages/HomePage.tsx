@@ -19,9 +19,7 @@ import axios from "axios";
 
 
 const HomePage: React.FC = () => {
-  // const [companies, setCompanies] = useState<CompanyInfo[]>([]);
   const [allCompanies, setAllCompanies] = useState<Company []>([]);
-  // const [suggestedCompanies, setSuggestedCompanies] = useState <Company[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
@@ -66,7 +64,6 @@ const HomePage: React.FC = () => {
               allCompanies={allCompanies} 
               setSearchResults={() => {}}
               handleSearchClick = {handleSearchClick}></SearchBarComponent>
-          {/* <span className="text-gray-500">[ Search Bar Placeholder ]</span> */}
         </div>
       </section>
 

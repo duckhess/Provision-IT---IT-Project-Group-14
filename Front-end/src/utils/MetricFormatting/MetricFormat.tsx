@@ -1,4 +1,4 @@
-import type { Dataset, Metric, Unit } from "../Types/Types";
+import type { Dataset, Metric, Unit } from "../../components/Types/Types";
 import axios from "axios";
 
 export const endpoints = [
@@ -32,8 +32,8 @@ export interface CompanyDataset {
 export interface CovenantMetricItem {
   name: string;
   pass: boolean;
-  calc_value: number;
-  abs_value: number;
+  calcValue: number;
+  absValue: number;
 }
 
 export interface CovenantDataset extends Dataset {
@@ -53,8 +53,8 @@ export const transformABSBenchmarking = (data: any[]): Dataset[] => [
     data: data.map((item) => ({
       name: item.Benchmark,
       pass: item.Analysis,
-      calc_value: item.CalcValue,
-      abs_value: item.ABSValue,
+      calcValue: item.CalcValue,
+      absValue: item.ABSValue,
       greater: item.Analysis
         ? item.CalcValue > item.ABSValue
         : item.CalcValue < item.ABSValue,
@@ -171,8 +171,8 @@ export const transformCovenants = async (
       const metricList = items.map((item) => ({
         name: item.MetricName,
         pass: item.Analysis,
-        calc_value: Number(item.Value),
-        abs_value: item.Benchmark,
+        calcValue: Number(item.Value),
+        absValue: item.Benchmark,
       }));
 
       let threeYearAvgSuccess = 0;
@@ -234,10 +234,6 @@ export const fetchCompanyDatasets = async (
     );
 
     const datasets: Dataset[] = [];
-
-    // Extract key ratios (used by other transforms)
-    const keyRatiosRes = responses.find((_, i) => endpoints[i] === "key_ratios");
-    const keyRatios = keyRatiosRes?.data ?? [];
 
     // Process each dataset
     for (let i = 0; i < responses.length; i++) {

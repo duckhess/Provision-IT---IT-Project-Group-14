@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
-import React from "react";
+
 
 // Mock page components for routing tests
 const Home = () => <h1>Home Page</h1>;

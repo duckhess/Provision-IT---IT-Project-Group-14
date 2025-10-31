@@ -19,7 +19,7 @@ type CompanyInfo = {
 
 const Summary: React.FC<{company: Company}> = ({company}) => {
   const[companyInfo, setCompanyInfo]=useState<CompanyInfo | null>(null);
-  const [loading, setLoading] = useState<boolean> (false);
+  const [_, setLoading] = useState<boolean> (false);
   
     useEffect (() => {
         const fetchCompanies = async (id : number) => {

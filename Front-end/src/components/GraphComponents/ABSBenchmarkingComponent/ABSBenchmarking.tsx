@@ -5,24 +5,24 @@ import ABSBenchmarkingSmall from './ABSBenchmarkingSmall';
 type MetricItem = {
     name : string;
     pass : boolean;
-    calc_value : number;
-    abs_value: number;
+    calcValue : number;
+    absValue: number;
     greater: boolean;
 }
 
 type ABSBenchmarkingProps  = {
     code : string;
-    metric_list: MetricItem[];
+    metricList: MetricItem[];
 }
 
-const ABSBenchmarking : React.FC<ABSBenchmarkingProps>= ({code, metric_list}) => {
+const ABSBenchmarking : React.FC<ABSBenchmarkingProps>= ({code, metricList}) => {
 
     const [expanded, setExpanded] = useState(false);
 
-    const passMetrics = metric_list.filter(m=>m.pass);
-    const failMetrics = metric_list.filter(m=>!m.pass);
+    const passMetrics = metricList.filter(m=>m.pass);
+    const failMetrics = metricList.filter(m=>!m.pass);
 
-    const passRate = metric_list.length ? (passMetrics.length / metric_list.length) * 100 : 0;
+    const passRate = metricList.length ? (passMetrics.length / metricList.length) * 100 : 0;
 
     const toggleExpand = () => setExpanded((prev)=> !prev);
 
@@ -33,8 +33,8 @@ const ABSBenchmarking : React.FC<ABSBenchmarkingProps>= ({code, metric_list}) =>
 
             <ABSBenchmarkingLarge 
                 code = {code} 
-                pass_list={passMetrics} 
-                fail_list={failMetrics} 
+                passList={passMetrics} 
+                failList={failMetrics} 
                 passRate={passRate}>            
             </ABSBenchmarkingLarge> 
         </div> ) : (

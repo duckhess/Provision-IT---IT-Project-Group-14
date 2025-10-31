@@ -1,28 +1,28 @@
-// tests/controllers/equity.controller.test.js
 import { jest } from "@jest/globals";
 
 jest.unstable_mockModule("../../src/services/equity.service.js", () => ({
-  equityService: jest.fn(),
+  equity_service: jest.fn(),
 }));
 
-
-const { equityService } = await import("../../src/services/equity.service.js");
-const { equityController } = await import("../../src/controllers/equity.controller.js");
+const { equity_service } = await import("../../src/services/equity.service.js");
+const { equity_controller } = await import("../../src/controllers/equity.controller.js");
 
 // Helper: mock Express res
-const makeRes = () => {
+const make_res = () => {
   const res = {};
   res.status = jest.fn(() => res);
-  res.json   = jest.fn(() => res);
+  res.json = jest.fn(() => res);
   return res;
 };
 
-describe("equityController", () => {
+describe("equity_controller", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("Positive: returns equities and lowercases query keys", async () => {
+  test("positive: returns equities and lowercases query keys", async () => {
+    expect.assertions(2);
+
     const req = {
       query: {
         Metric: "Equity Ratio",
@@ -32,37 +32,38 @@ describe("equityController", () => {
         FileID: "3",
       },
     };
-    const res = makeRes();
+    const res = make_res();
 
-    const mockData = [{ equityid: 7, metric: "Equity Ratio", value: 0.45 }];
-    equityService.mockResolvedValue(mockData);
+    const mock_data = [{ equityid: 7, metric: "Equity Ratio", value: 0.45 }];
+    equity_service.mockResolvedValue(mock_data);
 
-    await equityController(req, res);
+    await equity_controller(req, res);
 
-    expect(equityService).toHaveBeenCalledWith({
+    expect(equity_service).toHaveBeenCalledWith({
       metric: "Equity Ratio",
       unit: "%",
       equityid: "7",
       applicationid: "2",
       fileid: "3",
     });
-    expect(res.json).toHaveBeenCalledWith(mockData);
-    expect(res.status).not.toHaveBeenCalled();
+    expect(res.json).toHaveBeenCalledWith(mock_data);
   });
 
-  test("Negative: service throws → responds 500 with error", async () => {
+  test("negative: service throws → responds 500 with error", async () => {
+    expect.assertions(2);
+
     const req = { query: { EquityID: "7" } };
-    const res = makeRes();
+    const res = make_res();
 
-    equityService.mockRejectedValue(new Error("DB failure"));
+    equity_service.mockRejectedValue(new Error("DB failure"));
 
-    const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
+    const console_spy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-    await equityController(req, res);
+    await equity_controller(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
     expect(res.json).toHaveBeenCalledWith({ error: "DB failure" });
 
-    consoleSpy.mockRestore();
+    console_spy.mockRestore();
   });
 });

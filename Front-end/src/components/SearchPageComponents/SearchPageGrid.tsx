@@ -76,7 +76,7 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
 
   //for companyData
   const [dataNeeded,setDataNeeded] = useState<CompanyDataNeeded>();
-  const [loading, setLoading] = useState(false);
+  const [_, setLoading] = useState(false);
 
   // for bestMetrics
   const [bestMetrics, setBestMetrics] = useState<Dataset[]>([]);
@@ -108,8 +108,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
         } else {
           console.warn("data needed in search page grid not available");
         }
-
-        console.log("fetched data needed:", response.data);
       } catch (err){
         console.error("error fetching data needed in search page grid", err);
       } finally {
@@ -129,8 +127,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
           `/api/best_data?CompanyID=${company.companyId}`);
         const backendData = response.data;
 
-        console.log("best 4 metrics raw response", backendData);
-
         if(!Array.isArray(backendData) || backendData.length === 0){
           setBestMetrics([]);
           setTitleBestMetrics("");
@@ -148,8 +144,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
           unit : metric.Unit as Unit,
         }));
 
-        console.log("data needed : ", dataNeeded);
-
         setTitleBestMetrics(chartTitle);
         setBestMetrics(dataNeeded);
       } catch(err) {
@@ -160,11 +154,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
     } ;
     fetchBestMetrics();
   }, [company?.companyId]);
-
-  useEffect(()=>
-  console.log("best metrics", bestMetrics), [bestMetrics])
-
-
   
   useEffect(()=>{
     // we only interested in the one that is $ for this search grid 
@@ -191,8 +180,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
           metricMap.get(item.MetricName)!.push(item);
         });
 
-        console.log("metric map,", metricMap);
-
         const data : Dataset[] = Array.from(metricMap.entries()).map(
           ([metricName, items]) => ({
             name: metricName,
@@ -206,7 +193,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
               metric: items[0].MetricName as Metric,
               unit: '$' as Unit,
           }));
-        console.log("final datasets: ", data);
         setWorkingCapitalMovement(data);
       } catch (err) {
         console.error("failed to fetch working capital movement", err);
@@ -218,10 +204,6 @@ const SearchPageGrid: React.FC<SearchPageGridProps> = ({company}) => {
       fetchWorkingCapital();
     }
   }, [dataNeeded?.ApplicationID]);
-
-  useEffect(()=>{
-    console.log("working capital : ", workingCapitalMovement);
-  }, [workingCapitalMovement])
 
   return (
     <div role="grid"
