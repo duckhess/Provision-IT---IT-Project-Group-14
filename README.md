@@ -42,7 +42,12 @@ npm install
 
 ### To run:
 1. Ensure that the current working directiory is ".../Provision-IT---IT-Project-Group-14\Front-end>". 
-2. Once in this directory, run npm run dev on the terminal. This will start the webpage on localhost (defaulting to port 5173). 
+2. Once in this directory, run the following command on the terminal. This will start the webpage on localhost (defaulting to port 5173).
+   
+   ```
+   npm run dev
+   ```
+   
 3. Follow the link to the webpage on the terminal.
 (Note: The data is connected to the back end so the carousel/search bar/metric selections will not work as intended unless the back end is running at the same time.)
 
@@ -73,6 +78,47 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+```
+
+Note : Please ensure that when running `npm run build` doesn't have any error before using GitHub Actions for testing 
+
+### Folder Structure
+```
+/Front-end
+├── .github/                     # GitHub workflows and CI/CD configurations
+├── .vite/                       # Vite cache and build-related files
+├── public/                      # Static assets (icons, images, etc.)
+├── src/                         # Source code
+│   ├── components/              # Reusable UI components   
+│   │   ├── Carousel/            
+│   │   ├── ComparisonPageComponents/
+│   │   ├── filterBusinessPage/
+│   │   ├── Footer/
+│   │   ├── GraphComponents/
+│   │   ├── NavigationBar/
+│   │   ├── searchBar/
+│   │   ├── SearchPageComponents/
+│   │   └── Types/               # Shared TypeScript type definitions
+│   ├── assets/                  # Image and static media assets
+│   ├── pages/                   # Page-level components (routes)
+│   ├── utils/                   # Helper functions and utilities
+│   ├── App.css
+│   ├── App.tsx                  # Root React component
+│   ├── index.css
+│   ├── main.tsx                 # App entry point
+│   ├── setupTests.ts            # Testing configuration
+│   └── vite-env.d.ts            # Vite TypeScript environment declarations
+├── eslint.config.js             # ESLint configuration
+├── index.html                   # Main HTML template
+├── package-lock.json
+├── package.json                 # Project dependencies and scripts
+├── postcss.config.js            # PostCSS configuration
+├── tailwind.config.js           # Tailwind CSS setup
+├── tsconfig.app.json            # TypeScript config for the app
+├── tsconfig.json                # Base TypeScript configuration
+├── tsconfig.node.json           # TypeScript config for Node scripts
+├── tsconfig.test.json           # TypeScript config for tests
+└── vite.config.ts               # Vite build configuration
 ```
 
 ## Setup for Back-end
